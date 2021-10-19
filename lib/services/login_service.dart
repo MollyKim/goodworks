@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart' hide Headers;
-import 'package:practice/login_model.dart';
+import 'package:practice/models/login_model.dart';
 import 'package:retrofit/http.dart';
 
 part 'login_service.g.dart';

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:practice/login_service.dart';
+import 'package:practice/services/login_service.dart';
 
 class RootService {
   static Dio dio = Dio()

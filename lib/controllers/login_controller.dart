@@ -1,6 +1,6 @@
-import 'package:practice/login_model.dart';
-import 'package:practice/root_contoller.dart';
-import 'package:practice/root_service.dart';
+import 'package:practice/models/login_model.dart';
+import 'package:practice/controllers/root_contoller.dart';
+import 'package:practice/services/root_service.dart';
 
 class LoginController extends BaseController{
   LoginController(RootService rootService) : super(rootService);
