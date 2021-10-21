@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/services/root_service.dart';
 import 'package:practice/screens/home.dart';
@@ -27,6 +28,7 @@ class _RootState extends State<Root> {
   initControllers(){
     final service = initService();
     Get.put(LoginController(service));
+    Get.put(BottomNaviController());
   }
 
   initService() {
@@ -42,7 +44,6 @@ class _RootState extends State<Root> {
         name: '/',
         page: () => Home(),
         transition: Transition.noTransition,
-
       ),
     ];
   }
