@@ -5,13 +5,14 @@ import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/layouts/default_bottom.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/models/login_model.dart';
+import 'package:practice/screens/home/home.dart';
 import 'package:practice/services/root_service.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class Main extends StatefulWidget {
+  const Main({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _MainState createState() => _MainState();
 }
 
 Future<PostLoginInfoModel?> login() async{
@@ -22,7 +23,7 @@ Future<PostLoginInfoModel?> login() async{
 return resp;
 }
 
-class _HomeState extends State<Home> {
+class _MainState extends State<Main> {
   PostLoginInfoModel? result;
   @override
   Widget build(BuildContext context) {
@@ -33,9 +34,7 @@ class _HomeState extends State<Home> {
         builder: (s) => IndexedStack(
           index: s.selectedIndex,
           children: <Widget>[
-            Center(
-              child: Text(s.selectedIndex.toString()),
-            ),
+            Home(),
             Center(
               child: Text(s.selectedIndex.toString()),
             ),

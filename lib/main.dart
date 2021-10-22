@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/login_controller.dart';
+import 'package:practice/screens/home/home.dart';
 import 'package:practice/services/root_service.dart';
-import 'package:practice/screens/home.dart';
+import 'package:practice/screens/main.dart';
 
 void main() {
   runApp(Root());
@@ -42,6 +43,11 @@ class _RootState extends State<Root> {
     return [
       GetPage(
         name: '/',
+        page: () => Main(),
+        transition: Transition.noTransition,
+      ),
+      GetPage(
+        name: '/home',
         page: () => Home(),
         transition: Transition.noTransition,
       ),
