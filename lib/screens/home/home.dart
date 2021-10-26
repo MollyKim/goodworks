@@ -33,9 +33,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
     return DefaultLayout(
       body: Column(
         children: [
-          renderHeader(scrollController),
-          renderTap(),
-          renderBody(_animation),
+          Container(),
+          // renderHeader(scrollController),
+          // renderTap(),
+          // renderBody(_animation),
         ],
       ),
     );
@@ -46,16 +47,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        RaisedButton( child: Text("forward"), onPressed: () => _controller.forward(), ),
-        RaisedButton( child: Text("reverse"), onPressed: () => _controller.reverse(), ),
-        SizedBox(
-          height: 50,
-          child: Container(color: Colors.green,),
-        ),
-        SizedBox(
-          height: _animation.value*100,
-          child: Container(color:Colors.grey),
-        )
+
       ],
     );
   }
