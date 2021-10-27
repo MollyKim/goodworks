@@ -1,6 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:practice/layouts/default_layout.dart';
-import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
+  final TabBar child;
+
+  StickyTabBarDelegate({required this.child});
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Colors.pink,
+      child: this.child,
+    );
+  }
+
+  @override
+  double get maxExtent => this.child.preferredSize.height;
+
+  @override
+  double get minExtent => this.child.preferredSize.height;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
+  }
+}
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,90 +36,70 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin{
-  late AnimationController _controller ;
-  late Animation<double> _animation;
+   ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this, // the SingleTickerProviderStateMixin
-      duration:const Duration(seconds: 2),
-    );
-    _animation =CurvedAnimation( parent: _controller, curve: Curves.easeIn, );
-    _animation.addListener(() {setState(() {});});
   }
 
 
   @override
   Widget build(BuildContext context) {
+    TabController tabController = TabController(length: 2, vsync: this);
 
-    ScrollController scrollController = ScrollController();
-
-    return DefaultLayout(
-      body: Column(
-        children: [
-          Container(),
-          // renderHeader(scrollController),
-          // renderTap(),
-          // renderBody(_animation),
-        ],
-      ),
-    );
-  }
-
-  renderHeader(ScrollController scrollController){
-
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-
-      ],
-    );
-  }
-
-  renderTap(){
-    return Container(
-      height: 50,
-      color: Colors.purple,
-    );
-  }
-
-  renderBody( Animation<double> _animation ){
-    ScrollController scrollController = ScrollController();
-
-    return NotificationListener(
-      onNotification: (notification){
-        if (notification is ScrollStartNotification) {print(scrollController.position.pixels);
-          // if(notification.dragDetails!.localPosition.dy <scrollController.position.pixels.)
-          // _controller.forward();
-          //
-          // _controller.reverse();
-
-        }else if(notification is ScrollUpdateNotification){
-
-        }
-        else if(notification is ScrollEndNotification){
-          _controller.stop();
-        }
-        return true;
-        },
-      child: Expanded(
-        child: ListView.builder(
+    return
+      DefaultLayout(
+        appBar: AppBar(title: Text('icon'),),
+        body: NestedScrollView(
           controller: scrollController,
-          itemCount: 100,
-          itemBuilder: (context, index) {
-            return Text('df');
-        }),
-      ),
-    );
-      // return Expanded(
-      //   child: SingleChildScrollView(
-      //     controller: scrollController,
-      //     child: Container(
-      //       height: 1000,
-      //     ),
-      //   ),
-      // );
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                expandedHeight: 150.0,
+                pinned: false,
+                flexibleSpace: Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                        child: Image.network(
+                          "http://via.placeholder.com/350x150",
+                          fit: BoxFit.cover,
+                        )),
+                  ],
+                ),
+              ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: StickyTabBarDelegate(
+                  child: TabBar(
+                    labelColor: Colors.black,
+                    controller: tabController,
+                    tabs: <Widget>[
+                      Tab(text: '전체'),
+                      Tab(text: '기도'),
+                    ],
+                  ),
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            controller: tabController,
+            children: <Widget>[
+              tile(),
+              Container(color: Colors.blue,),
+            ],
+          ),
+        ),
+      );
   }
+
+  tile() {
+    return  ListView.builder(
+        itemCount: 100,
+        itemBuilder: (context, index) {
+          return Text('df');
+        });
+  }
+
 }
