@@ -1,32 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:practice/screens/home/list_tile.dart';
+import 'package:practice/screens/home/tab_bar_delegate.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
-  final TabBar child;
 
-  StickyTabBarDelegate({required this.child});
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.pink,
-      child: this.child,
-    );
-  }
-
-  @override
-  double get maxExtent => this.child.preferredSize.height;
-
-  @override
-  double get minExtent => this.child.preferredSize.height;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
-  }
-}
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -86,20 +65,26 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
           body: TabBarView(
             controller: tabController,
             children: <Widget>[
-              tile(),
-              Container(color: Colors.blue,),
+              ListTileContents(),
+              Container(color: Colors.blue,
+              child: ElevatedButton(
+                onPressed: (){
+                  Fluttertoast.showToast(
+                      msg: "This is Center Short Toast",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
+                }, child: Text("button"),
+              )),
             ],
           ),
         ),
       );
   }
 
-  tile() {
-    return  ListView.builder(
-        itemCount: 100,
-        itemBuilder: (context, index) {
-          return Text('df');
-        });
-  }
 
 }
