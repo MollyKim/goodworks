@@ -57,8 +57,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
-            // initialValue: widget.initialValue,
-            cursorColor: Colors.black,
+            style: TextStyle(
+              color: Color(0xff2d9067),
+            ),
+            cursorColor: Color(0xff2d9067),
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             autofocus: true,
@@ -120,8 +122,11 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
+            style: TextStyle(
+              color: Color(0xff2d9067),
+            ),
             // initialValue: widget.initialValue,
-            cursorColor: Colors.black,
+            cursorColor: Color(0xff2d9067),
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             autofocus: true,
@@ -183,8 +188,11 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
+            style: TextStyle(
+              color: Color(0xff2d9067),
+            ),
             // initialValue: widget.initialValue,
-            cursorColor: Colors.black,
+            cursorColor: Color(0xff2d9067),
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             autofocus: true,
@@ -246,8 +254,11 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
+            style: TextStyle(
+              color: Color(0xff2d9067),
+            ),
             // initialValue: widget.initialValue,
-            cursorColor: Colors.black,
+            cursorColor: Color(0xff2d9067),
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             autofocus: true,
@@ -309,8 +320,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
-            // initialValue: widget.initialValue,
-            cursorColor: Colors.black,
+            style: TextStyle(
+              color: Color(0xff2d9067),
+            ),
+            cursorColor: Color(0xff2d9067),
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             autofocus: true,
