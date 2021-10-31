@@ -30,6 +30,7 @@ dependencies:
   get: ^4.1.0
   animate_do: ^2.0.0
   cached_network_image: ^3.1.0
+  fluttertoast: ^8.0.6
   flutter_svg: ^0.22.0
   carousel_slider: ^4.0.0
 
@@ -51,8 +52,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-
 
   # To add assets to your application, add an assets section, like this:
   assets:
