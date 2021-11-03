@@ -1,5 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:practice/screens/login/login_select_church.dart';
 
 class ListTileContents extends StatefulWidget {
   @override
@@ -62,11 +64,18 @@ class _ListTileContentsState extends State<ListTileContents> {
                   ),
             ),
             SizedBox(height: 10,),
-
+            CarouselSlider(
+              options: CarouselOptions(
+                enlargeCenterPage: true,
+                enableInfiniteScroll: false,
+                initialPage: 2,
+                autoPlay: false,
+              ),
+              items: imageSliders,
+            )
           ],
         ),
       ),
     );
   }
-
 }
