@@ -1,5 +1,8 @@
-홈 화면 사진 삽입 가능하게 만들어 두었습니다. 
- 레이아웃만 만들어 두었고 아이콘이나 게시글 목록 보기 등과같은 페이지는 만드는 대로 추가하겠습니다.
+디자인에 맞게 수정 완료
 
-![캡처](https://user-images.githubusercontent.com/56612792/139208471-0d6289fe-f803-4513-a19e-7d4322ff0751.PNG)
-![캡처2](https://user-images.githubusercontent.com/56612792/139208476-ad482770-6478-43de-b7b2-c34dbbc5b492.PNG)
+todos :
+ 앱바 위로 내용이 곂쳐지게 보이는 것 수정,
+ 바텀 선택했을때, 안했을때 각각 아이콘 추가 필요
+
+
+![캡처](https://user-images.githubusercontent.com/56612792/140065501-0b08669d-892d-4cd0-88f5-5f97886d8a6c.PNG)
