@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:practice/layouts/default_layout.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:practice/screens/home/list_tile.dart';
-import 'package:practice/screens/home/tab_bar_delegate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-
+import 'package:practice/screens/post/post_list.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -61,45 +57,97 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   ],
                 ),
               ),
-              SliverPersistentHeader(
+              SliverAppBar(
+                elevation: 0,
+                backgroundColor: Colors.white,
                 pinned: true,
-                delegate: StickyTabBarDelegate(
-                  child: TabBar(
+                flexibleSpace: TabBar(
                   indicatorColor: Colors.transparent,
-                    isScrollable: true,
-                    labelPadding: EdgeInsets.only(left: 10, right: 10),
-                    unselectedLabelColor: Colors.grey,
-                    unselectedLabelStyle:
-                      TextStyle(
-                        fontSize: 14,
-                        fontFamily: "AppleSDGothicNeo",
-                        fontWeight: FontWeight.w700,
-                      ),
-                    labelColor: Color(0xff2d9067),
-                    labelStyle: TextStyle(
-                      color: Color(0xff2d9067),
-                      fontSize: 14,
-                      fontFamily: "AppleSDGothicNeo",
-                      fontWeight: FontWeight.w700,
-                    ),
-                    controller: tabController,
-                    tabs: <Widget>[
-                      Tab(text: '전체'),
-                      Tab(text: '기도'),
-                      Tab(text: '기도'),
-                      Tab(text: '기도'),
-                    ],
+                  isScrollable: true,
+                  labelPadding: EdgeInsets.only(left: 10, right: 10),
+                  unselectedLabelColor: Colors.grey,
+                  unselectedLabelStyle:
+                  TextStyle(
+                    fontSize: 14,
+                    fontFamily: "AppleSDGothicNeo",
+                    fontWeight: FontWeight.w700,
                   ),
+                  labelColor: Color(0xff2d9067),
+                  labelStyle: TextStyle(
+                    color: Color(0xff2d9067),
+                    fontSize: 14,
+                    fontFamily: "AppleSDGothicNeo",
+                    fontWeight: FontWeight.w700,
+                  ),
+                  controller: tabController,
+                  tabs: <Widget>[
+                    Tab(text: '전체'),
+                    Tab(text: '기도'),
+                    Tab(text: '기도'),
+                    Tab(text: '기도'),
+                  ],
                 ),
               ),
+              // SliverPersistentHeader(
+              //   pinned: true,
+              //   delegate: StickyTabBarDelegate(
+              //     child: TabBar(
+              //     indicatorColor: Colors.transparent,
+              //       isScrollable: true,
+              //       labelPadding: EdgeInsets.only(left: 10, right: 10),
+              //       unselectedLabelColor: Colors.grey,
+              //       unselectedLabelStyle:
+              //         TextStyle(
+              //           fontSize: 14,
+              //           fontFamily: "AppleSDGothicNeo",
+              //           fontWeight: FontWeight.w700,
+              //         ),
+              //       labelColor: Color(0xff2d9067),
+              //       labelStyle: TextStyle(
+              //         color: Color(0xff2d9067),
+              //         fontSize: 14,
+              //         fontFamily: "AppleSDGothicNeo",
+              //         fontWeight: FontWeight.w700,
+              //       ),
+              //       controller: tabController,
+              //       tabs: <Widget>[
+              //         Tab(text: '전체'),
+              //         Tab(text: '기도'),
+              //         Tab(text: '기도'),
+              //         Tab(text: '기도'),
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ];
           },
           body: TabBarView(
             controller: tabController,
             children: <Widget>[
-              ListTileContents(),
-              ListTileContents(),
-              ListTileContents(),
+              ListView.separated(
+                itemCount: 100,
+                separatorBuilder: (context, index) {
+                  return Divider(thickness: 2.0,);
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return PostList();
+                },),
+              ListView.separated(
+                itemCount: 100,
+                separatorBuilder: (context, index) {
+                  return Divider(thickness: 2.0,);
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return PostList();
+                },),
+              ListView.separated(
+                itemCount: 100,
+                separatorBuilder: (context, index) {
+                  return Divider(thickness: 2.0,);
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return PostList();
+                },),
               Container(color: Colors.blue,
               child: ElevatedButton(
                 onPressed: (){

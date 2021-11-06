@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/login_controller.dart';
@@ -7,9 +8,13 @@ import 'package:practice/screens/login/login.dart';
 import 'package:practice/screens/login/login_select_church.dart';
 import 'package:practice/screens/login/login_sign_up.dart';
 import 'package:practice/screens/main.dart';
+import 'package:practice/screens/post/post_detail.dart';
 import 'package:practice/services/root_service.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.white
+  ));
   runApp(Root());
 }
 
@@ -68,6 +73,11 @@ class _RootState extends State<Root> {
         page: () => LoginSignUp(),
         transition: Transition.noTransition,
       ),
+      GetPage(
+        name: '/post_detail',
+        page: () => PostDetail(),
+        transition: Transition.noTransition,
+      ),
     ];
   }
 
@@ -75,7 +85,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'FlutterStudy',
-      initialRoute: '/login',
+      initialRoute: '/',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );
