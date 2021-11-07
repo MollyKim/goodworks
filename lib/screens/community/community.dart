@@ -9,6 +9,7 @@ class Community extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Text("청년부",style: TextStyle(
           fontWeight: FontWeight.bold,fontSize: 20,
