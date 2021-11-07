@@ -13,6 +13,7 @@ class CommunityPostList extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top:8.0,left: 15,right: 15),
         child: Container(
+          color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/login_controller.dart';
+import 'package:practice/screens/community/community_post_detail.dart';
 import 'package:practice/screens/home/home.dart';
 import 'package:practice/screens/login/login.dart';
 import 'package:practice/screens/login/login_select_church.dart';
@@ -49,6 +50,16 @@ class _RootState extends State<Root> {
 
     return [
       GetPage(
+        name: '/login_sign_up',
+        page: () => LoginSignUp(),
+        transition: Transition.noTransition,
+      ),
+      GetPage(
+        name: '/login',
+        page: () => Login(),
+        transition: Transition.noTransition,
+      ),
+      GetPage(
         name: '/',
         page: () => Main(),
         transition: Transition.noTransition,
@@ -59,8 +70,8 @@ class _RootState extends State<Root> {
         transition: Transition.noTransition,
       ),
       GetPage(
-        name: '/login',
-        page: () => Login(),
+        name: '/home_post_detail',
+        page: () => HomePostDetail(),
         transition: Transition.noTransition,
       ),
       GetPage(
@@ -69,15 +80,11 @@ class _RootState extends State<Root> {
         transition: Transition.noTransition,
       ),
       GetPage(
-        name: '/login_sign_up',
-        page: () => LoginSignUp(),
+        name: '/community_post_detail',
+        page: () => CommunityPostDetail(),
         transition: Transition.noTransition,
       ),
-      GetPage(
-        name: '/home_post_detail',
-        page: () => HomePostDetail(),
-        transition: Transition.noTransition,
-      ),
+
     ];
   }
 
@@ -85,7 +92,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'FlutterStudy',
-      initialRoute: '/login',
+      initialRoute: '/',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );
