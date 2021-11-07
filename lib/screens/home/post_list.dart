@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/screens/login/login_select_church.dart';
 
-class PostList extends StatelessWidget {
+class HomePostList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Get.toNamed("/post_detail");
+        Get.toNamed("/home_post_detail");
       },
       child: Padding(
         padding: const EdgeInsets.only(top:8.0,left: 15,right: 15),

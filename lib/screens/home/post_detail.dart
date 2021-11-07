@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:share/share.dart';
 
-class PostDetail extends StatelessWidget {
+class HomePostDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(

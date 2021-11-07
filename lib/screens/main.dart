@@ -5,6 +5,7 @@ import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/layouts/default_bottom.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/models/login_model.dart';
+import 'package:practice/screens/community/community.dart';
 import 'package:practice/screens/home/home.dart';
 import 'package:practice/services/root_service.dart';
 
@@ -41,9 +42,7 @@ class _MainState extends State<Main> {
             Center(
               child: Text(s.selectedIndex.toString()),
             ),
-            Center(
-              child: Text(s.selectedIndex.toString()),
-            ),
+            Community(),
             Center(
               child: Text(s.selectedIndex.toString()),
             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:practice/screens/post/post_list.dart';
+import 'post_list.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -130,7 +130,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   return Divider(thickness: 2.0,);
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return PostList();
+                  return HomePostList();
                 },),
               ListView.separated(
                 itemCount: 100,
@@ -138,7 +138,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   return Divider(thickness: 2.0,);
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return PostList();
+                  return HomePostList();
                 },),
               ListView.separated(
                 itemCount: 100,
@@ -146,7 +146,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   return Divider(thickness: 2.0,);
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return PostList();
+                  return HomePostList();
                 },),
               Container(color: Colors.blue,
               child: ElevatedButton(
