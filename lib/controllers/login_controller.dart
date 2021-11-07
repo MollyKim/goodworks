@@ -6,14 +6,17 @@ class LoginController extends BaseController{
   LoginController(RootService rootService) : super(rootService);
 
   Future<PostLoginInfoModel?> loginInfos({
-    required String uid,required String passwd,
+    required String useremail,required String userpwd,
+    required String username, required String phone
     }) async {
-    final formData = {'userid': uid, 'userpw': passwd, 'regcode': 5,};
+    final formData = {'useremail': useremail, 'userpwd': userpwd,
+      'username': username,'phone': phone};
 
     final PostLoginInfoModel resp = await super.rootService.loginService.postLoginIngoBody(formData);
-    print("resp.RESP_CD : ${resp.RESP_CD}");
-    print("resp.RESP_CD : ${resp.RESP_DATA}");
-    print("resp.RESP_CD : ${resp.RESP_HOST}");
+    print("resp.trId : ${resp.trId}");
+    print("resp.resultMsg : ${resp.resultMsg}");
+    print("resp.resultCode : ${resp.resultCode}");
+    print("resp.resultData : ${resp.resultData}");
     update();
     return resp;
   }

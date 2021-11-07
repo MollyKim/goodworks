@@ -16,13 +16,13 @@ class Main extends StatefulWidget {
   _MainState createState() => _MainState();
 }
 
-Future<PostLoginInfoModel?> login() async{
-  final LoginController loginController = Get.find();
-  final PostLoginInfoModel? resp = await loginController.loginInfos(
-    uid: 'phil',
-    passwd: 'qweqwe123',);
-return resp;
-}
+// Future<PostLoginInfoModel?> login() async{
+//   final LoginController loginController = Get.find();
+//   final PostLoginInfoModel? resp = await loginController.loginInfos(
+//     uid: 'phil',
+//     passwd: 'qweqwe123',);
+// return resp;
+// }
 
 class _MainState extends State<Main> {
   PostLoginInfoModel? result;
