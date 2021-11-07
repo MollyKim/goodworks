@@ -191,7 +191,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             primary: Color(0xff2d9067),
           ),
           onPressed: () {
-            Get.toNamed('/home');
+            Get.toNamed('/');
           },
           child: Text(
             "가입하기",

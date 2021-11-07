@@ -8,7 +8,7 @@ import 'package:practice/screens/login/login.dart';
 import 'package:practice/screens/login/login_select_church.dart';
 import 'package:practice/screens/login/login_sign_up.dart';
 import 'package:practice/screens/main.dart';
-import 'package:practice/screens/post/post_detail.dart';
+import 'screens/home/post_detail.dart';
 import 'package:practice/services/root_service.dart';
 
 void main() {
@@ -74,8 +74,8 @@ class _RootState extends State<Root> {
         transition: Transition.noTransition,
       ),
       GetPage(
-        name: '/post_detail',
-        page: () => PostDetail(),
+        name: '/home_post_detail',
+        page: () => HomePostDetail(),
         transition: Transition.noTransition,
       ),
     ];
@@ -85,7 +85,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'FlutterStudy',
-      initialRoute: '/',
+      initialRoute: '/login',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );
