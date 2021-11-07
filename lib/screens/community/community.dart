@@ -29,8 +29,13 @@ class Community extends StatelessWidget {
                 return CommunityPostList();
               },),
         ),
-      floatingActionButton: SvgPicture.asset(
-        'assets/ic/ic_write.svg',
+      floatingActionButton: GestureDetector(
+        onTap: (){
+
+        },
+        child: SvgPicture.asset(
+          'assets/ic/ic_write.svg',
+        ),
       ),
     );
   }
