@@ -33,7 +33,7 @@ class DefaultBottomNaviBar extends StatelessWidget {
     return BottomNavigationBarItem(
       icon: myIndex == selectedIndex
           ? SvgPicture.asset(icon)
-          : SvgPicture.asset(icon,color: Colors.grey,),
+          : SvgPicture.asset(icon+"_inactive"),
       label:"",
     );
   }
