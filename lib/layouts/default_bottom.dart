@@ -32,8 +32,8 @@ class DefaultBottomNaviBar extends StatelessWidget {
   bottomStyle(String icon,int selectedIndex,int myIndex){
     return BottomNavigationBarItem(
       icon: myIndex == selectedIndex
-          ? SvgPicture.asset(icon+".svg")
-          : SvgPicture.asset(icon+"_inactive.svg"),
+          ? SvgPicture.asset(icon+"_active.svg")
+          : SvgPicture.asset(icon+".svg"),
       label:"",
     );
   }
