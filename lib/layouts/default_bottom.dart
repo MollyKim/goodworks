@@ -16,11 +16,11 @@ class DefaultBottomNaviBar extends StatelessWidget {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: <BottomNavigationBarItem>[
-          bottomStyle('assets/ic/ic_home.svg',s.selectedIndex,0),
-          bottomStyle('assets/ic/ic_pray.svg',s.selectedIndex,1),
-          bottomStyle('assets/ic/ic_worship.svg',s.selectedIndex,2),
-          bottomStyle('assets/ic/ic_community.svg',s.selectedIndex,3),
-          bottomStyle('assets/ic/ic_my.svg',s.selectedIndex,4),
+          bottomStyle('assets/ic/ic_home',s.selectedIndex,0),
+          bottomStyle('assets/ic/ic_pray',s.selectedIndex,1),
+          bottomStyle('assets/ic/ic_worship',s.selectedIndex,2),
+          bottomStyle('assets/ic/ic_community',s.selectedIndex,3),
+          bottomStyle('assets/ic/ic_my',s.selectedIndex,4),
         ],
         currentIndex: s.selectedIndex,
         onTap: (index) => s.onItemTapped(index),
@@ -32,8 +32,8 @@ class DefaultBottomNaviBar extends StatelessWidget {
   bottomStyle(String icon,int selectedIndex,int myIndex){
     return BottomNavigationBarItem(
       icon: myIndex == selectedIndex
-          ? SvgPicture.asset(icon)
-          : SvgPicture.asset(icon+"_inactive"),
+          ? SvgPicture.asset(icon+".svg")
+          : SvgPicture.asset(icon+"_inactive.svg"),
       label:"",
     );
   }
