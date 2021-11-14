@@ -14,7 +14,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
 
   bool necessaryFlagOne = false;
   bool necessaryFlagTwo = false;
-  bool necessaryFlagThree = false;
+
+  bool phoneFlag = false;
+  bool phoneOTPFlag = false;
+  bool signUpFlag = false;
 
   totalFlagChange() {
     print('totalFlagChange');
@@ -22,7 +25,30 @@ class _LoginSignUpState extends State<LoginSignUp> {
       totalFlag = !totalFlag;
       necessaryFlagOne = totalFlag;
       necessaryFlagTwo = totalFlag;
-      necessaryFlagThree = totalFlag;
+    });
+  }
+
+  necessaryOneFlagChange() {
+    setState(() {
+      necessaryFlagOne = !necessaryFlagOne;
+      if (necessaryFlagOne == true && necessaryFlagTwo == true) {
+        totalFlag = true;
+      }
+      if (necessaryFlagOne == false) {
+        totalFlag = false;
+      }
+    });
+  }
+
+  necessaryTwoFlagChange() {
+    setState(() {
+      necessaryFlagTwo = !necessaryFlagTwo;
+      if (necessaryFlagOne == true && necessaryFlagTwo == true) {
+        totalFlag = true;
+      }
+      if (necessaryFlagTwo == false) {
+        totalFlag = false;
+      }
     });
   }
 
@@ -58,7 +84,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ),
           child: TextFormField(
             style: TextStyle(
-              color: Color(0xff2d9067),
+              color: Color(0xff1a442b),
             ),
             cursorColor: Color(0xff2d9067),
             keyboardType: TextInputType.text,
@@ -123,7 +149,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ),
           child: TextFormField(
             style: TextStyle(
-              color: Color(0xff2d9067),
+              color: Color(0xff1a442b),
             ),
             // initialValue: widget.initialValue,
             cursorColor: Color(0xff2d9067),
@@ -189,7 +215,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ),
           child: TextFormField(
             style: TextStyle(
-              color: Color(0xff2d9067),
+              color: Color(0xff1a442b),
             ),
             // initialValue: widget.initialValue,
             cursorColor: Color(0xff2d9067),
@@ -255,7 +281,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ),
           child: TextFormField(
             style: TextStyle(
-              color: Color(0xff2d9067),
+              color: Color(0xff1a442b),
             ),
             // initialValue: widget.initialValue,
             cursorColor: Color(0xff2d9067),
@@ -321,13 +347,14 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ),
           child: TextFormField(
             style: TextStyle(
-              color: Color(0xff2d9067),
+              color: Color(0xff1a442b),
             ),
             cursorColor: Color(0xff2d9067),
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.number,
             textInputAction: TextInputAction.done,
             autofocus: true,
             inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
               LengthLimitingTextInputFormatter(11),
             ],
             decoration: InputDecoration(
@@ -346,10 +373,69 @@ class _LoginSignUpState extends State<LoginSignUp> {
               ),
             ),
             onChanged: (value) {
+              setState(() {
+                if (value == '01022449379') {
+                  signUpFlag = true;
+                } else {
+                  signUpFlag = false;
+                }
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  renderPhoneOTP() {
+    return Column(
+      children: [
+        Container(
+          height: 46,
+          width: 315,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(
+              color: Color(0xff90c79c),
+              width: 0.50,
+            ),
+            color: Color(0xffcde3d6),
+          ),
+          child: TextFormField(
+            style: TextStyle(
+              color: Color(0xff1a442b),
+            ),
+            cursorColor: Color(0xff2d9067),
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.done,
+            autofocus: true,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+              LengthLimitingTextInputFormatter(6),
+            ],
+            decoration: InputDecoration(
+              //클릭시 Label 올라 가는 애니메이션 제거
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              //isDense : label, hint 간격 조절
+              isDense: true,
+              fillColor: Colors.transparent,
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.only(top: 10, left: 12),
+              // labelText: '이름',
+              hintText: '인증번호 6자리를 입력해주세요.',
+              hintStyle: TextStyle(
+                color: Color(0xff629677),
+                fontSize: 16,
+              ),
+            ),
+            onChanged: (value) {
               setState(() {});
             },
           ),
         ),
+        Container(
+          height: 10,
+        )
       ],
     );
   }
@@ -366,6 +452,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
             primary: Color(0xff2d9067),
           ),
           onPressed: () {
+            setState(() {
+              phoneFlag = true;
+            });
             // Get.toNamed('/login_select_church');
           },
           child: Text(
@@ -382,6 +471,76 @@ class _LoginSignUpState extends State<LoginSignUp> {
     );
   }
 
+  renderPhoneOTPButton() {
+    return Row(
+      children: [
+        Expanded(
+          flex: 1,
+          child: SizedBox(
+            height: 50,
+            // width: 315,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(5.0),
+                  ),
+                  primary: Color(0xff2d9067),
+                ),
+                onPressed: () {
+                  setState(() {});
+                  // Get.toNamed('/login_select_church');
+                },
+                child: Text(
+                  "재전송",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontFamily: "AppleSDGothicNeo",
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 1.80,
+                  ),
+                )),
+          ),
+        ),
+        Container(
+          width: 7,
+        ),
+        Expanded(
+          flex: 1,
+          child: SizedBox(
+            height: 50,
+            // width: 315,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(5.0),
+                  ),
+                  primary: Color(0xff2d9067),
+                ),
+                onPressed: () {
+                  setState(() {
+                    phoneOTPFlag = true;
+                  });
+                  // Get.toNamed('/login_select_church');
+                },
+                child: Text(
+                  "인증 완료",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontFamily: "AppleSDGothicNeo",
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 1.80,
+                  ),
+                )),
+          ),
+        ),
+      ],
+    );
+  }
+
   renderTotalAgree() {
     return InkWell(
       onTap: () {
@@ -393,7 +552,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           Container(
               width: 24,
               height: 24,
-              child: !totalFlag
+              child: totalFlag
                   ? SvgPicture.asset(
                       'assets/ic/ic_checkbox_on.svg',
                       width: 24,
@@ -425,7 +584,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
   renderNecessaryOne() {
     return InkWell(
       onTap: () {
-        totalFlagChange();
+        necessaryOneFlagChange();
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -433,7 +592,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           Container(
               width: 24,
               height: 24,
-              child: !totalFlag
+              child: necessaryFlagOne
                   ? SvgPicture.asset(
                       'assets/ic/ic_checkbox_on.svg',
                       width: 24,
@@ -465,7 +624,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
   renderNecessaryTwo() {
     return InkWell(
       onTap: () {
-        totalFlagChange();
+        necessaryTwoFlagChange();
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -473,7 +632,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           Container(
               width: 24,
               height: 24,
-              child: !totalFlag
+              child: necessaryFlagTwo
                   ? SvgPicture.asset(
                       'assets/ic/ic_checkbox_on.svg',
                       width: 24,
@@ -514,7 +673,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
             primary: Color(0xff2d9067),
           ),
           onPressed: () {
-            Get.toNamed('/home');
+            signUpFlag
+                ? Get.toNamed('/login_fail')
+                : Get.toNamed('/login_welcome');
           },
           child: Text(
             "가입하기",
@@ -558,30 +719,21 @@ class _LoginSignUpState extends State<LoginSignUp> {
             ),
             renderPhone(),
             Container(
-              height: 20,
+              height: 10,
             ),
-            renderPhoneButton(),
+            phoneOTPFlag
+                ? Container()
+                : phoneFlag
+                    ? renderPhoneOTP()
+                    : Container(),
+            phoneOTPFlag
+                ? Container()
+                : phoneFlag
+                    ? renderPhoneOTPButton()
+                    : renderPhoneButton(),
             Container(
               height: 40,
             ),
-            // SvgPicture.asset(
-            //   'assets/img/img_logo.svg',
-            //   // color: Colors.amberAccent,
-            //   width: 105,
-            //   height: 109,
-            // ),
-            // SvgPicture.asset(
-            //   'assets/ic/ic_checkbox_on.svg',
-            //   width: 24,
-            //   height: 24,
-            //   // fit: BoxFit.none,
-            // ),
-            // SvgPicture.asset(
-            //   'assets/img/img_logo.svg',
-            //   // color: Colors.amberAccent,
-            //   width: 105,
-            //   height: 109,
-            // ),
             renderTotalAgree(),
             Container(
               height: 10,
