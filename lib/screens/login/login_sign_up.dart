@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,6 +20,39 @@ class _LoginSignUpState extends State<LoginSignUp> {
   bool phoneFlag = false;
   bool phoneOTPFlag = false;
   bool signUpFlag = false;
+
+  int timerMaxSeconds = 180;
+  int currentSeconds = 0;
+
+  final interval = const Duration(seconds: 1);
+  late Timer timer;
+
+  String get timerText =>
+      '${((timerMaxSeconds - currentSeconds) ~/ 60).toString().padLeft(1, '0')}:${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  startTimeout(int milliseconds) {
+    var duration = interval;
+    timer = Timer.periodic(duration, (timer) {
+      setState(() {
+        currentSeconds = timer.tick;
+        if (timer.tick > 179) {
+          currentSeconds = 180;
+        }
+        if (currentSeconds >= milliseconds) timer.cancel();
+      });
+    });
+  }
 
   totalFlagChange() {
     print('totalFlagChange');
@@ -61,7 +96,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "이메일 아이디",
+              "아이디",
               style: TextStyle(
                 color: Color(0xff2d9067),
                 fontSize: 14,
@@ -91,7 +126,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             textInputAction: TextInputAction.done,
             autofocus: true,
             inputFormatters: [
-              LengthLimitingTextInputFormatter(11),
+              LengthLimitingTextInputFormatter(20),
             ],
             decoration: InputDecoration(
               //클릭시 Label 올라 가는 애니메이션 제거
@@ -102,7 +137,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
               border: InputBorder.none,
               contentPadding: const EdgeInsets.only(top: 10, left: 12),
               // labelText: '이름',
-              hintText: '이메일 주소를 입력해주세요',
+              hintText: '5~20자로 입력해주세요',
               hintStyle: TextStyle(
                 color: Color(0xff629677),
                 fontSize: 16,
@@ -157,7 +192,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             textInputAction: TextInputAction.done,
             autofocus: true,
             inputFormatters: [
-              LengthLimitingTextInputFormatter(11),
+              LengthLimitingTextInputFormatter(20),
             ],
             decoration: InputDecoration(
               //클릭시 Label 올라 가는 애니메이션 제거
@@ -223,7 +258,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             textInputAction: TextInputAction.done,
             autofocus: true,
             inputFormatters: [
-              LengthLimitingTextInputFormatter(11),
+              LengthLimitingTextInputFormatter(20),
             ],
             decoration: InputDecoration(
               //클릭시 Label 올라 가는 애니메이션 제거
@@ -289,7 +324,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             textInputAction: TextInputAction.done,
             autofocus: true,
             inputFormatters: [
-              LengthLimitingTextInputFormatter(11),
+              LengthLimitingTextInputFormatter(6),
             ],
             decoration: InputDecoration(
               //클릭시 Label 올라 가는 애니메이션 제거
@@ -390,48 +425,65 @@ class _LoginSignUpState extends State<LoginSignUp> {
   renderPhoneOTP() {
     return Column(
       children: [
-        Container(
-          height: 46,
-          width: 315,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Color(0xff90c79c),
-              width: 0.50,
-            ),
-            color: Color(0xffcde3d6),
-          ),
-          child: TextFormField(
-            style: TextStyle(
-              color: Color(0xff1a442b),
-            ),
-            cursorColor: Color(0xff2d9067),
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.done,
-            autofocus: true,
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-              LengthLimitingTextInputFormatter(6),
-            ],
-            decoration: InputDecoration(
-              //클릭시 Label 올라 가는 애니메이션 제거
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              //isDense : label, hint 간격 조절
-              isDense: true,
-              fillColor: Colors.transparent,
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 10, left: 12),
-              // labelText: '이름',
-              hintText: '인증번호 6자리를 입력해주세요.',
-              hintStyle: TextStyle(
-                color: Color(0xff629677),
-                fontSize: 16,
+        Stack(
+          alignment: Alignment.centerRight,
+          children: [
+            Container(
+              height: 46,
+              width: 315,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                  color: Color(0xff90c79c),
+                  width: 0.50,
+                ),
+                color: Color(0xffcde3d6),
+              ),
+              child: TextFormField(
+                style: TextStyle(
+                  color: Color(0xff1a442b),
+                ),
+                cursorColor: Color(0xff2d9067),
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.done,
+                autofocus: true,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                  LengthLimitingTextInputFormatter(6),
+                ],
+                decoration: InputDecoration(
+                  //클릭시 Label 올라 가는 애니메이션 제거
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  //isDense : label, hint 간격 조절
+                  isDense: true,
+                  fillColor: Colors.transparent,
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.only(top: 10, left: 12),
+                  // labelText: '이름',
+                  hintText: '인증번호 6자리를 입력해주세요.',
+                  hintStyle: TextStyle(
+                    color: Color(0xff629677),
+                    fontSize: 16,
+                  ),
+                ),
+                onChanged: (value) {
+                  setState(() {});
+                },
               ),
             ),
-            onChanged: (value) {
-              setState(() {});
-            },
-          ),
+            Container(
+              padding: EdgeInsets.only(right: 12, bottom: 6),
+              child: Text(
+                timerText,
+                style: TextStyle(
+                  color: Color(0xff245d3a),
+                  fontSize: 14,
+                  fontFamily: "AppleSDGothicNeo",
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            )
+          ],
         ),
         Container(
           height: 10,
@@ -454,6 +506,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           onPressed: () {
             setState(() {
               phoneFlag = true;
+              startTimeout(180);
             });
             // Get.toNamed('/login_select_church');
           },
@@ -487,7 +540,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
                   primary: Color(0xff2d9067),
                 ),
                 onPressed: () {
-                  setState(() {});
+                  setState(() {
+                    timer.cancel();
+                    startTimeout(180);
+                  });
                   // Get.toNamed('/login_select_church');
                 },
                 child: Text(
@@ -521,6 +577,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 onPressed: () {
                   setState(() {
                     phoneOTPFlag = true;
+                    timer.cancel();
                   });
                   // Get.toNamed('/login_select_church');
                 },
@@ -543,6 +600,8 @@ class _LoginSignUpState extends State<LoginSignUp> {
 
   renderTotalAgree() {
     return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: () {
         totalFlagChange();
       },
@@ -583,6 +642,8 @@ class _LoginSignUpState extends State<LoginSignUp> {
 
   renderNecessaryOne() {
     return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: () {
         necessaryOneFlagChange();
       },
@@ -623,6 +684,8 @@ class _LoginSignUpState extends State<LoginSignUp> {
 
   renderNecessaryTwo() {
     return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: () {
         necessaryTwoFlagChange();
       },
