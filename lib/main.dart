@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/login_controller.dart';
+import 'package:practice/screens/community/community_post_detail.dart';
 import 'package:practice/screens/home/home.dart';
 import 'package:practice/screens/login/login.dart';
 import 'package:practice/screens/login/login_fail.dart';
@@ -9,9 +11,13 @@ import 'package:practice/screens/login/login_select_church.dart';
 import 'package:practice/screens/login/login_sign_up.dart';
 import 'package:practice/screens/login/login_welcome.dart';
 import 'package:practice/screens/main.dart';
+import 'screens/home/post_detail.dart';
 import 'package:practice/services/root_service.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.white
+  ));
   runApp(Root());
 }
 
@@ -46,6 +52,16 @@ class _RootState extends State<Root> {
 
     return [
       GetPage(
+        name: '/login_sign_up',
+        page: () => LoginSignUp(),
+        transition: Transition.noTransition,
+      ),
+      GetPage(
+        name: '/login',
+        page: () => Login(),
+        transition: Transition.noTransition,
+      ),
+      GetPage(
         name: '/',
         page: () => Main(),
         transition: Transition.noTransition,
@@ -56,15 +72,27 @@ class _RootState extends State<Root> {
         transition: Transition.noTransition,
       ),
       GetPage(
+
+        name: '/home_post_detail',
+        page: () => HomePostDetail(),
+        transition: Transition.noTransition,
+      ),
+      GetPage(
         name: '/login',
         page: () => Login(),
         transition: Transition.rightToLeft,
+
       ),
       GetPage(
         name: '/login_select_church',
         page: () => LoginSelectChurch(),
         transition: Transition.rightToLeft,
       ),
+      GetPage(
+        name: '/community_post_detail',
+        page: () => CommunityPostDetail(),
+        transition: Transition.noTransition,
+        ),
       GetPage(
         name: '/login_sign_up',
         page: () => LoginSignUp(),
@@ -80,6 +108,7 @@ class _RootState extends State<Root> {
         page: () => LoginWelcome(),
         transition: Transition.rightToLeft,
       ),
+
     ];
   }
 

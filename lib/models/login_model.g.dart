@@ -8,67 +8,117 @@ part of 'login_model.dart';
 
 PostLoginInfoBody _$PostLoginInfoBodyFromJson(Map<String, dynamic> json) {
   return PostLoginInfoBody(
-    userid: json['userid'] as String,
-    userpwd: json['userpwd'] as String,
-    regcode: json['regcode'] as String,
+    email: json['useremail'] as String,
+    password: json['userpwd'] as String,
+    userName: json['username'] as String,
+    phoneNumber: json['phone'] as String,
   );
 }
 
 Map<String, dynamic> _$PostLoginInfoBodyToJson(PostLoginInfoBody instance) =>
     <String, dynamic>{
-      'userid': instance.userid,
-      'userpwd': instance.userpwd,
-      'regcode': instance.regcode,
+      'useremail': instance.email,
+      'userpwd': instance.password,
+      'username': instance.userName,
+      'phone': instance.phoneNumber,
     };
 
 PostLoginInfoModel _$PostLoginInfoModelFromJson(Map<String, dynamic> json) {
   return PostLoginInfoModel(
-    RESP_CD: json['RESP_CD'] as int?,
-    RESP_MSG: json['RESP_MSG'] as String?,
-    RESP_DATA: json['RESP_DATA'] == null
+    trId: json['trId'] as int?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+    resultData: json['resultData'] == null
         ? null
-        : PostLoginInfoResponse.fromJson(json['RESP_DATA'] as Object),
-    RESP_HOST: json['RESP_HOST'] as String?,
+        : PostLoginInfoResponse.fromJson(json['resultData'] as Object),
   );
 }
 
 Map<String, dynamic> _$PostLoginInfoModelToJson(PostLoginInfoModel instance) =>
     <String, dynamic>{
-      'RESP_CD': instance.RESP_CD,
-      'RESP_MSG': instance.RESP_MSG,
-      'RESP_DATA': instance.RESP_DATA,
-      'RESP_HOST': instance.RESP_HOST,
+      'trId': instance.trId,
+      'resultCode': instance.resultCode,
+      'resultMsg': instance.resultMsg,
+      'resultData': instance.resultData,
     };
 
 PostLoginInfoResponse _$PostLoginInfoResponseFromJson(
     Map<String, dynamic> json) {
   return PostLoginInfoResponse(
-    session_id: json['session_id'] as String?,
-    state_key: json['state_key'] as String?,
-    mem_seq: json['mem_seq'] as String?,
-    library_seq: json['library_seq'] as String?,
-    mobilekey: json['mobilekey'] as String?,
-    mem_nickname: json['mem_nickname'] as String?,
-    adult_yn: json['adult_yn'] as String?,
-    mem_confirm_yn: json['mem_confirm_yn'] as String?,
-    dormancy: json['dormancy'] as int?,
-    phone_id: json['phone_id'] as String?,
-    free_payment_target_yn: json['free_payment_target_yn'] as String?,
+    id: json['id'] as String?,
+    email: json['email'] as String?,
+    phoneNumber: json['phoneNumber'] as String?,
+    isCertifiedPhone: json['isCertifiedPhone'] as String?,
+    userName: json['userName'] as String?,
+    deletedAt: json['deletedAt'] as String?,
+    updateAt: json['updateAt'] as String?,
+    createdAt: json['createdAt'] as String?,
+    userProfile: json['userProfile'] == null
+        ? null
+        : PostLoginInfoUserProfile.fromJson(json['userProfile'] as Object),
+    userType: json['userType'] as String?,
   );
 }
 
 Map<String, dynamic> _$PostLoginInfoResponseToJson(
         PostLoginInfoResponse instance) =>
     <String, dynamic>{
-      'session_id': instance.session_id,
-      'state_key': instance.state_key,
-      'mem_seq': instance.mem_seq,
-      'library_seq': instance.library_seq,
-      'mobilekey': instance.mobilekey,
-      'mem_nickname': instance.mem_nickname,
-      'adult_yn': instance.adult_yn,
-      'mem_confirm_yn': instance.mem_confirm_yn,
-      'dormancy': instance.dormancy,
-      'phone_id': instance.phone_id,
-      'free_payment_target_yn': instance.free_payment_target_yn,
+      'id': instance.id,
+      'email': instance.email,
+      'phoneNumber': instance.phoneNumber,
+      'isCertifiedPhone': instance.isCertifiedPhone,
+      'userName': instance.userName,
+      'userType': instance.userType,
+      'createdAt': instance.createdAt,
+      'updateAt': instance.updateAt,
+      'deletedAt': instance.deletedAt,
+      'userProfile': instance.userProfile,
+    };
+
+PostLoginInfoUserProfile _$PostLoginInfoUserProfileFromJson(
+    Map<String, dynamic> json) {
+  return PostLoginInfoUserProfile(
+    json['id'] as String?,
+    json['userId'] as String?,
+    json['nickName'] as String?,
+    json['selfIntroduce'] as String?,
+    json['avatar'] == null
+        ? null
+        : PostLoginInfoUserAvatar.fromJson(json['avatar'] as Object),
+    json['createdAt'] as String?,
+    json['updateAt'] as String?,
+    json['deletedAt'] as String?,
+  );
+}
+
+Map<String, dynamic> _$PostLoginInfoUserProfileToJson(
+        PostLoginInfoUserProfile instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
+      'nickName': instance.nickName,
+      'selfIntroduce': instance.selfIntroduce,
+      'avatar': instance.avatar,
+      'createdAt': instance.createdAt,
+      'updateAt': instance.updateAt,
+      'deletedAt': instance.deletedAt,
+    };
+
+PostLoginInfoUserAvatar _$PostLoginInfoUserAvatarFromJson(
+    Map<String, dynamic> json) {
+  return PostLoginInfoUserAvatar(
+    filename: json['filename'] as String?,
+    url: json['url'] as String?,
+    smallUrl: json['smallUrl'] as String?,
+    size: json['size'] as num?,
+  );
+}
+
+Map<String, dynamic> _$PostLoginInfoUserAvatarToJson(
+        PostLoginInfoUserAvatar instance) =>
+    <String, dynamic>{
+      'filename': instance.filename,
+      'url': instance.url,
+      'smallUrl': instance.smallUrl,
+      'size': instance.size,
     };

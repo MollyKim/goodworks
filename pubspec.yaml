@@ -33,6 +33,9 @@ dependencies:
   fluttertoast: ^8.0.6
   flutter_svg: ^0.22.0
   carousel_slider: ^4.0.0
+  share: ^2.0.4
+  logger: ^1.1.0
+  pull_to_refresh: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
