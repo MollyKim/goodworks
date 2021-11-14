@@ -1,5 +1,5 @@
-import 'package:animate_do/animate_do.dart';
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -54,8 +54,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
     });
   }
 
-  bool phoneButtonClicked = false;
-
   totalFlagChange() {
     print('totalFlagChange');
     setState(() {
@@ -88,7 +86,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
       }
     });
   }
-
 
   renderEmail() {
     return Column(
@@ -352,78 +349,78 @@ class _LoginSignUpState extends State<LoginSignUp> {
       ],
     );
   }
-  //
-  // renderPhone() {
-  //   return Column(
-  //     mainAxisAlignment: MainAxisAlignment.start,
-  //     children: [
-  //       Container(
-  //         padding: EdgeInsets.only(left: 0, bottom: 5),
-  //         child: Align(
-  //           alignment: Alignment.centerLeft,
-  //           child: Text(
-  //             "휴대폰 번호",
-  //             style: TextStyle(
-  //               color: Color(0xff2d9067),
-  //               fontSize: 14,
-  //               fontFamily: "AppleSDGothicNeo",
-  //               fontWeight: FontWeight.w700,
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //       Container(
-  //         height: 46,
-  //         width: 315,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(5),
-  //           border: Border.all(
-  //             color: Color(0xff90c79c),
-  //             width: 0.50,
-  //           ),
-  //           color: Color(0xffcde3d6),
-  //         ),
-  //         child: TextFormField(
-  //           style: TextStyle(
-  //             color: Color(0xff1a442b),
-  //           ),
-  //           cursorColor: Color(0xff2d9067),
-  //           keyboardType: TextInputType.number,
-  //           textInputAction: TextInputAction.done,
-  //           autofocus: true,
-  //           inputFormatters: [
-  //             FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-  //             LengthLimitingTextInputFormatter(11),
-  //           ],
-  //           decoration: InputDecoration(
-  //             //클릭시 Label 올라 가는 애니메이션 제거
-  //             floatingLabelBehavior: FloatingLabelBehavior.always,
-  //             //isDense : label, hint 간격 조절
-  //             isDense: true,
-  //             fillColor: Colors.transparent,
-  //             border: InputBorder.none,
-  //             contentPadding: const EdgeInsets.only(top: 10, left: 12),
-  //             // labelText: '이름',
-  //             hintText: '휴대폰 번호를 입력해주세요(숫자만 입력)',
-  //             hintStyle: TextStyle(
-  //               color: Color(0xff629677),
-  //               fontSize: 16,
-  //             ),
-  //           ),
-  //           onChanged: (value) {
-  //             setState(() {
-  //               if (value == '01022449379') {
-  //                 signUpFlag = true;
-  //               } else {
-  //                 signUpFlag = false;
-  //               }
-  //             });
-  //           },
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
+
+  renderPhone() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          padding: EdgeInsets.only(left: 0, bottom: 5),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "휴대폰 번호",
+              style: TextStyle(
+                color: Color(0xff2d9067),
+                fontSize: 14,
+                fontFamily: "AppleSDGothicNeo",
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          height: 46,
+          width: 315,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(
+              color: Color(0xff90c79c),
+              width: 0.50,
+            ),
+            color: Color(0xffcde3d6),
+          ),
+          child: TextFormField(
+            style: TextStyle(
+              color: Color(0xff1a442b),
+            ),
+            cursorColor: Color(0xff2d9067),
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.done,
+            autofocus: true,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+              LengthLimitingTextInputFormatter(11),
+            ],
+            decoration: InputDecoration(
+              //클릭시 Label 올라 가는 애니메이션 제거
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              //isDense : label, hint 간격 조절
+              isDense: true,
+              fillColor: Colors.transparent,
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.only(top: 10, left: 12),
+              // labelText: '이름',
+              hintText: '휴대폰 번호를 입력해주세요(숫자만 입력)',
+              hintStyle: TextStyle(
+                color: Color(0xff629677),
+                fontSize: 16,
+              ),
+            ),
+            onChanged: (value) {
+              setState(() {
+                if (value == '01022449379') {
+                  signUpFlag = true;
+                } else {
+                  signUpFlag = false;
+                }
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
 
   renderPhoneOTP() {
     return Column(
@@ -508,13 +505,11 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ),
           onPressed: () {
             setState(() {
-           //   phoneButtonClicked = true;
-            });
               phoneFlag = true;
               startTimeout(180);
-            },
+            });
             // Get.toNamed('/login_select_church');
-
+          },
           child: Text(
             "휴대폰 인증",
             textAlign: TextAlign.center,
@@ -618,17 +613,17 @@ class _LoginSignUpState extends State<LoginSignUp> {
               height: 24,
               child: totalFlag
                   ? SvgPicture.asset(
-                      'assets/ic/ic_checkbox_on.svg',
-                      width: 24,
-                      height: 24,
-                      // fit: BoxFit.none,
-                    )
+                'assets/ic/ic_checkbox_on.svg',
+                width: 24,
+                height: 24,
+                // fit: BoxFit.none,
+              )
                   : SvgPicture.asset(
-                      'assets/ic/ic_checkbox_off.svg',
-                      width: 24,
-                      height: 24,
-                      // fit: BoxFit.none,
-                    )),
+                'assets/ic/ic_checkbox_off.svg',
+                width: 24,
+                height: 24,
+                // fit: BoxFit.none,
+              )),
           SizedBox(width: 8),
           Align(
             alignment: Alignment.center,
@@ -660,17 +655,17 @@ class _LoginSignUpState extends State<LoginSignUp> {
               height: 24,
               child: necessaryFlagOne
                   ? SvgPicture.asset(
-                      'assets/ic/ic_checkbox_on.svg',
-                      width: 24,
-                      height: 24,
-                      // fit: BoxFit.none,
-                    )
+                'assets/ic/ic_checkbox_on.svg',
+                width: 24,
+                height: 24,
+                // fit: BoxFit.none,
+              )
                   : SvgPicture.asset(
-                      'assets/ic/ic_checkbox_off.svg',
-                      width: 24,
-                      height: 24,
-                      // fit: BoxFit.none,
-                    )),
+                'assets/ic/ic_checkbox_off.svg',
+                width: 24,
+                height: 24,
+                // fit: BoxFit.none,
+              )),
           SizedBox(width: 8),
           Align(
             alignment: Alignment.center,
@@ -702,17 +697,17 @@ class _LoginSignUpState extends State<LoginSignUp> {
               height: 24,
               child: necessaryFlagTwo
                   ? SvgPicture.asset(
-                      'assets/ic/ic_checkbox_on.svg',
-                      width: 24,
-                      height: 24,
-                      // fit: BoxFit.none,
-                    )
+                'assets/ic/ic_checkbox_on.svg',
+                width: 24,
+                height: 24,
+                // fit: BoxFit.none,
+              )
                   : SvgPicture.asset(
-                      'assets/ic/ic_checkbox_off.svg',
-                      width: 24,
-                      height: 24,
-                      // fit: BoxFit.none,
-                    )),
+                'assets/ic/ic_checkbox_off.svg',
+                width: 24,
+                height: 24,
+                // fit: BoxFit.none,
+              )),
           SizedBox(width: 8),
           Align(
             alignment: Alignment.center,
@@ -741,7 +736,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
             primary: Color(0xff2d9067),
           ),
           onPressed: () {
-         //   Get.toNamed('/');
             signUpFlag
                 ? Get.toNamed('/login_fail')
                 : Get.toNamed('/login_welcome');
@@ -760,291 +754,66 @@ class _LoginSignUpState extends State<LoginSignUp> {
     );
   }
 
-  renderPhoneCertButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        SizedBox(
-          height: 50,
-          width: 120,
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(5.0),
-                ),
-                primary: Color(0xff2d9067),
-              ),
-              onPressed: () {
-                // Get.toNamed('/home');
-              },
-              child: Text(
-                "재전송",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontFamily: "AppleSDGothicNeo",
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 1.80,
-                ),
-              )),
-        ),
-        SizedBox(width: 20,),
-        SizedBox(
-          height: 50,
-          width: 170,
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(5.0),
-                ),
-                primary: Color(0xff2d9067),
-              ),
-              onPressed: () {
-                Get.toNamed('/home');
-              },
-              child: Text(
-                "인증하기",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontFamily: "AppleSDGothicNeo",
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 1.80,
-                ),
-              )),
-        ),
-      ],
-    );
-  }
-
-  renderTiles(String label, String hintText, ){
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.only(left: 0, bottom: 5),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              label,
-              style: TextStyle(
-                color: Color(0xff2d9067),
-                fontSize: 14,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          height: 46,
-          width: 315,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Color(0xff90c79c),
-              width: 0.50,
-            ),
-            color: Color(0xffcde3d6),
-          ),
-          child: TextFormField(
-            style: TextStyle(
-              color: Color(0xff2d9067),
-            ),
-            // initialValue: widget.initialValue,
-            cursorColor: Color(0xff2d9067),
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.done,
-            autofocus: true,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(11),
-            ],
-            decoration: InputDecoration(
-              //클릭시 Label 올라 가는 애니메이션 제거
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              //isDense : label, hint 간격 조절
-              isDense: true,
-              fillColor: Colors.transparent,
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 10, left: 12),
-              // labelText: '이름',
-              hintText: hintText,
-              hintStyle: TextStyle(
-                color: Color(0xff629677),
-                fontSize: 16,
-              ),
-            ),
-            onChanged: (value) {
-              setState(() {});
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  renderPhone(String label, String hintText,){
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.only(left: 0, bottom: 5),
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              label,
-              style: TextStyle(
-                color: Color(0xff2d9067),
-                fontSize: 14,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          height: 46,
-          width: 315,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Color(0xff90c79c),
-              width: 0.50,
-            ),
-            color: Color(0xffcde3d6),
-          ),
-          child: TextFormField(
-            style: TextStyle(
-              color: Color(0xff2d9067),
-            ),
-            // initialValue: widget.initialValue,
-            cursorColor: Color(0xff2d9067),
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.done,
-            autofocus: true,
-            inputFormatters: [
-              // LengthLimitingTextInputFormatter(11),
-            ],
-            decoration: InputDecoration(
-              //클릭시 Label 올라 가는 애니메이션 제거
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              //isDense : label, hint 간격 조절
-              isDense: true,
-              fillColor: Colors.transparent,
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 10, left: 12),
-              // labelText: '이름',
-              hintText: hintText,
-              hintStyle: TextStyle(
-                color: Color(0xff629677),
-                fontSize: 16,
-              ),
-            ),
-            onChanged: (value) {
-              setState(() {});
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
         body: SingleChildScrollView(
-      child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start ,
-            children: [
-            Container(
-              height: 40,
-            ),
-            renderTiles("이메일 아이디","이메일 주소를 입력해 주세요"),
-            Container(
-              height: 20,
-            ),
-            renderTiles("비밀번호","영문, 숫자 8~20자 조합으로 입력해 주세요"),
-            Container(
-              height: 20,
-            ),
-            renderTiles("비밀번호 확인","영문, 숫자 8~20자 조합으로 입력해 주세요"),
-            Container(
-              height: 20,
-            ),
-            renderTiles("이름","이름(본명)을 입력해 주세요"),
-            Container(
-              height: 20,
-            ),
-            renderPhone("휴대폰 번호","휴대폰 번호를 입력해주세요(숫자만 입력)"),
-            if(phoneButtonClicked)
-              Column(
-                children: [
-                  SlideInDown(child: renderPhone("", "인증번호 6자리를 입력하세요"),duration: Duration(seconds: 1), ),
-                  Container(
-                    height: 10,
-                  ),
-                  SlideInDown(child: renderPhoneCertButton(),duration: Duration(seconds: 1) ),
-                ],
-              ),
-            Container(
-              height: 10,
-            ),
-            phoneOTPFlag
-                ? Container()
-                : phoneFlag
+          child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 40),
+              child: Column(children: [
+                Container(
+                  height: 40,
+                ),
+                renderEmail(),
+                Container(
+                  height: 20,
+                ),
+                renderPassword(),
+                Container(
+                  height: 20,
+                ),
+                renderPasswordTwo(),
+                Container(
+                  height: 20,
+                ),
+                renderName(),
+                Container(
+                  height: 20,
+                ),
+                renderPhone(),
+                Container(
+                  height: 10,
+                ),
+                phoneOTPFlag
+                    ? Container()
+                    : phoneFlag
                     ? renderPhoneOTP()
                     : Container(),
-            phoneOTPFlag
-                ? Container()
-                : phoneFlag
+                phoneOTPFlag
+                    ? Container()
+                    : phoneFlag
                     ? renderPhoneOTPButton()
                     : renderPhoneButton(),
-            Container(
-              height: 40,
-            ),
-
-            // SvgPicture.asset(
-            //   'assets/img/img_logo.svg',
-            //   // color: Colors.amberAccent,
-            //   width: 105,
-            //   height: 109,
-            // ),
-            // SvgPicture.asset(
-            //   'assets/ic/ic_checkbox_on.svg',
-            //   width: 24,
-            //   height: 24,
-            //   // fit: BoxFit.none,
-            // ),
-            // SvgPicture.asset(
-            //   'assets/img/img_logo.svg',
-            //   // color: Colors.amberAccent,
-            //   width: 105,
-            //   height: 109,
-            // ),
-
-            renderTotalAgree(),
-            Container(
-              height: 10,
-            ),
-            renderNecessaryOne(),
-            Container(
-              height: 10,
-            ),
-            renderNecessaryTwo(),
-            Container(
-              height: 10,
-            ),
-            Container(
-              height: 40,
-            ),
-            renderSignUpButton(),
-              Container(
-                height: 40,
-              ),
-          ])),
-    ));
+                Container(
+                  height: 40,
+                ),
+                renderTotalAgree(),
+                Container(
+                  height: 10,
+                ),
+                renderNecessaryOne(),
+                Container(
+                  height: 10,
+                ),
+                renderNecessaryTwo(),
+                Container(
+                  height: 10,
+                ),
+                Container(
+                  height: 40,
+                ),
+                renderSignUpButton(),
+              ])),
+        ));
   }
 }
