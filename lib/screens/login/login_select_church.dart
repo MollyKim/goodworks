@@ -15,8 +15,7 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
-        body: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Column(
+      body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -46,6 +45,7 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
             child: Container(
                 height: 350,
                 width: 350,
+                // width: double.infinit,
                 child: CarouselSlider(
                   options: CarouselOptions(
                     aspectRatio: 0.7,
@@ -59,7 +59,7 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
           ),
         ],
       ),
-    ]));
+    );
   }
 }
 
@@ -75,10 +75,10 @@ final List<String> imgList = [
 final List<Widget> imageSliders = imgList
     .map((item) => Container(
           child: Container(
-            margin: EdgeInsets.all(5.0),
+            // margin: EdgeInsets.all(5.0),
             child: Image(
-                width: 280,
-                height: 360,
+                // width: 280,
+                // height: 360,
                 image: AssetImage('assets/img/img_logo_church.jpg')),
           ),
         ))
