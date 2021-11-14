@@ -47,6 +47,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 expandedHeight: 150.0,
                 pinned: false,
                 flexibleSpace: Image.network(
@@ -55,6 +56,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                 ),
               ),
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 elevation: 0,
                 backgroundColor: Colors.white,
                 pinned: true,
