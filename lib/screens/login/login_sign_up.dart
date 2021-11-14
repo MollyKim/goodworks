@@ -352,78 +352,78 @@ class _LoginSignUpState extends State<LoginSignUp> {
       ],
     );
   }
-
-  renderPhone() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          padding: EdgeInsets.only(left: 0, bottom: 5),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "휴대폰 번호",
-              style: TextStyle(
-                color: Color(0xff2d9067),
-                fontSize: 14,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          height: 46,
-          width: 315,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Color(0xff90c79c),
-              width: 0.50,
-            ),
-            color: Color(0xffcde3d6),
-          ),
-          child: TextFormField(
-            style: TextStyle(
-              color: Color(0xff1a442b),
-            ),
-            cursorColor: Color(0xff2d9067),
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.done,
-            autofocus: true,
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-              LengthLimitingTextInputFormatter(11),
-            ],
-            decoration: InputDecoration(
-              //클릭시 Label 올라 가는 애니메이션 제거
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              //isDense : label, hint 간격 조절
-              isDense: true,
-              fillColor: Colors.transparent,
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 10, left: 12),
-              // labelText: '이름',
-              hintText: '휴대폰 번호를 입력해주세요(숫자만 입력)',
-              hintStyle: TextStyle(
-                color: Color(0xff629677),
-                fontSize: 16,
-              ),
-            ),
-            onChanged: (value) {
-              setState(() {
-                if (value == '01022449379') {
-                  signUpFlag = true;
-                } else {
-                  signUpFlag = false;
-                }
-              });
-            },
-          ),
-        ),
-      ],
-    );
-  }
+  //
+  // renderPhone() {
+  //   return Column(
+  //     mainAxisAlignment: MainAxisAlignment.start,
+  //     children: [
+  //       Container(
+  //         padding: EdgeInsets.only(left: 0, bottom: 5),
+  //         child: Align(
+  //           alignment: Alignment.centerLeft,
+  //           child: Text(
+  //             "휴대폰 번호",
+  //             style: TextStyle(
+  //               color: Color(0xff2d9067),
+  //               fontSize: 14,
+  //               fontFamily: "AppleSDGothicNeo",
+  //               fontWeight: FontWeight.w700,
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //       Container(
+  //         height: 46,
+  //         width: 315,
+  //         decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(5),
+  //           border: Border.all(
+  //             color: Color(0xff90c79c),
+  //             width: 0.50,
+  //           ),
+  //           color: Color(0xffcde3d6),
+  //         ),
+  //         child: TextFormField(
+  //           style: TextStyle(
+  //             color: Color(0xff1a442b),
+  //           ),
+  //           cursorColor: Color(0xff2d9067),
+  //           keyboardType: TextInputType.number,
+  //           textInputAction: TextInputAction.done,
+  //           autofocus: true,
+  //           inputFormatters: [
+  //             FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+  //             LengthLimitingTextInputFormatter(11),
+  //           ],
+  //           decoration: InputDecoration(
+  //             //클릭시 Label 올라 가는 애니메이션 제거
+  //             floatingLabelBehavior: FloatingLabelBehavior.always,
+  //             //isDense : label, hint 간격 조절
+  //             isDense: true,
+  //             fillColor: Colors.transparent,
+  //             border: InputBorder.none,
+  //             contentPadding: const EdgeInsets.only(top: 10, left: 12),
+  //             // labelText: '이름',
+  //             hintText: '휴대폰 번호를 입력해주세요(숫자만 입력)',
+  //             hintStyle: TextStyle(
+  //               color: Color(0xff629677),
+  //               fontSize: 16,
+  //             ),
+  //           ),
+  //           onChanged: (value) {
+  //             setState(() {
+  //               if (value == '01022449379') {
+  //                 signUpFlag = true;
+  //               } else {
+  //                 signUpFlag = false;
+  //               }
+  //             });
+  //           },
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   renderPhoneOTP() {
     return Column(
@@ -512,9 +512,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
             });
               phoneFlag = true;
               startTimeout(180);
-            });
+            },
             // Get.toNamed('/login_select_church');
-          },
+
           child: Text(
             "휴대폰 인증",
             textAlign: TextAlign.center,
