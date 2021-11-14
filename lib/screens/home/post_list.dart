@@ -1,7 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:practice/screens/login/login_select_church.dart';
 
 class HomePostList extends StatelessWidget {
   @override
@@ -55,17 +54,56 @@ class HomePostList extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10,),
-              CarouselSlider(
-                options: CarouselOptions(
-                  pageSnapping: false,
-                  // aspectRatio: 0.7,
-                  enlargeCenterPage: true,
-                  enableInfiniteScroll: false,
-                  initialPage: 2,
-                  autoPlay: false,
-                ),
-                items: imageSliders,
-              )
+              GridView.builder(
+                  primary: false,
+                  itemCount: listOfUrls.length > 3 ? 3 : listOfUrls.length,
+                  padding: EdgeInsets.all(0),
+                  semanticChildCount: 1,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisExtent: 150,
+                      crossAxisCount: listOfUrls.length > 3 ? 3 : listOfUrls.length,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 5),
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        child: listOfUrls.length> 3 && index == 2
+                          ? Stack(
+                          alignment: AlignmentDirectional.center,
+                          fit: StackFit.expand,
+                          children: <Widget>[
+                            CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: listOfUrls[index],
+                              height: 100.0,
+                              placeholder: (context, url) =>
+                                  Center(child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) => Icon(Icons.error),
+                            ),
+                            Container(
+                              color: Colors.black.withOpacity(.7),
+                              child: Center(
+                                child: Text(
+                                  "+${listOfUrls.length - index}",
+                                  style: TextStyle(color: Colors.white, fontSize: 40),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Container(
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: listOfUrls[index],
+                            height: 100.0,
+                            placeholder: (context, url) =>
+                                Center(child: CircularProgressIndicator()),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+                          ),
+                        ),
+                    );
+                  }),
             ],
           ),
         ),
@@ -73,3 +111,10 @@ class HomePostList extends StatelessWidget {
     );
   }
 }
+List<String> listOfUrls= [
+  "https://cosmosmagazine.com/wp-content/uploads/2020/02/191010_nature.jpg",
+  "https://scx2.b-cdn.net/gfx/news/hires/2019/2-nature.jpg",
+  "https://isha.sadhguru.org/blog/wp-content/uploads/2016/05/natures-temples.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/7/77/Big_Nature_%28155420955%29.jpeg",
+  "https://s23574.pcdn.co/wp-content/uploads/Singular-1140x703.jpg",
+];
