@@ -4,8 +4,10 @@ import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/screens/home/home.dart';
 import 'package:practice/screens/login/login.dart';
+import 'package:practice/screens/login/login_fail.dart';
 import 'package:practice/screens/login/login_select_church.dart';
 import 'package:practice/screens/login/login_sign_up.dart';
+import 'package:practice/screens/login/login_welcome.dart';
 import 'package:practice/screens/main.dart';
 import 'package:practice/services/root_service.dart';
 
@@ -56,17 +58,27 @@ class _RootState extends State<Root> {
       GetPage(
         name: '/login',
         page: () => Login(),
-        transition: Transition.noTransition,
+        transition: Transition.rightToLeft,
       ),
       GetPage(
         name: '/login_select_church',
         page: () => LoginSelectChurch(),
-        transition: Transition.noTransition,
+        transition: Transition.rightToLeft,
       ),
       GetPage(
         name: '/login_sign_up',
         page: () => LoginSignUp(),
-        transition: Transition.noTransition,
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/login_fail',
+        page: () => LoginFail(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/login_welcome',
+        page: () => LoginWelcome(),
+        transition: Transition.rightToLeft,
       ),
     ];
   }
@@ -75,7 +87,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'FlutterStudy',
-      initialRoute: '/',
+      initialRoute: '/login',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );
