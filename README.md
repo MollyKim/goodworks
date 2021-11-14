@@ -1,5 +1,9 @@
-홈 화면 사진 삽입 가능하게 만들어 두었습니다. 
- 레이아웃만 만들어 두었고 아이콘이나 게시글 목록 보기 등과같은 페이지는 만드는 대로 추가하겠습니다.
+todos: 
+1. api 모델링
+2. 리팩토링!!!!
+3. 사진 레이아웃 
+4. 예배 탭 유튜브 동영상 보여주기(api가져와서 대표이미지+시간+제목)
 
-![캡처](https://user-images.githubusercontent.com/56612792/139208471-0d6289fe-f803-4513-a19e-7d4322ff0751.PNG)
-![캡처2](https://user-images.githubusercontent.com/56612792/139208476-ad482770-6478-43de-b7b2-c34dbbc5b492.PNG)
+
+
+![캡처](https://user-images.githubusercontent.com/56612792/141109421-13927635-d88d-4754-b4f1-1b0b58ae1d5f.PNG)
