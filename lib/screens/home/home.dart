@@ -81,9 +81,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   controller: tabController,
                   tabs: <Widget>[
                     Tab(text: '전체'),
-                    Tab(text: '기도'),
-                    Tab(text: '기도'),
-                    Tab(text: '기도'),
+                    Tab(text: '주보'),
+                    Tab(text: '교회소식'),
+                    Tab(text: '청년부'),
                   ],
                 ),
               ),

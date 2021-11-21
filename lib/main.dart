@@ -11,6 +11,8 @@ import 'package:practice/screens/login/login_select_church.dart';
 import 'package:practice/screens/login/login_sign_up.dart';
 import 'package:practice/screens/login/login_welcome.dart';
 import 'package:practice/screens/main.dart';
+import 'package:practice/screens/pray/pray.dart';
+import 'package:practice/screens/pray/player.dart';
 import 'screens/home/post_detail.dart';
 import 'package:practice/services/root_service.dart';
 
@@ -63,6 +65,16 @@ class _RootState extends State<Root> {
       GetPage(
         name: '/home_post_detail',
         page: () => HomePostDetail(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/pray',
+        page: () => Pray(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/player',
+        page: () => Player(),
         transition: Transition.rightToLeft,
       ),
       GetPage(
