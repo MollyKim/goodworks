@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/login_controller.dart';
@@ -15,8 +14,6 @@ import 'screens/home/post_detail.dart';
 import 'package:practice/services/root_service.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Colors.white));
   runApp(Root());
 }
 
@@ -102,7 +99,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'FlutterStudy',
-      initialRoute: '/login',
+      initialRoute: '/main',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );
