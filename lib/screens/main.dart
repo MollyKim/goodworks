@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/login_controller.dart';
+import 'package:practice/controllers/status_bar.dart';
 import 'package:practice/layouts/default_bottom.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/models/login_model.dart';

@@ -17,8 +17,8 @@ class DefaultBottomNaviBar extends StatelessWidget {
         showUnselectedLabels: false,
         items: <BottomNavigationBarItem>[
           bottomStyle('assets/ic/ic_home',s.selectedIndex,0),
-          bottomStyle('assets/ic/ic_pray',s.selectedIndex,1),
-          bottomStyle('assets/ic/ic_worship',s.selectedIndex,2),
+          bottomStyle('assets/ic/ic_worship',s.selectedIndex,1),
+          bottomStyle('assets/ic/ic_pray',s.selectedIndex,2),
           bottomStyle('assets/ic/ic_community',s.selectedIndex,3),
           bottomStyle('assets/ic/ic_my',s.selectedIndex,4),
         ],
