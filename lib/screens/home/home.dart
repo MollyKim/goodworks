@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -29,17 +30,21 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
       DefaultLayout(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.white,
+          titleSpacing: 0,
+          backgroundColor: Color(0xff1a442b),
           backwardsCompatibility: false,
           title: Text('내수동교회'),
           titleTextStyle: TextStyle(
             fontSize: 20,
             fontFamily: "AppleSDGothicNeo",
             fontWeight: FontWeight.w700,
-            color: Color(0xff2d9067),
+            color: Colors.white,
           ),
-          leading: SvgPicture.asset(
-            'assets/ic/ic_appbar.svg',
+          leading: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: SvgPicture.asset(
+              'assets/ic/ic_appbar.svg', color: Colors.white,
+            ),
           ),
         ),
         body: NestedScrollView(
@@ -102,7 +107,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                 child: ListView.separated(
                   itemCount: 2,
                   separatorBuilder: (context, index) {
-                    return Divider(thickness: 2.0,);
+                    return Divider(thickness: 5.0,color: Colors.grey[600],);
                   },
                   itemBuilder: (BuildContext context, int index) {
                     return HomePostList();
@@ -119,7 +124,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
               ListView.separated(
                 itemCount: 1,
                 separatorBuilder: (context, index) {
-                  return Divider(thickness: 2.0,);
+                  return Divider(thickness: 2.0,color: Colors.grey[800],);
                 },
                 itemBuilder: (BuildContext context, int index) {
                   return HomePostList();

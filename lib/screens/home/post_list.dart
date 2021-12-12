@@ -104,6 +104,7 @@ class HomePostList extends StatelessWidget {
                         ),
                     );
                   }),
+              SizedBox(height: 10,),
             ],
           ),
         ),
