@@ -45,32 +45,66 @@ class _LoginState extends State<Login> {
           Container(
             height: 16,
           ),
-          Center(
-            child: SizedBox(
-              height: 50,
-              width: 130,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(26.0),
-                    ),
-                    primary: Color(0xff2d9067),
-                  ),
-                  onPressed: () {
-                    Get.toNamed('/login_select_church');
-                  },
-                  child: Text(
-                    "시작하기",
-                    textAlign: TextAlign.center,
+          Column(
+            children: [
+              Center(
+                child: SizedBox(
+                  height: 50,
+                  width: 180,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        primary: Color(0xff2d9067),
+                      ),
+                      onPressed: () {
+                        Get.toNamed('/login_select_church');
+                      },
+                      child: Text(
+                        "시작하기",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontFamily: "AppleSDGothicNeo",
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.80,
+                        ),
+                      )),
+                ),
+              ),
+              SizedBox(
+                height: 13,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '이미 계정이 있나요?',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontFamily: "AppleSDGothicNeo",
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.80,
+                      fontSize: 14,
                     ),
-                  )),
-            ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed('/login_phone');
+                    },
+                    child: Text(
+                      "로그인",
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Color(0xff2d9067),
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
         ],
       ),

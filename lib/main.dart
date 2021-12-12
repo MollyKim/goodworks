@@ -6,6 +6,8 @@ import 'package:practice/screens/community/community_post_detail.dart';
 import 'package:practice/screens/home/home.dart';
 import 'package:practice/screens/login/login.dart';
 import 'package:practice/screens/login/login_fail.dart';
+import 'package:practice/screens/login/login_id.dart';
+import 'package:practice/screens/login/login_phone.dart';
 import 'package:practice/screens/login/login_select_church.dart';
 import 'package:practice/screens/login/login_sign_up.dart';
 import 'package:practice/screens/login/login_welcome.dart';
@@ -80,6 +82,16 @@ class _RootState extends State<Root> {
         transition: Transition.rightToLeft,
       ),
       GetPage(
+        name: '/login_phone',
+        page: () => LoginPhone(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/login_id',
+        page: () => LoginID(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
         name: '/login_select_church',
         page: () => LoginSelectChurch(),
         transition: Transition.rightToLeft,
@@ -111,7 +123,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'FlutterStudy',
-      initialRoute: '/main',
+      initialRoute: '/login',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );
