@@ -12,6 +12,8 @@ import 'package:practice/screens/login/login_select_church.dart';
 import 'package:practice/screens/login/login_sign_up.dart';
 import 'package:practice/screens/login/login_welcome.dart';
 import 'package:practice/screens/main.dart';
+import 'package:practice/screens/menu/menu.dart';
+import 'package:practice/screens/menu/setting.dart';
 import 'package:practice/screens/pray/pray.dart';
 import 'package:practice/screens/pray/player.dart';
 import 'screens/home/post_detail.dart';
@@ -77,6 +79,16 @@ class _RootState extends State<Root> {
         transition: Transition.rightToLeft,
       ),
       GetPage(
+        name: '/menu',
+        page: () => Menu(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/setting',
+        page: () => Setting(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
         name: '/login',
         page: () => Login(),
         transition: Transition.rightToLeft,
@@ -123,7 +135,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'FlutterStudy',
-      initialRoute: '/login',
+      initialRoute: '/menu',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );

@@ -9,8 +9,8 @@ import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/models/login_model.dart';
 import 'package:practice/screens/community/community.dart';
 import 'package:practice/screens/home/home.dart';
+import 'package:practice/screens/menu/menu.dart';
 import 'package:practice/screens/pray/pray.dart';
-import 'package:practice/services/root_service.dart';
 
 class Main extends StatefulWidget {
   const Main({Key? key}) : super(key: key);
@@ -41,15 +41,12 @@ class _MainState extends State<Main> {
           children: <Widget>[
             Home(),
             //Pray
+            Center(
+              child: Text(s.selectedIndex.toString()),
+            ),
             Pray(),
-
-            Center(
-              child: Text(s.selectedIndex.toString()),
-            ),
             Community(),
-            Center(
-              child: Text(s.selectedIndex.toString()),
-            ),
+            Menu(),
           ],
         ),
       ),
