@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/screens/community/post_list.dart';
 
@@ -16,7 +17,7 @@ class Community extends StatelessWidget {
           fontFamily: "AppleSDGothicNeo",
           color: Color(0xff2d9067),
         ),),
-        elevation: 0,
+        elevation: 2.0,
       ),
         body: SafeArea(
             top: true,
@@ -32,7 +33,7 @@ class Community extends StatelessWidget {
         ),
       floatingActionButton: GestureDetector(
         onTap: (){
-
+          Get.toNamed("/write_community_post");
         },
         child: SvgPicture.asset(
           'assets/ic/ic_write.svg',
