@@ -6,6 +6,8 @@ import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/models/login_model.dart';
 import 'package:practice/screens/community/community.dart';
 import 'package:practice/screens/home/home.dart';
+import 'package:practice/screens/menu/menu.dart';
+import 'package:practice/screens/pray/pray.dart';
 
 class Main extends StatefulWidget {
   const Main({Key? key}) : super(key: key);
@@ -24,6 +26,7 @@ class Main extends StatefulWidget {
 
 class _MainState extends State<Main> {
   PostLoginInfoModel? result;
+
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
@@ -34,16 +37,13 @@ class _MainState extends State<Main> {
           index: s.selectedIndex,
           children: <Widget>[
             Home(),
+            //Pray
             Center(
               child: Text(s.selectedIndex.toString()),
             ),
-            Center(
-              child: Text(s.selectedIndex.toString()),
-            ),
+            Pray(),
             Community(),
-            Center(
-              child: Text(s.selectedIndex.toString()),
-            ),
+            Menu(),
           ],
         ),
       ),

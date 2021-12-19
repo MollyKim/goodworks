@@ -7,10 +7,18 @@ import 'package:practice/screens/community/write_community_post.dart';
 import 'package:practice/screens/home/home.dart';
 import 'package:practice/screens/login/login.dart';
 import 'package:practice/screens/login/login_fail.dart';
+import 'package:practice/screens/login/login_id.dart';
+import 'package:practice/screens/login/login_phone.dart';
 import 'package:practice/screens/login/login_select_church.dart';
 import 'package:practice/screens/login/login_sign_up.dart';
 import 'package:practice/screens/login/login_welcome.dart';
 import 'package:practice/screens/main.dart';
+import 'package:practice/screens/menu/menu.dart';
+import 'package:practice/screens/menu/password_reset.dart';
+import 'package:practice/screens/menu/profile.dart';
+import 'package:practice/screens/menu/setting.dart';
+import 'package:practice/screens/pray/pray.dart';
+import 'package:practice/screens/pray/player.dart';
 import 'screens/home/post_detail.dart';
 import 'package:practice/services/root_service.dart';
 
@@ -64,8 +72,48 @@ class _RootState extends State<Root> {
         transition: Transition.rightToLeft,
       ),
       GetPage(
+        name: '/pray',
+        page: () => Pray(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/player',
+        page: () => Player(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/menu',
+        page: () => Menu(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/profile',
+        page: () => Profile(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/setting',
+        page: () => Setting(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/password_reset',
+        page: () => PasswordReset(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
         name: '/login',
         page: () => Login(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/login_phone',
+        page: () => LoginPhone(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/login_id',
+        page: () => LoginID(),
         transition: Transition.rightToLeft,
       ),
       GetPage(
