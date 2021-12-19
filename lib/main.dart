@@ -99,7 +99,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'FlutterStudy',
-      initialRoute: '/main',
+      initialRoute: '/login',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );

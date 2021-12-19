@@ -31,19 +31,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
         appBar: AppBar(
           elevation: 0,
           titleSpacing: 0,
-          backgroundColor: Color(0xff1a442b),
+          backgroundColor: Colors.white,
           backwardsCompatibility: false,
           title: Text('내수동교회'),
           titleTextStyle: TextStyle(
             fontSize: 20,
             fontFamily: "AppleSDGothicNeo",
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: Color(0xff2d9067),
           ),
           leading: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: SvgPicture.asset(
-              'assets/ic/ic_appbar.svg', color: Colors.white,
+              'assets/ic/ic_appbar.svg',
             ),
           ),
         ),

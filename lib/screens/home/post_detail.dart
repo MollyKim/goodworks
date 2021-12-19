@@ -7,12 +7,9 @@ import 'package:share/share.dart';
 class HomePostDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.white));
     return DefaultLayout(
       appBar: AppBar(
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.white),
         backgroundColor: Colors.white,
         leading: GestureDetector(
             onTap: (){
