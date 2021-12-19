@@ -31,46 +31,52 @@ class _MenuState extends State<Menu> {
             ),
           ),
         ),
-        Container(
-          padding: EdgeInsets.all(20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/ic/ic_photo.svg',
-                  ),
-                  SizedBox(
-                    width: 19,
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        "홍길동",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontFamily: "Apple SD Gothic Neo",
-                          fontWeight: FontWeight.w700,
+        InkWell(
+          onTap: (){
+            Get.toNamed('/profile');
+
+          },
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/ic/ic_photo.svg',
+                    ),
+                    SizedBox(
+                      width: 19,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "홍길동",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: "Apple SD Gothic Neo",
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        "청년부",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
+                        SizedBox(height: 5),
+                        Text(
+                          "청년부",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SvgPicture.asset(
-                'assets/ic/ic_selected.svg',
-              ),
-            ],
+                      ],
+                    ),
+                  ],
+                ),
+                SvgPicture.asset(
+                  'assets/ic/ic_selected.svg',
+                ),
+              ],
+            ),
           ),
         ),
         InkWell(

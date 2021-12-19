@@ -13,6 +13,7 @@ import 'package:practice/screens/login/login_sign_up.dart';
 import 'package:practice/screens/login/login_welcome.dart';
 import 'package:practice/screens/main.dart';
 import 'package:practice/screens/menu/menu.dart';
+import 'package:practice/screens/menu/profile.dart';
 import 'package:practice/screens/menu/setting.dart';
 import 'package:practice/screens/pray/pray.dart';
 import 'package:practice/screens/pray/player.dart';
@@ -81,6 +82,11 @@ class _RootState extends State<Root> {
       GetPage(
         name: '/menu',
         page: () => Menu(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/profile',
+        page: () => Profile(),
         transition: Transition.rightToLeft,
       ),
       GetPage(
