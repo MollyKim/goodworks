@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:practice/layouts/default_layout.dart';
 
 class Profile extends StatefulWidget {
@@ -229,19 +230,24 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "비밀번호 변경",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
+            GestureDetector(
+              onTap: () {
+                Get.toNamed('/password_reset');
+              },
+              child: Container(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "비밀번호 변경",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

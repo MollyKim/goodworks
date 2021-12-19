@@ -13,6 +13,7 @@ import 'package:practice/screens/login/login_sign_up.dart';
 import 'package:practice/screens/login/login_welcome.dart';
 import 'package:practice/screens/main.dart';
 import 'package:practice/screens/menu/menu.dart';
+import 'package:practice/screens/menu/password_reset.dart';
 import 'package:practice/screens/menu/profile.dart';
 import 'package:practice/screens/menu/setting.dart';
 import 'package:practice/screens/pray/pray.dart';
@@ -92,6 +93,11 @@ class _RootState extends State<Root> {
       GetPage(
         name: '/setting',
         page: () => Setting(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/password_reset',
+        page: () => PasswordReset(),
         transition: Transition.rightToLeft,
       ),
       GetPage(
