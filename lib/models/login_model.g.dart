@@ -8,19 +8,19 @@ part of 'login_model.dart';
 
 PostLoginInfoBody _$PostLoginInfoBodyFromJson(Map<String, dynamic> json) {
   return PostLoginInfoBody(
-    email: json['useremail'] as String,
-    password: json['userpwd'] as String,
-    userName: json['username'] as String,
-    phoneNumber: json['phone'] as String,
+    email: json['email'] as String,
+    password: json['password'] as String,
+    userName: json['userName'] as String,
+    phoneNumber: json['phoneNumber'] as String,
   );
 }
 
 Map<String, dynamic> _$PostLoginInfoBodyToJson(PostLoginInfoBody instance) =>
     <String, dynamic>{
-      'useremail': instance.email,
-      'userpwd': instance.password,
-      'username': instance.userName,
-      'phone': instance.phoneNumber,
+      'email': instance.email,
+      'password': instance.password,
+      'userName': instance.userName,
+      'phoneNumber': instance.phoneNumber,
     };
 
 PostLoginInfoModel _$PostLoginInfoModelFromJson(Map<String, dynamic> json) {
