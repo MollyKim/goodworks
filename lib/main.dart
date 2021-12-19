@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/screens/community/community_post_detail.dart';
+import 'package:practice/screens/community/write_community_post.dart';
 import 'package:practice/screens/home/home.dart';
 import 'package:practice/screens/login/login.dart';
 import 'package:practice/screens/login/login_fail.dart';
@@ -78,6 +79,11 @@ class _RootState extends State<Root> {
         transition: Transition.rightToLeft,
       ),
       GetPage(
+        name: '/write_community_post',
+        page: () => WriteCommunityPost(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
         name: '/login_sign_up',
         page: () => LoginSignUp(),
         transition: Transition.rightToLeft,
@@ -99,7 +105,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'FlutterStudy',
-      initialRoute: '/login',
+      initialRoute: '/',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );

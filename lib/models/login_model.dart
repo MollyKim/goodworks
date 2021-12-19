@@ -51,6 +51,7 @@ class PostLoginInfoResponse {
   final String? updateAt;
   final String? deletedAt;
   final PostLoginInfoUserProfile? userProfile;
+  //토큰 여기에 넣어야 할지?
 
   PostLoginInfoResponse({this.id, this.email, this.phoneNumber, this.isCertifiedPhone,
       this.userName, this.deletedAt,this.updateAt,this.createdAt,this.userProfile,this.userType});

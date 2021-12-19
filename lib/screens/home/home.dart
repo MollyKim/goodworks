@@ -29,7 +29,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
     return
       DefaultLayout(
         appBar: AppBar(
-          elevation: 0,
+          elevation: 2.0,
           titleSpacing: 0,
           backgroundColor: Colors.white,
           backwardsCompatibility: false,
