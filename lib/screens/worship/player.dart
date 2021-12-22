@@ -47,10 +47,10 @@ class PlayerState extends State<Player> {
   @override
   Widget build(BuildContext context) {
     return YoutubePlayerBuilder(
-        // onExitFullScreen: () {
-        //   // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
-        //   SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-        // },
+      // onExitFullScreen: () {
+      //   // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
+      //   SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+      // },
         player: YoutubePlayer(
           // width:MediaQuery.of(context).size.width,
           aspectRatio: 16 / 7,
@@ -82,37 +82,3 @@ class PlayerState extends State<Player> {
             )));
   }
 }
-
-// @override
-// Widget build(BuildContext context) {
-//   return Container(
-//     padding: EdgeInsets.all(20),
-//     child: YoutubePlayerBuilder(
-//       // onExitFullScreen: () {
-//       //   // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
-//       //   SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-//       // },
-//         player: YoutubePlayer(
-//           controller: _controller,
-//         ),
-//         builder: (context, player) => Scaffold(
-//           appBar: AppBar(
-//             backgroundColor: Colors.white,
-//             title: Text('VideoTitle',style: TextStyle(color: Colors.black),),
-//           ),
-//           body: player,
-//         )
-//     ),
-//   );
-// }
-// }
-
-// {
-// return Column(
-// children: [
-// // some widgets
-// player,
-// //some other widgets
-// ],
-// );
-// }

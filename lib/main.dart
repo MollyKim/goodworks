@@ -17,8 +17,9 @@ import 'package:practice/screens/menu/menu.dart';
 import 'package:practice/screens/menu/password_reset.dart';
 import 'package:practice/screens/menu/profile.dart';
 import 'package:practice/screens/menu/setting.dart';
-import 'package:practice/screens/pray/pray.dart';
-import 'package:practice/screens/pray/player.dart';
+import 'package:practice/screens/splash.dart';
+import 'package:practice/screens/worship/player.dart';
+import 'package:practice/screens/worship/worship.dart';
 import 'screens/home/post_detail.dart';
 import 'package:practice/services/root_service.dart';
 
@@ -72,8 +73,8 @@ class _RootState extends State<Root> {
         transition: Transition.rightToLeft,
       ),
       GetPage(
-        name: '/pray',
-        page: () => Pray(),
+        name: '/worship',
+        page: () => Worship(),
         transition: Transition.rightToLeft,
       ),
       GetPage(
@@ -151,11 +152,33 @@ class _RootState extends State<Root> {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'FlutterStudy',
-      initialRoute: '/',
-      debugShowCheckedModeBanner: false,
-      getPages: renderPages(),
+    return FutureBuilder(
+      future: Init.instance.initialize(),
+    builder: (context, AsyncSnapshot snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return MaterialApp(home: Splash());
+      }
+      else {
+        return  GetMaterialApp(
+          title: 'FlutterStudy',
+          initialRoute: '/login',
+          debugShowCheckedModeBanner: false,
+          getPages: renderPages(),
+        );
+      }
+    }
     );
+  }
+}
+
+class Init {
+  Init._();
+  static final instance = Init._();
+
+  Future initialize() async {
+    // This is where you can initialize the resources needed by your app while
+    // the splash screen is displayed.  Remove the following example because
+    // delaying the user experience is a bad design practice!
+    await Future.delayed(const Duration(seconds: 2));
   }
 }

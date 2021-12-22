@@ -1,17 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:practice/screens/pray/player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class Pray extends StatefulWidget {
-  const Pray({Key? key}) : super(key: key);
+class Worship extends StatefulWidget {
+  const Worship({Key? key}) : super(key: key);
 
   @override
-  _PrayState createState() => _PrayState();
+  _WorshipState createState() => _WorshipState();
 }
 
-class _PrayState extends State<Pray> {
+class _WorshipState extends State<Worship> {
   late YoutubePlayerController _controller;
 
   @override
@@ -55,9 +53,9 @@ class _PrayState extends State<Pray> {
                   Get.toNamed('/player', arguments: 'dyRsYk0LyA8');
                   // Player('dyRsYk0LyA8', 'Video Title');
                 },
-                child: Text('hello')),
+                child: Text('Full Screen')),
             YoutubePlayer(
-            thumbnail:Container(child: Text('ThumbNail'),),
+              thumbnail:Container(child: Text('ThumbNail'),),
               key: ObjectKey(_controller),
               controller: _controller,
               actionsPadding: const EdgeInsets.only(left: 16.0),
