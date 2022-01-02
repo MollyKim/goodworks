@@ -50,7 +50,7 @@ class _WorshipState extends State<Worship> {
                 onPressed: () {
 
                   // Get.toNamed('/player', arguments: 'lQ-bjS-S4wQ');
-                  Get.toNamed('/player', arguments: 'dyRsYk0LyA8');
+                  Get.toNamed('/full_screen', arguments: 'dyRsYk0LyA8');
                   // Player('dyRsYk0LyA8', 'Video Title');
                 },
                 child: Text('Full Screen')),

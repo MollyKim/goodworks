@@ -17,6 +17,9 @@ import 'package:practice/screens/menu/menu.dart';
 import 'package:practice/screens/menu/password_reset.dart';
 import 'package:practice/screens/menu/profile.dart';
 import 'package:practice/screens/menu/setting.dart';
+import 'package:practice/screens/pray/pray.dart';
+import 'package:practice/screens/pray/pray_community_post.dart';
+import 'package:practice/screens/pray/pray_post_correction.dart';
 import 'package:practice/screens/splash.dart';
 import 'package:practice/screens/worship/player.dart';
 import 'package:practice/screens/worship/worship.dart';
@@ -78,8 +81,23 @@ class _RootState extends State<Root> {
         transition: Transition.rightToLeft,
       ),
       GetPage(
-        name: '/player',
-        page: () => Player(),
+        name: '/full_screen',
+        page: () => FullScreen(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/pray',
+        page: () => Pray(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/pray_community_post',
+        page: () => PrayCommunityPost(),
+        transition: Transition.rightToLeft,
+      ),
+      GetPage(
+        name: '/pray_post_correction',
+        page: () => PrayPostCorrection(),
         transition: Transition.rightToLeft,
       ),
       GetPage(
@@ -161,7 +179,7 @@ class _RootState extends State<Root> {
       else {
         return  GetMaterialApp(
           title: 'FlutterStudy',
-          initialRoute: '/login',
+          initialRoute: '/',
           debugShowCheckedModeBanner: false,
           getPages: renderPages(),
         );

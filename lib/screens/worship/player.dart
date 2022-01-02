@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class Player extends StatefulWidget {
+class FullScreen extends StatefulWidget {
   @override
-  PlayerState createState() => PlayerState();
+  FullScreenState createState() => FullScreenState();
 }
 
-class PlayerState extends State<Player> {
+class FullScreenState extends State<FullScreen> {
   late YoutubePlayerController _controller;
 
   @override
