@@ -81,8 +81,8 @@ class _RootState extends State<Root> {
         transition: Transition.rightToLeft,
       ),
       GetPage(
-        name: '/full_screen',
-        page: () => FullScreen(),
+        name: '/player',
+        page: () => Player(),
         transition: Transition.rightToLeft,
       ),
       GetPage(
