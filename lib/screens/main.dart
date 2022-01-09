@@ -26,7 +26,7 @@ class Main extends StatefulWidget {
 // }
 
 class _MainState extends State<Main> {
-  PostLoginInfoModel? result;
+  UserModel? result;
 
   @override
   Widget build(BuildContext context) {

@@ -23,25 +23,24 @@ class PostLoginInfoBody {
 }
 
 @JsonSerializable()
-class PostLoginInfoModel {
-  int? trId;
+class UserModel {
+  String? trId;
   String? resultCode;
   String? resultMsg;
-  PostLoginInfoResponse? resultData;
+  UserResultData? resultData;
 
-  // ignore: non_constant_identifier_names
-  PostLoginInfoModel(
+  UserModel(
       {this.trId, this.resultCode, this.resultMsg, this.resultData});
 
-  factory PostLoginInfoModel.fromJson(Object? json) =>
-      _$PostLoginInfoModelFromJson(json as Map<String, dynamic>);
+  factory UserModel.fromJson(Object? json) =>
+      _$UserModelFromJson(json as Map<String, dynamic>);
 
-  Map<String, dynamic> toJson() => _$PostLoginInfoModelToJson(this);
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }
 
 @JsonSerializable()
-class PostLoginInfoResponse {
-  final String? id;
+class UserResultData {
+  final int? id;
   final String? email;
   final String? phoneNumber;
   final String? isCertifiedPhone;
@@ -50,51 +49,51 @@ class PostLoginInfoResponse {
   final String? createdAt;
   final String? updateAt;
   final String? deletedAt;
-  final PostLoginInfoUserProfile? userProfile;
-  //토큰 여기에 넣어야 할지?
+  final UserProfile? userProfile;
+  final List<String>? tokens;
 
-  PostLoginInfoResponse({this.id, this.email, this.phoneNumber, this.isCertifiedPhone,
-      this.userName, this.deletedAt,this.updateAt,this.createdAt,this.userProfile,this.userType});
+  UserResultData({this.id, this.email, this.phoneNumber, this.isCertifiedPhone,
+      this.userName, this.deletedAt,this.updateAt,this.createdAt,this.userProfile,this.userType, this.tokens});
 
-  factory PostLoginInfoResponse.fromJson(Object? json) =>
-      _$PostLoginInfoResponseFromJson(json as Map<String, dynamic>);
+  factory UserResultData.fromJson(Object? json) =>
+      _$UserResultDataFromJson(json as Map<String, dynamic>);
 
 
-  Map<String, dynamic> toJson() => _$PostLoginInfoResponseToJson(this);
+  Map<String, dynamic> toJson() => _$UserResultDataToJson(this);
 }
 
 @JsonSerializable()
-class PostLoginInfoUserProfile{
-  final String? id;
+class UserProfile{
+  final int? id;
   final String? userId;
   final String? nickName;
   final String? selfIntroduce;
-  final PostLoginInfoUserAvatar? avatar;
+  final UserAvatar? avatar;
   final String? createdAt;
   final String? updateAt;
   final String? deletedAt;
 
-  PostLoginInfoUserProfile(this.id, this.userId, this.nickName, this.selfIntroduce, this.avatar, this.createdAt, this.updateAt, this.deletedAt);
+  UserProfile(this.id, this.userId, this.nickName, this.selfIntroduce, this.avatar, this.createdAt, this.updateAt, this.deletedAt);
 
-  factory PostLoginInfoUserProfile.fromJson(Object? json) =>
-      _$PostLoginInfoUserProfileFromJson(json as Map<String, dynamic>);
+  factory UserProfile.fromJson(Object? json) =>
+      _$UserProfileFromJson(json as Map<String, dynamic>);
 
 
-  Map<String, dynamic> toJson() => _$PostLoginInfoUserProfileToJson(this);
+  Map<String, dynamic> toJson() => _$UserProfileToJson(this);
 }
 
 @JsonSerializable()
-class PostLoginInfoUserAvatar {
+class UserAvatar {
   final String? filename;
   final String? url;
   final String? smallUrl;
   final num? size;
 
-  PostLoginInfoUserAvatar({this.filename, this.url, this.smallUrl, this.size});
+  UserAvatar({this.filename, this.url, this.smallUrl, this.size});
 
-  factory PostLoginInfoUserAvatar.fromJson(Object? json) =>
-      _$PostLoginInfoUserAvatarFromJson(json as Map<String, dynamic>);
+  factory UserAvatar.fromJson(Object? json) =>
+      _$UserAvatarFromJson(json as Map<String, dynamic>);
 
 
-  Map<String, dynamic> toJson() => _$PostLoginInfoUserAvatarToJson(this);
+  Map<String, dynamic> toJson() => _$UserAvatarToJson(this);
 }

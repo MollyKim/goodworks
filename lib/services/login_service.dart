@@ -10,7 +10,7 @@ abstract class LoginService {
 
   @POST('/login')
   @Headers(<String,dynamic>{})
-  Future<PostLoginInfoModel> postLoginIngoBody(
+  Future<UserModel> postLoginIngoBody(
         @Body() Map<String,dynamic> body,
       );
 }

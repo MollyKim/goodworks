@@ -23,29 +23,27 @@ Map<String, dynamic> _$PostLoginInfoBodyToJson(PostLoginInfoBody instance) =>
       'phoneNumber': instance.phoneNumber,
     };
 
-PostLoginInfoModel _$PostLoginInfoModelFromJson(Map<String, dynamic> json) {
-  return PostLoginInfoModel(
-    trId: json['trId'] as int?,
+UserModel _$UserModelFromJson(Map<String, dynamic> json) {
+  return UserModel(
+    trId: json['trId'] as String?,
     resultCode: json['resultCode'] as String?,
     resultMsg: json['resultMsg'] as String?,
     resultData: json['resultData'] == null
         ? null
-        : PostLoginInfoResponse.fromJson(json['resultData'] as Object),
+        : UserResultData.fromJson(json['resultData'] as Object),
   );
 }
 
-Map<String, dynamic> _$PostLoginInfoModelToJson(PostLoginInfoModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'trId': instance.trId,
       'resultCode': instance.resultCode,
       'resultMsg': instance.resultMsg,
       'resultData': instance.resultData,
     };
 
-PostLoginInfoResponse _$PostLoginInfoResponseFromJson(
-    Map<String, dynamic> json) {
-  return PostLoginInfoResponse(
-    id: json['id'] as String?,
+UserResultData _$UserResultDataFromJson(Map<String, dynamic> json) {
+  return UserResultData(
+    id: json['id'] as int?,
     email: json['email'] as String?,
     phoneNumber: json['phoneNumber'] as String?,
     isCertifiedPhone: json['isCertifiedPhone'] as String?,
@@ -55,13 +53,14 @@ PostLoginInfoResponse _$PostLoginInfoResponseFromJson(
     createdAt: json['createdAt'] as String?,
     userProfile: json['userProfile'] == null
         ? null
-        : PostLoginInfoUserProfile.fromJson(json['userProfile'] as Object),
+        : UserProfile.fromJson(json['userProfile'] as Object),
     userType: json['userType'] as String?,
+    tokens:
+        (json['tokens'] as List<dynamic>?)?.map((e) => e as String).toList(),
   );
 }
 
-Map<String, dynamic> _$PostLoginInfoResponseToJson(
-        PostLoginInfoResponse instance) =>
+Map<String, dynamic> _$UserResultDataToJson(UserResultData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'email': instance.email,
@@ -73,26 +72,25 @@ Map<String, dynamic> _$PostLoginInfoResponseToJson(
       'updateAt': instance.updateAt,
       'deletedAt': instance.deletedAt,
       'userProfile': instance.userProfile,
+      'tokens': instance.tokens,
     };
 
-PostLoginInfoUserProfile _$PostLoginInfoUserProfileFromJson(
-    Map<String, dynamic> json) {
-  return PostLoginInfoUserProfile(
-    json['id'] as String?,
+UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
+  return UserProfile(
+    json['id'] as int?,
     json['userId'] as String?,
     json['nickName'] as String?,
     json['selfIntroduce'] as String?,
     json['avatar'] == null
         ? null
-        : PostLoginInfoUserAvatar.fromJson(json['avatar'] as Object),
+        : UserAvatar.fromJson(json['avatar'] as Object),
     json['createdAt'] as String?,
     json['updateAt'] as String?,
     json['deletedAt'] as String?,
   );
 }
 
-Map<String, dynamic> _$PostLoginInfoUserProfileToJson(
-        PostLoginInfoUserProfile instance) =>
+Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
@@ -104,9 +102,8 @@ Map<String, dynamic> _$PostLoginInfoUserProfileToJson(
       'deletedAt': instance.deletedAt,
     };
 
-PostLoginInfoUserAvatar _$PostLoginInfoUserAvatarFromJson(
-    Map<String, dynamic> json) {
-  return PostLoginInfoUserAvatar(
+UserAvatar _$UserAvatarFromJson(Map<String, dynamic> json) {
+  return UserAvatar(
     filename: json['filename'] as String?,
     url: json['url'] as String?,
     smallUrl: json['smallUrl'] as String?,
@@ -114,8 +111,7 @@ PostLoginInfoUserAvatar _$PostLoginInfoUserAvatarFromJson(
   );
 }
 
-Map<String, dynamic> _$PostLoginInfoUserAvatarToJson(
-        PostLoginInfoUserAvatar instance) =>
+Map<String, dynamic> _$UserAvatarToJson(UserAvatar instance) =>
     <String, dynamic>{
       'filename': instance.filename,
       'url': instance.url,

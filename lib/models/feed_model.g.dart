@@ -11,7 +11,8 @@ Feed _$FeedFromJson(Map<String, dynamic> json) {
     trID: json['trID'] as String,
     resultCode: json['resultCode'] as String,
     resultMsg: json['resultMsg'] as String,
-    resultData: ResultData.fromJson(json['resultData'] as Map<String, dynamic>),
+    resultData:
+        FeedResultData.fromJson(json['resultData'] as Map<String, dynamic>),
   );
 }
 
@@ -22,20 +23,20 @@ Map<String, dynamic> _$FeedToJson(Feed instance) => <String, dynamic>{
       'resultData': instance.resultData,
     };
 
-ResultData _$ResultDataFromJson(Map<String, dynamic> json) {
-  return ResultData(
-    id: json['id'] as String,
+FeedResultData _$FeedResultDataFromJson(Map<String, dynamic> json) {
+  return FeedResultData(
+    id: json['id'] as int,
     churchId: json['churchId'] as int,
     churchUserId: json['churchUserId'] as int,
     title: json['title'] as String,
     feedType: json['feedType'] as int,
     feedStatus: json['feedStatus'] as int,
-    content: json['content'] as String,
+    content: json['content'] as String?,
     favoriteCount: json['favoriteCount'] as int,
     commentCount: json['commentCount'] as int,
     pinned: json['pinned'] as bool,
-    attachments: (json['attachments'] as List<dynamic>)
-        .map((e) => Attachment.fromJson(e as Map<String, dynamic>))
+    attachments: (json['attachments'] as List<dynamic>?)
+        ?.map((e) => FeedAttachment.fromJson(e as Map<String, dynamic>))
         .toList(),
     createdAt: json['createdAt'] as String,
     updatedAt: json['updatedAt'] as String,
@@ -43,7 +44,7 @@ ResultData _$ResultDataFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$ResultDataToJson(ResultData instance) =>
+Map<String, dynamic> _$FeedResultDataToJson(FeedResultData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'churchId': instance.churchId,
@@ -61,16 +62,16 @@ Map<String, dynamic> _$ResultDataToJson(ResultData instance) =>
       'deletedAt': instance.deletedAt,
     };
 
-Attachment _$AttachmentFromJson(Map<String, dynamic> json) {
-  return Attachment(
+FeedAttachment _$FeedAttachmentFromJson(Map<String, dynamic> json) {
+  return FeedAttachment(
     id: json['id'] as int,
     feedId: json['feedId'] as String,
-    fileinfo: FileInfo.fromJson(json['fileinfo'] as Map<String, dynamic>),
+    fileinfo: FeedFileInfo.fromJson(json['fileinfo'] as Map<String, dynamic>),
     attachType: json['attachType'] as String,
   );
 }
 
-Map<String, dynamic> _$AttachmentToJson(Attachment instance) =>
+Map<String, dynamic> _$FeedAttachmentToJson(FeedAttachment instance) =>
     <String, dynamic>{
       'id': instance.id,
       'feedId': instance.feedId,
@@ -78,16 +79,17 @@ Map<String, dynamic> _$AttachmentToJson(Attachment instance) =>
       'attachType': instance.attachType,
     };
 
-FileInfo _$FileInfoFromJson(Map<String, dynamic> json) {
-  return FileInfo(
-    filename: json['filename'] as String,
-    url: json['url'] as String,
-    smallUrl: json['smallUrl'] as String,
-    size: json['size'] as int,
+FeedFileInfo _$FeedFileInfoFromJson(Map<String, dynamic> json) {
+  return FeedFileInfo(
+    filename: json['filename'] as String?,
+    url: json['url'] as String?,
+    smallUrl: json['smallUrl'] as String?,
+    size: json['size'] as int?,
   );
 }
 
-Map<String, dynamic> _$FileInfoToJson(FileInfo instance) => <String, dynamic>{
+Map<String, dynamic> _$FeedFileInfoToJson(FeedFileInfo instance) =>
+    <String, dynamic>{
       'filename': instance.filename,
       'url': instance.url,
       'smallUrl': instance.smallUrl,
