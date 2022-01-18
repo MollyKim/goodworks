@@ -179,7 +179,7 @@ class _RootState extends State<Root> {
       else {
         return  GetMaterialApp(
           title: 'FlutterStudy',
-          initialRoute: '/',
+          initialRoute: '/login_sign_up',
           debugShowCheckedModeBanner: false,
           getPages: renderPages(),
         );

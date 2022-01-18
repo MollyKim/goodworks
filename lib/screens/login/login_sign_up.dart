@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/models/user_model.dart';
 
 class LoginSignUp extends StatefulWidget {
   @override
@@ -143,9 +145,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 fontSize: 16,
               ),
             ),
-            onChanged: (value) {
-              setState(() {});
-            },
+            // onChanged: (value) {
+            //   setState(() {
+            //   });
+            // },
           ),
         ),
       ],
@@ -735,10 +738,15 @@ class _LoginSignUpState extends State<LoginSignUp> {
             ),
             primary: Color(0xff2d9067),
           ),
-          onPressed: () {
-            signUpFlag
-                ? Get.toNamed('/login_fail')
-                : Get.toNamed('/login_welcome');
+          onPressed: () async{
+            final LoginController loginController = Get.find();
+            final UserModel? userModel = await loginController.registerUser(
+                email: "", userpwd: "userpwd", userName: "userName", phoneNumber: "phoneNumber");
+
+            if(userModel?.resultCode == "200"){
+              Get.toNamed('/login_welcome');
+            } else Get.toNamed('/login_fail');
+
           },
           child: Text(
             "가입하기",

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart' hide Headers;
-import 'package:practice/models/login_model.dart';
+import 'package:practice/models/user_model.dart';
 import 'package:retrofit/http.dart';
 
 part 'login_service.g.dart';
@@ -13,4 +13,18 @@ abstract class LoginService {
   Future<UserModel> postLoginIngoBody(
         @Body() Map<String,dynamic> body,
       );
+
+  @POST('/login')
+  @Headers(<String,dynamic>{})
+  Future<UserModel> registerUser(
+      @Body() Map<String,dynamic> body,
+      );
+
+  @POST('/login')
+  @Headers(<String,dynamic>{})
+  Future<UserModel> loginUser(
+      @Body() Map<String,dynamic> body,
+      );
+
+
 }
