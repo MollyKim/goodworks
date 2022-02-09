@@ -743,6 +743,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
             final UserModel? userModel = await loginController.registerUser(
                 email: "", userpwd: "userpwd", userName: "userName", phoneNumber: "phoneNumber");
 
+
+            print(userModel?.resultMsg);
+            print(userModel?.resultCode);
             if(userModel?.resultCode == "200"){
               Get.toNamed('/login_welcome');
             } else Get.toNamed('/login_fail');

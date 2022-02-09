@@ -8,7 +8,7 @@ part of 'login_service.dart';
 
 class _LoginService implements LoginService {
   _LoginService(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://dev-api.millie.co.kr/v1';
+    baseUrl ??= 'http://qa-amos.vm-united.com';
   }
 
   final Dio _dio;
@@ -40,7 +40,7 @@ class _LoginService implements LoginService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<UserModel>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/login',
+                .compose(_dio.options, '/api/v1/seum/user/register',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserModel.fromJson(_result.data!);
