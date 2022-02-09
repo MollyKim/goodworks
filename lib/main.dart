@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
+import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/screens/community/community_post_detail.dart';
 import 'package:practice/screens/community/write_community_post.dart';
@@ -49,6 +50,7 @@ class _RootState extends State<Root> {
     final service = initService();
     Get.put(LoginController(service));
     Get.put(BottomNaviController());
+    Get.put(ChurchController(service));
   }
 
   initService() {
@@ -199,9 +201,7 @@ class Init {
   static final instance = Init._();
 
   Future initialize() async {
-    // This is where you can initialize the resources needed by your app while
-    // the splash screen is displayed.  Remove the following example because
-    // delaying the user experience is a bad design practice!
+    //세션 검사 및 교회 정보 받아오기
     await Future.delayed(const Duration(seconds: 1));
     return true;
   }

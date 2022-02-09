@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
-import 'package:practice/models/user_model.dart';
+import 'package:practice/services/user/user_model.dart';
 
 class LoginSignUp extends StatefulWidget {
   @override

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/layouts/default_bottom.dart';
 import 'package:practice/layouts/default_layout.dart';
-import 'package:practice/models/user_model.dart';
+import 'package:practice/services/user/user_model.dart';
 import 'package:practice/screens/community/community.dart';
 import 'package:practice/screens/home/home.dart';
 import 'package:practice/screens/menu/menu.dart';

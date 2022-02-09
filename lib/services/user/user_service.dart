@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart' hide Headers;
-import 'package:practice/models/user_model.dart';
+import 'package:practice/services/user/user_model.dart';
 import 'package:retrofit/http.dart';
 
-part 'login_service.g.dart';
+part 'user_service.g.dart';
 
 @RestApi(baseUrl: 'http://qa-amos.vm-united.com')
 abstract class LoginService {

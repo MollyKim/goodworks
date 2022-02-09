@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:practice/services/login_service.dart';
+import 'package:practice/services/church/church_service.dart';
+import 'package:practice/services/user/user_service.dart';
 import 'package:practice/util/logger.dart';
 
 class RootService {
@@ -15,8 +16,11 @@ class RootService {
     );
 
   LoginService loginService;
+  ChurchService churchService;
 
-  RootService() : this.loginService = LoginService(_dio);
+  RootService()
+      : this.loginService = LoginService(_dio),
+       this.churchService = ChurchService(_dio);
 
   static parseBody(dynamic data) {
     try {

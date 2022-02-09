@@ -6,23 +6,6 @@ part of 'user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostLoginInfoBody _$PostLoginInfoBodyFromJson(Map<String, dynamic> json) {
-  return PostLoginInfoBody(
-    email: json['email'] as String,
-    password: json['password'] as String,
-    userName: json['userName'] as String,
-    phoneNumber: json['phoneNumber'] as String,
-  );
-}
-
-Map<String, dynamic> _$PostLoginInfoBodyToJson(PostLoginInfoBody instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'password': instance.password,
-      'userName': instance.userName,
-      'phoneNumber': instance.phoneNumber,
-    };
-
 UserModel _$UserModelFromJson(Map<String, dynamic> json) {
   return UserModel(
     trId: json['trId'] as String?,

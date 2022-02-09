@@ -1,4 +1,4 @@
-import 'package:practice/models/user_model.dart';
+import 'package:practice/services/user/user_model.dart';
 import 'package:practice/controllers/root_contoller.dart';
 import 'package:practice/services/root_service.dart';
 

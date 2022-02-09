@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:practice/services/church/church_model.dart';
 import 'post_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -13,26 +15,35 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin{
-   ScrollController scrollController = ScrollController();
-   RefreshController _refreshController = RefreshController(initialRefresh: false);
+   final ScrollController scrollController = ScrollController();
+   final RefreshController _refreshController = RefreshController(initialRefresh: false);
+   String test = "";
+   final ChurchController churchController = Get.find();
+   ChurchModel? churchModel = ChurchModel();
 
   @override
   void initState() {
+    getFeed();
     super.initState();
   }
 
+  getFeed() async{
+    churchModel = await churchController.getChurchData(churchId: "1");
+    test = "test";
+    // setState(() {});
+    //겟빌더로 감싸서 교회정보들을 담는 모델 만들어서 넣을지?
+  }
 
   @override
   Widget build(BuildContext context) {
-    TabController tabController = TabController(length: 4, vsync: this);
+    TabController tabController = TabController(length: 3, vsync: this);
     return
       DefaultLayout(
         appBar: AppBar(
           elevation: 2.0,
           titleSpacing: 0,
           backgroundColor: Colors.white,
-          backwardsCompatibility: false,
-          title: Text('내수동교회'),
+          title: Text(test),//Text(churchModel?.resultData?.metaCommunity?.title ?? ""),
           titleTextStyle: TextStyle(
             fontSize: 20,
             fontFamily: "AppleSDGothicNeo",
@@ -87,7 +98,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                     Tab(text: '전체'),
                     Tab(text: '주보'),
                     Tab(text: '교회소식'),
-                    Tab(text: '청년부'),
                   ],
                 ),
               ),
@@ -128,20 +138,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                 itemBuilder: (BuildContext context, int index) {
                   return HomePostList();
                 },),
-              Container(color: Colors.blue,
-                  child: ElevatedButton(
-                    onPressed: (){
-                      Fluttertoast.showToast(
-                          msg: "This is Center Short Toast",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0
-                      );
-                    }, child: Text("button"),
-                  )),
             ],
           ),
         ),

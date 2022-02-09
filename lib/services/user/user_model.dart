@@ -3,26 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 part 'user_model.g.dart';
 
 @JsonSerializable()
-class PostLoginInfoBody {
-  final String email;
-  final String password;
-  final String userName;
-  final String phoneNumber;
-
-  PostLoginInfoBody(
-      {required this.email,
-      required this.password,
-      required this.userName,
-      required this.phoneNumber});
-
-
-  factory PostLoginInfoBody.fromJson(Map<String, dynamic> json) =>
-      _$PostLoginInfoBodyFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PostLoginInfoBodyToJson(this);
-}
-
-@JsonSerializable()
 class UserModel {
   String? trId;
   String? resultCode;
