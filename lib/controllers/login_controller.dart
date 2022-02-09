@@ -25,8 +25,8 @@ class LoginController extends BaseController{
     required String email,required String userpwd,
     required String userName, required String phoneNumber
   }) async {
-    final formData = {'useremail': email, 'userpwd': userpwd,
-      'username': userName,'phone': phoneNumber};
+    final formData = {'seumId': email, 'password': userpwd,
+      'userName': userName,'phoneNumber': phoneNumber};
 
     final UserModel resp = await super.rootService.loginService.registerUser(formData);
     update();

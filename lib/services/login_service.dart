@@ -4,7 +4,7 @@ import 'package:retrofit/http.dart';
 
 part 'login_service.g.dart';
 
-@RestApi(baseUrl: 'https://dev-api.millie.co.kr/v1')
+@RestApi(baseUrl: 'http://qa-amos.vm-united.com')
 abstract class LoginService {
   factory LoginService(Dio dio, {String baseUrl}) = _LoginService;
 
@@ -14,7 +14,7 @@ abstract class LoginService {
         @Body() Map<String,dynamic> body,
       );
 
-  @POST('/login')
+  @POST('/api/v1/seum/user/register')
   @Headers(<String,dynamic>{})
   Future<UserModel> registerUser(
       @Body() Map<String,dynamic> body,
