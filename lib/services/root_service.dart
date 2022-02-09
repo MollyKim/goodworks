@@ -1,39 +1,47 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:practice/services/login_service.dart';
+import 'package:practice/util/logger.dart';
 
 class RootService {
-  static Dio dio = Dio()
-  ..interceptors.add(
-    InterceptorsWrapper(
-      onError: onErrorWrapper,
-      onRequest: onRequestWrapper,
-      onResponse: onResponseWrapper,
-    ),
-  );
+  static final Dio _dio = Dio()
+    ..interceptors.add(
+      InterceptorsWrapper(
+        onRequest: onRequestWrapper,
+        onResponse: onResponseWrapper,
+        onError: onErrorWrapper,
+      ),
+    );
 
   LoginService loginService;
 
-  RootService() : this.loginService = LoginService(dio);
+  RootService() : this.loginService = LoginService(_dio);
 
   static parseBody(dynamic data) {
-    try{
-      if(data is List){
-        final listDynamic = [];
-        for(int index = 0; index < data.length;index ++){
-          listDynamic.add(parseBody(data[index]));
+    try {
+      if (data is List) {
+        final dynamicList = [];
+        for (int i = 0; i < data.length; i++) {
+          dynamicList.add(parseBody(data[i]));
         }
+        return dynamicList;
       }
-      else if(data is Map){
-        for(var key in data.keys){
+
+      if (data is Map) {
+        for (var key in data.keys) {
           data[key] = parseBody(data[key]);
         }
       }
-      else if(data is int) return data;
-      else if(data is double) return data;
-      else
-        return data.toString();
-    } catch(e) {
-      print(e);
+
+      if (data is int) return data;
+      if (data is double) return data;
+      return data;
+    } catch (e) {
+      customLogger.e(
+        '이 에러가 난다면 해결 또는 헬프요청. 실행에는 영향 없음.'
+            '\n$e',
+      );
     }
   }
 
@@ -41,12 +49,27 @@ class RootService {
       DioError error,
       ErrorInterceptorHandler handler,
       ) async {
-    print('error');
-print(error.requestOptions.baseUrl);
-print(error.requestOptions.path);
-print(error.response!.statusCode);
-print(error.response!.data.toString());
-print(error.response?.headers.toString() ?? '');
+   // if (logHttpRequests) {
+      Fluttertoast.showToast(
+          msg: "통신 오류가 발생했습니다.\n잠시 후 다시 이용해주세요.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0);
+
+      customLogger.d(
+        '!!!!!!!!!!ERROR THROWN WITH FOLLOWING LOG!!!!!!!!!!\n'
+            'path: ${error.requestOptions.baseUrl}${error.requestOptions.path}\n'
+            'status code: ${error.response?.statusCode ?? ''}\n'
+            'body: ${error.response?.data.toString() ?? ''}\n'
+            'headers: ${error.response?.headers ?? ''}',
+      );
+   // }
+
+    // TODO production 가기전에 무조건 고처야함 RETRY 횟수를 지정하기!
+
     return handler.next(error);
   }
 
@@ -54,11 +77,14 @@ print(error.response?.headers.toString() ?? '');
       Response resp,
       ResponseInterceptorHandler handler,
       ) async {
-    print('response');
-print(resp.requestOptions.baseUrl);
-print(resp.requestOptions.path);
-print(resp.data);
-print(resp.headers);
+   // if (logHttpRequests) {
+      customLogger.d(
+        '!!!!!!!!!!RESPONSE RECEIVED WITH FOLLOWING LOG!!!!!!!!!!\n'
+            'path: ${resp.requestOptions.baseUrl}${resp.requestOptions.path}\n'
+            'body: ${resp.data}\n'
+            'headers: ${resp.headers}',
+      );
+  //  }
 
     return handler.next(resp);
   }
@@ -69,17 +95,19 @@ print(resp.headers);
       ) async {
     if (options.headers.containsKey('content-type')) {
       // final ct = options.headers['content-type'];
-      final ct = options
-          .headers['multipart/form-data; boundary=<calculated when request is sent>'];
-      print('request');
-print("options.data : ${options.data}");
-print("options.path : ${options.path}");
-print("options.headers : ${options.headers}");
-print("options.uri : ${options.uri}");
-print(options.data);
+      final ct = options.headers[
+      'multipart/form-data; boundary=<calculated when request is sent>'];
+
       options.contentType = ct;
     }
+
+  //  if (logHttpRequests) {
+      customLogger.d('!!!!!!!!!!REQUEST SENT WITH FOLLOWING LOG!!!!!!!!!!\n'
+          'path: ${options.baseUrl}${options.path}\n'
+          'body: ${parseBody(options.data)}\n'
+          'headers: ${options.headers}');
+ //   }
+
     return handler.next(options);
   }
-
 }

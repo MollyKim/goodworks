@@ -176,13 +176,18 @@ class _RootState extends State<Root> {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return MaterialApp(home: Splash());
       }
-      else {
+      else if(snapshot.hasData) {
+        print(snapshot.data);
         return  GetMaterialApp(
           title: 'FlutterStudy',
-          initialRoute: '/login_sign_up',
+          initialRoute: '/',
           debugShowCheckedModeBanner: false,
           getPages: renderPages(),
         );
+      }
+      else {
+        print(snapshot.data);
+       return Container(child: Center(child: Text("인터넷 연결 확인"),),);
       }
     }
     );
@@ -197,6 +202,7 @@ class Init {
     // This is where you can initialize the resources needed by your app while
     // the splash screen is displayed.  Remove the following example because
     // delaying the user experience is a bad design practice!
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
+    return true;
   }
 }
