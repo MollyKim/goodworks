@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
   @override
   void initState() {
-    getFeed();
+    // getFeed();
     super.initState();
   }
 
@@ -109,8 +110,17 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
               SmartRefresher(
                 enablePullDown: true,
                 controller: _refreshController,
-                header:	MaterialClassicHeader(),
-                // header: WaterDropHeader(),
+                header:	ClassicHeader(
+                  height: 100,
+                  idleIcon: CupertinoActivityIndicator(radius: 13.0,),
+                  idleText: "",
+                  refreshingIcon: CupertinoActivityIndicator(radius: 13.0,),
+                  releaseIcon: CupertinoActivityIndicator(radius: 13.0,),
+                  completeIcon: null,
+                  completeText: "",
+                  completeDuration: Duration.zero,
+                  releaseText: "",
+                  refreshingText: "",),                // header: CupertinoActivityIndicator(radius: 3.0,),
                 onRefresh: _onRefresh,
                 onLoading: _onLoading,
                 child: ListView.separated(

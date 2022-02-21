@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -243,8 +244,17 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
             SmartRefresher(
               enablePullDown: true,
               controller: _refreshController,
-              header: MaterialClassicHeader(),
-              // header: WaterDropHeader(),
+              header:	ClassicHeader(
+                height: 100,
+                idleIcon: CupertinoActivityIndicator(radius: 13.0,),
+                idleText: "",
+                refreshingIcon: CupertinoActivityIndicator(radius: 13.0,),
+                releaseIcon: CupertinoActivityIndicator(radius: 13.0,),
+                completeIcon: null,
+                completeText: "",
+                completeDuration: Duration.zero,
+                releaseText: "",
+                refreshingText: "",),              // header: WaterDropHeader(),
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               child: ListView.separated(
