@@ -4,7 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/layouts/default_shimmer.dart';
 import 'package:practice/services/church/church_model.dart';
+import 'package:shimmer/shimmer.dart';
 import 'post_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -24,14 +26,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
   @override
   void initState() {
-    // getFeed();
+    getFeed();
     super.initState();
   }
 
   getFeed() async{
-    churchModel = await churchController.getChurchData(churchId: "1");
-    test = "test";
-    // setState(() {});
+    await Future.delayed(Duration(milliseconds: 1000));
+    // churchModel = await churchController.getChurchData(churchId: "1");
+    // test = "test";
+    setState(() {});
     //겟빌더로 감싸서 교회정보들을 담는 모델 만들어서 넣을지?
   }
 
@@ -104,51 +107,138 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
               ),
             ];
           },
-          body: TabBarView(
-            controller: tabController,
-            children: <Widget>[
-              SmartRefresher(
-                enablePullDown: true,
-                controller: _refreshController,
-                header:	ClassicHeader(
-                  height: 100,
-                  idleIcon: CupertinoActivityIndicator(radius: 13.0,),
-                  idleText: "",
-                  refreshingIcon: CupertinoActivityIndicator(radius: 13.0,),
-                  releaseIcon: CupertinoActivityIndicator(radius: 13.0,),
-                  completeIcon: null,
-                  completeText: "",
-                  completeDuration: Duration.zero,
-                  releaseText: "",
-                  refreshingText: "",),                // header: CupertinoActivityIndicator(radius: 3.0,),
-                onRefresh: _onRefresh,
-                onLoading: _onLoading,
-                child: ListView.separated(
-                  itemCount: 2,
-                  separatorBuilder: (context, index) {
-                    return Divider(thickness: 5.0,color: Colors.grey[600],);
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    return HomePostList();
-                  },),
-              ),
-              ListView.separated(
-                itemCount: 1,
-                separatorBuilder: (context, index) {
-                  return Divider(thickness: 2.0,);
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return HomePostList();
-                },),
-              ListView.separated(
-                itemCount: 1,
-                separatorBuilder: (context, index) {
-                  return Divider(thickness: 2.0,color: Colors.grey[800],);
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return HomePostList();
-                },),
-            ],
+          body: FutureBuilder(
+            future: Future.delayed(const Duration(milliseconds: 3000)),
+            builder: (context, snapshot) {
+              if(snapshot.connectionState == ConnectionState.waiting) {
+                return Shimmer.fromColors(
+                  baseColor: Colors.grey,
+                  highlightColor: Colors.red,
+                  child: TabBarView(
+                    controller: tabController,
+                    children: <Widget>[
+                      ListView.separated(
+                        itemCount: 5,
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                            thickness: 5.0, color: Colors.grey[600],);
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return DefaultShimmer();
+                        },),
+                      ListView.separated(
+                        itemCount: 5,
+                        separatorBuilder: (context, index) {
+                          return Divider(thickness: 2.0,);
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return DefaultShimmer();
+                        },),
+                      ListView.separated(
+                        itemCount: 5,
+                        separatorBuilder: (context, index) {
+                          return Divider(thickness: 2.0, color: Colors
+                              .grey[800],);
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return DefaultShimmer();
+                        },),
+                    ],
+                  ),
+                );
+              }
+              else if (snapshot.connectionState == ConnectionState.done) {
+                return TabBarView(
+                  controller: tabController,
+                  children: <Widget>[
+                    SmartRefresher(
+                      enablePullDown: true,
+                      controller: _refreshController,
+                      header: ClassicHeader(
+                        height: 100,
+                        idleIcon: CupertinoActivityIndicator(radius: 13.0,),
+                        idleText: "",
+                        refreshingIcon: CupertinoActivityIndicator(
+                          radius: 13.0,),
+                        releaseIcon: CupertinoActivityIndicator(
+                          radius: 13.0,),
+                        completeIcon: null,
+                        completeText: "",
+                        completeDuration: Duration.zero,
+                        releaseText: "",
+                        refreshingText: "",),
+                      onRefresh: _onRefresh,
+                      onLoading: _onLoading,
+                      child: ListView.separated(
+                        itemCount: 2,
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                            thickness: 5.0, color: Colors.grey[600],);
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return HomePostList();
+                        },),
+                    ),
+                    SmartRefresher(
+                      enablePullDown: true,
+                      controller: _refreshController,
+                      header: ClassicHeader(
+                        height: 100,
+                        idleIcon: CupertinoActivityIndicator(radius: 13.0,),
+                        idleText: "",
+                        refreshingIcon: CupertinoActivityIndicator(
+                          radius: 13.0,),
+                        releaseIcon: CupertinoActivityIndicator(
+                          radius: 13.0,),
+                        completeIcon: null,
+                        completeText: "",
+                        completeDuration: Duration.zero,
+                        releaseText: "",
+                        refreshingText: "",),
+                      onRefresh: _onRefresh,
+                      onLoading: _onLoading,
+                      child: ListView.separated(
+                        itemCount: 1,
+                        separatorBuilder: (context, index) {
+                          return Divider(thickness: 2.0,);
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return HomePostList();
+                        },),
+                    ),
+                    SmartRefresher(
+                      enablePullDown: true,
+                      controller: _refreshController,
+                      header: ClassicHeader(
+                        height: 100,
+                        idleIcon: CupertinoActivityIndicator(radius: 13.0,),
+                        idleText: "",
+                        refreshingIcon: CupertinoActivityIndicator(
+                          radius: 13.0,),
+                        releaseIcon: CupertinoActivityIndicator(
+                          radius: 13.0,),
+                        completeIcon: null,
+                        completeText: "",
+                        completeDuration: Duration.zero,
+                        releaseText: "",
+                        refreshingText: "",),
+                      onRefresh: _onRefresh,
+                      onLoading: _onLoading,
+                      child: ListView.separated(
+                        itemCount: 1,
+                        separatorBuilder: (context, index) {
+                          return Divider(thickness: 2.0, color: Colors
+                              .grey[800],);
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return HomePostList();
+                        },),
+                    ),
+                  ],
+                );
+              }
+              return Container();
+            }
           ),
         ),
       );
