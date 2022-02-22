@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/components/baseToast.dart';
 import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/layouts/default_noInternet.dart';
+import 'package:practice/layouts/default_nodata.dart';
 import 'package:practice/layouts/default_shimmer.dart';
 import 'package:practice/services/church/church_model.dart';
 import 'package:shimmer/shimmer.dart';
@@ -108,8 +111,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
             ];
           },
           body: FutureBuilder(
-            future: Future.delayed(const Duration(milliseconds: 3000)),
+            future: _fetchData(),
             builder: (context, snapshot) {
+              print("----");
+              print(snapshot.connectionState);
+              if(snapshot.hasError) {
+                return DefaultNoInternetScreen();
+              }
               if(snapshot.connectionState == ConnectionState.waiting) {
                 return Shimmer.fromColors(
                   baseColor: Colors.grey,
@@ -148,94 +156,122 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                 );
               }
               else if (snapshot.connectionState == ConnectionState.done) {
-                return TabBarView(
-                  controller: tabController,
-                  children: <Widget>[
-                    SmartRefresher(
-                      enablePullDown: true,
-                      controller: _refreshController,
-                      header: ClassicHeader(
-                        height: 100,
-                        idleIcon: CupertinoActivityIndicator(radius: 13.0,),
-                        idleText: "",
-                        refreshingIcon: CupertinoActivityIndicator(
-                          radius: 13.0,),
-                        releaseIcon: CupertinoActivityIndicator(
-                          radius: 13.0,),
-                        completeIcon: null,
-                        completeText: "",
-                        completeDuration: Duration.zero,
-                        releaseText: "",
-                        refreshingText: "",),
-                      onRefresh: _onRefresh,
-                      onLoading: _onLoading,
-                      child: ListView.separated(
-                        itemCount: 2,
-                        separatorBuilder: (context, index) {
-                          return Divider(
-                            thickness: 5.0, color: Colors.grey[600],);
-                        },
-                        itemBuilder: (BuildContext context, int index) {
-                          return HomePostList();
-                        },),
-                    ),
-                    SmartRefresher(
-                      enablePullDown: true,
-                      controller: _refreshController,
-                      header: ClassicHeader(
-                        height: 100,
-                        idleIcon: CupertinoActivityIndicator(radius: 13.0,),
-                        idleText: "",
-                        refreshingIcon: CupertinoActivityIndicator(
-                          radius: 13.0,),
-                        releaseIcon: CupertinoActivityIndicator(
-                          radius: 13.0,),
-                        completeIcon: null,
-                        completeText: "",
-                        completeDuration: Duration.zero,
-                        releaseText: "",
-                        refreshingText: "",),
-                      onRefresh: _onRefresh,
-                      onLoading: _onLoading,
-                      child: ListView.separated(
-                        itemCount: 1,
-                        separatorBuilder: (context, index) {
-                          return Divider(thickness: 2.0,);
-                        },
-                        itemBuilder: (BuildContext context, int index) {
-                          return HomePostList();
-                        },),
-                    ),
-                    SmartRefresher(
-                      enablePullDown: true,
-                      controller: _refreshController,
-                      header: ClassicHeader(
-                        height: 100,
-                        idleIcon: CupertinoActivityIndicator(radius: 13.0,),
-                        idleText: "",
-                        refreshingIcon: CupertinoActivityIndicator(
-                          radius: 13.0,),
-                        releaseIcon: CupertinoActivityIndicator(
-                          radius: 13.0,),
-                        completeIcon: null,
-                        completeText: "",
-                        completeDuration: Duration.zero,
-                        releaseText: "",
-                        refreshingText: "",),
-                      onRefresh: _onRefresh,
-                      onLoading: _onLoading,
-                      child: ListView.separated(
-                        itemCount: 1,
-                        separatorBuilder: (context, index) {
-                          return Divider(thickness: 2.0, color: Colors
-                              .grey[800],);
-                        },
-                        itemBuilder: (BuildContext context, int index) {
-                          return HomePostList();
-                        },),
-                    ),
-                  ],
-                );
+                if(snapshot.hasData) {
+                  return TabBarView(
+                    controller: tabController,
+                    children: <Widget>[
+                      SmartRefresher(
+                        enablePullDown: true,
+                        controller: _refreshController,
+                        header: ClassicHeader(
+                          height: 100,
+                          idleIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          idleText: "",
+                          refreshingIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          releaseIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          completeIcon: null,
+                          completeText: "",
+                          completeDuration: Duration.zero,
+                          releaseText: "",
+                          refreshingText: "",
+                        ),
+                        onRefresh: _onRefresh,
+                        onLoading: _onLoading,
+                        child: ListView.separated(
+                          itemCount: 2,
+                          separatorBuilder: (context, index) {
+                            return Divider(
+                              thickness: 5.0,
+                              color: Colors.grey[600],
+                            );
+                          },
+                          itemBuilder: (BuildContext context, int index) {
+                            return HomePostList();
+                          },
+                        ),
+                      ),
+                      SmartRefresher(
+                        enablePullDown: true,
+                        controller: _refreshController,
+                        header: ClassicHeader(
+                          height: 100,
+                          idleIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          idleText: "",
+                          refreshingIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          releaseIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          completeIcon: null,
+                          completeText: "",
+                          completeDuration: Duration.zero,
+                          releaseText: "",
+                          refreshingText: "",
+                        ),
+                        onRefresh: _onRefresh,
+                        onLoading: _onLoading,
+                        child: ListView.separated(
+                          itemCount: 1,
+                          separatorBuilder: (context, index) {
+                            return Divider(
+                              thickness: 2.0,
+                            );
+                          },
+                          itemBuilder: (BuildContext context, int index) {
+                            return HomePostList();
+                          },
+                        ),
+                      ),
+                      SmartRefresher(
+                        enablePullDown: true,
+                        controller: _refreshController,
+                        header: ClassicHeader(
+                          height: 100,
+                          idleIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          idleText: "",
+                          refreshingIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          releaseIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          completeIcon: null,
+                          completeText: "",
+                          completeDuration: Duration.zero,
+                          releaseText: "",
+                          refreshingText: "",
+                        ),
+                        onRefresh: _onRefresh,
+                        onLoading: _onLoading,
+                        child: ListView.separated(
+                          itemCount: 1,
+                          separatorBuilder: (context, index) {
+                            return Divider(
+                              thickness: 2.0,
+                              color: Colors.grey[800],
+                            );
+                          },
+                          itemBuilder: (BuildContext context, int index) {
+                            return HomePostList();
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                else
+                  return DefaultNoDataScreen();
               }
               return Container();
             }
@@ -249,10 +285,17 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
      _refreshController.refreshCompleted();
    }
 
-   void _onLoading() async{
-     await Future.delayed(Duration(milliseconds: 1000));
+   Future<String> _fetchData() async {
+     await Future.delayed(Duration(seconds: 2));
+     _refreshController.loadComplete();print("3");
+     return 'Call Data';
+   }
+
+   _onLoading() async{print("4");
+     await Future.delayed(Duration(milliseconds: 1000));print("5");
      if(mounted)
        setState(() {});
-     _refreshController.loadComplete();
+     _refreshController.loadComplete();print("6");
+     return true;
    }
 }
