@@ -5,8 +5,11 @@ import 'package:practice/services/root_service.dart';
 class ChurchController extends BaseController{
   ChurchController(RootService rootService) : super(rootService);
 
+  ChurchModel churchModel = ChurchModel();
+
   Future<ChurchModel> getChurchData({required String churchId}) async {
     final ChurchModel resp = await super.rootService.churchService.getChurchData(churchId);
+    this.churchModel = resp;
     update();
     return resp;
   }

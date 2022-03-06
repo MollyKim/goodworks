@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:practice/components/baseToast.dart';
 import 'package:practice/controllers/church_controller.dart';
+import 'package:practice/controllers/feed_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/layouts/default_noInternet.dart';
 import 'package:practice/layouts/default_nodata.dart';
 import 'package:practice/layouts/default_shimmer.dart';
-import 'package:practice/services/church/church_model.dart';
 import 'package:shimmer/shimmer.dart';
 import 'post_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -24,8 +23,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
    final ScrollController scrollController = ScrollController();
    final RefreshController _refreshController = RefreshController(initialRefresh: false);
    String test = "";
+   final FeedController feedController = Get.find();
    final ChurchController churchController = Get.find();
-   ChurchModel? churchModel = ChurchModel();
 
   @override
   void initState() {
@@ -35,7 +34,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
   getFeed() async{
     await Future.delayed(Duration(milliseconds: 1000));
-    // churchModel = await churchController.getChurchData(churchId: "1");
+    await feedController.getFeedData(churchId: "1",communityID: "?");
     // test = "test";
     setState(() {});
     //겟빌더로 감싸서 교회정보들을 담는 모델 만들어서 넣을지?
@@ -50,7 +49,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
           elevation: 2.0,
           titleSpacing: 0,
           backgroundColor: Colors.white,
-          title: Text(test),//Text(churchModel?.resultData?.metaCommunity?.title ?? ""),
+          title: Text(churchController.churchModel.resultData?.metaCommunity!.title! ?? "내수동교회"),
           titleTextStyle: TextStyle(
             fontSize: 20,
             fontFamily: "AppleSDGothicNeo",
@@ -73,7 +72,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                 expandedHeight: 150.0,
                 pinned: false,
                 flexibleSpace: Image.network(
-                  "http://via.placeholder.com/350x150",
+                  churchController.churchModel.resultData?.metaCommunity!.coverImage!.smallUrl
+                    ?? "https://cdn.vm-united.com/dev/user/1/community/cover/2021-11-25/small.bGUVRfg3e422_Image%20from%20iOS.jpg",
                   fit: BoxFit.cover,
                 ),
               ),

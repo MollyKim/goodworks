@@ -4,16 +4,16 @@ part 'feed_model.g.dart';
 
 @JsonSerializable()
 class Feed {
-  final String trID;
-  final String resultCode;
-  final String resultMsg;
-  final FeedResultData resultData;
+  final String? trID;
+  final String? resultCode;
+  final String? resultMsg;
+  final FeedResultData? resultData;
 
   Feed({
-    required this.trID,
-    required this.resultCode,
-    required this.resultMsg,
-    required this.resultData});
+    this.trID,
+    this.resultCode,
+    this.resultMsg,
+    this.resultData});
 
   factory Feed.fromJson(Map<String, dynamic> json) =>
       _$FeedFromJson(json);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/church_controller.dart';
+import 'package:practice/controllers/feed_controller.dart';
 import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/screens/community/community_post_detail.dart';
 import 'package:practice/screens/community/write_community_post.dart';
@@ -51,6 +52,7 @@ class _RootState extends State<Root> {
     Get.put(LoginController(service));
     Get.put(BottomNaviController());
     Get.put(ChurchController(service));
+    Get.put(FeedController(service));
   }
 
   initService() {
@@ -167,42 +169,20 @@ class _RootState extends State<Root> {
         page: () => LoginWelcome(),
         transition: Transition.rightToLeft,
       ),
+      GetPage(
+        name: '/splash',
+        page: () => Splash(),
+        transition: Transition.rightToLeft,
+      ),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Init.instance.initialize(),
-    builder: (context, AsyncSnapshot snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return MaterialApp(home: Splash());
-      }
-      else if(snapshot.hasData) {
-        print(snapshot.data);
-        return  GetMaterialApp(
-          title: 'FlutterStudy',
-          initialRoute: '/',
-          debugShowCheckedModeBanner: false,
-          getPages: renderPages(),
-        );
-      }
-      else {
-        print(snapshot.data);
-       return Container(child: Center(child: Text("인터넷 연결 확인"),),);
-      }
-    }
+    return  GetMaterialApp(
+      initialRoute: '/', //'/splash',
+      debugShowCheckedModeBanner: false,
+      getPages: renderPages(),
     );
-  }
-}
-
-class Init {
-  Init._();
-  static final instance = Init._();
-
-  Future initialize() async {
-    //세션 검사 및 교회 정보 받아오기
-    await Future.delayed(const Duration(seconds: 1));
-    return true;
   }
 }
