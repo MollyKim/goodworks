@@ -1,13 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/feed_controller.dart';
 
 class HomePostList extends StatelessWidget {
+  HomePostList(this.index);
+  final int index;
+
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
-      onTap: (){
-        Get.toNamed("/home_post_detail");
+      onTap: () async{
+        FeedController feedController = Get.find();
+        await feedController.getFeedDetail(churchId: "churchId", communityID: "communityID", feedID: "feedID");
+        Get.toNamed("/home_post_detail", arguments: index);
       },
       child: Padding(
         padding: const EdgeInsets.only(top:8.0,left: 15,right: 15),

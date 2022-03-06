@@ -34,7 +34,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
   getFeed() async{
     await Future.delayed(Duration(milliseconds: 1000));
-    await feedController.getFeedData(churchId: "1",communityID: "?");
+    await feedController.getFeedListData(churchId: "1",communityID: "?");
     // test = "test";
     setState(() {});
     //겟빌더로 감싸서 교회정보들을 담는 모델 만들어서 넣을지?
@@ -192,7 +192,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                             );
                           },
                           itemBuilder: (BuildContext context, int index) {
-                            return HomePostList();
+                            return HomePostList(index);
                           },
                         ),
                       ),
@@ -227,7 +227,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                             );
                           },
                           itemBuilder: (BuildContext context, int index) {
-                            return HomePostList();
+                            return HomePostList(index);
                           },
                         ),
                       ),
@@ -263,7 +263,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                             );
                           },
                           itemBuilder: (BuildContext context, int index) {
-                            return HomePostList();
+                            return HomePostList(index);
                           },
                         ),
                       ),

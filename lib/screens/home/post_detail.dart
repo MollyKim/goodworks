@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:share/share.dart';
+import 'package:practice/controllers/feed_controller.dart';
 
 class HomePostDetail extends StatelessWidget {
+  final FeedController feedController = Get.find();
+
   @override
   Widget build(BuildContext context) {
+
     return DefaultLayout(
       appBar: AppBar(
         elevation: 0,

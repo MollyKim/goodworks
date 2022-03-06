@@ -16,7 +16,25 @@ class _FeedService implements FeedService {
   String? baseUrl;
 
   @override
-  Future<Feed> getFeedList(churchID, communityID) async {
+  Future<FeedList> getFeedList(churchID, communityID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        FeedList>(Options(
+            method: 'GET',
+            headers: <String, dynamic>{r'Country': 'KR'},
+            extra: _extra)
+        .compose(_dio.options,
+            '/api/v1/seum/church/$churchID/community/{communityID}/feed?limit=5',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = FeedList.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<Feed> getFeedDetailData(churchID, communityID, feedID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -26,7 +44,7 @@ class _FeedService implements FeedService {
             headers: <String, dynamic>{r'Country': 'KR'},
             extra: _extra)
         .compose(_dio.options,
-            '/api/v1/seum/church/$churchID/community/{{communityID}}/feed?limit=5',
+            '/api/v1/seum/church/$churchID/community/{communityID}/feed/{feedID}',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = Feed.fromJson(_result.data!);

@@ -8,11 +8,12 @@ part of 'feed_model.dart';
 
 Feed _$FeedFromJson(Map<String, dynamic> json) {
   return Feed(
-    trID: json['trID'] as String,
-    resultCode: json['resultCode'] as String,
-    resultMsg: json['resultMsg'] as String,
-    resultData:
-        FeedResultData.fromJson(json['resultData'] as Map<String, dynamic>),
+    trID: json['trID'] as String?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+    resultData: json['resultData'] == null
+        ? null
+        : FeedResultData.fromJson(json['resultData'] as Map<String, dynamic>),
   );
 }
 

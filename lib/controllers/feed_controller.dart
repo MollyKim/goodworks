@@ -1,17 +1,27 @@
 import 'package:practice/controllers/root_contoller.dart';
+import 'package:practice/services/feed/feed_list_model.dart';
 import 'package:practice/services/feed/feed_model.dart';
 import 'package:practice/services/root_service.dart';
 
 class FeedController extends BaseController{
   FeedController(RootService rootService) : super(rootService);
 
-  Feed feedData = Feed();
+  FeedList feedList = FeedList();
+  Feed feed = Feed();
 
-  Future<Feed> getFeedData({required String churchId, required String communityID}) async {
-    final Feed resp = await super.rootService.feedService.getFeedList(churchId,communityID);
-    this.feedData = resp;
+  Future<void> getFeedListData({required String churchId, required String communityID}) async {
+    final FeedList resp = await super.rootService.feedService.getFeedList(churchId,communityID);
+    this.feedList = resp;
     update();
-    return resp;
   }
+
+  Future<void> getFeedDetail({
+    required String churchId, required String communityID, required String feedID
+  }) async {
+    Feed resp = await super.rootService.feedService.getFeedDetailData(churchId,communityID,feedID);
+    this.feed = resp;
+    update();
+  }
+
 
 }
