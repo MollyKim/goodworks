@@ -13,7 +13,7 @@ abstract class FeedService {
   @Headers(<String, dynamic>{
     'Country': 'KR',
   })
-  Future<Feed> getFeedData(
+  Future<Feed> getFeedList(
       @Path() String churchID, String communityID,
       );
 

@@ -16,7 +16,7 @@ class _FeedService implements FeedService {
   String? baseUrl;
 
   @override
-  Future<Feed> getFeedData(churchID, communityID) async {
+  Future<Feed> getFeedList(churchID, communityID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
