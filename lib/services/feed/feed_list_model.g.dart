@@ -11,10 +11,9 @@ FeedList _$FeedListFromJson(Map<String, dynamic> json) {
     trID: json['trID'] as String?,
     resultCode: json['resultCode'] as String?,
     resultMsg: json['resultMsg'] as String?,
-    resultData: json['resultData'] == null
-        ? null
-        : FeedListResultData.fromJson(
-            json['resultData'] as Map<String, dynamic>),
+    resultData: (json['resultData'] as List<dynamic>?)
+        ?.map((e) => FeedListResultData.fromJson(e as Map<String, dynamic>))
+        .toList(),
     cursor: json['cursor'] as String?,
   );
 }

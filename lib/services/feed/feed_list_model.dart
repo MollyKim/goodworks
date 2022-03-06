@@ -7,7 +7,7 @@ class FeedList {
   final String? trID;
   final String? resultCode;
   final String? resultMsg;
-  final FeedListResultData? resultData;
+  final List<FeedListResultData>? resultData;
   final String? cursor;
 
   FeedList(

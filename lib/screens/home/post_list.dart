@@ -9,10 +9,12 @@ class HomePostList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FeedController feedController = Get.find();
+
+    int itemCount = feedController.feedList.resultData?[index].attachments!.length ?? 1;
 
     return GestureDetector(
       onTap: () async{
-        FeedController feedController = Get.find();
         await feedController.getFeedDetail(churchId: "churchId", communityID: "communityID", feedID: "feedID");
         Get.toNamed("/home_post_detail", arguments: index);
       },
@@ -45,14 +47,14 @@ class HomePostList extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10,),
-              Text("10.03 주보 제목",
+              Text(feedController.feedList.resultData?[index].title ?? "공지사항",
                 style: TextStyle(
                     fontFamily: "AppleSDGothicNeo",
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10,),
-              Text("게시글 본문 표시되는 곳 \n최대 다섯줄 까지 적용",
+              Text(feedController.feedList.resultData?[index].content ?? "",
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -63,26 +65,33 @@ class HomePostList extends StatelessWidget {
               SizedBox(height: 10,),
               GridView.builder(
                   primary: false,
-                  itemCount: listOfUrls.length > 3 ? 3 : listOfUrls.length,
+                  itemCount: itemCount
+                      > 3
+                      ? 3
+                      : itemCount,
                   padding: EdgeInsets.all(0),
                   semanticChildCount: 1,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisExtent: 150,
-                      crossAxisCount: listOfUrls.length > 3 ? 3 : listOfUrls.length,
+                      crossAxisCount:  itemCount
+                          > 3
+                          ? 3
+                          : itemCount,
                       mainAxisSpacing: 0,
                       crossAxisSpacing: 5),
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     return ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
-                        child: listOfUrls.length> 3 && index == 2
+                        child: itemCount > 3 && index == 2
                           ? Stack(
                           alignment: AlignmentDirectional.center,
                           fit: StackFit.expand,
                           children: <Widget>[
                             CachedNetworkImage(
                               fit: BoxFit.cover,
-                              imageUrl: listOfUrls[index],
+                              imageUrl: feedController.feedList.resultData?[index].attachments![index].fileinfo.smallUrl!
+                                ?? "",
                               height: 100.0,
                               placeholder: (context, url) =>
                                   Center(child: CircularProgressIndicator()),
@@ -92,7 +101,7 @@ class HomePostList extends StatelessWidget {
                               color: Colors.black.withOpacity(.7),
                               child: Center(
                                 child: Text(
-                                  "+${listOfUrls.length - index}",
+                                  "+${itemCount - index}",
                                   style: TextStyle(color: Colors.white, fontSize: 40),
                                 ),
                               ),
@@ -102,7 +111,7 @@ class HomePostList extends StatelessWidget {
                       : Container(
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
-                            imageUrl: listOfUrls[index],
+                            imageUrl: feedController.feedList.resultData?[index].attachments![index].fileinfo.smallUrl! ?? "",
                             height: 100.0,
                             placeholder: (context, url) =>
                                 Center(child: CircularProgressIndicator()),
@@ -119,6 +128,7 @@ class HomePostList extends StatelessWidget {
     );
   }
 }
+
 List<String> listOfUrls= [
   "https://cosmosmagazine.com/wp-content/uploads/2020/02/191010_nature.jpg",
   "https://scx2.b-cdn.net/gfx/news/hires/2019/2-nature.jpg",

@@ -22,7 +22,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin{
    final ScrollController scrollController = ScrollController();
    final RefreshController _refreshController = RefreshController(initialRefresh: false);
-   String test = "";
    final FeedController feedController = Get.find();
    final ChurchController churchController = Get.find();
 
@@ -35,7 +34,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
   getFeed() async{
     await Future.delayed(Duration(milliseconds: 1000));
     await feedController.getFeedListData(churchId: "1",communityID: "?");
-    // test = "test";
     setState(() {});
     //겟빌더로 감싸서 교회정보들을 담는 모델 만들어서 넣을지?
   }
@@ -184,7 +182,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                         onRefresh: _onRefresh,
                         onLoading: _onLoading,
                         child: ListView.separated(
-                          itemCount: 2,
+                          itemCount: feedController.feedList.resultData?.length ?? 1,
                           separatorBuilder: (context, index) {
                             return Divider(
                               thickness: 5.0,
