@@ -2,20 +2,21 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/feed_controller.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class HomePostList extends StatelessWidget {
   HomePostList(this.index);
   final int index;
+  final now = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     FeedController feedController = Get.find();
-
     int itemCount = feedController.feedList.resultData?[index].attachments!.length ?? 1;
 
     return GestureDetector(
       onTap: () async{
-        await feedController.getFeedDetail(churchId: "churchId", communityID: "communityID", feedID: "feedID");
+        // await feedController.getFeedDetail(churchId: "churchId", communityID: "communityID", feedID: "feedID");
         Get.toNamed("/home_post_detail", arguments: index);
       },
       child: Padding(
@@ -40,20 +41,22 @@ class HomePostList extends StatelessWidget {
                     height: 30,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Text("교회 소식",style: TextStyle(color: Colors.white),),
+                      child: Text(feedController.feedList.resultData?[index].feedType!.toString() ?? "교회소식",
+                        style: TextStyle(color: Colors.white),),
                     ),
                   ),
-                  Text("2 시간 전")
+                  Text(getTimeAge(feedController.feedList.resultData?[index].feedType!.toString()))
+                  // Text(getTimeAge(feedController.feedList.resultData?[index].createdAt))
                 ],
               ),
               SizedBox(height: 10,),
-              Text(feedController.feedList.resultData?[index].title ?? "공지사항",
-                style: TextStyle(
-                    fontFamily: "AppleSDGothicNeo",
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 10,),
+              // Text(feedController.feedList.resultData?[index].title ?? "공지사항",
+              //   style: TextStyle(
+              //       fontFamily: "AppleSDGothicNeo",
+              //       fontSize: 18,
+              //       fontWeight: FontWeight.bold),
+              // ),
+              // SizedBox(height: 10,),
               Text(feedController.feedList.resultData?[index].content ?? "",
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
@@ -126,6 +129,13 @@ class HomePostList extends StatelessWidget {
         ),
       ),
     );
+  }
+  getTimeAge(String? feedTime) {
+    if(feedTime == null)
+      feedTime = DateTime.now().toString();
+    DateTime feedTimeDatetime = DateTime.parse(feedTime);
+    final difference = now.difference(feedTimeDatetime);
+    return timeago.format(now.subtract(difference), locale: 'ko');
   }
 }
 

@@ -27,8 +27,11 @@ import 'package:practice/screens/worship/player.dart';
 import 'package:practice/screens/worship/worship.dart';
 import 'screens/home/post_detail.dart';
 import 'package:practice/services/root_service.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 void main() {
+  timeago.setLocaleMessages('ko', timeago.KoMessages());
+
   runApp(Root());
 }
 

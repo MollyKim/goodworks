@@ -6,7 +6,7 @@ class BaseToast {
   final FToast fToast = FToast();
   final String text;
 
-  BaseToast({required this.text});
+  BaseToast( {required this.text});
 
   void showToast(BuildContext context){
     String replacedText ="";
