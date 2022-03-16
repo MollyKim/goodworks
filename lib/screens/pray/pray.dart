@@ -57,7 +57,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
     ''';
 
     TabController tabController = TabController(
-      length: 3,
+      length: 2,
       vsync: this,
     );
     return Scaffold(
@@ -73,9 +73,6 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
         elevation: 2.0,
         titleSpacing: 0,
         backgroundColor: Colors.white,
-        backwardsCompatibility: false,
-        // leadingWidth: 75,
-        //TODO Adjust leading container width
         leading: Center(
             child: Text(
           '기도',
@@ -229,7 +226,6 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                 ),
                 controller: tabController,
                 tabs: <Widget>[
-                  Tab(text: '전체'),
                   Tab(text: '교회 기도'),
                   Tab(text: '소그룹 기도'),
                   // Tab(text: '청년부'),
@@ -269,18 +265,6 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                   return PrayPostList();
                 },
               ),
-            ),
-            ListView.separated(
-              itemCount: 5,
-              separatorBuilder: (context, index) {
-                return Divider(
-                  thickness: 3.0,
-                  color: Colors.grey[600],
-                );
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return PrayPostList();
-              },
             ),
             ListView.separated(
               itemCount: 5,

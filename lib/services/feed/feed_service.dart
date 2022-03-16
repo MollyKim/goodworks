@@ -16,7 +16,7 @@ abstract class FeedService {
     'Country': 'KR',
   })
   Future<FeedList> getFeedList(
-      @Path() String churchID, String communityID,
+      @Path() String churchID, String communityID//, int type, String cursor
       );
 
 

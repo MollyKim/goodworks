@@ -5,10 +5,6 @@ import 'package:get/get.dart';
 import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/feed_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
-import 'package:practice/layouts/default_noInternet.dart';
-import 'package:practice/layouts/default_nodata.dart';
-import 'package:practice/layouts/default_shimmer.dart';
-import 'package:shimmer/shimmer.dart';
 import 'post_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -21,18 +17,22 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   final ScrollController scrollController = ScrollController();
-  final RefreshController _refreshController =
+  final RefreshController _totalRefreshController =
+      RefreshController(initialRefresh: false);
+  final RefreshController _juboRefreshController =
+      RefreshController(initialRefresh: false);
+  final RefreshController _newsRefreshController =
       RefreshController(initialRefresh: false);
   final FeedController feedController = Get.find();
   final ChurchController churchController = Get.find();
 
   @override
   void initState() {
-    getFeed();
+    // getFeed("total");
     super.initState();
   }
 
-  getFeed() async {
+  getFeed(String subject) async {
     await Future.delayed(Duration(milliseconds: 1000));
     await feedController.getFeedListData(churchId: "1", communityID: "?");
     setState(() {});
@@ -115,7 +115,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           children: <Widget>[
             SmartRefresher(
               enablePullDown: true,
-              controller: _refreshController,
+              controller: _totalRefreshController,
               header: ClassicHeader(
                 height: 100,
                 idleIcon: CupertinoActivityIndicator(
@@ -134,8 +134,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 releaseText: "",
                 refreshingText: "",
               ),
-              onRefresh: _onRefresh,
-              onLoading: _onLoading,
+              onRefresh: (){_onRefresh("total");},
+              onLoading: (){_onLoading("total");},
               child: ListView.separated(
                 itemCount: feedController.feedList.resultData?.length ?? 1,
                 separatorBuilder: (context, index) {
@@ -151,7 +151,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             SmartRefresher(
               enablePullDown: true,
-              controller: _refreshController,
+              controller: _juboRefreshController,
               header: ClassicHeader(
                 height: 100,
                 idleIcon: CupertinoActivityIndicator(
@@ -170,8 +170,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 releaseText: "",
                 refreshingText: "",
               ),
-              onRefresh: _onRefresh,
-              onLoading: _onLoading,
+              onRefresh: (){_onRefresh("jubo");},
+              onLoading: (){_onLoading("jubo");},
               child: ListView.separated(
                 itemCount: 1,
                 separatorBuilder: (context, index) {
@@ -186,7 +186,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             SmartRefresher(
               enablePullDown: true,
-              controller: _refreshController,
+              controller: _newsRefreshController,
               header: ClassicHeader(
                 height: 100,
                 idleIcon: CupertinoActivityIndicator(
@@ -205,8 +205,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 releaseText: "",
                 refreshingText: "",
               ),
-              onRefresh: _onRefresh,
-              onLoading: _onLoading,
+              onRefresh: (){_onRefresh("news");},
+              onLoading: (){_onLoading("news");},
               child: ListView.separated(
                 itemCount: 1,
                 separatorBuilder: (context, index) {
@@ -226,25 +226,63 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
-  void _onRefresh() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    _refreshController.refreshCompleted();
+  void _onRefresh(String subject) async { // 위로 새로고침 호출
+    switch (subject) {
+      case "total" :
+        {
+          await Future.delayed(Duration(milliseconds: 1000));
+          getFeed(subject);
+          _totalRefreshController.refreshCompleted();
+          break;
+        }
+      case "jubo" :
+        {
+          getFeed(subject);
+          _juboRefreshController.refreshCompleted();
+          break;
+        }
+      case "news" :
+        {
+          getFeed(subject);
+          _newsRefreshController.refreshCompleted();
+          break;
+        }
+      default : {
+        _totalRefreshController.refreshCompleted();
+        _juboRefreshController.refreshCompleted();
+        _newsRefreshController.refreshCompleted();
+        break;
+      }
+    }
   }
 
-  Future<String> _fetchData() async {
-    await Future.delayed(Duration(seconds: 2));
-    _refreshController.loadComplete();
-    print("3");
-    return 'Call Data';
-  }
 
-  _onLoading() async {
-    print("4");
-    await Future.delayed(Duration(milliseconds: 1000));
-    print("5");
-    if (mounted) setState(() {});
-    _refreshController.loadComplete();
-    print("6");
-    return true;
+  void _onLoading(String subject) async { // 커서 호출
+    switch (subject) {
+      case "total" :
+        {print("123");
+          await Future.delayed(Duration(milliseconds: 1000));
+          getFeed(subject);
+          _totalRefreshController.loadComplete();
+          break;
+        }
+      case "jubo" :
+        {
+        _juboRefreshController.loadComplete();
+        break;
+        }
+      case "news" :
+        {
+          _newsRefreshController.loadComplete();
+          break;
+        }
+      default : {
+        _totalRefreshController.loadComplete();
+        _juboRefreshController.loadComplete();
+        _newsRefreshController.loadComplete();
+        break;
+      }
+    }
+
   }
 }
