@@ -108,18 +108,19 @@ class HomePostDetail extends StatelessWidget {
   renderPostDetailPicture(){
     return ListView.builder(
       scrollDirection: Axis.vertical,
-      itemCount: feedController.feed.resultData?.attachments?.length ?? 0,
+      itemCount: feedController.feed.resultData?.attachments?.length ?? 2,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl: feedController.feedList.resultData?[index].attachments![index].fileinfo.smallUrl!
-                ?? "",
-                height: 100.0,
+                ?? "https://cosmosmagazine.com/wp-content/uploads/2020/02/191010_nature.jpg",
+                height: 300.0,
                 placeholder: (context, url) =>
                     Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => Icon(Icons.error),

@@ -114,7 +114,10 @@ class HomePostList extends StatelessWidget {
                       : Container(
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
-                            imageUrl: feedController.feedList.resultData?[index].attachments![index].fileinfo.smallUrl! ?? "",
+                            imageUrl:
+                            feedController.feedList.resultData?[index].attachments![index].fileinfo.smallUrl!
+                                ??
+                                "https://cdn.vm-united.com/dev/user_profile/origin/3/2021-11-21/small.rXixqiVPspWs_test.png",
                             height: 100.0,
                             placeholder: (context, url) =>
                                 Center(child: CircularProgressIndicator()),

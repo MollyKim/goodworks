@@ -44,7 +44,7 @@ class Init {
     ChurchController churchController = Get.find();
 
     //세션 검사 및 교회 정보 받아오기
-    // await churchController.getChurchData(churchId: "1");
+    await churchController.getChurchData(churchId: "1");
     return true;
   }
 }
