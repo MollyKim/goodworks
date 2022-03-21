@@ -54,19 +54,19 @@ class PrayUpdateModel {
   final String? trID;
   final String? resultCode;
   final String? resultMsg;
-  final PrayCreateResultData? resultData;
+  final PrayUpdateResultData? resultData;
 
-  PrayCreateModel(
+  PrayUpdateModel(
       {this.trID, this.resultCode, this.resultMsg, this.resultData});
 
-  factory PrayCreateModel.fromJson(Map<String, dynamic> json) =>
-      _$PrayCreateModelFromJson(json);
+  factory PrayUpdateModel.fromJson(Map<String, dynamic> json) =>
+      _$PrayUpdateModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PrayCreateModelToJson(this);
+  Map<String, dynamic> toJson() => _$PrayUpdateModelToJson(this);
 }
 
 @JsonSerializable()
-class PrayCreateResultData {
+class PrayUpdateResultData {
   final int id;
   final int churchId;
   final int? communityId;
@@ -77,7 +77,7 @@ class PrayCreateResultData {
   final String updatedAt;
   final String? deletedAt;
 
-  PrayCreateResultData({
+  PrayUpdateResultData({
     required this.id,
     required this.churchId,
     required this.communityId,
@@ -89,8 +89,23 @@ class PrayCreateResultData {
     this.deletedAt,
   });
 
-  factory PrayCreateResultData.fromJson(Map<String, dynamic> json) =>
-      _$PrayCreateResultDataFromJson(json);
+  factory PrayUpdateResultData.fromJson(Map<String, dynamic> json) =>
+      _$PrayUpdateResultDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PrayCreateResultDataToJson(this);
+  Map<String, dynamic> toJson() => _$PrayUpdateResultDataToJson(this);
+}
+
+@JsonSerializable()
+class PrayDeleteModel {
+  final String? trID;
+  final String? resultCode;
+  final String? resultMsg;
+
+  PrayDeleteModel(
+      {this.trID, this.resultCode, this.resultMsg,});
+
+  factory PrayDeleteModel.fromJson(Map<String, dynamic> json) =>
+      _$PrayDeleteModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PrayDeleteModelToJson(this);
 }
