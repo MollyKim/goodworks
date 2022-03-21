@@ -19,6 +19,7 @@ class PlayerState extends State<Player> {
       flags: const YoutubePlayerFlags(
         mute: false,
         autoPlay: true,
+        controlsVisibleAtStart: true,
         disableDragSeek: false,
         loop: false,
         isLive: false,
@@ -26,7 +27,7 @@ class PlayerState extends State<Player> {
         enableCaption: false,
       ),
     );
-    _controller.toggleFullScreenMode();
+    // _controller.toggleFullScreenMode();
     // _controller.fitHeight(Mede);
   }
 
@@ -116,12 +117,7 @@ class PlayerState extends State<Player> {
   @override
   Widget build(BuildContext context) {
     return YoutubePlayerBuilder(
-        // onExitFullScreen: () {
-        //   // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
-        //   SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-        // },
         player: YoutubePlayer(
-          // width:MediaQuery.of(context).size.width,
           aspectRatio: 16 / 7,
           controller: _controller,
           actionsPadding: const EdgeInsets.only(left: 16.0),
@@ -134,7 +130,6 @@ class PlayerState extends State<Player> {
             FullScreenButton(),
           ],
         ),
-
         builder: (context, player) => Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.white,
@@ -203,8 +198,6 @@ class PlayerState extends State<Player> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: SizedBox(
-                      // width: 350,
-                      // height: 19,
                       child: Text(
                         "코로나시대 영성(59)_’휘파람’ 그리고 ‘구속' 스가랴 10:6-10",
                         style: TextStyle(
@@ -235,32 +228,6 @@ class PlayerState extends State<Player> {
                       ),
                     ),
                   ),
-                  Divider(
-                    thickness: 3.0,
-                    color: Colors.grey[600],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Text(
-                      "연관 컨텐츠",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontFamily: "AppleSDGothicNeo",
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  renderContent(),
-                  renderContent(),
-                  renderContent(),
-
                 ],
               ),
             )));
