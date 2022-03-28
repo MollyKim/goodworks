@@ -20,7 +20,7 @@ class DefaultLayout extends StatelessWidget {
       appBar: appBar,
       backgroundColor: backgroundColor,
       bottomNavigationBar: bottomNavigationBar,
-      // resizeToAvoidBottomInset : false,
+      resizeToAvoidBottomInset : false,
       body: SafeArea(
         top: true,
         bottom: true,

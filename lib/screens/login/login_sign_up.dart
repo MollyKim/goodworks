@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/login_controller.dart';
-import 'package:practice/controllers/login_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/services/user/user_model.dart';
 
@@ -15,6 +14,12 @@ class LoginSignUp extends StatefulWidget {
 }
 
 class _LoginSignUpState extends State<LoginSignUp> {
+
+  TextEditingController idTextEditingController = TextEditingController();
+  TextEditingController passwordTextEditingController = TextEditingController();
+  TextEditingController nameTextEditingController = TextEditingController();
+  TextEditingController phoneNumberTextEditingController = TextEditingController();
+
   bool totalFlag = false;
 
   bool necessaryFlagOne = false;
@@ -121,6 +126,17 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
+            controller: idTextEditingController,
+            // onSaved: (val) {
+            //   nameTextEditingController.text = val;
+            // },
+            // validator: (val) {
+            //   if(val.length < 1) {
+            //     return '이름은 필수사항입니다.';
+            //   } else if(val.length > 20) {
+            //     return '20자 이하여야 합니다.';
+            //   } return null;
+            // },
             style: TextStyle(
               color: Color(0xff1a442b),
             ),
@@ -187,6 +203,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
+            obscureText: true,
             style: TextStyle(
               color: Color(0xff1a442b),
             ),
@@ -253,6 +270,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
+            obscureText: true,
             style: TextStyle(
               color: Color(0xff1a442b),
             ),
