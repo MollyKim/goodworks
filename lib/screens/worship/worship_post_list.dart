@@ -18,71 +18,26 @@ class _WorshipPostListState extends State<WorshipPostList> {
     super.initState();
 
     _controller = YoutubePlayerController(
-      initialVideoId: 'dyRsYk0LyA8',
+      initialVideoId: 'YmrMtEj5T-I',
       flags: const YoutubePlayerFlags(
         hideControls: true,
+        // hideThumbnail: ,
         mute: false,
         autoPlay: false,
         disableDragSeek: false,
         loop: false,
-        isLive: true,
-        forceHD: false,
-        enableCaption: true,
+        // isLive: true,
+        // forceHD: false,
+        // enableCaption: true,
       ),
     );
   }
 
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         automaticallyImplyLeading: false,
-//         foregroundColor: Colors.black,
-//         backgroundColor: Colors.white,
-//         title: Text(
-//           '기도',
-//           style: TextStyle(fontSize: 20.0),
-//         ),
-//       ),
-//       body: Container(
-//         padding: EdgeInsets.all(20),
-//         child: Column(
-//           children: [
-//             ElevatedButton(
-//                 onPressed: () {
-//
-//                   // Get.toNamed('/player', arguments: 'lQ-bjS-S4wQ');
-//                   Get.toNamed('/full_screen', arguments: 'dyRsYk0LyA8');
-//                   // Player('dyRsYk0LyA8', 'Video Title');
-//                 },
-//                 child: Text('Full Screen')),
-//             YoutubePlayer(
-//               thumbnail:Container(child: Text('ThumbNail'),),
-//               key: ObjectKey(_controller),
-//               controller: _controller,
-//               actionsPadding: const EdgeInsets.only(left: 16.0),
-//               bottomActions: [
-//
-//                 CurrentPosition(),
-//                 const SizedBox(width: 10.0),
-//                 ProgressBar(isExpanded: true),
-//                 const SizedBox(width: 10.0),
-//                 RemainingDuration(),
-//                 FullScreenButton(),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -111,6 +66,7 @@ class _WorshipPostListState extends State<WorshipPostList> {
                 // width: 57,
                 height: 13,
                 child: Text(
+                  ///시간
                   "21.11.22",
                   textAlign: TextAlign.right,
                   style: TextStyle(
@@ -128,11 +84,12 @@ class _WorshipPostListState extends State<WorshipPostList> {
             width: 350,
             height: 19,
             child: Text(
+              ///본문
               "2021_1123(화)내수동교회 새벽예배",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 18,
-                fontFamily: "Apple SD Gothic Neo",
+                fontFamily: "AppleSDGothicNeo",
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -144,23 +101,38 @@ class _WorshipPostListState extends State<WorshipPostList> {
 
           GestureDetector(
             onTap: () {
-              Get.toNamed('/player', arguments: 'dyRsYk0LyA8');
+              Get.toNamed('/player', arguments: 'YmrMtEj5T-I');
             },
-            child: YoutubePlayer(
-              thumbnail: Container(
-                child: Text('ThumbNail'),
-              ),
-              key: ObjectKey(_controller),
-              controller: _controller,
-              // actionsPadding: const EdgeInsets.only(left: 16.0),
-              // bottomActions: [
-              //   CurrentPosition(),
-              //   const SizedBox(width: 10.0),
-              //   ProgressBar(isExpanded: true),
-              //   const SizedBox(width: 10.0),
-              //   RemainingDuration(),
-              //   FullScreenButton(),
-              // ]
+            child: Stack(
+              children: [
+                Container(
+                  color: Colors.yellow,
+                  width: double.infinity,
+                  height: 200,
+                  child: Center(
+                    child: Text(
+                      '썸네일 사진',
+                      style: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom:0,
+                  right: 0,
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 10, right: 10),
+                    width: 60,
+                    height: 20,
+                    color: Colors.black,
+                    child: Center(
+                      child: Text(
+                        '3:35:27',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
         ],
