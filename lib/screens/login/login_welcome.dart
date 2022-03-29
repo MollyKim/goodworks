@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 
-class LoginWelcome extends StatefulWidget {
-  const LoginWelcome({Key? key}) : super(key: key);
+class LoginWelcome extends StatelessWidget {
 
-  @override
-  _LoginWelcomeState createState() => _LoginWelcomeState();
-}
+  final ChurchController churchController = Get.find();
 
-class _LoginWelcomeState extends State<LoginWelcome> {
   renderUserPicture() {
     return Container(
       child: SvgPicture.asset(
@@ -27,7 +24,7 @@ class _LoginWelcomeState extends State<LoginWelcome> {
       width: 273,
       height: 68,
       child: Text(
-        "샬롬! {churchName} 세움에 오신\n{userName} 성도님을 환영합니다.",
+        "샬롬! ${churchController.churchModel.resultData?.metaCommunity?.title ?? ""} 세움에 오신\n{userName} 성도님을 환영합니다.",
         textAlign: TextAlign.center,
         style: TextStyle(
           color: Color(0xff2d9067),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/screens/login/login.dart';
 
 class LoginFail extends StatefulWidget {
   const LoginFail({Key? key}) : super(key: key);
@@ -64,7 +65,7 @@ class _LoginFailState extends State<LoginFail> {
             primary: Color(0xff2d9067),
           ),
           onPressed: () {
-            Get.toNamed('/login');
+            Get.offAll(Login());
           },
           child: Text(
             "확인",

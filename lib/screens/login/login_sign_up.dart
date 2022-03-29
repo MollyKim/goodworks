@@ -19,6 +19,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
   TextEditingController passwordTextEditingController = TextEditingController();
   TextEditingController nameTextEditingController = TextEditingController();
   TextEditingController phoneNumberTextEditingController = TextEditingController();
+  TextEditingController otpTextEditingController = TextEditingController();
 
   bool totalFlag = false;
 
@@ -31,9 +32,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
 
   int timerMaxSeconds = 180;
   int currentSeconds = 0;
+  final formKey = GlobalKey<FormState>();
 
   final interval = const Duration(seconds: 1);
-  late Timer timer;
+  Timer? timer;
 
   String get timerText =>
       '${((timerMaxSeconds - currentSeconds) ~/ 60).toString().padLeft(1, '0')}:${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
@@ -45,7 +47,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
 
   @override
   void dispose() {
-    timer.cancel();
+    timer?.cancel();
     super.dispose();
   }
 
@@ -127,16 +129,16 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ),
           child: TextFormField(
             controller: idTextEditingController,
-            // onSaved: (val) {
-            //   nameTextEditingController.text = val;
-            // },
-            // validator: (val) {
-            //   if(val.length < 1) {
-            //     return '이름은 필수사항입니다.';
-            //   } else if(val.length > 20) {
-            //     return '20자 이하여야 합니다.';
-            //   } return null;
-            // },
+            onChanged: (val) {
+              idTextEditingController.text = val;
+            },
+            validator: (val) {
+              if(val!.length < 1) {
+                return '이름은 필수사항입니다.';
+              } else if(val.length > 20 || val.length<5) {
+                return '5자 이상 20자 이하여야 합니다.';
+              } return null;
+            },
             style: TextStyle(
               color: Color(0xff1a442b),
             ),
@@ -162,10 +164,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 fontSize: 16,
               ),
             ),
-            // onChanged: (value) {
-            //   setState(() {
-            //   });
-            // },
           ),
         ),
       ],
@@ -203,6 +201,16 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
+            onChanged: (val) {
+              passwordTextEditingController.text = val;
+            },
+            validator: (val) {
+              if(val!.length < 1) {
+                return '비밀번호는 필수사항입니다.';
+              } else if(val.length > 20 || val.length<8 || !RegExp(r'^[a-zA-Z0-9]+$').hasMatch(val)) {
+                return '영문, 숫자 8~20자 조합으로 입력해주세요.';
+              } return null;
+            },
             obscureText: true,
             style: TextStyle(
               color: Color(0xff1a442b),
@@ -230,9 +238,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 fontSize: 16,
               ),
             ),
-            onChanged: (value) {
-              setState(() {});
-            },
           ),
         ),
       ],
@@ -270,6 +275,13 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
+            validator: (val) {print(val);print(passwordTextEditingController.text);
+              if(val!.length < 1) {
+                return '비밀번호는 필수사항입니다.';
+              } else if(passwordTextEditingController.text != val) {
+                return '비밀번호를 확인해주세요.';
+              } return null;
+            },
             obscureText: true,
             style: TextStyle(
               color: Color(0xff1a442b),
@@ -297,9 +309,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 fontSize: 16,
               ),
             ),
-            onChanged: (value) {
-              setState(() {});
-            },
           ),
         ),
       ],
@@ -337,6 +346,15 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
+            controller: nameTextEditingController,
+            onChanged: (val) {
+              nameTextEditingController.text = val;
+            },
+            validator: (val) {
+              if(val!.length < 1) {
+                return '이름은 필수사항입니다.';
+              } return null;
+            },
             style: TextStyle(
               color: Color(0xff1a442b),
             ),
@@ -363,9 +381,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 fontSize: 16,
               ),
             ),
-            onChanged: (value) {
-              setState(() {});
-            },
           ),
         ),
       ],
@@ -403,6 +418,15 @@ class _LoginSignUpState extends State<LoginSignUp> {
             color: Color(0xffcde3d6),
           ),
           child: TextFormField(
+            controller: phoneNumberTextEditingController,
+            onChanged: (val) {
+              phoneNumberTextEditingController.text = val;
+            },
+            validator: (val) {
+              if(val!.length < 1) {
+                return '번호는 필수사항입니다.';
+              } return null;
+            },
             style: TextStyle(
               color: Color(0xff1a442b),
             ),
@@ -429,15 +453,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 fontSize: 16,
               ),
             ),
-            onChanged: (value) {
-              setState(() {
-                if (value == '01022449379') {
-                  signUpFlag = true;
-                } else {
-                  signUpFlag = false;
-                }
-              });
-            },
           ),
         ),
       ],
@@ -462,6 +477,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 color: Color(0xffcde3d6),
               ),
               child: TextFormField(
+                controller: otpTextEditingController,
                 style: TextStyle(
                   color: Color(0xff1a442b),
                 ),
@@ -488,9 +504,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
                     fontSize: 16,
                   ),
                 ),
-                onChanged: (value) {
-                  setState(() {});
-                },
               ),
             ),
             Container(
@@ -545,7 +558,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
           )),
     );
   }
-
   renderPhoneOTPButton() {
     return Row(
       children: [
@@ -563,7 +575,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 ),
                 onPressed: () {
                   setState(() {
-                    timer.cancel();
+                    timer?.cancel();
                     startTimeout(180);
                   });
                   // Get.toNamed('/login_select_church');
@@ -599,7 +611,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 onPressed: () {
                   setState(() {
                     phoneOTPFlag = true;
-                    timer.cancel();
+                    timer?.cancel();
                   });
                   // Get.toNamed('/login_select_church');
                 },
@@ -758,16 +770,19 @@ class _LoginSignUpState extends State<LoginSignUp> {
             primary: Color(0xff2d9067),
           ),
           onPressed: () async{
-            final LoginController loginController = Get.find();
-            final UserModel? userModel = await loginController.registerUser(
-                email: "", userpwd: "userpwd", userName: "userName", phoneNumber: "phoneNumber");
-
-
-            print(userModel?.resultMsg);
-            print(userModel?.resultCode);
-            if(userModel?.resultCode == "200"){
-              Get.toNamed('/login_welcome');
-            } else Get.toNamed('/login_fail');
+            // if(this.formKey.currentState!.validate()){
+            //   final LoginController loginController = Get.find();
+            //   await loginController.registerUser(
+            //       email: idTextEditingController.text,
+            //       userpwd: passwordTextEditingController.text,
+            //       userName: nameTextEditingController.text,
+            //       phoneNumber: phoneNumberTextEditingController.text);
+            //
+            //
+            //   if(loginController.userModel.resultCode == "200"){
+                Get.toNamed('/login_welcome');
+            //   } else Get.toNamed('/login_fail');
+            // }
 
           },
           child: Text(
@@ -790,60 +805,63 @@ class _LoginSignUpState extends State<LoginSignUp> {
         body: SingleChildScrollView(
           child: Container(
               padding: EdgeInsets.symmetric(horizontal: 40),
-              child: Column(children: [
-                Container(
-                  height: 40,
-                ),
-                renderEmail(),
-                Container(
-                  height: 20,
-                ),
-                renderPassword(),
-                Container(
-                  height: 20,
-                ),
-                renderPasswordTwo(),
-                Container(
-                  height: 20,
-                ),
-                renderName(),
-                Container(
-                  height: 20,
-                ),
-                renderPhone(),
-                Container(
-                  height: 10,
-                ),
-                phoneOTPFlag
-                    ? Container()
-                    : phoneFlag
-                    ? renderPhoneOTP()
-                    : Container(),
-                phoneOTPFlag
-                    ? Container()
-                    : phoneFlag
-                    ? renderPhoneOTPButton()
-                    : renderPhoneButton(),
-                Container(
-                  height: 40,
-                ),
-                renderTotalAgree(),
-                Container(
-                  height: 10,
-                ),
-                renderNecessaryOne(),
-                Container(
-                  height: 10,
-                ),
-                renderNecessaryTwo(),
-                Container(
-                  height: 10,
-                ),
-                Container(
-                  height: 40,
-                ),
-                renderSignUpButton(),
-              ])),
+              child: Form(
+                key: this.formKey,
+                child: Column(children: [
+                  Container(
+                    height: 40,
+                  ),
+                  renderEmail(),
+                  Container(
+                    height: 20,
+                  ),
+                  renderPassword(),
+                  Container(
+                    height: 20,
+                  ),
+                  renderPasswordTwo(),
+                  Container(
+                    height: 20,
+                  ),
+                  renderName(),
+                  Container(
+                    height: 20,
+                  ),
+                  renderPhone(),
+                  Container(
+                    height: 10,
+                  ),
+                  phoneOTPFlag
+                      ? Container()
+                      : phoneFlag
+                      ? renderPhoneOTP()
+                      : Container(),
+                  phoneOTPFlag
+                      ? Container()
+                      : phoneFlag
+                      ? renderPhoneOTPButton()
+                      : renderPhoneButton(),
+                  Container(
+                    height: 40,
+                  ),
+                  renderTotalAgree(),
+                  Container(
+                    height: 10,
+                  ),
+                  renderNecessaryOne(),
+                  Container(
+                    height: 10,
+                  ),
+                  renderNecessaryTwo(),
+                  Container(
+                    height: 10,
+                  ),
+                  Container(
+                    height: 40,
+                  ),
+                  renderSignUpButton(),
+                ]),
+              )),
         ));
   }
 }
