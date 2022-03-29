@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/feed_controller.dart';
-import 'package:practice/controllers/login_controller.dart';
+import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/screens/community/community_post_detail.dart';
 import 'package:practice/screens/community/write_community_post.dart';
 import 'package:practice/screens/home/home.dart';
@@ -52,7 +52,7 @@ class _RootState extends State<Root> {
 
   initControllers() {
     final service = initService();
-    Get.put(LoginController(service));
+    Get.put(UserController(service));
     Get.put(BottomNaviController());
     Get.put(ChurchController(service));
     Get.put(FeedController(service));
@@ -64,8 +64,6 @@ class _RootState extends State<Root> {
   }
 
   List<GetPage> renderPages() {
-    final services = initService();
-
     return [
       GetPage(
         name: '/',

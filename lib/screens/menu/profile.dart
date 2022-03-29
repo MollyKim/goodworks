@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'dart:io';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -13,6 +15,8 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
+    XFile? image;
+
     return DefaultLayout(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -34,13 +38,24 @@ class _ProfileState extends State<Profile> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 134,
-              child: Center(
-                child: SvgPicture.asset(
-                  'assets/ic/ic_photo.svg',
-                  width: 81,
-                  height: 81,
+            GestureDetector(
+              onTap: () async {
+                image = (await ImagePicker().pickImage(source: ImageSource.gallery))!;
+                setState(() {});
+              },
+              child: Container(
+                height: 134,
+                child: Center(
+                  child: image == null
+                      ? SvgPicture.asset(
+                          'assets/ic/ic_photo.svg',
+                          width: 81,
+                          height: 81,
+                        )
+                      : Image.file(
+                          File(image!.path),
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
             ),

@@ -2,8 +2,8 @@ import 'package:practice/services/user/user_model.dart';
 import 'package:practice/controllers/root_contoller.dart';
 import 'package:practice/services/root_service.dart';
 
-class LoginController extends BaseController{
-  LoginController(RootService rootService) : super(rootService);
+class UserController extends BaseController{
+  UserController(RootService rootService) : super(rootService);
 
   UserModel userModel = UserModel();
 
