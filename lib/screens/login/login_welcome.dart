@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/church_controller.dart';
+import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/themes/extensions.dart';
 
 class LoginWelcome extends StatelessWidget {
-
   final ChurchController churchController = Get.find();
+  final UserController userController = Get.find();
 
   renderUserPicture() {
     return Container(
@@ -19,24 +21,64 @@ class LoginWelcome extends StatelessWidget {
     );
   }
 
-  renderText() {
+  renderText(BuildContext context) {
     return SizedBox(
-      width: 273,
-      height: 68,
-      child: Text(
-        "샬롬! ${churchController.churchModel.resultData?.metaCommunity?.title ?? ""} 세움에 오신\n{userName} 성도님을 환영합니다.",
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: Color(0xff2d9067),
-          fontSize: 18,
-          fontFamily: "Apple SD Gothic Neo",
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-    );
+        width: 273,
+        height: 68,
+        child: RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+              text: "샬롬! ",
+              style: context.textStyleCustom
+                  .copyWith(fontSize: 18, color: context.forest50),
+              children: [
+                TextSpan(
+                  text:
+                      "${churchController.churchModel.resultData?.metaCommunity?.title ?? "내수동 교회"} ",
+                  style: context.textStyleCustom.copyWith(
+                      fontSize: 18,
+                      color: context.forest50,
+                      fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text:
+                  "세움에 오신\n",
+                  style: context.textStyleCustom.copyWith(
+                      fontSize: 18,
+                      color: context.forest50,
+                     ),
+                ),
+                TextSpan(
+                  text:
+                  "${userController.userModel.resultData?.email ?? "ooo"} ",
+                  style: context.textStyleCustom.copyWith(
+                      fontSize: 18,
+                      color: context.forest50,
+                      fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text:
+                  "성도님을 환영합니다.",
+                  style: context.textStyleCustom.copyWith(
+                    fontSize: 18,
+                    color: context.forest50,
+                  ),
+                ),
+              ]),
+        )
+
+        // Text(
+        //   "샬롬! ${churchController.churchModel.resultData?.metaCommunity?.title ?? ""} 세움에 오신\n${userController.userModel.resultData?.email ?? ""} 성도님을 환영합니다.",
+        //   textAlign: TextAlign.center,
+        //   style: context.textStyleCustom.copyWith(
+        //     fontSize: 18,
+        //     color: context.forest50
+        //   ),
+        // ),
+        );
   }
 
-  renderBottomButton() {
+  renderBottomButton(BuildContext context) {
     return SizedBox(
       height: 50,
       width: 315,
@@ -45,7 +87,7 @@ class LoginWelcome extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(5.0),
             ),
-            primary: Color(0xff2d9067),
+            primary: context.forest50,
           ),
           onPressed: () {
             Get.toNamed('/main');
@@ -53,12 +95,9 @@ class LoginWelcome extends StatelessWidget {
           child: Text(
             "입장하기",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontFamily: "AppleSDGothicNeo",
-              fontWeight: FontWeight.w500,
-              letterSpacing: 1.80,
+            style: context.textStyleCustom.copyWith(
+              color: context.forest80,
+              fontWeight: FontWeight.bold
             ),
           )),
     );
@@ -67,6 +106,7 @@ class LoginWelcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
+      backgroundColor: context.forest80!,
       body: Container(
         child: Center(
           child: Column(
@@ -78,11 +118,11 @@ class LoginWelcome extends StatelessWidget {
               Container(
                 height: 35,
               ),
-              renderText(),
+              renderText(context),
               Container(
                 height: 60,
               ),
-              renderBottomButton()
+              renderBottomButton(context)
             ],
           ),
         ),
