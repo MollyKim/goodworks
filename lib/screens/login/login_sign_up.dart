@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/services/user/user_model.dart';
+import 'package:practice/themes/extensions.dart';
 
 class LoginSignUp extends StatefulWidget {
   @override
@@ -14,11 +15,11 @@ class LoginSignUp extends StatefulWidget {
 }
 
 class _LoginSignUpState extends State<LoginSignUp> {
-
   TextEditingController idTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
   TextEditingController nameTextEditingController = TextEditingController();
-  TextEditingController phoneNumberTextEditingController = TextEditingController();
+  TextEditingController phoneNumberTextEditingController =
+      TextEditingController();
   TextEditingController otpTextEditingController = TextEditingController();
 
   bool totalFlag = false;
@@ -107,62 +108,62 @@ class _LoginSignUpState extends State<LoginSignUp> {
             alignment: Alignment.centerLeft,
             child: Text(
               "아이디",
-              style: TextStyle(
-                color: Color(0xff2d9067),
+              style: context.textStyleCustom.copyWith(
                 fontSize: 14,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
+                color: context.forest80,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
-        Container(
-          height: 46,
-          width: 315,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Color(0xff90c79c),
-              width: 0.50,
-            ),
-            color: Color(0xffcde3d6),
-          ),
-          child: TextFormField(
-            controller: idTextEditingController,
-            onChanged: (val) {
-              idTextEditingController.text = val;
-            },
-            validator: (val) {
-              if(val!.length < 1) {
-                return '이름은 필수사항입니다.';
-              } else if(val.length > 20 || val.length<5) {
-                return '5자 이상 20자 이하여야 합니다.';
-              } return null;
-            },
-            style: TextStyle(
-              color: Color(0xff1a442b),
-            ),
-            cursorColor: Color(0xff2d9067),
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.done,
-            autofocus: true,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(20),
-            ],
-            decoration: InputDecoration(
-              //클릭시 Label 올라 가는 애니메이션 제거
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              //isDense : label, hint 간격 조절
-              isDense: true,
-              fillColor: Colors.transparent,
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 10, left: 12),
-              // labelText: '이름',
-              hintText: '5~20자로 입력해주세요',
-              hintStyle: TextStyle(
-                color: Color(0xff629677),
-                fontSize: 16,
-              ),
+        TextFormField(
+          // controller: idTextEditingController,
+          onChanged: (val) {
+            idTextEditingController.text = val;
+          },
+          validator: (val) {
+            if (val!.length < 1) {
+              return '이름은 필수사항입니다.';
+            } else if (val.length > 20 || val.length < 5) {
+              return '5자 이상 20자 이하여야 합니다.';
+            }
+            return null;
+          },
+          style: context.textStyleCustom
+              .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+          cursorColor: context.forest70,
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.done,
+          autofocus: true,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(20),
+          ],
+          // textAlign: TextAlign.start,
+          decoration: InputDecoration(
+            filled: true,
+            //클릭시 Label 올라 가는 애니메이션 제거
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            //isDense : label, hint 간격 조절
+            isDense: true,
+            fillColor: context.forest50,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                )),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                )),
+            contentPadding:
+                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
+            hintText: '아이디를 입력해주세요',
+            hintStyle: context.textStyleCustom.copyWith(
+              color: context.forest70,
+              fontSize: 14,
             ),
           ),
         ),
@@ -180,64 +181,64 @@ class _LoginSignUpState extends State<LoginSignUp> {
             alignment: Alignment.centerLeft,
             child: Text(
               "비밀번호",
-              style: TextStyle(
-                color: Color(0xff2d9067),
+              style: context.textStyleCustom.copyWith(
                 fontSize: 14,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
+                color: context.forest80,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
-        Container(
-          height: 46,
-          width: 315,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Color(0xff90c79c),
-              width: 0.50,
+        TextFormField(
+          onChanged: (val) {
+            passwordTextEditingController.text = val;
+          },
+          validator: (val) {
+            if (val!.length < 1) {
+              return '비밀번호는 필수사항입니다.';
+            } else if (val.length > 20 ||
+                val.length < 8 ||
+                !RegExp(r'^[a-zA-Z0-9]+$').hasMatch(val)) {
+              return '영문, 숫자 8~20자 조합으로 입력해주세요.';
+            }
+            return null;
+          },
+          obscureText: true,
+          style: context.textStyleCustom
+              .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+          cursorColor: context.forest70,
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.done,
+          autofocus: true,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(20),
+          ],
+          decoration: InputDecoration(
+            filled: true,
+            //클릭시 Label 올라 가는 애니메이션 제거
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            //isDense : label, hint 간격 조절
+            isDense: true,
+            fillColor: context.forest50,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                )),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                )),
+            contentPadding:
+                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
+            hintStyle: context.textStyleCustom.copyWith(
+              color: context.forest70,
+              fontSize: 14,
             ),
-            color: Color(0xffcde3d6),
-          ),
-          child: TextFormField(
-            onChanged: (val) {
-              passwordTextEditingController.text = val;
-            },
-            validator: (val) {
-              if(val!.length < 1) {
-                return '비밀번호는 필수사항입니다.';
-              } else if(val.length > 20 || val.length<8 || !RegExp(r'^[a-zA-Z0-9]+$').hasMatch(val)) {
-                return '영문, 숫자 8~20자 조합으로 입력해주세요.';
-              } return null;
-            },
-            obscureText: true,
-            style: TextStyle(
-              color: Color(0xff1a442b),
-            ),
-            // initialValue: widget.initialValue,
-            cursorColor: Color(0xff2d9067),
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.done,
-            autofocus: true,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(20),
-            ],
-            decoration: InputDecoration(
-              //클릭시 Label 올라 가는 애니메이션 제거
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              //isDense : label, hint 간격 조절
-              isDense: true,
-              fillColor: Colors.transparent,
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 10, left: 12),
-              // labelText: '이름',
-              hintText: '영문, 숫자 8~20자 조합으로 입력해주세요',
-              hintStyle: TextStyle(
-                color: Color(0xff629677),
-                fontSize: 16,
-              ),
-            ),
+            hintText: '영문, 숫자 8~20자 조합으로 입력해주세요',
           ),
         ),
       ],
@@ -254,61 +255,59 @@ class _LoginSignUpState extends State<LoginSignUp> {
             alignment: Alignment.centerLeft,
             child: Text(
               "비밀번호 확인",
-              style: TextStyle(
-                color: Color(0xff2d9067),
+              style: context.textStyleCustom.copyWith(
                 fontSize: 14,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
+                color: context.forest80,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
-        Container(
-          height: 46,
-          width: 315,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Color(0xff90c79c),
-              width: 0.50,
+        TextFormField(
+          validator: (val) {
+            if (val!.length < 1) {
+              return '비밀번호는 필수사항입니다.';
+            } else if (passwordTextEditingController.text != val) {
+              return '비밀번호를 확인해주세요.';
+            }
+            return null;
+          },
+          obscureText: true,
+          style: context.textStyleCustom
+              .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+          cursorColor: context.forest70,
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.done,
+          autofocus: true,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(20),
+          ],
+          decoration: InputDecoration(
+            filled: true,
+            //클릭시 Label 올라 가는 애니메이션 제거
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            //isDense : label, hint 간격 조절
+            isDense: true,
+            fillColor: context.forest50,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                )),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                )),
+            contentPadding:
+                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
+            hintStyle: context.textStyleCustom.copyWith(
+              color: context.forest70,
+              fontSize: 14,
             ),
-            color: Color(0xffcde3d6),
-          ),
-          child: TextFormField(
-            validator: (val) {print(val);print(passwordTextEditingController.text);
-              if(val!.length < 1) {
-                return '비밀번호는 필수사항입니다.';
-              } else if(passwordTextEditingController.text != val) {
-                return '비밀번호를 확인해주세요.';
-              } return null;
-            },
-            obscureText: true,
-            style: TextStyle(
-              color: Color(0xff1a442b),
-            ),
-            // initialValue: widget.initialValue,
-            cursorColor: Color(0xff2d9067),
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.done,
-            autofocus: true,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(20),
-            ],
-            decoration: InputDecoration(
-              //클릭시 Label 올라 가는 애니메이션 제거
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              //isDense : label, hint 간격 조절
-              isDense: true,
-              fillColor: Colors.transparent,
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 10, left: 12),
-              // labelText: '이름',
-              hintText: '영문, 숫자 8~20자 조합으로 입력해주세요',
-              hintStyle: TextStyle(
-                color: Color(0xff629677),
-                fontSize: 16,
-              ),
-            ),
+            hintText: '영문, 숫자 8~20자 조합으로 입력해주세요',
           ),
         ),
       ],
@@ -325,62 +324,59 @@ class _LoginSignUpState extends State<LoginSignUp> {
             alignment: Alignment.centerLeft,
             child: Text(
               "이름",
-              style: TextStyle(
-                color: Color(0xff2d9067),
+              style: context.textStyleCustom.copyWith(
                 fontSize: 14,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
+                color: context.forest80,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
-        Container(
-          height: 46,
-          width: 315,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Color(0xff90c79c),
-              width: 0.50,
+        TextFormField(
+          onChanged: (val) {
+            nameTextEditingController.text = val;
+          },
+          validator: (val) {
+            if (val!.length < 1) {
+              return '이름은 필수사항입니다.';
+            }
+            return null;
+          },
+          style: context.textStyleCustom
+              .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+          cursorColor: context.forest70,
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.done,
+          autofocus: true,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(6),
+          ],
+          decoration: InputDecoration(
+            filled: true,
+            //클릭시 Label 올라 가는 애니메이션 제거
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            //isDense : label, hint 간격 조절
+            isDense: true,
+            fillColor: context.forest50,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                )),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                )),
+            contentPadding:
+                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
+            hintStyle: context.textStyleCustom.copyWith(
+              color: context.forest70,
+              fontSize: 14,
             ),
-            color: Color(0xffcde3d6),
-          ),
-          child: TextFormField(
-            controller: nameTextEditingController,
-            onChanged: (val) {
-              nameTextEditingController.text = val;
-            },
-            validator: (val) {
-              if(val!.length < 1) {
-                return '이름은 필수사항입니다.';
-              } return null;
-            },
-            style: TextStyle(
-              color: Color(0xff1a442b),
-            ),
-            // initialValue: widget.initialValue,
-            cursorColor: Color(0xff2d9067),
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.done,
-            autofocus: true,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(6),
-            ],
-            decoration: InputDecoration(
-              //클릭시 Label 올라 가는 애니메이션 제거
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              //isDense : label, hint 간격 조절
-              isDense: true,
-              fillColor: Colors.transparent,
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 10, left: 12),
-              // labelText: '이름',
-              hintText: '이름(본명)을 입력해주세요',
-              hintStyle: TextStyle(
-                color: Color(0xff629677),
-                fontSize: 16,
-              ),
-            ),
+            hintText: '이름(본명)을 입력해주세요',
           ),
         ),
       ],
@@ -397,62 +393,60 @@ class _LoginSignUpState extends State<LoginSignUp> {
             alignment: Alignment.centerLeft,
             child: Text(
               "휴대폰 번호",
-              style: TextStyle(
-                color: Color(0xff2d9067),
+              style: context.textStyleCustom.copyWith(
                 fontSize: 14,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
+                color: context.forest80,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
-        Container(
-          height: 46,
-          width: 315,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Color(0xff90c79c),
-              width: 0.50,
+        TextFormField(
+          onChanged: (val) {
+            phoneNumberTextEditingController.text = val;
+          },
+          validator: (val) {
+            if (val!.length < 1) {
+              return '번호는 필수사항입니다.';
+            }
+            return null;
+          },
+          style: context.textStyleCustom
+              .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+          cursorColor: context.forest70,
+          keyboardType: TextInputType.number,
+          textInputAction: TextInputAction.done,
+          autofocus: true,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+            LengthLimitingTextInputFormatter(11),
+          ],
+          decoration: InputDecoration(
+            filled: true,
+            //클릭시 Label 올라 가는 애니메이션 제거
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            //isDense : label, hint 간격 조절
+            isDense: true,
+            fillColor: context.forest50,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                )),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                )),
+            contentPadding:
+                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
+            hintStyle: context.textStyleCustom.copyWith(
+              color: context.forest70,
+              fontSize: 14,
             ),
-            color: Color(0xffcde3d6),
-          ),
-          child: TextFormField(
-            controller: phoneNumberTextEditingController,
-            onChanged: (val) {
-              phoneNumberTextEditingController.text = val;
-            },
-            validator: (val) {
-              if(val!.length < 1) {
-                return '번호는 필수사항입니다.';
-              } return null;
-            },
-            style: TextStyle(
-              color: Color(0xff1a442b),
-            ),
-            cursorColor: Color(0xff2d9067),
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.done,
-            autofocus: true,
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-              LengthLimitingTextInputFormatter(11),
-            ],
-            decoration: InputDecoration(
-              //클릭시 Label 올라 가는 애니메이션 제거
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              //isDense : label, hint 간격 조절
-              isDense: true,
-              fillColor: Colors.transparent,
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 10, left: 12),
-              // labelText: '이름',
-              hintText: '휴대폰 번호를 입력해주세요(숫자만 입력)',
-              hintStyle: TextStyle(
-                color: Color(0xff629677),
-                fontSize: 16,
-              ),
-            ),
+            hintText: '휴대폰 번호를 입력해주세요(숫자만 입력)',
           ),
         ),
       ],
@@ -466,7 +460,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           alignment: Alignment.centerRight,
           children: [
             Container(
-              height: 46,
+              height: 41,
               width: 315,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
@@ -539,9 +533,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
             primary: Color(0xff2d9067),
           ),
           onPressed: () {
+            startTimeout(180);
             setState(() {
               phoneFlag = true;
-              startTimeout(180);
             });
             // Get.toNamed('/login_select_church');
           },
@@ -558,6 +552,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           )),
     );
   }
+
   renderPhoneOTPButton() {
     return Row(
       children: [
@@ -647,17 +642,17 @@ class _LoginSignUpState extends State<LoginSignUp> {
               height: 24,
               child: totalFlag
                   ? SvgPicture.asset(
-                'assets/ic/ic_checkbox_on.svg',
-                width: 24,
-                height: 24,
-                // fit: BoxFit.none,
-              )
+                      'assets/ic/ic_checkbox_on.svg',
+                      width: 24,
+                      height: 24,
+                      // fit: BoxFit.none,
+                    )
                   : SvgPicture.asset(
-                'assets/ic/ic_checkbox_off.svg',
-                width: 24,
-                height: 24,
-                // fit: BoxFit.none,
-              )),
+                      'assets/ic/ic_checkbox_off.svg',
+                      width: 24,
+                      height: 24,
+                      // fit: BoxFit.none,
+                    )),
           SizedBox(width: 8),
           Align(
             alignment: Alignment.center,
@@ -689,17 +684,17 @@ class _LoginSignUpState extends State<LoginSignUp> {
               height: 24,
               child: necessaryFlagOne
                   ? SvgPicture.asset(
-                'assets/ic/ic_checkbox_on.svg',
-                width: 24,
-                height: 24,
-                // fit: BoxFit.none,
-              )
+                      'assets/ic/ic_checkbox_on.svg',
+                      width: 24,
+                      height: 24,
+                      // fit: BoxFit.none,
+                    )
                   : SvgPicture.asset(
-                'assets/ic/ic_checkbox_off.svg',
-                width: 24,
-                height: 24,
-                // fit: BoxFit.none,
-              )),
+                      'assets/ic/ic_checkbox_off.svg',
+                      width: 24,
+                      height: 24,
+                      // fit: BoxFit.none,
+                    )),
           SizedBox(width: 8),
           Align(
             alignment: Alignment.center,
@@ -731,17 +726,17 @@ class _LoginSignUpState extends State<LoginSignUp> {
               height: 24,
               child: necessaryFlagTwo
                   ? SvgPicture.asset(
-                'assets/ic/ic_checkbox_on.svg',
-                width: 24,
-                height: 24,
-                // fit: BoxFit.none,
-              )
+                      'assets/ic/ic_checkbox_on.svg',
+                      width: 24,
+                      height: 24,
+                      // fit: BoxFit.none,
+                    )
                   : SvgPicture.asset(
-                'assets/ic/ic_checkbox_off.svg',
-                width: 24,
-                height: 24,
-                // fit: BoxFit.none,
-              )),
+                      'assets/ic/ic_checkbox_off.svg',
+                      width: 24,
+                      height: 24,
+                      // fit: BoxFit.none,
+                    )),
           SizedBox(width: 8),
           Align(
             alignment: Alignment.center,
@@ -769,7 +764,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             ),
             primary: Color(0xff2d9067),
           ),
-          onPressed: () async{
+          onPressed: () async {
             // if(this.formKey.currentState!.validate()){
             //   final LoginController loginController = Get.find();
             //   await loginController.registerUser(
@@ -780,10 +775,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
             //
             //
             //   if(loginController.userModel.resultCode == "200"){
-                Get.toNamed('/login_welcome');
+            Get.toNamed('/login_welcome');
             //   } else Get.toNamed('/login_fail');
             // }
-
           },
           child: Text(
             "가입하기",
@@ -803,65 +797,65 @@ class _LoginSignUpState extends State<LoginSignUp> {
   Widget build(BuildContext context) {
     return DefaultLayout(
         body: SingleChildScrollView(
-          child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: Form(
-                key: this.formKey,
-                child: Column(children: [
-                  Container(
-                    height: 40,
-                  ),
-                  renderEmail(),
-                  Container(
-                    height: 20,
-                  ),
-                  renderPassword(),
-                  Container(
-                    height: 20,
-                  ),
-                  renderPasswordTwo(),
-                  Container(
-                    height: 20,
-                  ),
-                  renderName(),
-                  Container(
-                    height: 20,
-                  ),
-                  renderPhone(),
-                  Container(
-                    height: 10,
-                  ),
-                  phoneOTPFlag
-                      ? Container()
-                      : phoneFlag
+      child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 40),
+          child: Form(
+            key: this.formKey,
+            child: Column(children: [
+              Container(
+                height: 40,
+              ),
+              renderEmail(),
+              Container(
+                height: 20,
+              ),
+              renderPassword(),
+              Container(
+                height: 20,
+              ),
+              renderPasswordTwo(),
+              Container(
+                height: 20,
+              ),
+              renderName(),
+              Container(
+                height: 20,
+              ),
+              renderPhone(),
+              Container(
+                height: 10,
+              ),
+              phoneOTPFlag
+                  ? Container()
+                  : phoneFlag
                       ? renderPhoneOTP()
                       : Container(),
-                  phoneOTPFlag
-                      ? Container()
-                      : phoneFlag
+              phoneOTPFlag
+                  ? Container()
+                  : phoneFlag
                       ? renderPhoneOTPButton()
                       : renderPhoneButton(),
-                  Container(
-                    height: 40,
-                  ),
-                  renderTotalAgree(),
-                  Container(
-                    height: 10,
-                  ),
-                  renderNecessaryOne(),
-                  Container(
-                    height: 10,
-                  ),
-                  renderNecessaryTwo(),
-                  Container(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 40,
-                  ),
-                  renderSignUpButton(),
-                ]),
-              )),
-        ));
+              Container(
+                height: 40,
+              ),
+              renderTotalAgree(),
+              Container(
+                height: 10,
+              ),
+              renderNecessaryOne(),
+              Container(
+                height: 10,
+              ),
+              renderNecessaryTwo(),
+              Container(
+                height: 10,
+              ),
+              Container(
+                height: 40,
+              ),
+              renderSignUpButton(),
+            ]),
+          )),
+    ));
   }
 }

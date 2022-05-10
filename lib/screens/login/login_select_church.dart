@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/layouts/default_layout.dart';
 
@@ -19,9 +18,7 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
         // mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            height: 150,
-          ),
+          SizedBox(height: 150),
           Container(
             child: Text(
               "출석하고 있는 교회를 선택해주세요.",
@@ -34,10 +31,7 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
               ),
             ),
           ),
-          Container(
-            height: 150,
-            // width: 200,
-          ),
+          Spacer(),
           GestureDetector(
             onTap: () {
               Get.toNamed('/login_sign_up');
@@ -45,7 +39,6 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
             child: Container(
                 height: 350,
                 width: 350,
-                // width: double.infinit,
                 child: CarouselSlider(
                   options: CarouselOptions(
                     aspectRatio: 0.7,
@@ -57,6 +50,7 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
                   items: imageSliders,
                 )),
           ),
+          SizedBox(height: 30),
         ],
       ),
     );
@@ -65,11 +59,9 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
 
 //
 final List<String> imgList = [
-  '',
-  '',
-  '',
-  '',
-  '',
+  'assets/img/img_logo_church.jpg',
+  'assets/img/img_rural_church.jpg',
+  'assets/img/img_urban_church.jpg',
 ];
 //
 final List<Widget> imageSliders = imgList
@@ -79,7 +71,7 @@ final List<Widget> imageSliders = imgList
             child: Image(
                 // width: 280,
                 // height: 360,
-                image: AssetImage('assets/img/img_logo_church.jpg')),
+                image: AssetImage(item)),
           ),
         ))
     .toList();
