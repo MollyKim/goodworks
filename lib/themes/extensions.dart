@@ -62,6 +62,9 @@ extension ThemeColor on BuildContext {
   Color? get forest100 =>
       dynamicColor(light: const Color(0xFF1B442B), dark: const Color(0xFFFFFFFF));
 
+  Color? get forest90 =>
+      dynamicColor(light: const Color(0xFF245D3A), dark: const Color(0xFFFFFFFF));
+
   Color? get forest80 =>
       dynamicColor(light: const Color(0xFF2E9067), dark: const Color(0xFFFFFFFF));
 

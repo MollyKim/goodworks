@@ -459,56 +459,55 @@ class _LoginSignUpState extends State<LoginSignUp> {
         Stack(
           alignment: Alignment.centerRight,
           children: [
-            Container(
-              height: 41,
-              width: 315,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(
-                  color: Color(0xff90c79c),
-                  width: 0.50,
-                ),
-                color: Color(0xffcde3d6),
+            TextFormField(
+              controller: otpTextEditingController,
+              style: TextStyle(
+                color: Color(0xff1a442b),
               ),
-              child: TextFormField(
-                controller: otpTextEditingController,
-                style: TextStyle(
-                  color: Color(0xff1a442b),
-                ),
-                cursorColor: Color(0xff2d9067),
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.done,
-                autofocus: true,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                  LengthLimitingTextInputFormatter(6),
-                ],
-                decoration: InputDecoration(
-                  //클릭시 Label 올라 가는 애니메이션 제거
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  //isDense : label, hint 간격 조절
-                  isDense: true,
-                  fillColor: Colors.transparent,
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.only(top: 10, left: 12),
-                  // labelText: '이름',
-                  hintText: '인증번호 6자리를 입력해주세요.',
-                  hintStyle: TextStyle(
-                    color: Color(0xff629677),
-                    fontSize: 16,
-                  ),
+              cursorColor: Color(0xff2d9067),
+              keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.done,
+              autofocus: true,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                LengthLimitingTextInputFormatter(6),
+              ],
+              decoration: InputDecoration(
+                filled: true,
+                //클릭시 Label 올라 가는 애니메이션 제거
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                //isDense : label, hint 간격 조절
+                isDense: true,
+                fillColor: context.forest50,
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 0.0,
+                    )),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 0.0,
+                    )),
+                contentPadding:
+                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
+                hintText: '인증번호 6자리를 입력해주세요.',
+                hintStyle: context.textStyleCustom.copyWith(
+                  color: context.forest70,
+                  fontSize: 14,
                 ),
               ),
             ),
             Container(
-              padding: EdgeInsets.only(right: 12, bottom: 6),
+              padding: EdgeInsets.only(right: 12),
               child: Text(
                 timerText,
-                style: TextStyle(
-                  color: Color(0xff245d3a),
+                style: context.textStyleCustom.copyWith(
+                  color: context.forest90,
                   fontSize: 14,
-                  fontFamily: "AppleSDGothicNeo",
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             )
@@ -530,7 +529,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(5.0),
             ),
-            primary: Color(0xff2d9067),
+            primary: context.forest80,
           ),
           onPressed: () {
             startTimeout(180);
@@ -542,12 +541,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
           child: Text(
             "휴대폰 인증",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
+            style: context.textStyleCustom.copyWith(
               fontSize: 18,
-              fontFamily: "AppleSDGothicNeo",
-              fontWeight: FontWeight.w500,
-              letterSpacing: 1.80,
+              color: Colors.white
             ),
           )),
     );
@@ -566,7 +562,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
                   shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(5.0),
                   ),
-                  primary: Color(0xff2d9067),
+                  primary: context.forest80,
                 ),
                 onPressed: () {
                   setState(() {
@@ -578,13 +574,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 child: Text(
                   "재전송",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontFamily: "AppleSDGothicNeo",
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 1.80,
-                  ),
+                    style: context.textStyleCustom.copyWith(
+                        fontSize: 18,
+                        color: Colors.white
+                    )
                 )),
           ),
         ),
@@ -601,7 +594,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
                   shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(5.0),
                   ),
-                  primary: Color(0xff2d9067),
+                  primary: context.forest80,
                 ),
                 onPressed: () {
                   setState(() {
@@ -613,13 +606,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 child: Text(
                   "인증 완료",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontFamily: "AppleSDGothicNeo",
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 1.80,
-                  ),
+                    style: context.textStyleCustom.copyWith(
+                        fontSize: 18,
+                        color: Colors.white
+                    )
                 )),
           ),
         ),
@@ -658,8 +648,8 @@ class _LoginSignUpState extends State<LoginSignUp> {
             alignment: Alignment.center,
             child: Text(
               "전체 동의",
-              style: TextStyle(
-                color: Color(0xff1a442b),
+              style: context.textStyleCustom.copyWith(
+                color: context.forest100,
                 fontSize: 14,
               ),
             ),
@@ -700,8 +690,8 @@ class _LoginSignUpState extends State<LoginSignUp> {
             alignment: Alignment.center,
             child: Text(
               "서비스 이용약관에 동의합니다",
-              style: TextStyle(
-                color: Color(0xff1a442b),
+              style: context.textStyleCustom.copyWith(
+                color: context.forest100,
                 fontSize: 14,
               ),
             ),
@@ -742,8 +732,8 @@ class _LoginSignUpState extends State<LoginSignUp> {
             alignment: Alignment.center,
             child: Text(
               "개인정보 처리방침에 동의합니다",
-              style: TextStyle(
-                color: Color(0xff1a442b),
+              style: context.textStyleCustom.copyWith(
+                color: context.forest100,
                 fontSize: 14,
               ),
             ),
@@ -762,7 +752,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(5.0),
             ),
-            primary: Color(0xff2d9067),
+            primary: context.forest80,
           ),
           onPressed: () async {
             // if(this.formKey.currentState!.validate()){
@@ -782,13 +772,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
           child: Text(
             "가입하기",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontFamily: "AppleSDGothicNeo",
-              fontWeight: FontWeight.w500,
-              letterSpacing: 1.80,
-            ),
+              style: context.textStyleCustom.copyWith(
+                  fontSize: 18,
+                  color: Colors.white
+              )
           )),
     );
   }
@@ -854,6 +841,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 height: 40,
               ),
               renderSignUpButton(),
+              Container(
+                height: 10,
+              ),
             ]),
           )),
     ));

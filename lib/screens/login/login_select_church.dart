@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/themes/extensions.dart';
 
 class LoginSelectChurch extends StatefulWidget {
   @override
@@ -14,44 +15,41 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
-      body: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 150),
-          Container(
-            child: Text(
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center, // 동작이 안되서 상위에 center 감싸줌
+          children: [
+            SizedBox(height: 150),
+            Text(
               "출석하고 있는 교회를 선택해주세요.",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xff2d9067),
-                fontSize: 20,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
+              style: context.textStyleCustom.copyWith(
+                color: context.forest80,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ),
-          Spacer(),
-          GestureDetector(
-            onTap: () {
-              Get.toNamed('/login_sign_up');
-            },
-            child: Container(
-                height: 350,
-                width: 350,
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    aspectRatio: 0.7,
-                    enlargeCenterPage: true,
-                    enableInfiniteScroll: false,
-                    initialPage: 2,
-                    autoPlay: true,
-                  ),
-                  items: imageSliders,
-                )),
-          ),
-          SizedBox(height: 30),
-        ],
+            Spacer(),
+            GestureDetector(
+              onTap: () {
+                Get.toNamed('/login_sign_up');
+              },
+              child: Container(
+                  height: 350,
+                  width: 350,
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                      aspectRatio: 0.7,
+                      enlargeCenterPage: true,
+                      enableInfiniteScroll: false,
+                      initialPage: 0,
+                      autoPlay: true,
+                    ),
+                    items: imageSliders,
+                  )),
+            ),
+            SizedBox(height: 30),
+          ],
+        ),
       ),
     );
   }
