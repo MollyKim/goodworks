@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/feed_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/themes/extensions.dart';
 import 'post_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -43,26 +45,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 3, vsync: this);
     return DefaultLayout(
-      appBar: AppBar(
-        elevation: 2.0,
-        titleSpacing: 0,
-        backgroundColor: Colors.white,
-        title: Text(
-            churchController.churchModel.resultData?.metaCommunity!.title! ??
-                "내수동교회"),
-        titleTextStyle: TextStyle(
-          fontSize: 20,
-          fontFamily: "AppleSDGothicNeo",
-          fontWeight: FontWeight.w700,
-          color: Color(0xff2d9067),
-        ),
-        leading: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: SvgPicture.asset(
-            'assets/ic/ic_appbar.svg',
-          ),
-        ),
-      ),
       body: NestedScrollView(
         controller: scrollController,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -71,11 +53,39 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               automaticallyImplyLeading: false,
               expandedHeight: 150.0,
               pinned: false,
-              flexibleSpace: Image.network(
-                churchController.churchModel.resultData?.metaCommunity!
-                        .coverImage!.smallUrl ??
-                    "https://cdn.vm-united.com/dev/user/1/community/cover/2021-11-25/small.bGUVRfg3e422_Image%20from%20iOS.jpg",
+              flexibleSpace: CachedNetworkImage(
                 fit: BoxFit.cover,
+                imageUrl: churchController.churchModel.resultData
+                        ?.metaCommunity!.coverImage!.smallUrl ??
+                    "https://cdn.vm-united.com/dev/user/1/community/cover/2021-11-25/small.bGUVRfg3e422_Image%20from%20iOS.jpg",
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
+            ),
+            SliverAppBar(
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              backgroundColor: Colors.white,
+              pinned: true,
+              flexibleSpace: AppBar(
+                elevation: 0.5,
+                titleSpacing: 0,
+                backgroundColor: Colors.white,
+                title: Text(
+                    churchController.churchModel.resultData?.metaCommunity!.title! ??
+                        "내수동교회"),
+                titleTextStyle: context.textStyleCustom.copyWith(
+                  color: context.forest100,
+                  fontWeight: FontWeight.bold,
+                ),
+                leading: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      churchController.churchModel.resultData?.metaCommunity?.coverImage?.smallUrl??
+                          "https://cdn.vm-united.com/dev/user/1/community/cover/2021-11-25/small.bGUVRfg3e422_Image%20from%20iOS.jpg",
+                    ),
+                  ),
+                ),
               ),
             ),
             SliverAppBar(
@@ -87,18 +97,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 indicatorColor: Colors.transparent,
                 isScrollable: true,
                 labelPadding: EdgeInsets.only(left: 10, right: 10),
-                unselectedLabelColor: Colors.grey,
-                unselectedLabelStyle: TextStyle(
-                  fontSize: 14,
-                  fontFamily: "AppleSDGothicNeo",
-                  fontWeight: FontWeight.w700,
+                unselectedLabelColor: context.gray02,
+                unselectedLabelStyle: context.textStyleCustom.copyWith(
+                  fontSize: 16,
                 ),
-                labelColor: Color(0xff2d9067),
-                labelStyle: TextStyle(
-                  color: Color(0xff2d9067),
-                  fontSize: 14,
-                  fontFamily: "AppleSDGothicNeo",
-                  fontWeight: FontWeight.w700,
+                labelColor: context.forest90,
+                labelStyle:context.textStyleCustom.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold
                 ),
                 controller: tabController,
                 tabs: <Widget>[
@@ -255,7 +261,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       }
     }
   }
-
 
   void _onLoading(String subject) async { // 커서 호출
     switch (subject) {
