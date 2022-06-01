@@ -30,14 +30,14 @@ class LoginWelcome extends StatelessWidget {
           text: TextSpan(
               text: "샬롬! ",
               style: context.textStyleCustom
-                  .copyWith(fontSize: 18, color: context.forest50),
+                  .copyWith(fontSize: 18, color: context.forest80),
               children: [
                 TextSpan(
                   text:
                       "${churchController.churchModel.resultData?.metaCommunity?.title ?? "내수동 교회"} ",
                   style: context.textStyleCustom.copyWith(
                       fontSize: 18,
-                      color: context.forest50,
+                      color: context.forest80,
                       fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
@@ -45,7 +45,7 @@ class LoginWelcome extends StatelessWidget {
                   "세움에 오신\n",
                   style: context.textStyleCustom.copyWith(
                       fontSize: 18,
-                      color: context.forest50,
+                      color: context.forest80,
                      ),
                 ),
                 TextSpan(
@@ -53,7 +53,7 @@ class LoginWelcome extends StatelessWidget {
                   "${userController.userModel.resultData?.email ?? "ooo"} ",
                   style: context.textStyleCustom.copyWith(
                       fontSize: 18,
-                      color: context.forest50,
+                      color: context.forest80,
                       fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
@@ -61,7 +61,7 @@ class LoginWelcome extends StatelessWidget {
                   "성도님을 환영합니다.",
                   style: context.textStyleCustom.copyWith(
                     fontSize: 18,
-                    color: context.forest50,
+                    color: context.forest80,
                   ),
                 ),
               ]),
@@ -72,7 +72,7 @@ class LoginWelcome extends StatelessWidget {
         //   textAlign: TextAlign.center,
         //   style: context.textStyleCustom.copyWith(
         //     fontSize: 18,
-        //     color: context.forest50
+        //     color: context.forest80
         //   ),
         // ),
         );
@@ -87,7 +87,7 @@ class LoginWelcome extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(5.0),
             ),
-            primary: context.forest50,
+            primary: context.forest80,
           ),
           onPressed: () {
             Get.toNamed('/main');
@@ -96,7 +96,7 @@ class LoginWelcome extends StatelessWidget {
             "입장하기",
             textAlign: TextAlign.center,
             style: context.textStyleCustom.copyWith(
-              color: context.forest80,
+              color: Colors.white,
               fontWeight: FontWeight.bold
             ),
           )),
@@ -106,7 +106,7 @@ class LoginWelcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
-      backgroundColor: context.forest80!,
+      backgroundColor: context.uiBackground!,
       body: Container(
         child: Center(
           child: Column(

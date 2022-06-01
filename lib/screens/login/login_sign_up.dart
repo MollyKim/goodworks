@@ -107,10 +107,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "아이디",
+              "이메일 아이디",
               style: context.textStyleCustom.copyWith(
                 fontSize: 14,
-                color: context.forest80,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -123,9 +123,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           },
           validator: (val) {
             if (val!.length < 1) {
-              return '이름은 필수사항입니다.';
-            } else if (val.length > 20 || val.length < 5) {
-              return '5자 이상 20자 이하여야 합니다.';
+              return '필수사항입니다.';
             }
             return null;
           },
@@ -140,31 +138,23 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ],
           // textAlign: TextAlign.start,
           decoration: InputDecoration(
-            filled: true,
             //클릭시 Label 올라 가는 애니메이션 제거
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            //isDense : label, hint 간격 조절
+            //isDense : lab!el, hint 간격 조절
             isDense: true,
-            fillColor: context.forest50,
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                )),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                )),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: context.forest60!),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: context.forest90!),
+            ),
             contentPadding:
                 const EdgeInsets.only(left: 12, top: 11, bottom: 11),
-            hintText: '아이디를 입력해주세요',
             hintStyle: context.textStyleCustom.copyWith(
               color: context.forest70,
               fontSize: 14,
             ),
+            hintText: '이메일 주소를 입력하세요.',
           ),
         ),
       ],
@@ -183,7 +173,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
               "비밀번호",
               style: context.textStyleCustom.copyWith(
                 fontSize: 14,
-                color: context.forest80,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -214,31 +204,23 @@ class _LoginSignUpState extends State<LoginSignUp> {
             LengthLimitingTextInputFormatter(20),
           ],
           decoration: InputDecoration(
-            filled: true,
             //클릭시 Label 올라 가는 애니메이션 제거
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            //isDense : label, hint 간격 조절
+            //isDense : lab!el, hint 간격 조절
             isDense: true,
-            fillColor: context.forest50,
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                )),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                )),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: context.forest60!),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: context.forest90!),
+            ),
             contentPadding:
                 const EdgeInsets.only(left: 12, top: 11, bottom: 11),
             hintStyle: context.textStyleCustom.copyWith(
               color: context.forest70,
               fontSize: 14,
             ),
-            hintText: '영문, 숫자 8~20자 조합으로 입력해주세요',
+            hintText: '영문, 숫자 8~20자 조합으로 입력해주세요.',
           ),
         ),
       ],
@@ -257,7 +239,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
               "비밀번호 확인",
               style: context.textStyleCustom.copyWith(
                 fontSize: 14,
-                color: context.forest80,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -283,31 +265,23 @@ class _LoginSignUpState extends State<LoginSignUp> {
             LengthLimitingTextInputFormatter(20),
           ],
           decoration: InputDecoration(
-            filled: true,
             //클릭시 Label 올라 가는 애니메이션 제거
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            //isDense : label, hint 간격 조절
+            //isDense : lab!el, hint 간격 조절
             isDense: true,
-            fillColor: context.forest50,
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                )),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                )),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: context.forest60!),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: context.forest90!),
+            ),
             contentPadding:
                 const EdgeInsets.only(left: 12, top: 11, bottom: 11),
             hintStyle: context.textStyleCustom.copyWith(
               color: context.forest70,
               fontSize: 14,
             ),
-            hintText: '영문, 숫자 8~20자 조합으로 입력해주세요',
+            hintText: '영문, 숫자 8~20자 조합으로 입력해주세요.',
           ),
         ),
       ],
@@ -326,7 +300,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
               "이름",
               style: context.textStyleCustom.copyWith(
                 fontSize: 14,
-                color: context.forest80,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -352,31 +326,23 @@ class _LoginSignUpState extends State<LoginSignUp> {
             LengthLimitingTextInputFormatter(6),
           ],
           decoration: InputDecoration(
-            filled: true,
             //클릭시 Label 올라 가는 애니메이션 제거
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            //isDense : label, hint 간격 조절
+            //isDense : lab!el, hint 간격 조절
             isDense: true,
-            fillColor: context.forest50,
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                )),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                )),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: context.forest60!),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: context.forest90!),
+            ),
             contentPadding:
                 const EdgeInsets.only(left: 12, top: 11, bottom: 11),
             hintStyle: context.textStyleCustom.copyWith(
               color: context.forest70,
               fontSize: 14,
             ),
-            hintText: '이름(본명)을 입력해주세요',
+            hintText: '이름(본명)을 입력해주세요.',
           ),
         ),
       ],
@@ -395,7 +361,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
               "휴대폰 번호",
               style: context.textStyleCustom.copyWith(
                 fontSize: 14,
-                color: context.forest80,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -422,31 +388,23 @@ class _LoginSignUpState extends State<LoginSignUp> {
             LengthLimitingTextInputFormatter(11),
           ],
           decoration: InputDecoration(
-            filled: true,
             //클릭시 Label 올라 가는 애니메이션 제거
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            //isDense : label, hint 간격 조절
+            //isDense : lab!el, hint 간격 조절
             isDense: true,
-            fillColor: context.forest50,
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                )),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                )),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: context.forest60!),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: context.forest90!),
+            ),
             contentPadding:
                 const EdgeInsets.only(left: 12, top: 11, bottom: 11),
             hintStyle: context.textStyleCustom.copyWith(
               color: context.forest70,
               fontSize: 14,
             ),
-            hintText: '휴대폰 번호를 입력해주세요(숫자만 입력)',
+            hintText: '휴대폰 번호를 입력하세요.',
           ),
         ),
       ],
@@ -473,31 +431,23 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 LengthLimitingTextInputFormatter(6),
               ],
               decoration: InputDecoration(
-                filled: true,
                 //클릭시 Label 올라 가는 애니메이션 제거
                 floatingLabelBehavior: FloatingLabelBehavior.always,
-                //isDense : label, hint 간격 조절
+                //isDense : lab!el, hint 간격 조절
                 isDense: true,
-                fillColor: context.forest50,
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 0.0,
-                    )),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 0.0,
-                    )),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: context.forest60!),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: context.forest90!),
+                ),
                 contentPadding:
-                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
-                hintText: '인증번호 6자리를 입력해주세요.',
+                    const EdgeInsets.only(left: 12, top: 11, bottom: 11),
                 hintStyle: context.textStyleCustom.copyWith(
                   color: context.forest70,
                   fontSize: 14,
                 ),
+                hintText: '인증번호 6자리를 입력해주세요.',
               ),
             ),
             Container(
@@ -522,12 +472,11 @@ class _LoginSignUpState extends State<LoginSignUp> {
 
   renderPhoneButton() {
     return SizedBox(
-      height: 50,
-      width: 315,
+      height: 24,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(5.0),
+              borderRadius: new BorderRadius.circular(12.0),
             ),
             primary: context.forest80,
           ),
@@ -539,12 +488,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
             // Get.toNamed('/login_select_church');
           },
           child: Text(
-            "휴대폰 인증",
+            "인증요청",
             textAlign: TextAlign.center,
-            style: context.textStyleCustom.copyWith(
-              fontSize: 18,
-              color: Colors.white
-            ),
+            style: context.textStyleCustom
+                .copyWith(fontSize: 12, color: Colors.white),
           )),
     );
   }
@@ -571,14 +518,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
                   });
                   // Get.toNamed('/login_select_church');
                 },
-                child: Text(
-                  "재전송",
-                  textAlign: TextAlign.center,
-                    style: context.textStyleCustom.copyWith(
-                        fontSize: 18,
-                        color: Colors.white
-                    )
-                )),
+                child: Text("재전송",
+                    textAlign: TextAlign.center,
+                    style: context.textStyleCustom
+                        .copyWith(fontSize: 18, color: Colors.white))),
           ),
         ),
         Container(
@@ -603,14 +546,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
                   });
                   // Get.toNamed('/login_select_church');
                 },
-                child: Text(
-                  "인증 완료",
-                  textAlign: TextAlign.center,
-                    style: context.textStyleCustom.copyWith(
-                        fontSize: 18,
-                        color: Colors.white
-                    )
-                )),
+                child: Text("인증 완료",
+                    textAlign: TextAlign.center,
+                    style: context.textStyleCustom
+                        .copyWith(fontSize: 18, color: Colors.white))),
           ),
         ),
       ],
@@ -649,7 +588,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
             child: Text(
               "전체 동의",
               style: context.textStyleCustom.copyWith(
-                color: context.forest100,
+                color: Colors.black,
                 fontSize: 14,
               ),
             ),
@@ -688,11 +627,26 @@ class _LoginSignUpState extends State<LoginSignUp> {
           SizedBox(width: 8),
           Align(
             alignment: Alignment.center,
-            child: Text(
-              "서비스 이용약관에 동의합니다",
-              style: context.textStyleCustom.copyWith(
-                color: context.forest100,
-                fontSize: 14,
+            child: Text.rich(
+              TextSpan(
+                text: '서비스 이용약관',
+                style: context.textStyleCustom.copyWith(
+                  color: Colors.black,
+                  fontSize: 14,
+                  height: 1,
+                  decoration: TextDecoration.underline,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '에 동의합니다.',
+                    style: context.textStyleCustom.copyWith(
+                      color: Colors.black,
+                      fontSize: 14,
+                      height: 1,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -730,11 +684,26 @@ class _LoginSignUpState extends State<LoginSignUp> {
           SizedBox(width: 8),
           Align(
             alignment: Alignment.center,
-            child: Text(
-              "개인정보 처리방침에 동의합니다",
-              style: context.textStyleCustom.copyWith(
-                color: context.forest100,
-                fontSize: 14,
+            child: Text.rich(
+              TextSpan(
+                text: '개인정보 처리방침',
+                style: context.textStyleCustom.copyWith(
+                  color: Colors.black,
+                  fontSize: 14,
+                  height: 1,
+                  decoration: TextDecoration.underline,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '에 동의합니다.',
+                    style: context.textStyleCustom.copyWith(
+                      color: Colors.black,
+                      fontSize: 14,
+                      height: 1,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -769,83 +738,75 @@ class _LoginSignUpState extends State<LoginSignUp> {
             //   } else Get.toNamed('/login_fail');
             // }
           },
-          child: Text(
-            "가입하기",
-            textAlign: TextAlign.center,
-              style: context.textStyleCustom.copyWith(
-                  fontSize: 18,
-                  color: Colors.white
-              )
-          )),
+          child: Text("가입하기",
+              textAlign: TextAlign.center,
+              style: context.textStyleCustom
+                  .copyWith(fontSize: 18, color: Colors.white))),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
-        body: SingleChildScrollView(
-      child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40),
-          child: Form(
-            key: this.formKey,
-            child: Column(children: [
-              Container(
-                height: 40,
-              ),
-              renderEmail(),
-              Container(
-                height: 20,
-              ),
-              renderPassword(),
-              Container(
-                height: 20,
-              ),
-              renderPasswordTwo(),
-              Container(
-                height: 20,
-              ),
-              renderName(),
-              Container(
-                height: 20,
-              ),
-              renderPhone(),
-              Container(
-                height: 10,
-              ),
-              phoneOTPFlag
-                  ? Container()
-                  : phoneFlag
-                      ? renderPhoneOTP()
-                      : Container(),
-              phoneOTPFlag
-                  ? Container()
-                  : phoneFlag
-                      ? renderPhoneOTPButton()
-                      : renderPhoneButton(),
-              Container(
-                height: 40,
-              ),
-              renderTotalAgree(),
-              Container(
-                height: 10,
-              ),
-              renderNecessaryOne(),
-              Container(
-                height: 10,
-              ),
-              renderNecessaryTwo(),
-              Container(
-                height: 10,
-              ),
-              Container(
-                height: 40,
-              ),
-              renderSignUpButton(),
-              Container(
-                height: 10,
-              ),
-            ]),
-          )),
-    ));
+      body: SingleChildScrollView(
+        child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: Form(
+              key: this.formKey,
+              child: Column(children: [
+                SizedBox(
+                  height: 40,
+                ),
+                renderEmail(),
+                SizedBox(
+                  height: 20,
+                ),
+                renderPassword(),
+                SizedBox(
+                  height: 20,
+                ),
+                renderPasswordTwo(),
+                SizedBox(
+                  height: 20,
+                ),
+                renderName(),
+                SizedBox(
+                  height: 20,
+                ),
+                Stack(
+                  children: [
+                    renderPhone(),
+                    Positioned(
+                        right: 13, bottom: 10, child: renderPhoneButton())
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                phoneOTPFlag
+                    ? Container()
+                    : phoneFlag
+                        ? renderPhoneOTP()
+                        : Container(),
+                SizedBox(
+                  height: 40,
+                ),
+                renderTotalAgree(),
+                SizedBox(
+                  height: 10,
+                ),
+                renderNecessaryOne(),
+                SizedBox(
+                  height: 10,
+                ),
+                renderNecessaryTwo(),
+                SizedBox(
+                  height: 10,
+                ),
+                renderSignUpButton(),
+              ]),
+            )),
+      ),
+    );
   }
 }
