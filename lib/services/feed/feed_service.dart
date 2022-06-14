@@ -10,15 +10,14 @@ part 'feed_service.g.dart';
 abstract class FeedService {
   factory FeedService(Dio dio, {String baseUrl}) = _FeedService;
 
-
-  @GET('/api/v1/seum/church/{churchID}/community/{communityID}/feed?limit=5')
+  @GET('/api/v1/seum/church/{churchID}/community/feed?limit=5')
   @Headers(<String, dynamic>{
     'Country': 'KR',
   })
   Future<FeedList> getFeedList(
-      @Path() String churchID, String communityID//, int type, String cursor
+      @Path() String churchID,
+      // @Path() String communityID//, int type, String cursor
       );
-
 
   @GET('/api/v1/seum/church/{churchID}/community/{communityID}/feed/{feedID}')
   @Headers(<String, dynamic>{

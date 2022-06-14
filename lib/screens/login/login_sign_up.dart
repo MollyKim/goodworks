@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:practice/controllers/user_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -725,17 +726,17 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ),
           onPressed: () async {
             // if(this.formKey.currentState!.validate()){
-            //   final LoginController loginController = Get.find();
-            //   await loginController.registerUser(
-            //       email: idTextEditingController.text,
-            //       userpwd: passwordTextEditingController.text,
-            //       userName: nameTextEditingController.text,
-            //       phoneNumber: phoneNumberTextEditingController.text);
-            //
-            //
-            //   if(loginController.userModel.resultCode == "200"){
+              final UserController loginController = Get.find();
+              await loginController.registerUser(
+                  email: "jkdrumgrammer12",//idTextEditingController.text,
+                  userpwd: "abcd1234ABCD",//passwordTextEditingController.text,
+                  userName: "가나다",//nameTextEditingController.text,
+                  phoneNumber: "01027623661",//phoneNumberTextEditingController.text);
+              );
+
+              if(loginController.userModel.resultCode == "200"){
             Get.toNamed('/login_welcome');
-            //   } else Get.toNamed('/login_fail');
+              } else Get.toNamed('/login_fail');
             // }
           },
           child: Text("가입하기",

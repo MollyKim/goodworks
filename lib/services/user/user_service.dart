@@ -15,14 +15,19 @@ abstract class LoginService {
       );
 
   @POST('/api/v1/seum/user/register')
-  @Headers(<String,dynamic>{})
+  @Headers(<String,dynamic>{
+    'Content-Type' : 'application/json',
+    'Country': 'KR'
+  })
   Future<UserModel> registerUser(
+      // @Headers({"Content-Type": "application/json","Country": "KR"}) String header,
       @Body() Map<String,dynamic> body,
       );
 
-  @POST('/login')
-  @Headers(<String,dynamic>{})
+  @POST('/api/v1/seum/user/login')
+  @Headers(<String,dynamic>{"Appname" : "class/student"})
   Future<UserModel> loginUser(
+      // @Header() Map<String, dynamic> header,
       @Body() Map<String,dynamic> body,
       );
 

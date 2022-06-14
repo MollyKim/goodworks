@@ -35,7 +35,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   getFeed(String subject) async {
-    await Future.delayed(Duration(milliseconds: 1000));
     await feedController.getFeedListData(churchId: "1", communityID: "?");
     setState(() {});
     //겟빌더로 감싸서 교회정보들을 담는 모델 만들어서 넣을지?
@@ -45,189 +44,212 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 3, vsync: this);
     return DefaultLayout(
-      body: NestedScrollView(
-        controller: scrollController,
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              expandedHeight: 150.0,
-              pinned: false,
-              flexibleSpace: CachedNetworkImage(
-                fit: BoxFit.cover,
-                imageUrl: churchController.churchModel.resultData
-                        ?.metaCommunity!.coverImage!.smallUrl ??
-                    "https://cdn.vm-united.com/dev/user/1/community/cover/2021-11-25/small.bGUVRfg3e422_Image%20from%20iOS.jpg",
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
-            ),
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              elevation: 0,
-              backgroundColor: Colors.white,
-              pinned: true,
-              flexibleSpace: AppBar(
-                elevation: 0.5,
-                titleSpacing: 0,
-                backgroundColor: Colors.white,
-                title: Text(
-                    churchController.churchModel.resultData?.metaCommunity!.title! ??
-                        "내수동교회"),
-                titleTextStyle: context.textStyleCustom.copyWith(
-                  color: context.forest100,
-                  fontWeight: FontWeight.bold,
-                ),
-                leading: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      churchController.churchModel.resultData?.metaCommunity?.coverImage?.smallUrl??
-                          "https://cdn.vm-united.com/dev/user/1/community/cover/2021-11-25/small.bGUVRfg3e422_Image%20from%20iOS.jpg",
+      body: FutureBuilder(
+        future: getFeed("total"),
+        builder: (context,snapShot) {
+          if(snapShot.hasData) {
+              return NestedScrollView(
+                controller: scrollController,
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverAppBar(
+                      automaticallyImplyLeading: false,
+                      expandedHeight: 150.0,
+                      pinned: false,
+                      flexibleSpace: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: churchController.churchModel.resultData
+                                ?.metaCommunity!.coverImage!.smallUrl ??
+                            "https://cdn.vm-united.com/dev/user/1/community/cover/2021-11-25/small.bGUVRfg3e422_Image%20from%20iOS.jpg",
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              elevation: 0,
-              backgroundColor: Colors.white,
-              pinned: true,
-              flexibleSpace: TabBar(
-                indicatorColor: Colors.transparent,
-                isScrollable: true,
-                labelPadding: EdgeInsets.only(left: 10, right: 10),
-                unselectedLabelColor: context.gray02,
-                unselectedLabelStyle: context.textStyleCustom.copyWith(
-                  fontSize: 16,
-                ),
-                labelColor: context.forest90,
-                labelStyle:context.textStyleCustom.copyWith(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold
-                ),
-                controller: tabController,
-                tabs: <Widget>[
-                  Tab(text: '전체'),
-                  Tab(text: '주보'),
-                  Tab(text: '교회소식'),
-                ],
-              ),
-            ),
-          ];
-        },
-        body: TabBarView(
-          controller: tabController,
-          children: <Widget>[
-            SmartRefresher(
-              enablePullDown: true,
-              controller: _totalRefreshController,
-              header: ClassicHeader(
-                height: 100,
-                idleIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                idleText: "",
-                refreshingIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                releaseIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                completeIcon: null,
-                completeText: "",
-                completeDuration: Duration.zero,
-                releaseText: "",
-                refreshingText: "",
-              ),
-              onRefresh: (){_onRefresh("total");},
-              onLoading: (){_onLoading("total");},
-              child: ListView.separated(
-                itemCount: feedController.feedList.resultData?.length ?? 1,
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    thickness: 5.0,
-                    color: Colors.grey[600],
-                  );
+                    SliverAppBar(
+                      automaticallyImplyLeading: false,
+                      elevation: 0,
+                      backgroundColor: Colors.white,
+                      pinned: true,
+                      flexibleSpace: AppBar(
+                        elevation: 0.5,
+                        titleSpacing: 0,
+                        backgroundColor: Colors.white,
+                        title: Text(churchController.churchModel.resultData
+                                ?.metaCommunity!.title! ??
+                            "내수동교회"),
+                        titleTextStyle: context.textStyleCustom.copyWith(
+                          color: context.forest100,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        leading: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              churchController.churchModel.resultData
+                                      ?.metaCommunity?.coverImage?.smallUrl ??
+                                  "https://cdn.vm-united.com/dev/user/1/community/cover/2021-11-25/small.bGUVRfg3e422_Image%20from%20iOS.jpg",
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SliverAppBar(
+                      automaticallyImplyLeading: false,
+                      elevation: 0,
+                      backgroundColor: Colors.white,
+                      pinned: true,
+                      flexibleSpace: TabBar(
+                        indicatorColor: Colors.transparent,
+                        isScrollable: true,
+                        labelPadding: EdgeInsets.only(left: 10, right: 10),
+                        unselectedLabelColor: context.gray02,
+                        unselectedLabelStyle: context.textStyleCustom.copyWith(
+                          fontSize: 16,
+                        ),
+                        labelColor: context.forest90,
+                        labelStyle: context.textStyleCustom.copyWith(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                        controller: tabController,
+                        tabs: <Widget>[
+                          Tab(text: '전체'),
+                          Tab(text: '주보'),
+                          Tab(text: '교회소식'),
+                        ],
+                      ),
+                    ),
+                  ];
                 },
-                itemBuilder: (BuildContext context, int index) {
-                  return HomePostList(index);
-                },
-              ),
-            ),
-            SmartRefresher(
-              enablePullDown: true,
-              controller: _juboRefreshController,
-              header: ClassicHeader(
-                height: 100,
-                idleIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
+                body: TabBarView(
+                  controller: tabController,
+                  children: <Widget>[
+                    SmartRefresher(
+                      enablePullDown: true,
+                      controller: _totalRefreshController,
+                      header: ClassicHeader(
+                        height: 100,
+                        idleIcon: CupertinoActivityIndicator(
+                          radius: 13.0,
+                        ),
+                        idleText: "",
+                        refreshingIcon: CupertinoActivityIndicator(
+                          radius: 13.0,
+                        ),
+                        releaseIcon: CupertinoActivityIndicator(
+                          radius: 13.0,
+                        ),
+                        completeIcon: null,
+                        completeText: "",
+                        completeDuration: Duration.zero,
+                        releaseText: "",
+                        refreshingText: "",
+                      ),
+                      onRefresh: () {
+                        _onRefresh("total");
+                      },
+                      onLoading: () {
+                        _onLoading("total");
+                      },
+                      child: ListView.separated(
+                        itemCount:
+                            feedController.feedList.resultData?.length ?? 1,
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                            thickness: 5.0,
+                            color: Colors.grey[600],
+                          );
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return HomePostList(index);
+                        },
+                      ),
+                    ),
+                    SmartRefresher(
+                      enablePullDown: true,
+                      controller: _juboRefreshController,
+                      header: ClassicHeader(
+                        height: 100,
+                        idleIcon: CupertinoActivityIndicator(
+                          radius: 13.0,
+                        ),
+                        idleText: "",
+                        refreshingIcon: CupertinoActivityIndicator(
+                          radius: 13.0,
+                        ),
+                        releaseIcon: CupertinoActivityIndicator(
+                          radius: 13.0,
+                        ),
+                        completeIcon: null,
+                        completeText: "",
+                        completeDuration: Duration.zero,
+                        releaseText: "",
+                        refreshingText: "",
+                      ),
+                      onRefresh: () {
+                        _onRefresh("jubo");
+                      },
+                      onLoading: () {
+                        _onLoading("jubo");
+                      },
+                      child: ListView.separated(
+                        itemCount: 1,
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                            thickness: 2.0,
+                          );
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return HomePostList(index);
+                        },
+                      ),
+                    ),
+                    SmartRefresher(
+                      enablePullDown: true,
+                      controller: _newsRefreshController,
+                      header: ClassicHeader(
+                        height: 100,
+                        idleIcon: CupertinoActivityIndicator(
+                          radius: 13.0,
+                        ),
+                        idleText: "",
+                        refreshingIcon: CupertinoActivityIndicator(
+                          radius: 13.0,
+                        ),
+                        releaseIcon: CupertinoActivityIndicator(
+                          radius: 13.0,
+                        ),
+                        completeIcon: null,
+                        completeText: "",
+                        completeDuration: Duration.zero,
+                        releaseText: "",
+                        refreshingText: "",
+                      ),
+                      onRefresh: () {
+                        _onRefresh("news");
+                      },
+                      onLoading: () {
+                        _onLoading("news");
+                      },
+                      child: ListView.separated(
+                        itemCount: 1,
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                            thickness: 2.0,
+                            color: Colors.grey[800],
+                          );
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return HomePostList(index);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                idleText: "",
-                refreshingIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                releaseIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                completeIcon: null,
-                completeText: "",
-                completeDuration: Duration.zero,
-                releaseText: "",
-                refreshingText: "",
-              ),
-              onRefresh: (){_onRefresh("jubo");},
-              onLoading: (){_onLoading("jubo");},
-              child: ListView.separated(
-                itemCount: 1,
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    thickness: 2.0,
-                  );
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return HomePostList(index);
-                },
-              ),
-            ),
-            SmartRefresher(
-              enablePullDown: true,
-              controller: _newsRefreshController,
-              header: ClassicHeader(
-                height: 100,
-                idleIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                idleText: "",
-                refreshingIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                releaseIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                completeIcon: null,
-                completeText: "",
-                completeDuration: Duration.zero,
-                releaseText: "",
-                refreshingText: "",
-              ),
-              onRefresh: (){_onRefresh("news");},
-              onLoading: (){_onLoading("news");},
-              child: ListView.separated(
-                itemCount: 1,
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    thickness: 2.0,
-                    color: Colors.grey[800],
-                  );
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return HomePostList(index);
-                },
-              ),
-            ),
-          ],
-        ),
+              );
+            }
+          else {
+            return Center(child: CircularProgressIndicator());
+          }
+          }
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 
 class LoginID extends StatefulWidget {
@@ -133,10 +134,12 @@ class _LoginIDState extends State<LoginID> {
             primary: Color(0xff2d9067),
           ),
           onPressed: () {
+            UserController controller = Get.find();
+            controller.loginUser("drumgrammer", "abcd1234ABCD");
             setState(() {
               IDFlag = true;
             });
-            Get.offAllNamed('/main');
+            // Get.offAllNamed('/main');
           },
           child: Text(
             "로그인",
