@@ -4,18 +4,15 @@ import 'package:retrofit/http.dart';
 
 part 'pray_service.g.dart';
 
-@RestApi(baseUrl: 'https://www.vm-united.com/seum/api/v1/seum')
+@RestApi(baseUrl: 'http://qa-amos.vm-united.com/api/v1/seum')
 abstract class PrayService {
   factory PrayService(Dio dio, {String baseUrl}) = _PrayService;
 
-  // @GET('/api/v1/seum/church/{churchID}/community/{communityID}/feed?limit=5')
-  @GET('/church/{churchID}/prayer?limit=5&timeFilter=2022-03')
+  @GET('/church/{churchID}/prayer?limit=5&timeFilter=2022-06')
   @Headers(<String, dynamic>{
-    'Country': 'KR',
+    "Country": "KR",
   })
   Future<PrayList> getPrayList(
-      @Path() String churchID, String communityID//, int type, String cursor
-      );
-
-
+    @Path() String churchID, //, int type, String cursor
+  );
 }

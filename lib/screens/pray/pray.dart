@@ -4,10 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:practice/layouts/default_layout.dart';
-import 'package:practice/screens/home/post_list.dart';
+import 'package:practice/controllers/pray_controller.dart';
 import 'package:practice/screens/pray/pray_post_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -22,13 +20,31 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+  PrayController prayController = Get.find();
 
   String year = '2022';
   String month = '1';
 
   @override
   void initState() {
+    print('phil 000');
+    getPray();
+    print('phil 001');
     super.initState();
+  }
+
+  getPray() async {
+    print('phil 002');
+    // await Future.delayed(Duration(milliseconds: 1000));
+    try {
+      await prayController.getPrayListData(churchId: "1");
+    } catch (e) {
+      print(e);
+    }
+    print('phil 003');
+    print(prayController.prayList);
+    setState(() {});
+    //겟빌더로 감싸서 교회정보들을 담는 모델 만들어서 넣을지?
   }
 
   @override
@@ -62,7 +78,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
     );
     return Scaffold(
       floatingActionButton: GestureDetector(
-        onTap: (){
+        onTap: () {
           Get.toNamed("/pray_community_post");
         },
         child: SvgPicture.asset(
@@ -240,17 +256,25 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
             SmartRefresher(
               enablePullDown: true,
               controller: _refreshController,
-              header:	ClassicHeader(
+              header: ClassicHeader(
                 height: 100,
-                idleIcon: CupertinoActivityIndicator(radius: 13.0,),
+                idleIcon: CupertinoActivityIndicator(
+                  radius: 13.0,
+                ),
                 idleText: "",
-                refreshingIcon: CupertinoActivityIndicator(radius: 13.0,),
-                releaseIcon: CupertinoActivityIndicator(radius: 13.0,),
+                refreshingIcon: CupertinoActivityIndicator(
+                  radius: 13.0,
+                ),
+                releaseIcon: CupertinoActivityIndicator(
+                  radius: 13.0,
+                ),
                 completeIcon: null,
                 completeText: "",
                 completeDuration: Duration.zero,
                 releaseText: "",
-                refreshingText: "",),              // header: WaterDropHeader(),
+                refreshingText: "",
+              ),
+              // header: WaterDropHeader(),
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               child: ListView.separated(
