@@ -7,10 +7,20 @@ class PrayController extends BaseController {
 
   PrayList prayList = PrayList();
 
-  Future<void> getPrayListData({required String churchId, required String communityID}) async{//, int? type, String? cursor} ) async {
-    // final PrayList resp = await super.rootService.pryService.g(churchId,communityID);//,type,cursor);
-    // this.PrayList = resp;
+  Future<void> getPrayListData({required String churchId}) async {
+    //, int? type, String? cursor} ) async {
+    final PrayList resp = await super
+        .rootService
+        .pryService
+        .getPrayList(churchId); //,type,cursor);
+    this.prayList = resp;
     update();
   }
+
+  // Future<void> getFeedListData({required String churchId, required String communityID}) async{//, int? type, String? cursor} ) async {
+  //   final FeedList resp = await super.rootService.feedService.getFeedList(churchId,communityID);//,type,cursor);
+  //   this.feedList = resp;
+  //   update();
+  // }
 
 }

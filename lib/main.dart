@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/feed_controller.dart';
+import 'package:practice/controllers/pray_controller.dart';
 import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/screens/community/community_post_detail.dart';
 import 'package:practice/screens/community/write_community_post.dart';
@@ -25,9 +26,10 @@ import 'package:practice/screens/pray/pray_post_correction.dart';
 import 'package:practice/screens/splash.dart';
 import 'package:practice/screens/worship/player.dart';
 import 'package:practice/screens/worship/worship.dart';
-import 'screens/home/post_detail.dart';
 import 'package:practice/services/root_service.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
+import 'screens/home/post_detail.dart';
 
 void main() {
   timeago.setLocaleMessages('ko', timeago.KoMessages());
@@ -56,6 +58,7 @@ class _RootState extends State<Root> {
     Get.put(BottomNaviController());
     Get.put(ChurchController(service));
     Get.put(FeedController(service));
+    Get.put(PrayController(service));
   }
 
   initService() {
@@ -180,8 +183,8 @@ class _RootState extends State<Root> {
 
   @override
   Widget build(BuildContext context) {
-    return  GetMaterialApp(
-      initialRoute:  '/login', //'/splash',
+    return GetMaterialApp(
+      initialRoute: '/login', //'/splash',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );
