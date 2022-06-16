@@ -104,9 +104,9 @@ class RootService {
     RequestInterceptorHandler handler,
   ) async {
     if (options.headers.containsKey('content-type')) {
-      // final ct = options.headers['content-type'];
-      final ct = options.headers[
-          'multipart/form-data; boundary=<calculated when request is sent>'];
+      final ct = options.headers['content-type'];
+      // final ct = options.headers[
+      //     'multipart/form-data; boundary=<calculated when request is sent>'];
 
       options.contentType = ct;
     }

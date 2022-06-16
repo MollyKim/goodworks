@@ -23,7 +23,7 @@ class UserResultData {
   final int? id;
   final String? email;
   final String? phoneNumber;
-  final String? isCertifiedPhone;
+  final bool? isCertifiedPhone;
   final String? userName;
   final String? userType;
   final String? createdAt;

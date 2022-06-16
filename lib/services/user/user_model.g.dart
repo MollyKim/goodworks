@@ -29,7 +29,7 @@ UserResultData _$UserResultDataFromJson(Map<String, dynamic> json) {
     id: json['id'] as int?,
     email: json['email'] as String?,
     phoneNumber: json['phoneNumber'] as String?,
-    isCertifiedPhone: json['isCertifiedPhone'] as String?,
+    isCertifiedPhone: json['isCertifiedPhone'] as bool?,
     userName: json['userName'] as String?,
     deletedAt: json['deletedAt'] as String?,
     updateAt: json['updateAt'] as String?,
