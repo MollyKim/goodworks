@@ -76,6 +76,7 @@ class Avatar {
   Map<String, dynamic> toJson() => _$AvatarToJson(this);
 }
 
+@JsonSerializable()
 class PrayDetail {
   final String? trID;
   final String? resultCode;
@@ -134,6 +135,7 @@ class PrayDetailResultData {
   Map<String, dynamic> toJson() => _$PrayDetailResultDataToJson(this);
 }
 
+@JsonSerializable()
 class PrayCreate {
   final String? trID;
   final String? resultCode;
@@ -186,6 +188,7 @@ class PrayCreateResultData {
   Map<String, dynamic> toJson() => _$PrayCreateResultDataToJson(this);
 }
 
+@JsonSerializable()
 class PrayUpdate {
   final String? trID;
   final String? resultCode;
@@ -200,8 +203,8 @@ class PrayUpdate {
       this.resultData,
       this.cursor});
 
-  factory PrayUpdate.fromJson(Map<String, dynamic> json) =>
-      _$PrayUpdateFromJson(json);
+  factory PrayUpdate.fromJson(Object? json) =>
+      _$PrayUpdateFromJson(json as Map<String, dynamic>);
 
   Map<String, dynamic> toJson() => _$PrayUpdateToJson(this);
 }
@@ -236,6 +239,7 @@ class PrayUpdateResultData {
   Map<String, dynamic> toJson() => _$PrayUpdateResultDataToJson(this);
 }
 
+@JsonSerializable()
 class PrayDelete {
   final String? trID;
   final String? resultCode;

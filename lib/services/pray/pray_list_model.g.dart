@@ -79,6 +79,28 @@ Map<String, dynamic> _$AvatarToJson(Avatar instance) => <String, dynamic>{
       'size': instance.size,
     };
 
+PrayDetail _$PrayDetailFromJson(Map<String, dynamic> json) {
+  return PrayDetail(
+    trID: json['trID'] as String?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+    resultData: json['resultData'] == null
+        ? null
+        : PrayDetailResultData.fromJson(
+            json['resultData'] as Map<String, dynamic>),
+    cursor: json['cursor'] as String?,
+  );
+}
+
+Map<String, dynamic> _$PrayDetailToJson(PrayDetail instance) =>
+    <String, dynamic>{
+      'trID': instance.trID,
+      'resultCode': instance.resultCode,
+      'resultMsg': instance.resultMsg,
+      'resultData': instance.resultData,
+      'cursor': instance.cursor,
+    };
+
 PrayDetailResultData _$PrayDetailResultDataFromJson(Map<String, dynamic> json) {
   return PrayDetailResultData(
     id: json['id'] as int,
@@ -117,6 +139,28 @@ Map<String, dynamic> _$PrayDetailResultDataToJson(
       'isMine': instance.isMine,
     };
 
+PrayCreate _$PrayCreateFromJson(Map<String, dynamic> json) {
+  return PrayCreate(
+    trID: json['trID'] as String?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+    resultData: json['resultData'] == null
+        ? null
+        : PrayCreateResultData.fromJson(
+            json['resultData'] as Map<String, dynamic>),
+    cursor: json['cursor'] as String?,
+  );
+}
+
+Map<String, dynamic> _$PrayCreateToJson(PrayCreate instance) =>
+    <String, dynamic>{
+      'trID': instance.trID,
+      'resultCode': instance.resultCode,
+      'resultMsg': instance.resultMsg,
+      'resultData': instance.resultData,
+      'cursor': instance.cursor,
+    };
+
 PrayCreateResultData _$PrayCreateResultDataFromJson(Map<String, dynamic> json) {
   return PrayCreateResultData(
     id: json['id'] as int,
@@ -147,6 +191,28 @@ Map<String, dynamic> _$PrayCreateResultDataToJson(
       'deletedAt': instance.deletedAt,
     };
 
+PrayUpdate _$PrayUpdateFromJson(Map<String, dynamic> json) {
+  return PrayUpdate(
+    trID: json['trID'] as String?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+    resultData: json['resultData'] == null
+        ? null
+        : PrayUpdateResultData.fromJson(
+            json['resultData'] as Map<String, dynamic>),
+    cursor: json['cursor'] as String?,
+  );
+}
+
+Map<String, dynamic> _$PrayUpdateToJson(PrayUpdate instance) =>
+    <String, dynamic>{
+      'trID': instance.trID,
+      'resultCode': instance.resultCode,
+      'resultMsg': instance.resultMsg,
+      'resultData': instance.resultData,
+      'cursor': instance.cursor,
+    };
+
 PrayUpdateResultData _$PrayUpdateResultDataFromJson(Map<String, dynamic> json) {
   return PrayUpdateResultData(
     id: json['id'] as int,
@@ -173,4 +239,19 @@ Map<String, dynamic> _$PrayUpdateResultDataToJson(
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'deletedAt': instance.deletedAt,
+    };
+
+PrayDelete _$PrayDeleteFromJson(Map<String, dynamic> json) {
+  return PrayDelete(
+    trID: json['trID'] as String?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+  );
+}
+
+Map<String, dynamic> _$PrayDeleteToJson(PrayDelete instance) =>
+    <String, dynamic>{
+      'trID': instance.trID,
+      'resultCode': instance.resultCode,
+      'resultMsg': instance.resultMsg,
     };
