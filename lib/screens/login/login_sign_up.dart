@@ -728,10 +728,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
             // if(this.formKey.currentState!.validate()){
               final UserController loginController = Get.find();
               await loginController.registerUser(
-                  email: "jkdrumgrammer12345",//idTextEditingController.text,
-                  userpwd: "abcd1234ABCD",//passwordTextEditingController.text,
+                  email: "jkdrumgrammer235",//idTextEditingController.text,
+                  userpwd: "abcd1234",//passwordTextEditingController.text,
                   userName: "가나다",//nameTextEditingController.text,
-                  phoneNumber: "01027623661",//phoneNumberTextEditingController.text);
+                  phoneNumber: "01027623662",//phoneNumberTextEditingController.text);
               );
 
               if(loginController.userModel.resultCode == "200"){

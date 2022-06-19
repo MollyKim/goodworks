@@ -24,6 +24,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
 
   String year = '2022';
   String month = '1';
+  late String time = year+'-'+month;
 
   @override
   void initState() {
@@ -37,7 +38,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
     print('phil 002');
     // await Future.delayed(Duration(milliseconds: 1000));
     try {
-      await prayController.getPrayListData(churchId: "1");
+      await prayController.getPrayListData(churchId: "1", time: time);
     } catch (e) {
       print(e);
     }
@@ -132,6 +133,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                                 setState(() {
                                   year = picker.getSelectedValues().first;
                                   month = picker.getSelectedValues().last;
+                                  getPray();
                                 });
                                 print(picker.getSelectedValues().first);
                               }).showDialog(context);
@@ -185,6 +187,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                                 setState(() {
                                   year = picker.getSelectedValues().first;
                                   month = picker.getSelectedValues().last;
+                                  getPray();
                                 });
                                 print(picker.getSelectedValues().first);
                               }).showDialog(context);

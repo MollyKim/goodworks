@@ -16,25 +16,90 @@ class _PrayService implements PrayService {
   String? baseUrl;
 
   @override
-  Future<PrayList> getPrayList(churchID) async {
+  Future<PrayList> getPrayList(churchID, time) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PrayList>(Options(
                 method: 'GET',
-                headers: <String, dynamic>{
-                  r'Country': 'KR',
-                  r'Authorization':
-                      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJxYS52bS11bml0ZWQuY29tL3NldW0iLCJleHAiOjE2NTUyOTk1NjksImp0aSI6IkpwV3ZzN3dvczhKVHNIeVlhakxNNVgiLCJpYXQiOjE2NTUyMTMxNjksImlzcyI6Ikdvb2RXb3JrcyBBdXRoIiwic3ViIjoiR29vZFdvcmtzIFNlcnZpY2UgVG9rZW4iLCJpZHgiOjAsInNjb3BlcyI6WyJub3JtYWwiLCJhZG1pbiJdLCJvd25lciI6ImRydW1ncmFtbWVyIn0.8-TYOdPcdw9fznzT6uSaWBlZPrwDXhGTWvet1eERMaU'
-                },
-                extra: _extra,
-                contentType: 'application/json')
+                headers: <String, dynamic>{r'Country': 'KR'},
+                extra: _extra)
             .compose(_dio.options,
-                '/church/$churchID/prayer?limit=5&timeFilter=2022-06',
+                '/church/$churchID/prayer?limit=5&timeFilter={time}',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PrayList.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PrayDetail> getPrayDetail(churchID, prayerID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PrayDetail>(Options(
+                method: 'GET',
+                headers: <String, dynamic>{r'Country': 'KR'},
+                extra: _extra)
+            .compose(_dio.options, '/church/$churchID/prayer/{prayerID}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PrayDetail.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PrayCreate> postPrayCreate(churchID, body) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PrayCreate>(Options(
+                method: 'POST',
+                headers: <String, dynamic>{r'Country': 'KR'},
+                extra: _extra)
+            .compose(_dio.options, '/church/$churchID/prayer',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PrayCreate.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PrayUpdate> putPrayUpdate(churchID, prayerID, body) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PrayUpdate>(Options(
+                method: 'PUT',
+                headers: <String, dynamic>{r'Country': 'KR'},
+                extra: _extra)
+            .compose(_dio.options, '/church/$churchID/prayer/{prayerID}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PrayUpdate.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PrayDelete> deletePray(churchID, prayerID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PrayDelete>(Options(
+                method: 'DELETE',
+                headers: <String, dynamic>{r'Country': 'KR'},
+                extra: _extra)
+            .compose(_dio.options, '/church/$churchID/prayer/{prayerID}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PrayDelete.fromJson(_result.data!);
     return value;
   }
 
