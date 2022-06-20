@@ -1,15 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/feed_controller.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:practice/util/getTimeAgo.dart';
 
 class HomePostList extends StatelessWidget {
   HomePostList(this.index);
 
   final int index;
-  final now = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -152,14 +150,6 @@ class HomePostList extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  getTimeAge(String? feedTime) {
-    if (feedTime == null) feedTime = DateTime.now().toString();
-
-    DateTime feedTimeDatetime = DateTime.parse(feedTime);
-    final difference = now.difference(feedTimeDatetime);
-    return timeago.format(now.subtract(difference), locale: 'ko');
   }
 }
 

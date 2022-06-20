@@ -11,10 +11,9 @@ CommunityModel _$CommunityModelFromJson(Map<String, dynamic> json) {
     trId: json['trId'] as String?,
     resultCode: json['resultCode'] as String?,
     resultMsg: json['resultMsg'] as String?,
-    resultData: json['resultData'] == null
-        ? null
-        : CommunityResultData.fromJson(
-            json['resultData'] as Map<String, dynamic>),
+    resultData: (json['resultData'] as List<dynamic>?)
+        ?.map((e) => CommunityResultData.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

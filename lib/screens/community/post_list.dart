@@ -2,14 +2,21 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/screens/home/post_list.dart';
 import 'package:practice/screens/login/login_select_church.dart';
+import 'package:practice/util/getTimeAgo.dart';
 
 class CommunityPostList extends StatelessWidget {
+  CommunityPostList(this.index);
+
+  final int index;
+
   @override
   Widget build(BuildContext context) {
     UserController userController = Get.find();
+    CommunityController communityController = Get.find();
     return GestureDetector(
       onTap: () {
         Get.toNamed("/community_post_detail");
@@ -42,26 +49,28 @@ class CommunityPostList extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "홍길동",
+                              userController.userModel.resultData?.userName ??
+                                  "",
                               style: TextStyle(
                                   fontFamily: "AppleSDGothicNeo",
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text("2시간 전"),
                           ],
                         )
                       ],
                     ),
                   ),
-                  Icon(Icons.more_horiz_outlined)
+                  Text(getTimeAge(communityController
+                      .communityList.resultData?[index].createdAt))
                 ],
               ),
               SizedBox(
                 height: 10,
               ),
               Text(
-                "10.03 주보 제목",
+                communityController.communityList.resultData?[index].title ??
+                    "제목 없음",
                 style: TextStyle(
                     fontFamily: "AppleSDGothicNeo",
                     fontSize: 18,
@@ -71,7 +80,8 @@ class CommunityPostList extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "게시글 본문 표시되는 곳 \n최대 다섯줄 까지 적용",
+                communityController.communityList.resultData?[index].introduce ??
+                    "게시글 본문 표시되는 곳 \n최대 다섯줄 까지 적용",
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

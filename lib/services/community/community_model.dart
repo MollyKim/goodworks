@@ -7,7 +7,7 @@ class CommunityModel {
   String? trId;
   String? resultCode;
   String? resultMsg;
-  CommunityResultData? resultData;
+  List<CommunityResultData>? resultData;
 
   CommunityModel(
       {this.trId, this.resultCode, this.resultMsg, this.resultData});

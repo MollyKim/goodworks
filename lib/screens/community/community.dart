@@ -95,14 +95,14 @@ class _CommunityState extends State<Community> {
             _onLoading();
           },
           child: ListView.separated(
-            itemCount: 10,
+            itemCount: communityController.communityList.resultData?.length ?? 1,
             separatorBuilder: (context, index) {
               return Divider(
                 thickness: 2.0,
               );
             },
             itemBuilder: (BuildContext context, int index) {
-              return CommunityPostList();
+              return CommunityPostList(index);
             },
           ),
         ),
