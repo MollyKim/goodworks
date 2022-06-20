@@ -12,15 +12,16 @@ abstract class FeedService {
 
   @GET('/api/v1/seum/church/{churchID}/community/feed?limit=5')
   Future<FeedList> getFeedList(
-      @Headers(<String, dynamic>{}) headers,
+      @Header('Authorization') String token,
       @Path() String churchID,
       // @Path() String communityID//, int type, String cursor
       );
 
   @GET('/api/v1/seum/church/{churchID}/community/{communityID}/feed/{feedID}')
   Future<Feed> getFeedDetailData(
-      @Headers(<String, dynamic>{}) headers,
+      @Header('Authorization') String token,
       @Path() String churchID, String communityID,feedID
       );
+
 
 }

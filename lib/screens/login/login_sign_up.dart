@@ -125,6 +125,8 @@ class _LoginSignUpState extends State<LoginSignUp> {
           validator: (val) {
             if (val!.length < 1) {
               return '필수사항입니다.';
+            } else if(val.length < 5) {
+              return '5자리 이상 20자리 이하로 작성해주세요';
             }
             return null;
           },
@@ -728,10 +730,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
             // if(this.formKey.currentState!.validate()){
               final UserController loginController = Get.find();
               await loginController.registerUser(
-                  email: "jkdrumgrammer235",//idTextEditingController.text,
-                  userpwd: "abcd1234",//passwordTextEditingController.text,
-                  userName: "가나다",//nameTextEditingController.text,
-                  phoneNumber: "01027623662",//phoneNumberTextEditingController.text);
+                  email: idTextEditingController.text,
+                  userpwd: passwordTextEditingController.text,
+                  userName: nameTextEditingController.text,
+                  phoneNumber: phoneNumberTextEditingController.text
               );
 
               if(loginController.userModel.resultCode == "200"){

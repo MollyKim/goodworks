@@ -66,7 +66,7 @@ class Init {
 
     print("session : ${userController.userSession}");
     if(userController.userSession != null) {
-      // userController.loginUser(email, password)
+      userController.loginUser("test12", "qweqwe123");
     }
     return userController.userSession;
   }

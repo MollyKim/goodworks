@@ -8,7 +8,7 @@ part of 'user_model.dart';
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) {
   return UserModel(
-    trId: json['trId'] as String?,
+    trId: json['trId'] as int?,
     resultCode: json['resultCode'] as String?,
     resultMsg: json['resultMsg'] as String?,
     resultData: json['resultData'] == null
@@ -37,7 +37,7 @@ UserResultData _$UserResultDataFromJson(Map<String, dynamic> json) {
     userProfile: json['userProfile'] == null
         ? null
         : UserProfile.fromJson(json['userProfile'] as Object),
-    userType: json['userType'] as String?,
+    userType: json['userType'] as int?,
     tokens:
         (json['tokens'] as List<dynamic>?)?.map((e) => e as String).toList(),
   );
@@ -61,7 +61,7 @@ Map<String, dynamic> _$UserResultDataToJson(UserResultData instance) =>
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
   return UserProfile(
     json['id'] as int?,
-    json['userId'] as String?,
+    json['userId'] as int?,
     json['nickName'] as String?,
     json['selfIntroduce'] as String?,
     json['avatar'] == null

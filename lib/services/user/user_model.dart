@@ -4,7 +4,7 @@ part 'user_model.g.dart';
 
 @JsonSerializable()
 class UserModel {
-  String? trId;
+  int? trId;
   String? resultCode;
   String? resultMsg;
   UserResultData? resultData;
@@ -25,7 +25,7 @@ class UserResultData {
   final String? phoneNumber;
   final bool? isCertifiedPhone;
   final String? userName;
-  final String? userType;
+  final int? userType;
   final String? createdAt;
   final String? updateAt;
   final String? deletedAt;
@@ -45,7 +45,7 @@ class UserResultData {
 @JsonSerializable()
 class UserProfile{
   final int? id;
-  final String? userId;
+  final int? userId;
   final String? nickName;
   final String? selfIntroduce;
   final UserAvatar? avatar;

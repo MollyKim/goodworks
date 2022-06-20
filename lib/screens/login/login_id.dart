@@ -11,6 +11,8 @@ class LoginID extends StatefulWidget {
 
 class _LoginIDState extends State<LoginID> {
   bool IDFlag = false;
+  TextEditingController idTextEditingController = TextEditingController();
+  TextEditingController passwordTextEditingController = TextEditingController();
 
   renderID() {
     return Container(
@@ -41,6 +43,7 @@ class _LoginIDState extends State<LoginID> {
               color: Color(0xffcde3d6),
             ),
             child: TextFormField(
+              controller: idTextEditingController,
               style: TextStyle(
                 color: Color(0xff1a442b),
               ),
@@ -85,6 +88,7 @@ class _LoginIDState extends State<LoginID> {
               color: Color(0xffcde3d6),
             ),
             child: TextFormField(
+              controller: passwordTextEditingController,
               style: TextStyle(
                 color: Color(0xff1a442b),
               ),
@@ -135,11 +139,11 @@ class _LoginIDState extends State<LoginID> {
           ),
           onPressed: () {
             UserController controller = Get.find();
-            controller.loginUser("drumgrammer", "abcd1234ABCD");
+            controller.loginUser(idTextEditingController.text, passwordTextEditingController.text);
             setState(() {
               IDFlag = true;
             });
-            // Get.offAllNamed('/main');
+            Get.offAllNamed('/main');
           },
           child: Text(
             "로그인",

@@ -13,10 +13,8 @@ class FeedController extends BaseController{
   UserController userController = Get.find();
 
   Future<void> getFeedListData({required String churchId, required String communityID}) async{//, int? type, String? cursor} ) async {
-    Map<String, dynamic> headers = {
-      'Authorization' : userController.userSession,
-    };
-    final FeedList resp = await super.rootService.feedService.getFeedList(headers,churchId);//,type,cursor);
+    String token = "Bearer ${userController.userSession}";
+    final FeedList resp = await super.rootService.feedService.getFeedList(token,churchId);//,type,cursor);
     this.feedList = resp;
     update();
   }
@@ -24,10 +22,9 @@ class FeedController extends BaseController{
   Future<void> getFeedDetail({
     required String churchId, required String communityID, required String feedID
   }) async {
-    Map<String, dynamic> headers = {
-      'Authorization' : userController.userSession,
-    };
-    Feed resp = await super.rootService.feedService.getFeedDetailData(headers,churchId,communityID,feedID);
+    String token = "Bearer ${userController.userSession}";
+
+    Feed resp = await super.rootService.feedService.getFeedDetailData(token,churchId,communityID,feedID);
     this.feed = resp;
     update();
   }
