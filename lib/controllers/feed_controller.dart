@@ -20,7 +20,7 @@ class FeedController extends BaseController{
   }
 
   Future<void> getFeedDetail({
-    required String churchId, required String communityID, required String feedID
+    required int churchId, required int communityID, required String feedID
   }) async {
     String token = "Bearer ${userController.userSession}";
 

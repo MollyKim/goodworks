@@ -62,7 +62,7 @@ class HomePostDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top:8.0,left: 20,right: 20),
+                        padding: const EdgeInsets.only(top:8.0,left: 20),
                         child: Text(feedController.feed.resultData?.title ?? "제목",
                           style: TextStyle(
                               fontFamily: "AppleSDGothicNeo",

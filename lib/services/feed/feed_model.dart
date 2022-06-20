@@ -23,7 +23,7 @@ class Feed {
 
 @JsonSerializable()
 class FeedResultData {
-  final int id;
+  final String id;
   final int churchId;
   final int churchUserId;
   final String title;
@@ -59,7 +59,7 @@ class FeedResultData {
 class FeedAttachment {
   final int id;
   final String feedId;
-  final FeedFileInfo fileinfo;
+  final FeedFileInfo fileInfo;
   final String attachType;
 
   factory FeedAttachment.fromJson(Map<String, dynamic> json) =>
@@ -68,7 +68,7 @@ class FeedAttachment {
   FeedAttachment({
       required this.id,
       required this.feedId,
-      required this.fileinfo,
+      required this.fileInfo,
       required this.attachType});
 
   Map<String, dynamic> toJson() => _$FeedAttachmentToJson(this);

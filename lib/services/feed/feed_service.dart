@@ -20,7 +20,10 @@ abstract class FeedService {
   @GET('/api/v1/seum/church/{churchID}/community/{communityID}/feed/{feedID}')
   Future<Feed> getFeedDetailData(
       @Header('Authorization') String token,
-      @Path() String churchID, String communityID,feedID
+      @Path("churchID") int churchID,
+      @Path("communityID") int communityID,
+      @Path("feedID")String feedID
+
       );
 
 

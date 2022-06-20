@@ -26,7 +26,7 @@ Map<String, dynamic> _$FeedToJson(Feed instance) => <String, dynamic>{
 
 FeedResultData _$FeedResultDataFromJson(Map<String, dynamic> json) {
   return FeedResultData(
-    id: json['id'] as int,
+    id: json['id'] as String,
     churchId: json['churchId'] as int,
     churchUserId: json['churchUserId'] as int,
     title: json['title'] as String,
@@ -67,7 +67,7 @@ FeedAttachment _$FeedAttachmentFromJson(Map<String, dynamic> json) {
   return FeedAttachment(
     id: json['id'] as int,
     feedId: json['feedId'] as String,
-    fileinfo: FeedFileInfo.fromJson(json['fileinfo'] as Map<String, dynamic>),
+    fileInfo: FeedFileInfo.fromJson(json['fileInfo'] as Map<String, dynamic>),
     attachType: json['attachType'] as String,
   );
 }
@@ -76,7 +76,7 @@ Map<String, dynamic> _$FeedAttachmentToJson(FeedAttachment instance) =>
     <String, dynamic>{
       'id': instance.id,
       'feedId': instance.feedId,
-      'fileinfo': instance.fileinfo,
+      'fileinfo': instance.fileInfo,
       'attachType': instance.attachType,
     };
 

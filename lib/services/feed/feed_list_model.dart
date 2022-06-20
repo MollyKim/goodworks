@@ -30,6 +30,7 @@ class FeedListResultData {
   final int churchUserId;
   final String? userName;
   final int? churchUserType;
+  final int? communityId;
   final int? communityUserType;
   final Avatar avatar;
   final String? title;
@@ -58,6 +59,7 @@ class FeedListResultData {
     required this.updatedAt,
     this.deletedAt,
     this.churchUserType,
+    this.communityId,
     this.communityUserType,
     this.myFavorite,
     this.userName,
