@@ -137,13 +137,14 @@ class _LoginIDState extends State<LoginID> {
             ),
             primary: Color(0xff2d9067),
           ),
-          onPressed: () {
+          onPressed: () async{
             UserController controller = Get.find();
-            controller.loginUser(idTextEditingController.text, passwordTextEditingController.text);
+            await controller.loginUser(idTextEditingController.text, passwordTextEditingController.text);
             setState(() {
               IDFlag = true;
             });
-            Get.offAllNamed('/main');
+            if(controller.userSession!=null)
+              Get.offAllNamed('/main');
           },
           child: Text(
             "로그인",

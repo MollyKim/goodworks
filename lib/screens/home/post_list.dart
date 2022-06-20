@@ -135,9 +135,8 @@ class HomePostList extends StatelessWidget {
   getTimeAge(String? feedTime) {
     if(feedTime == null)
       feedTime = DateTime.now().toString();
-    print("123");
+
     DateTime feedTimeDatetime = DateTime.parse(feedTime);
-    print(feedTimeDatetime);
     final difference = now.difference(feedTimeDatetime);
     return timeago.format(now.subtract(difference), locale: 'ko');
   }

@@ -68,7 +68,7 @@ class Init {
         String token = "Bearer ${userController.userSession}";
 
         await churchController.getChurchData(token, churchId: "1");
-        // await userController.loginUser("drumgrammer", "abcd1234ABCD");
+        await userController.loginUser("drumgrammer", "abcd1234ABCD");
       }
     } catch(e) {
       print("error in splash : $e");

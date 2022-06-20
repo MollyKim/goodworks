@@ -35,7 +35,7 @@ class _MainState extends State<Main> {
         builder: (controller) {
         return DefaultLayout(
             body: IndexedStack(
-              index: 0,
+              index: controller.selectedIndex,
               children: <Widget>[
                 Home(),
                 Worship(),
