@@ -23,10 +23,10 @@ class _FeedService implements FeedService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<FeedList>(Options(
                 method: 'GET',
-                headers: <String, dynamic>{r'token': token},
+                headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options,
-                '/api/v1/seum/church/$churchID/community/feed?limit=5',
+                '/api/v1/seum/church/$churchID/feed?limit=5',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = FeedList.fromJson(_result.data!);

@@ -29,7 +29,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
   @override
   void initState() {
     print('phil 000');
-    getPray();
+    // getPray();
     print('phil 001');
     super.initState();
   }
