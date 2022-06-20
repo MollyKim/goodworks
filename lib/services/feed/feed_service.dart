@@ -11,21 +11,16 @@ abstract class FeedService {
   factory FeedService(Dio dio, {String baseUrl}) = _FeedService;
 
   @GET('/api/v1/seum/church/{churchID}/community/feed?limit=5')
-  @Headers(<String, dynamic>{
-    'Country': 'KR',
-  })
   Future<FeedList> getFeedList(
+      @Headers(<String, dynamic>{}) headers,
       @Path() String churchID,
       // @Path() String communityID//, int type, String cursor
       );
 
   @GET('/api/v1/seum/church/{churchID}/community/{communityID}/feed/{feedID}')
-  @Headers(<String, dynamic>{
-    'Country': 'KR',
-  })
   Future<Feed> getFeedDetailData(
+      @Headers(<String, dynamic>{}) headers,
       @Path() String churchID, String communityID,feedID
       );
-
 
 }

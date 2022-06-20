@@ -6,6 +6,6 @@ class DefaultNoInternetScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultLayout(body: Container());
+    return DefaultLayout(body: Center(child: Text("에러"),));
   }
 }

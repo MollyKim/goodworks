@@ -184,7 +184,7 @@ class _RootState extends State<Root> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: '/login', //'/splash',
+      initialRoute: '/splash', //'/splash',
       debugShowCheckedModeBanner: false,
       getPages: renderPages(),
     );

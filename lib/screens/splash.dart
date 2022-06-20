@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/layouts/default_noInternet.dart';
 import 'package:get/get.dart';
+import 'package:practice/screens/login/login.dart';
 import 'main.dart';
 import 'package:practice/controllers/church_controller.dart';
 
-class Splash extends StatelessWidget {
+class Splash extends StatefulWidget {
+  @override
+  State<Splash> createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  @override
+  void initState() {
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -22,12 +35,16 @@ class Splash extends StatelessWidget {
               ),
             );
           }
-          else if(snapshot.hasData) {
-            print(snapshot.data);
-            return Main();
+          else if(snapshot.connectionState == ConnectionState.done) {
+            print(snapshot.hasData);
+            if(snapshot.data != null) {
+              return Main();
+            }
+           else{
+              return Login();
+            }
           }
           else {
-            print(snapshot.data);
             return DefaultNoInternetScreen();
           }
         }
@@ -41,10 +58,16 @@ class Init {
   static final instance = Init._();
 
   Future initialize() async {
-    ChurchController churchController = Get.find();
+    // ChurchController churchController = Get.find();
+    // await churchController.getChurchData(churchId: "1");
 
-    //세션 검사 및 교회 정보 받아오기
-    await churchController.getChurchData(churchId: "1");
-    return true;
+    UserController userController = Get.find();
+    await userController.getSession();
+
+    print("session : ${userController.userSession}");
+    if(userController.userSession != null) {
+      // userController.loginUser(email, password)
+    }
+    return userController.userSession;
   }
 }

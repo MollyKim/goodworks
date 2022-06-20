@@ -3,14 +3,7 @@ import 'package:get/get.dart';
 
 extension ThemeColor on BuildContext {
   Color? dynamicColor({Color? light, Color? dark}) {
-    if(Get.currentRoute == '/b2b_library' || Get.currentRoute == '/b2b_curation_web_view' || Get.currentRoute == '/notice_webview') {
-      if ((MediaQuery.of(this).platformBrightness == Brightness.light)) {
-        return light;
-      } else {
-        return dark;
-      }
-    }
-    else if ((MediaQuery.of(this).platformBrightness == Brightness.light)) {
+    if ((MediaQuery.of(this).platformBrightness == Brightness.light)) {
       return light;
     } else {
       return light;
@@ -18,14 +11,7 @@ extension ThemeColor on BuildContext {
   }
 
   String? dynamicString({String? light, String? dark}) {
-    if(Get.currentRoute == '/b2b_library' || Get.currentRoute == '/b2b_curation_web_view' || Get.currentRoute == '/notice_webview') {
-      if ((MediaQuery.of(this).platformBrightness == Brightness.light)) {
-        return light;
-      } else {
-        return light;
-      }
-    }
-    else if ((MediaQuery.of(this).platformBrightness == Brightness.light)) {
+    if ((MediaQuery.of(this).platformBrightness == Brightness.light)) {
       return light;
     } else {
       return light; // return dark;
