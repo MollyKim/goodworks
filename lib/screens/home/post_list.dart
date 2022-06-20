@@ -12,7 +12,7 @@ class HomePostList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FeedController feedController = Get.find();
-    int itemCount = feedController.feedList.resultData?[index].attachments!.length ?? 1;
+    int itemCount = feedController.feedList.resultData?[index].attachments?.length ?? 1;
 
     return GestureDetector(
       onTap: () async{
@@ -41,11 +41,11 @@ class HomePostList extends StatelessWidget {
                     height: 30,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Text(feedController.feedList.resultData?[index].feedType!.toString() ?? "교회소식",
+                      child: Text(feedController.feedList.resultData?[index].feedType?.toString() ?? "교회소식",
                         style: TextStyle(color: Colors.white),),
                     ),
                   ),
-                  Text(getTimeAge(feedController.feedList.resultData?[index].feedType!.toString()))
+                  Text(getTimeAge(feedController.feedList.resultData?[index].feedType?.toString()))
                   // Text(getTimeAge(feedController.feedList.resultData?[index].createdAt))
                 ],
               ),
@@ -93,7 +93,7 @@ class HomePostList extends StatelessWidget {
                           children: <Widget>[
                             CachedNetworkImage(
                               fit: BoxFit.cover,
-                              imageUrl: feedController.feedList.resultData?[index].attachments![index].fileinfo.smallUrl!
+                              imageUrl: feedController.feedList.resultData?[index].attachments?[index].fileinfo.smallUrl!
                                 ?? "",
                               height: 100.0,
                               placeholder: (context, url) =>
@@ -115,7 +115,7 @@ class HomePostList extends StatelessWidget {
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl:
-                            feedController.feedList.resultData?[index].attachments![index].fileinfo.smallUrl!
+                            feedController.feedList.resultData?[index].attachments?[index].fileinfo.smallUrl!
                                 ??
                                 "https://cdn.vm-united.com/dev/user_profile/origin/3/2021-11-21/small.rXixqiVPspWs_test.png",
                             height: 100.0,

@@ -10,11 +10,8 @@ abstract class ChurchService {
 
 
   @GET('/api/v1/seum/church/{churchID}')
-  @Headers(<String, dynamic>{
-    'Content-Type': 'application/json',
-    'Country': 'KR',
-  })
   Future<ChurchModel> getChurchData(
+      @Header('Authorization') String token,
       @Path() String churchID,
     );
 

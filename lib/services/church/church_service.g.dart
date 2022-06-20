@@ -16,19 +16,15 @@ class _ChurchService implements ChurchService {
   String? baseUrl;
 
   @override
-  Future<ChurchModel> getChurchData(churchID) async {
+  Future<ChurchModel> getChurchData(token, churchID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ChurchModel>(Options(
                 method: 'GET',
-                headers: <String, dynamic>{
-                  r'Content-Type': 'application/json',
-                  r'Country': 'KR'
-                },
-                extra: _extra,
-                contentType: 'application/json')
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
             .compose(_dio.options, '/api/v1/seum/church/$churchID',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));

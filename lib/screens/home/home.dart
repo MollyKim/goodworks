@@ -39,7 +39,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKee
   }
 
   getFeed(String subject) async {
-      await feedController.getFeedListData(churchId: "1", communityID: "?");
+    try {
+      await feedController.getFeedListData(churchId: "1");
+    } catch(e) {
+      print("error!! home get Feed: $e");
+    }
+    return true;
   }
 
   @override
@@ -51,6 +56,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKee
       body: FutureBuilder(
         future: callApis,
         builder: (context,snapShot) {
+          print(snapShot);
           if(snapShot.hasData) {
               return NestedScrollView(
                 controller: scrollController,
@@ -65,7 +71,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKee
                         fit: BoxFit.cover,
                         imageUrl: churchController.churchModel.resultData
                                 ?.metaCommunity!.coverImage!.smallUrl ??
-                            "https://cdn.vm-united.com/dev/user/1/community/cover/2021-11-25/small.bGUVRfg3e422_Image%20from%20iOS.jpg",
+                            "https://cdn.vm-united.com/statics/defaultImage/user/userAvatar.png",
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
@@ -91,7 +97,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKee
                             backgroundImage: NetworkImage(
                               churchController.churchModel.resultData
                                       ?.metaCommunity?.coverImage?.smallUrl ??
-                                  "https://cdn.vm-united.com/dev/user/1/community/cover/2021-11-25/small.bGUVRfg3e422_Image%20from%20iOS.jpg",
+                                  "https://cdn.vm-united.com/statics/defaultImage/user/userAvatar.png",
                             ),
                           ),
                         ),
@@ -251,7 +257,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKee
               );
             }
           else {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator(color: context.forest80,));
           }
           }
       ),
@@ -262,20 +268,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKee
     switch (subject) {
       case "total" :
         {
-          await Future.delayed(Duration(milliseconds: 1000));
-          getFeed(subject);
+          await getFeed(subject);
           _totalRefreshController.refreshCompleted();
           break;
         }
       case "jubo" :
         {
-          getFeed(subject);
+          await getFeed(subject);
           _juboRefreshController.refreshCompleted();
           break;
         }
       case "news" :
         {
-          getFeed(subject);
+          await  getFeed(subject);
           _newsRefreshController.refreshCompleted();
           break;
         }

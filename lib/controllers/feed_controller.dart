@@ -12,9 +12,10 @@ class FeedController extends BaseController{
   Feed feed = Feed();
   UserController userController = Get.find();
 
-  Future<void> getFeedListData({required String churchId, required String communityID}) async{//, int? type, String? cursor} ) async {
+  Future<void> getFeedListData({required String churchId}) async{
     String token = "Bearer ${userController.userSession}";
     final FeedList resp = await super.rootService.feedService.getFeedList(token,churchId);//,type,cursor);
+    print(resp);print("resp");
     this.feedList = resp;
     update();
   }

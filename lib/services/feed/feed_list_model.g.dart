@@ -28,7 +28,7 @@ Map<String, dynamic> _$FeedListToJson(FeedList instance) => <String, dynamic>{
 
 FeedListResultData _$FeedListResultDataFromJson(Map<String, dynamic> json) {
   return FeedListResultData(
-    id: json['id'] as int,
+    id: json['id'] as String,
     churchId: json['churchId'] as int,
     churchUserId: json['churchUserId'] as int,
     title: json['title'] as String?,

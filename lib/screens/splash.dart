@@ -36,7 +36,7 @@ class _SplashState extends State<Splash> {
             );
           }
           else if(snapshot.connectionState == ConnectionState.done) {
-            print(snapshot.hasData);
+            print(snapshot.hasData);print(snapshot.data);print("0000000");
             if(snapshot.data != null) {
               return Main();
             }
@@ -58,15 +58,21 @@ class Init {
   static final instance = Init._();
 
   Future initialize() async {
-    // ChurchController churchController = Get.find();
-    // await churchController.getChurchData(churchId: "1");
 
     UserController userController = Get.find();
     await userController.getSession();
 
     print("session : ${userController.userSession}");
-    if(userController.userSession != null) {
-     await userController.loginUser("test12", "qweqwe123");
+    try {
+      if (userController.userSession != null) {
+        ChurchController churchController = Get.find();
+        String token = "Bearer ${userController.userSession}";
+
+        await churchController.getChurchData(token, churchId: "1");
+        await userController.loginUser("drumgrammer", "abcd1234ABCD");
+      }
+    } catch(e) {
+      print("error in splash : $e");
     }
     return userController.userSession;
   }

@@ -25,7 +25,7 @@ class FeedList {
 
 @JsonSerializable()
 class FeedListResultData {
-  final int id;
+  final String id;
   final int churchId;
   final int churchUserId;
   final String? userName;
