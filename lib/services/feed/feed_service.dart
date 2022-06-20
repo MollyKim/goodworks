@@ -13,7 +13,7 @@ abstract class FeedService {
   @GET('/api/v1/seum/church/{churchID}/feed?limit=5')
   Future<FeedList> getFeedList(
       @Header('Authorization') String token,
-      @Path() String churchID,
+      @Path() int churchID,
       // @Path() String communityID//, int type, String cursor
       );
 

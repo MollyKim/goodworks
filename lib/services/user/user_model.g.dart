@@ -27,7 +27,7 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
 UserResultData _$UserResultDataFromJson(Map<String, dynamic> json) {
   return UserResultData(
     id: json['id'] as int?,
-    email: json['email'] as String?,
+    seumId: json['seumId'] as String?,
     phoneNumber: json['phoneNumber'] as String?,
     isCertifiedPhone: json['isCertifiedPhone'] as bool?,
     userName: json['userName'] as String?,
@@ -46,7 +46,7 @@ UserResultData _$UserResultDataFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$UserResultDataToJson(UserResultData instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'email': instance.email,
+      'seumId': instance.seumId,
       'phoneNumber': instance.phoneNumber,
       'isCertifiedPhone': instance.isCertifiedPhone,
       'userName': instance.userName,

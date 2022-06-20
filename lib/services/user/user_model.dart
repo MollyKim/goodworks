@@ -21,7 +21,7 @@ class UserModel {
 @JsonSerializable()
 class UserResultData {
   final int? id;
-  final String? email;
+  final String? seumId;
   final String? phoneNumber;
   final bool? isCertifiedPhone;
   final String? userName;
@@ -31,9 +31,10 @@ class UserResultData {
   final String? deletedAt;
   final UserProfile? userProfile;
   final List<String>? tokens;
+  final int? churchId;
 
-  UserResultData({this.id, this.email, this.phoneNumber, this.isCertifiedPhone,
-      this.userName, this.deletedAt,this.updateAt,this.createdAt,this.userProfile,this.userType, this.tokens});
+  UserResultData({this.id, this.seumId, this.phoneNumber, this.isCertifiedPhone,
+    this.churchId, this.userName, this.deletedAt,this.updateAt,this.createdAt,this.userProfile,this.userType, this.tokens});
 
   factory UserResultData.fromJson(Object? json) =>
       _$UserResultDataFromJson(json as Map<String, dynamic>);

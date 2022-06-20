@@ -12,7 +12,7 @@ abstract class ChurchService {
   @GET('/api/v1/seum/church/{churchID}')
   Future<ChurchModel> getChurchData(
       @Header('Authorization') String token,
-      @Path() String churchID,
+      @Path() int churchID,
     );
 
 

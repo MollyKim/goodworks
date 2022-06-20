@@ -13,16 +13,18 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  late final Future callApis;
+
   @override
   void initState() {
-
+    callApis = initialize();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Init.instance.initialize(),
+        future: callApis,
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Scaffold(
@@ -34,30 +36,19 @@ class _SplashState extends State<Splash> {
                 ),
               ),
             );
-          }
-          else if(snapshot.connectionState == ConnectionState.done) {
-            if(snapshot.data != null) {
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.data != null) {
               return Main();
-            }
-           else{
+            } else {
               return Login();
             }
-          }
-          else {
+          } else {
             return DefaultNoInternetScreen();
           }
-        }
-    );
-
+        });
   }
-}
-
-class Init {
-  Init._();
-  static final instance = Init._();
 
   Future initialize() async {
-
     UserController userController = Get.find();
     await userController.getSession();
 
@@ -66,11 +57,12 @@ class Init {
       if (userController.userSession != null) {
         ChurchController churchController = Get.find();
         String token = "Bearer ${userController.userSession}";
-
-        await churchController.getChurchData(token, churchId: "1");
         await userController.loginUser("drumgrammer", "abcd1234ABCD");
+
+        await churchController.getChurchData(token,
+            churchId: userController.userModel.resultData?.churchId ?? 1);
       }
-    } catch(e) {
+    } catch (e) {
       print("error in splash : $e");
     }
     return userController.userSession;

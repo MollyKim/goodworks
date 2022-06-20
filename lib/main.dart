@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/church_controller.dart';
+import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/controllers/feed_controller.dart';
 import 'package:practice/controllers/pray_controller.dart';
 import 'package:practice/controllers/user_controller.dart';
@@ -57,6 +58,7 @@ class _RootState extends State<Root> {
     Get.put(UserController(service));
     Get.put(BottomNaviController());
     Get.put(ChurchController(service));
+    Get.put(CommunityController(service));
     Get.put(FeedController(service));
     Get.put(PrayController(service));
   }

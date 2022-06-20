@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:practice/screens/community/community.dart';
 import 'package:practice/services/church/church_service.dart';
 import 'package:practice/services/feed/feed_service.dart';
 import 'package:practice/services/pray/pray_service.dart';
 import 'package:practice/services/user/user_service.dart';
 import 'package:practice/util/logger.dart';
+
+import 'community/community_service.dart';
 
 class RootService {
   static final Dio _dio = Dio()
@@ -20,12 +23,14 @@ class RootService {
   LoginService loginService;
   ChurchService churchService;
   FeedService feedService;
+  CommunityService communityService;
   PrayService pryService;
 
   RootService()
       : this.loginService = LoginService(_dio),
         this.churchService = ChurchService(_dio),
         this.feedService = FeedService(_dio),
+        this.communityService = CommunityService(_dio),
         this.pryService = PrayService(_dio);
 
   static parseBody(dynamic data) {

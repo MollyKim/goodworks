@@ -50,7 +50,7 @@ class LoginWelcome extends StatelessWidget {
                 ),
                 TextSpan(
                   text:
-                  "${userController.userModel.resultData?.email ?? "ooo"} ",
+                  "${userController.userModel.resultData?.seumId ?? "ooo"} ",
                   style: context.textStyleCustom.copyWith(
                       fontSize: 18,
                       color: context.forest80,

@@ -76,7 +76,7 @@ Map<String, dynamic> _$FeedAttachmentToJson(FeedAttachment instance) =>
     <String, dynamic>{
       'id': instance.id,
       'feedId': instance.feedId,
-      'fileinfo': instance.fileInfo,
+      'fileInfo': instance.fileInfo,
       'attachType': instance.attachType,
     };
 

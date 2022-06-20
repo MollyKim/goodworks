@@ -2,71 +2,113 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/church_controller.dart';
+import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/screens/community/post_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class Community extends StatelessWidget {
+class Community extends StatefulWidget {
+  @override
+  State<Community> createState() => _CommunityState();
+}
+
+class _CommunityState extends State<Community> {
+  CommunityController communityController = Get.find();
+  ChurchController churchController = Get.find();
+
+  @override
+  void initState() {
+    getCommunity();
+    super.initState();
+  }
+
+  getCommunity() async{
+    try{
+      communityController.getCommunityListData(churchId:  churchController.churchModel.resultData?.id ?? 1);
+    } catch(e){
+      print("error!! in community : $e");
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    final RefreshController _refreshController = RefreshController(initialRefresh: false);
+    final RefreshController _refreshController =
+        RefreshController(initialRefresh: false);
 
-    void _onRefresh() async{
+    void _onRefresh() async {
       await Future.delayed(Duration(milliseconds: 1000));
       _refreshController.refreshCompleted();
     }
 
-    void _onLoading() async{
+    void _onLoading() async {
       await Future.delayed(Duration(milliseconds: 1000));
       // if(mounted)
       //   setState(() {});
       _refreshController.loadComplete();
     }
 
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: Text("청년부",style: TextStyle(
-          fontWeight: FontWeight.bold,fontSize: 20,
-          fontFamily: "AppleSDGothicNeo",
-          color: Color(0xff2d9067),
-        ),),
-        elevation: 2.0,
-      ),
-        body: SafeArea(
-            top: true,
-            bottom: true,
-            child: SmartRefresher(
-              enablePullDown: true,
-              controller: _refreshController,
-              header:	ClassicHeader(
-                height: 100,
-                idleIcon: CupertinoActivityIndicator(radius: 13.0,),
-                idleText: "",
-                refreshingIcon: CupertinoActivityIndicator(radius: 13.0,),
-                releaseIcon: CupertinoActivityIndicator(radius: 13.0,),
-                completeIcon: null,
-                completeText: "",
-                completeDuration: Duration.zero,
-                releaseText: "",
-                refreshingText: "",),
-              // header: CircularProgressIndicator(),
-              onRefresh: _onRefresh,
-              onLoading: _onLoading,
-              child: ListView.separated(
-                itemCount: 10,
-                separatorBuilder: (context, index) {
-                  return Divider(thickness: 2.0,);
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return CommunityPostList();
-                },),
-            ),
+        title: Text(
+          "청년부",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            fontFamily: "AppleSDGothicNeo",
+            color: Color(0xff2d9067),
+          ),
         ),
+        elevation: 0.0,
+      ),
+      body: SafeArea(
+        top: true,
+        bottom: true,
+        child: SmartRefresher(
+          enablePullDown: true,
+          controller: _refreshController,
+          header: ClassicHeader(
+            height: 100,
+            idleIcon: CupertinoActivityIndicator(
+              radius: 13.0,
+            ),
+            idleText: "",
+            refreshingIcon: CupertinoActivityIndicator(
+              radius: 13.0,
+            ),
+            releaseIcon: CupertinoActivityIndicator(
+              radius: 13.0,
+            ),
+            completeIcon: null,
+            completeText: "",
+            completeDuration: Duration.zero,
+            releaseText: "",
+            refreshingText: "",
+          ),
+          onRefresh: () {
+            _onRefresh();
+          },
+          onLoading: () {
+            _onLoading();
+          },
+          child: ListView.separated(
+            itemCount: 10,
+            separatorBuilder: (context, index) {
+              return Divider(
+                thickness: 2.0,
+              );
+            },
+            itemBuilder: (BuildContext context, int index) {
+              return CommunityPostList();
+            },
+          ),
+        ),
+      ),
       floatingActionButton: GestureDetector(
-        onTap: (){
+        onTap: () {
           Get.toNamed("/write_community_post");
         },
         child: SvgPicture.asset(
@@ -74,8 +116,5 @@ class Community extends StatelessWidget {
         ),
       ),
     );
-
-
   }
-
 }

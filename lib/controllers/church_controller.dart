@@ -7,7 +7,7 @@ class ChurchController extends BaseController {
 
   ChurchModel churchModel = ChurchModel();
 
-  Future<ChurchModel> getChurchData(String token, {required String churchId}) async {
+  Future<ChurchModel> getChurchData(String token, {required int churchId}) async {
     final ChurchModel resp =
         await super.rootService.churchService.getChurchData(token, churchId);
     this.churchModel = resp;
