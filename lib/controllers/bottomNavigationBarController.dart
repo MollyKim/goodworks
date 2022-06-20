@@ -2,12 +2,10 @@ import 'package:get/get.dart';
 
 class BottomNaviController extends GetxController {
 
-  final _selectedIndex = 0.obs;
-  set selectedIndex(value) => this._selectedIndex.value = value;
-  get selectedIndex => this._selectedIndex.value;
+ int selectedIndex = 0;
 
   onItemTapped(int index) {
-    this.selectedIndex = index;
+    selectedIndex = index;
     update();
   }
 }

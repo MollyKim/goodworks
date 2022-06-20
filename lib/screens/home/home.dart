@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/feed_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with TickerProviderStateMixin {
+class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin{
   final ScrollController scrollController = ScrollController();
   final RefreshController _totalRefreshController =
       RefreshController(initialRefresh: false);
@@ -27,25 +27,29 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       RefreshController(initialRefresh: false);
   final FeedController feedController = Get.find();
   final ChurchController churchController = Get.find();
+  late final Future callApis;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
-    // getFeed("total");
+    callApis = getFeed("total");
     super.initState();
   }
 
   getFeed(String subject) async {
-    await feedController.getFeedListData(churchId: "1", communityID: "?");
-    setState(() {});
-    //겟빌더로 감싸서 교회정보들을 담는 모델 만들어서 넣을지?
+      await feedController.getFeedListData(churchId: "1", communityID: "?");
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     TabController tabController = TabController(length: 3, vsync: this);
     return DefaultLayout(
       body: FutureBuilder(
-        future: getFeed("total"),
+        future: callApis,
         builder: (context,snapShot) {
           if(snapShot.hasData) {
               return NestedScrollView(
