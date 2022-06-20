@@ -91,8 +91,8 @@ FeedListAttachment _$FeedListAttachmentFromJson(Map<String, dynamic> json) {
   return FeedListAttachment(
     id: json['id'] as int,
     feedId: json['feedId'] as String,
-    fileinfo:
-        FeedListFileInfo.fromJson(json['fileinfo'] as Map<String, dynamic>),
+    fileInfo:
+        FeedListFileInfo.fromJson(json['fileInfo'] as Map<String, dynamic>),
     attachType: json['attachType'] as String,
   );
 }
@@ -101,7 +101,7 @@ Map<String, dynamic> _$FeedListAttachmentToJson(FeedListAttachment instance) =>
     <String, dynamic>{
       'id': instance.id,
       'feedId': instance.feedId,
-      'fileinfo': instance.fileinfo,
+      'fileInfo': instance.fileInfo,
       'attachType': instance.attachType,
     };
 

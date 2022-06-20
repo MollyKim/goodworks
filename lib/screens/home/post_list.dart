@@ -45,8 +45,7 @@ class HomePostList extends StatelessWidget {
                         style: TextStyle(color: Colors.white),),
                     ),
                   ),
-                  Text(getTimeAge(feedController.feedList.resultData?[index].feedType?.toString()))
-                  // Text(getTimeAge(feedController.feedList.resultData?[index].createdAt))
+                  Text(getTimeAge(feedController.feedList.resultData?[index].createdAt))
                 ],
               ),
               SizedBox(height: 10,),
@@ -93,7 +92,7 @@ class HomePostList extends StatelessWidget {
                           children: <Widget>[
                             CachedNetworkImage(
                               fit: BoxFit.cover,
-                              imageUrl: feedController.feedList.resultData?[index].attachments?[index].fileinfo.smallUrl!
+                              imageUrl: feedController.feedList.resultData?[index].attachments?[index].fileInfo.smallUrl!
                                 ?? "",
                               height: 100.0,
                               placeholder: (context, url) =>
@@ -115,7 +114,7 @@ class HomePostList extends StatelessWidget {
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl:
-                            feedController.feedList.resultData?[index].attachments?[index].fileinfo.smallUrl!
+                            feedController.feedList.resultData?[index].attachments?[index].fileInfo.smallUrl!
                                 ??
                                 "https://cdn.vm-united.com/dev/user_profile/origin/3/2021-11-21/small.rXixqiVPspWs_test.png",
                             height: 100.0,
@@ -136,7 +135,9 @@ class HomePostList extends StatelessWidget {
   getTimeAge(String? feedTime) {
     if(feedTime == null)
       feedTime = DateTime.now().toString();
+    print("123");
     DateTime feedTimeDatetime = DateTime.parse(feedTime);
+    print(feedTimeDatetime);
     final difference = now.difference(feedTimeDatetime);
     return timeago.format(now.subtract(difference), locale: 'ko');
   }

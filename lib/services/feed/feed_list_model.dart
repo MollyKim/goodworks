@@ -88,7 +88,7 @@ class Avatar {
 class FeedListAttachment {
   final int id;
   final String feedId;
-  final FeedListFileInfo fileinfo;
+  final FeedListFileInfo fileInfo;
   final String attachType;
 
   factory FeedListAttachment.fromJson(Map<String, dynamic> json) =>
@@ -97,7 +97,7 @@ class FeedListAttachment {
   FeedListAttachment(
       {required this.id,
       required this.feedId,
-      required this.fileinfo,
+      required this.fileInfo,
       required this.attachType});
 
   Map<String, dynamic> toJson() => _$FeedListAttachmentToJson(this);

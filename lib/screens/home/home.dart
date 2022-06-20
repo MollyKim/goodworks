@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:practice/controllers/bottomNavigationBarController.dart';
 import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/feed_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
@@ -17,7 +16,8 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin{
+class _HomeState extends State<Home>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final ScrollController scrollController = ScrollController();
   final RefreshController _totalRefreshController =
       RefreshController(initialRefresh: false);
@@ -41,7 +41,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKee
   getFeed(String subject) async {
     try {
       await feedController.getFeedListData(churchId: "1");
-    } catch(e) {
+    } catch (e) {
       print("error!! home get Feed: $e");
     }
     return true;
@@ -54,10 +54,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKee
     TabController tabController = TabController(length: 3, vsync: this);
     return DefaultLayout(
       body: FutureBuilder(
-        future: callApis,
-        builder: (context,snapShot) {
-          print(snapShot);
-          if(snapShot.hasData) {
+          future: callApis,
+          builder: (context, snapShot) {
+            print(snapShot);
+            if (snapShot.hasData) {
               return NestedScrollView(
                 controller: scrollController,
                 headerSliverBuilder:
@@ -71,7 +71,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKee
                         fit: BoxFit.cover,
                         imageUrl: churchController.churchModel.resultData
                                 ?.metaCommunity!.coverImage!.smallUrl ??
-                            "https://cdn.vm-united.com/statics/defaultImage/user/userAvatar.png",
+                            "https://cdn.vm-united.com/statics/defaultImage/church/churchLandscapeUrban.png",
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
@@ -255,70 +255,75 @@ class _HomeState extends State<Home> with TickerProviderStateMixin, AutomaticKee
                   ],
                 ),
               );
+            } else {
+              return Center(
+                  child: CircularProgressIndicator(
+                color: context.forest80,
+              ));
             }
-          else {
-            return Center(child: CircularProgressIndicator(color: context.forest80,));
-          }
-          }
-      ),
+          }),
     );
   }
 
-  void _onRefresh(String subject) async { // 위로 새로고침 호출
+  void _onRefresh(String subject) async {
+    // 위로 새로고침 호출
     switch (subject) {
-      case "total" :
+      case "total":
         {
           await getFeed(subject);
           _totalRefreshController.refreshCompleted();
           break;
         }
-      case "jubo" :
+      case "jubo":
         {
           await getFeed(subject);
           _juboRefreshController.refreshCompleted();
           break;
         }
-      case "news" :
+      case "news":
         {
-          await  getFeed(subject);
+          await getFeed(subject);
           _newsRefreshController.refreshCompleted();
           break;
         }
-      default : {
-        _totalRefreshController.refreshCompleted();
-        _juboRefreshController.refreshCompleted();
-        _newsRefreshController.refreshCompleted();
-        break;
-      }
+      default:
+        {
+          _totalRefreshController.refreshCompleted();
+          _juboRefreshController.refreshCompleted();
+          _newsRefreshController.refreshCompleted();
+          break;
+        }
     }
   }
 
-  void _onLoading(String subject) async { // 커서 호출
+  void _onLoading(String subject) async {
+    // 커서 호출
     switch (subject) {
-      case "total" :
-        {print("123");
+      case "total":
+        {
+          print("123");
           await Future.delayed(Duration(milliseconds: 1000));
           getFeed(subject);
           _totalRefreshController.loadComplete();
           break;
         }
-      case "jubo" :
+      case "jubo":
         {
-        _juboRefreshController.loadComplete();
-        break;
+          _juboRefreshController.loadComplete();
+          break;
         }
-      case "news" :
+      case "news":
         {
           _newsRefreshController.loadComplete();
           break;
         }
-      default : {
-        _totalRefreshController.loadComplete();
-        _juboRefreshController.loadComplete();
-        _newsRefreshController.loadComplete();
-        break;
-      }
+      default:
+        {
+          _totalRefreshController.loadComplete();
+          _juboRefreshController.loadComplete();
+          _newsRefreshController.loadComplete();
+          break;
+        }
     }
-
   }
 }

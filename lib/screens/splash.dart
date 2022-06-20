@@ -36,7 +36,6 @@ class _SplashState extends State<Splash> {
             );
           }
           else if(snapshot.connectionState == ConnectionState.done) {
-            print(snapshot.hasData);print(snapshot.data);print("0000000");
             if(snapshot.data != null) {
               return Main();
             }
@@ -69,7 +68,7 @@ class Init {
         String token = "Bearer ${userController.userSession}";
 
         await churchController.getChurchData(token, churchId: "1");
-        await userController.loginUser("drumgrammer", "abcd1234ABCD");
+        // await userController.loginUser("drumgrammer", "abcd1234ABCD");
       }
     } catch(e) {
       print("error in splash : $e");

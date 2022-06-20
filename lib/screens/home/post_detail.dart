@@ -118,7 +118,7 @@ class HomePostDetail extends StatelessWidget {
             Container(
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: feedController.feedList.resultData?[index].attachments![index].fileinfo.smallUrl!
+                imageUrl: feedController.feedList.resultData?[index].attachments![index].fileInfo.smallUrl!
                 ?? "https://cosmosmagazine.com/wp-content/uploads/2020/02/191010_nature.jpg",
                 height: 300.0,
                 placeholder: (context, url) =>
