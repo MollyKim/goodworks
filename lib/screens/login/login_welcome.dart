@@ -34,7 +34,7 @@ class LoginWelcome extends StatelessWidget {
               children: [
                 TextSpan(
                   text:
-                      "${churchController.churchModel.resultData?.metaCommunity?.title ?? "내수동 교회"} ",
+                      "${churchController.churchModel.resultData?.title ?? "교회"} ",
                   style: context.textStyleCustom.copyWith(
                       fontSize: 18,
                       color: context.forest80,

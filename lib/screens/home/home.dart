@@ -70,7 +70,7 @@ class _HomeState extends State<Home>
                       flexibleSpace: CachedNetworkImage(
                         fit: BoxFit.cover,
                         imageUrl: churchController.churchModel.resultData
-                                ?.metaCommunity!.coverImage!.smallUrl ??
+                                ?.logoImage?.fileInfo.smallUrl ??
                             "https://cdn.vm-united.com/statics/defaultImage/church/churchLandscapeUrban.png",
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
@@ -84,9 +84,8 @@ class _HomeState extends State<Home>
                         elevation: 0.5,
                         titleSpacing: 0,
                         backgroundColor: Colors.white,
-                        title: Text(churchController.churchModel.resultData
-                                ?.metaCommunity!.title! ??
-                            "내수동교회"),
+                        title: Text(churchController.churchModel.resultData?.title ??
+                            "교회"),
                         titleTextStyle: context.textStyleCustom.copyWith(
                           color: context.forest100,
                           fontWeight: FontWeight.bold,
@@ -96,7 +95,7 @@ class _HomeState extends State<Home>
                           child: CircleAvatar(
                             backgroundImage: NetworkImage(
                               churchController.churchModel.resultData
-                                      ?.metaCommunity?.coverImage?.smallUrl ??
+                                      ?.logoImage?.fileInfo.smallUrl ??
                                   "https://cdn.vm-united.com/statics/defaultImage/user/userAvatar.png",
                             ),
                           ),

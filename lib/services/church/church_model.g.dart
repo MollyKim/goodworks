@@ -14,9 +14,6 @@ ChurchModel _$ChurchModelFromJson(Map<String, dynamic> json) {
     resultData: json['resultData'] == null
         ? null
         : ChurchResultData.fromJson(json['resultData'] as Map<String, dynamic>),
-    createdAt: json['createdAt'] as String?,
-    deletedAt: json['deletedAt'] as String?,
-    updatedAt: json['updatedAt'] as String?,
   );
 }
 
@@ -26,17 +23,14 @@ Map<String, dynamic> _$ChurchModelToJson(ChurchModel instance) =>
       'resultCode': instance.resultCode,
       'resultMsg': instance.resultMsg,
       'resultData': instance.resultData,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
-      'deletedAt': instance.deletedAt,
     };
 
 ChurchResultData _$ChurchResultDataFromJson(Map<String, dynamic> json) {
   return ChurchResultData(
     id: json['id'] as int,
-    metaCommunity: json['metaCommunity'] == null
+    logoImage: json['logoImage'] == null
         ? null
-        : MetaCommunity.fromJson(json['metaCommunity'] as Map<String, dynamic>),
+        : ChurchAttachment.fromJson(json['logoImage'] as Map<String, dynamic>),
     createdAt: json['createdAt'] as String,
     deletedAt: json['deletedAt'] as String?,
     churchType: json['churchType'] as int?,
@@ -46,6 +40,17 @@ ChurchResultData _$ChurchResultDataFromJson(Map<String, dynamic> json) {
     memberLimit: json['memberLimit'] as int?,
     ownerId: json['ownerId'] as int,
     updatedAt: json['updatedAt'] as String?,
+    introduce: json['introduce'] as String?,
+    title: json['title'] as String?,
+    memberCount: json['memberCount'] as int?,
+    landscapeImage: json['landscapeImage'] == null
+        ? null
+        : ChurchAttachment.fromJson(
+            json['landscapeImage'] as Map<String, dynamic>),
+    portraitImage: json['portraitImage'] == null
+        ? null
+        : ChurchAttachment.fromJson(
+            json['portraitImage'] as Map<String, dynamic>),
   );
 }
 
@@ -53,91 +58,40 @@ Map<String, dynamic> _$ChurchResultDataToJson(ChurchResultData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'ownerId': instance.ownerId,
+      'memberCount': instance.memberCount,
       'memberLimit': instance.memberLimit,
       'communityCount': instance.communityCount,
       'communityLimit': instance.communityLimit,
       'depthLimit': instance.depthLimit,
       'churchType': instance.churchType,
-      'metaCommunity': instance.metaCommunity,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
-      'deletedAt': instance.deletedAt,
-    };
-
-MetaCommunity _$MetaCommunityFromJson(Map<String, dynamic> json) {
-  return MetaCommunity(
-    id: json['id'] as int,
-    attachments: (json['attachments'] as List<dynamic>?)
-        ?.map((e) => ChurchAttachment.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    coverImage: json['coverImage'] == null
-        ? null
-        : ChurchCoverImage.fromJson(json['coverImage'] as Map<String, dynamic>),
-    updatedAt: json['updatedAt'] as String?,
-    memberLimit: json['memberLimit'] as int?,
-    deletedAt: json['deletedAt'] as String?,
-    createdAt: json['createdAt'] as String?,
-    churchId: json['churchId'] as int?,
-    communityType: json['communityType'] as int?,
-    introduce: json['introduce'] as String?,
-    memberCount: json['memberCount'] as int?,
-    title: json['title'] as String?,
-  );
-}
-
-Map<String, dynamic> _$MetaCommunityToJson(MetaCommunity instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'churchId': instance.churchId,
       'title': instance.title,
-      'communityType': instance.communityType,
-      'memberCount': instance.memberCount,
-      'memberLimit': instance.memberLimit,
       'introduce': instance.introduce,
-      'coverImage': instance.coverImage,
-      'attachments': instance.attachments,
+      'logoImage': instance.logoImage,
+      'portraitImage': instance.portraitImage,
+      'landscapeImage': instance.landscapeImage,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'deletedAt': instance.deletedAt,
-    };
-
-ChurchCoverImage _$ChurchCoverImageFromJson(Map<String, dynamic> json) {
-  return ChurchCoverImage(
-    json['filename'] as String?,
-    json['url'] as String?,
-    json['smallUrl'] as String,
-    json['size'] as int,
-  );
-}
-
-Map<String, dynamic> _$ChurchCoverImageToJson(ChurchCoverImage instance) =>
-    <String, dynamic>{
-      'filename': instance.filename,
-      'url': instance.url,
-      'smallUrl': instance.smallUrl,
-      'size': instance.size,
     };
 
 ChurchAttachment _$ChurchAttachmentFromJson(Map<String, dynamic> json) {
   return ChurchAttachment(
     id: json['id'] as int,
-    communityId: json['communityId'] as String,
-    fileinfo: ChurchFileInfo.fromJson(json['fileinfo'] as Map<String, dynamic>),
-    attachType: json['attachType'] as String,
+    fileInfo: ChurchFileInfo.fromJson(json['fileInfo'] as Map<String, dynamic>),
+    imageType: json['imageType'] as int,
   );
 }
 
 Map<String, dynamic> _$ChurchAttachmentToJson(ChurchAttachment instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'communityId': instance.communityId,
-      'fileinfo': instance.fileinfo,
-      'attachType': instance.attachType,
+      'fileInfo': instance.fileInfo,
+      'imageType': instance.imageType,
     };
 
 ChurchFileInfo _$ChurchFileInfoFromJson(Map<String, dynamic> json) {
   return ChurchFileInfo(
-    filename: json['filename'] as String?,
+    filename: json['filename'] as String,
     url: json['url'] as String?,
     smallUrl: json['smallUrl'] as String?,
     size: json['size'] as int?,

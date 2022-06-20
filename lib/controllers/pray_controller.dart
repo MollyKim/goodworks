@@ -11,7 +11,7 @@ class PrayController extends BaseController {
   PrayUpdate prayUpdate = PrayUpdate();
   PrayDelete prayDelete = PrayDelete();
 
-  Future<void> getPrayListData({required String churchId, time}) async {
+  Future<void> getPrayListData({required int churchId, time}) async {
     //, int? type, String? cursor} ) async {
     final PrayList resp = await super
         .rootService

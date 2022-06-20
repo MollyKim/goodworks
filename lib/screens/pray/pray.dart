@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/pray_controller.dart';
+import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/screens/pray/pray_post_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -21,6 +23,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   PrayController prayController = Get.find();
+  UserController userController = Get.find();
 
   String year = '2022';
   String month = '1';
@@ -28,17 +31,13 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    print('phil 000');
     // getPray();
-    print('phil 001');
     super.initState();
   }
 
   getPray() async {
-    print('phil 002');
-    // await Future.delayed(Duration(milliseconds: 1000));
     try {
-      await prayController.getPrayListData(churchId: "1", time: time);
+      // await prayController.getPrayListData(churchId: userController.userModel.resultData?.churchId ?? 1, time: time);
     } catch (e) {
       print(e);
     }

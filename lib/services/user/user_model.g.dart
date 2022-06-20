@@ -30,7 +30,6 @@ UserResultData _$UserResultDataFromJson(Map<String, dynamic> json) {
     seumId: json['seumId'] as String?,
     phoneNumber: json['phoneNumber'] as String?,
     isCertifiedPhone: json['isCertifiedPhone'] as bool?,
-    churchId: json['churchId'] as int?,
     userName: json['userName'] as String?,
     deletedAt: json['deletedAt'] as String?,
     updateAt: json['updateAt'] as String?,
@@ -57,7 +56,6 @@ Map<String, dynamic> _$UserResultDataToJson(UserResultData instance) =>
       'deletedAt': instance.deletedAt,
       'userProfile': instance.userProfile,
       'tokens': instance.tokens,
-      'churchId': instance.churchId,
     };
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {

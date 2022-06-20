@@ -31,10 +31,9 @@ class UserResultData {
   final String? deletedAt;
   final UserProfile? userProfile;
   final List<String>? tokens;
-  final int? churchId;
 
   UserResultData({this.id, this.seumId, this.phoneNumber, this.isCertifiedPhone,
-    this.churchId, this.userName, this.deletedAt,this.updateAt,this.createdAt,this.userProfile,this.userType, this.tokens});
+    this.userName, this.deletedAt,this.updateAt,this.createdAt,this.userProfile,this.userType, this.tokens});
 
   factory UserResultData.fromJson(Object? json) =>
       _$UserResultDataFromJson(json as Map<String, dynamic>);

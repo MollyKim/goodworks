@@ -13,7 +13,7 @@ abstract class PrayService {
     "Country": "KR",
   })
   Future<PrayList> getPrayList( ///2022-06
-    @Path() String churchID, time //, int type, String cursor
+    @Path() int churchID, time //, int type, String cursor
   );
 
   @GET('/church/{churchID}/prayer/{prayerID}')

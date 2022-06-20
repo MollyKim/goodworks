@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/components/base_bottomSheet.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/util/getTimeAgo.dart';
 import 'package:share/share.dart';
 import 'package:practice/controllers/feed_controller.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -49,8 +50,9 @@ class HomePostDetail extends StatelessWidget {
                           height: 30,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: Text(feedController.feed.resultData?.feedType.toString() ?? "교회소식",
-                              style: TextStyle(color: Colors.white),),
+                            child: Text(feedType(feedController.feed.resultData?.feedType ?? 1),
+                              style: TextStyle(color: Colors.white,fontFamily: "AppleSDGothicNeo",
+                                fontSize: 18,),),
                           ),
                         ),
                         Text(getTimeAge(feedController.feed.resultData?.createdAt))
@@ -132,11 +134,13 @@ class HomePostDetail extends StatelessWidget {
       },
     );
   }
-  getTimeAge(String? feedTime) {
-    if(feedTime == null)
-      feedTime = DateTime.now().toString();
-    DateTime feedTimeDatetime = DateTime.parse(feedTime);
-    final difference = now.difference(feedTimeDatetime);
-    return timeago.format(now.subtract(difference), locale: 'ko');
+
+  String feedType(int typeNum) {
+    switch(typeNum) {
+      case 1:
+        return "교회 소식";
+      default: return "소식";
+    }
   }
+
 }
