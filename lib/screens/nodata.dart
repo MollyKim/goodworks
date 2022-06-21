@@ -9,18 +9,21 @@ class NoData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
-      body: Column(
-        children: [
-          SvgPicture.asset(
-            'assets/img/img_nodata.svg',
-          ),
-          Text("현재 작성된 게시물이 없습니다.",
-              style: context.textStyleCustom.copyWith(
-                  fontSize: 24,
-                  color: context.forest80,
-                  fontWeight: FontWeight.bold),
-              ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              'assets/img/img_nodata.svg',
+            ),
+            Text("현재 작성된 게시물이 없습니다.",
+                style: context.textStyleCustom.copyWith(
+                    fontSize: 24,
+                    color: context.forest80,
+                    fontWeight: FontWeight.bold),
+                ),
+          ],
+        ),
       ),
     );
   }

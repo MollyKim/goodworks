@@ -45,9 +45,10 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
           churchId: churchController.churchModel.resultData?.id ?? 1,
           time: time);
     } catch (e) {
-      print(e);
+      print("error!! in pray : $e");
     }
-    if(prayController.prayList.resultCode == "0000") {
+
+    if(prayController.prayList.resultCode == "0000" && prayController.prayList.resultData?.length != 0) {
       return true;
     } else return false;
   }
@@ -108,194 +109,215 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
       body: FutureBuilder(
           future: callPrayApis,
           builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot == true) {
-              return NestedScrollView(
-                controller: scrollController,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverAppBar(
-                      automaticallyImplyLeading: false,
-                      elevation: 0,
-                      backgroundColor: Colors.white,
-                      pinned: true,
-                      bottom: PreferredSize(
-                        // Add this code
-                        preferredSize: Size.fromHeight(40.0), // Add this code
-                        child: Padding(
-                          padding:
-                              EdgeInsets.only(right: 10, left: 10, bottom: 20),
-                          child: Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Picker(
-                                      adapter: PickerDataAdapter<String>(
-                                          pickerdata: new JsonDecoder()
-                                              .convert(PickerData2),
-                                          isArray: true),
-                                      hideHeader: true,
-                                      title: new Text("날짜 선택"),
-                                      cancelText: '취소',
-                                      confirmText: '선택',
-                                      onConfirm: (Picker picker, List value) {
-                                        print(value.toString());
-                                        setState(() {
-                                          year =
-                                              picker.getSelectedValues().first;
-                                          month =
-                                              picker.getSelectedValues().last;
-                                          getPray();
-                                        });
-                                        print(picker.getSelectedValues().first);
-                                      }).showDialog(context);
-                                },
-                                child: Container(
-                                  width: 80,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: Color(0xff2d9067),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        year,
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontFamily: "AppleSDGothicNeo",
-                                          fontWeight: FontWeight.w700,
+            if(snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasData && snapshot.data == true) {
+                return NestedScrollView(
+                  controller: scrollController,
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
+                    return <Widget>[
+                      SliverAppBar(
+                        automaticallyImplyLeading: false,
+                        elevation: 0,
+                        backgroundColor: Colors.white,
+                        pinned: true,
+                        bottom: PreferredSize(
+                          // Add this code
+                          preferredSize: Size.fromHeight(40.0), // Add this code
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                right: 10, left: 10, bottom: 20),
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Picker(
+                                        adapter: PickerDataAdapter<String>(
+                                            pickerdata: new JsonDecoder()
+                                                .convert(PickerData2),
+                                            isArray: true),
+                                        hideHeader: true,
+                                        title: new Text("날짜 선택"),
+                                        cancelText: '취소',
+                                        confirmText: '선택',
+                                        onConfirm: (Picker picker, List value) {
+                                          print(value.toString());
+                                          setState(() {
+                                            year = picker
+                                                .getSelectedValues()
+                                                .first;
+                                            month =
+                                                picker.getSelectedValues().last;
+                                            getPray();
+                                          });
+                                          print(
+                                              picker.getSelectedValues().first);
+                                        }).showDialog(context);
+                                  },
+                                  child: Container(
+                                    width: 80,
+                                    height: 32,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Color(0xff2d9067),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          year,
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontFamily: "AppleSDGothicNeo",
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      SvgPicture.asset(
-                                        'assets/ic/ic_bottom.svg',
-                                      )
-                                    ],
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        SvgPicture.asset(
+                                          'assets/ic/ic_bottom.svg',
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Picker(
-                                      adapter: PickerDataAdapter<String>(
-                                          pickerdata: new JsonDecoder()
-                                              .convert(PickerData2),
-                                          isArray: true),
-                                      hideHeader: true,
-                                      title: new Text("날짜 선택"),
-                                      cancelText: '취소',
-                                      confirmText: '선택',
-                                      onConfirm: (Picker picker, List value) {
-                                        print(value.toString());
-                                        setState(() {
-                                          year =
-                                              picker.getSelectedValues().first;
-                                          month =
-                                              picker.getSelectedValues().last;
-                                          getPray();
-                                        });
-                                        print(picker.getSelectedValues().first);
-                                      }).showDialog(context);
-                                },
-                                child: Container(
-                                  width: 62,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: Color(0xff2d9067),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        month,
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontFamily: "AppleSDGothicNeo",
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      SvgPicture.asset(
-                                        'assets/ic/ic_bottom.svg',
-                                      )
-                                    ],
-                                  ),
+                                SizedBox(
+                                  width: 20,
                                 ),
-                              )
-                            ],
+                                GestureDetector(
+                                  onTap: () {
+                                    Picker(
+                                        adapter: PickerDataAdapter<String>(
+                                            pickerdata: new JsonDecoder()
+                                                .convert(PickerData2),
+                                            isArray: true),
+                                        hideHeader: true,
+                                        title: new Text("날짜 선택"),
+                                        cancelText: '취소',
+                                        confirmText: '선택',
+                                        onConfirm: (Picker picker, List value) {
+                                          print(value.toString());
+                                          setState(() {
+                                            year = picker
+                                                .getSelectedValues()
+                                                .first;
+                                            month =
+                                                picker.getSelectedValues().last;
+                                            getPray();
+                                          });
+                                          print(
+                                              picker.getSelectedValues().first);
+                                        }).showDialog(context);
+                                  },
+                                  child: Container(
+                                    width: 62,
+                                    height: 32,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Color(0xff2d9067),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          month,
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontFamily: "AppleSDGothicNeo",
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        SvgPicture.asset(
+                                          'assets/ic/ic_bottom.svg',
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ), // Add this code
+                        ),
+                        flexibleSpace: TabBar(
+                          indicatorColor: Colors.transparent,
+                          isScrollable: true,
+                          labelPadding: EdgeInsets.only(left: 10, right: 10),
+                          unselectedLabelColor: Colors.grey,
+                          unselectedLabelStyle: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "AppleSDGothicNeo",
+                            fontWeight: FontWeight.w700,
                           ),
-                        ), // Add this code
+                          labelColor: Color(0xff2d9067),
+                          labelStyle: TextStyle(
+                            color: Color(0xff2d9067),
+                            fontSize: 14,
+                            fontFamily: "AppleSDGothicNeo",
+                            fontWeight: FontWeight.w700,
+                          ),
+                          controller: tabController,
+                          tabs: <Widget>[
+                            Tab(text: '교회 기도'),
+                            Tab(text: '소그룹 기도'),
+                            // Tab(text: '청년부'),
+                          ],
+                        ),
                       ),
-                      flexibleSpace: TabBar(
-                        indicatorColor: Colors.transparent,
-                        isScrollable: true,
-                        labelPadding: EdgeInsets.only(left: 10, right: 10),
-                        unselectedLabelColor: Colors.grey,
-                        unselectedLabelStyle: TextStyle(
-                          fontSize: 14,
-                          fontFamily: "AppleSDGothicNeo",
-                          fontWeight: FontWeight.w700,
+                    ];
+                  },
+                  body: TabBarView(
+                    controller: tabController,
+                    children: <Widget>[
+                      SmartRefresher(
+                        enablePullDown: true,
+                        controller: _refreshController,
+                        header: ClassicHeader(
+                          height: 100,
+                          idleIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          idleText: "",
+                          refreshingIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          releaseIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          completeIcon: null,
+                          completeText: "",
+                          completeDuration: Duration.zero,
+                          releaseText: "",
+                          refreshingText: "",
                         ),
-                        labelColor: Color(0xff2d9067),
-                        labelStyle: TextStyle(
-                          color: Color(0xff2d9067),
-                          fontSize: 14,
-                          fontFamily: "AppleSDGothicNeo",
-                          fontWeight: FontWeight.w700,
+                        // header: WaterDropHeader(),
+                        onRefresh: _onRefresh,
+                        onLoading: _onLoading,
+                        child: ListView.separated(
+                          itemCount:
+                              prayController.prayList.resultData?.length ?? 0,
+                          separatorBuilder: (context, index) {
+                            return Divider(
+                              thickness: 3.0,
+                              color: Colors.grey[600],
+                            );
+                          },
+                          itemBuilder: (BuildContext context, int index) {
+                            return PrayPostList();
+                          },
                         ),
-                        controller: tabController,
-                        tabs: <Widget>[
-                          Tab(text: '교회 기도'),
-                          Tab(text: '소그룹 기도'),
-                          // Tab(text: '청년부'),
-                        ],
                       ),
-                    ),
-                  ];
-                },
-                body: TabBarView(
-                  controller: tabController,
-                  children: <Widget>[
-                    SmartRefresher(
-                      enablePullDown: true,
-                      controller: _refreshController,
-                      header: ClassicHeader(
-                        height: 100,
-                        idleIcon: CupertinoActivityIndicator(
-                          radius: 13.0,
-                        ),
-                        idleText: "",
-                        refreshingIcon: CupertinoActivityIndicator(
-                          radius: 13.0,
-                        ),
-                        releaseIcon: CupertinoActivityIndicator(
-                          radius: 13.0,
-                        ),
-                        completeIcon: null,
-                        completeText: "",
-                        completeDuration: Duration.zero,
-                        releaseText: "",
-                        refreshingText: "",
-                      ),
-                      // header: WaterDropHeader(),
-                      onRefresh: _onRefresh,
-                      onLoading: _onLoading,
-                      child: ListView.separated(
-                        itemCount: prayController.prayList.resultData?.length ?? 0,
+                      ListView.separated(
+                        itemCount: 5,
                         separatorBuilder: (context, index) {
                           return Divider(
                             thickness: 3.0,
@@ -306,26 +328,13 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                           return PrayPostList();
                         },
                       ),
-                    ),
-                    ListView.separated(
-                      itemCount: 5,
-                      separatorBuilder: (context, index) {
-                        return Divider(
-                          thickness: 3.0,
-                          color: Colors.grey[600],
-                        );
-                      },
-                      itemBuilder: (BuildContext context, int index) {
-                        return PrayPostList();
-                      },
-                    ),
-                  ],
-                ),
-              );
-            } else if (snapshot.hasData && snapshot == false){
-              return NoData();
-            }
-              else {
+                    ],
+                  ),
+                );
+              } else {
+                return NoData();
+              }
+            } else {
               return Center(
                   child: CircularProgressIndicator(
                 color: context.forest80,
