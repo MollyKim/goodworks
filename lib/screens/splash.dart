@@ -57,17 +57,17 @@ class _SplashState extends State<Splash> {
       if (userController.userSession != null) {
         ChurchController churchController = Get.find();
         String token = "Bearer ${userController.userSession}";
-        // await userController.loginUser("drumgrammer", "abcd1234ABCD");
-        //
-        // await churchController.getChurchData(token,
-        //     churchId: churchController.churchModel.resultData?.id ?? 1);
+        await userController.loginUser("drumgrammer", "abcd1234ABCD");
+
+        await churchController.getChurchData(token,
+            churchId: churchController.churchModel.resultData?.id ?? 1);
       }
     } catch (e) {
       print("error!! in splash : $e");
     }
-    // if (userController.userModel.resultCode == "0000")
-    //   return true;
-    // else
+    if (userController.userModel.resultCode == "0000")
+      return true;
+    else
       return false;
   }
 }
