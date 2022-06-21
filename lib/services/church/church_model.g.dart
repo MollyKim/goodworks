@@ -31,8 +31,7 @@ ChurchResultData _$ChurchResultDataFromJson(Map<String, dynamic> json) {
     logoImage: json['logoImage'] == null
         ? null
         : ChurchAttachment.fromJson(json['logoImage'] as Map<String, dynamic>),
-    createdAt: json['createdAt'] as String,
-    deletedAt: json['deletedAt'] as String?,
+    createdAt: json['createdAt'] as String?,
     churchType: json['churchType'] as int?,
     communityCount: json['communityCount'] as int?,
     communityLimit: json['communityLimit'] as int?,
@@ -71,7 +70,6 @@ Map<String, dynamic> _$ChurchResultDataToJson(ChurchResultData instance) =>
       'landscapeImage': instance.landscapeImage,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
-      'deletedAt': instance.deletedAt,
     };
 
 ChurchAttachment _$ChurchAttachmentFromJson(Map<String, dynamic> json) {
@@ -91,7 +89,7 @@ Map<String, dynamic> _$ChurchAttachmentToJson(ChurchAttachment instance) =>
 
 ChurchFileInfo _$ChurchFileInfoFromJson(Map<String, dynamic> json) {
   return ChurchFileInfo(
-    filename: json['filename'] as String,
+    filename: json['filename'] as String?,
     url: json['url'] as String?,
     smallUrl: json['smallUrl'] as String?,
     size: json['size'] as int?,

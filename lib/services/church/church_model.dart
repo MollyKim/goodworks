@@ -37,7 +37,7 @@ class ChurchResultData {
   final ChurchAttachment? logoImage;
   final ChurchAttachment? portraitImage;
   final ChurchAttachment? landscapeImage;
-  final String createdAt;
+  final String? createdAt;
   final String? updatedAt;
   final String? deletedAt;
 

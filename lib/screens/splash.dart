@@ -37,7 +37,7 @@ class _SplashState extends State<Splash> {
               ),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.data != null) {
+            if (snapshot.data != null && snapshot.data == true) {
               return Main();
             } else {
               return Login();
@@ -57,7 +57,7 @@ class _SplashState extends State<Splash> {
       if (userController.userSession != null) {
         ChurchController churchController = Get.find();
         String token = "Bearer ${userController.userSession}";
-        // await userController.loginUser("drumgrammer", "abcd1234ABCD");
+        await userController.loginUser("drumgrammer", "abcd1234ABCD");
 
         await churchController.getChurchData(token,
             churchId: churchController.churchModel.resultData?.id ?? 1);
@@ -65,6 +65,9 @@ class _SplashState extends State<Splash> {
     } catch (e) {
       print("error!! in splash : $e");
     }
-    return userController.userSession;
+    if (userController.userModel.resultCode == "0000")
+      return true;
+    else
+      return false;
   }
 }
