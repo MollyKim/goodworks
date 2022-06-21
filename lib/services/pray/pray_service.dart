@@ -12,16 +12,19 @@ abstract class PrayService {
   @Headers(<String, dynamic>{
     "Country": "KR",
   })
-  Future<PrayList> getPrayList( ///2022-06
-    @Path() int churchID, time //, int type, String cursor
-  );
+  Future<PrayList> getPrayList(
+
+      ///2022-06
+      @Header('Authorization') String token,
+      @Path("churchID") int churchID,
+      @Path("time") time);
 
   @GET('/church/{churchID}/prayer/{prayerID}')
   @Headers(<String, dynamic>{
     "Country": "KR",
   })
-  Future<PrayDetail> getPrayDetail(
-      @Path() String churchID, prayerID//, int type, String cursor
+  Future<PrayDetail> getPrayDetail(@Path() String churchID, prayerID
+      //, int type, String cursor
       );
 
   ///create
@@ -30,9 +33,9 @@ abstract class PrayService {
     "Country": "KR",
   })
   Future<PrayCreate> postPrayCreate(
-      @Path() String churchID,
-      @Body() Map<String, dynamic> body,
-      );
+    @Path() String churchID,
+    @Body() Map<String, dynamic> body,
+  );
 
   ///create
   @PUT('/church/{churchID}/prayer/{prayerID}')
@@ -40,17 +43,19 @@ abstract class PrayService {
     "Country": "KR",
   })
   Future<PrayUpdate> putPrayUpdate(
-      @Path() String churchID, prayerID,
-      @Body() Map<String, dynamic> body,
-      );
+    @Path() String churchID,
+    prayerID,
+    @Body() Map<String, dynamic> body,
+  );
 
   @DELETE('/church/{churchID}/prayer/{prayerID}')
   @Headers(<String, dynamic>{
     "Country": "KR",
   })
   Future<PrayDelete> deletePray(
-      @Path() String churchID, prayerID,
-      );
+    @Path() String churchID,
+    prayerID,
+  );
 
-///https://www.vm-united.com/seum/api/v1/seum/church/1/prayer
+  ///https://www.vm-united.com/seum/api/v1/seum/church/1/prayer
 }

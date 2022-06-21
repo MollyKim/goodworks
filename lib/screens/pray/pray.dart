@@ -23,28 +23,27 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   PrayController prayController = Get.find();
+  ChurchController churchController = Get.find();
   UserController userController = Get.find();
 
   String year = '2022';
-  String month = '1';
+  String month = '01';
   late String time = year+'-'+month;
 
   @override
   void initState() {
-    // getPray();
+    getPray();
     super.initState();
   }
 
   getPray() async {
     try {
-      // await prayController.getPrayListData(churchId: userController.userModel.resultData?.churchId ?? 1, time: time);
+      await prayController.getPrayListData(userController.userSession!, churchId: churchController.churchModel.resultData?.id ?? 1, time: time);
     } catch (e) {
       print(e);
     }
-    print('phil 003');
-    print(prayController.prayList);
-    setState(() {});
-    //겟빌더로 감싸서 교회정보들을 담는 모델 만들어서 넣을지?
+
+    print(prayController.prayList);print('---');
   }
 
   @override

@@ -11,12 +11,13 @@ class PrayController extends BaseController {
   PrayUpdate prayUpdate = PrayUpdate();
   PrayDelete prayDelete = PrayDelete();
 
-  Future<void> getPrayListData({required int churchId, time}) async {
+  Future<void> getPrayListData(String token,{required int churchId, time}) async {
+    String headerToken = "Bearer $token";
     //, int? type, String? cursor} ) async {
     final PrayList resp = await super
         .rootService
         .pryService
-        .getPrayList(churchId, time); //,type,cursor);
+        .getPrayList(headerToken,churchId, time); //,type,cursor);
     this.prayList = resp;
     update();
   }

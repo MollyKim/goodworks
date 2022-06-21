@@ -32,6 +32,7 @@ ChurchResultData _$ChurchResultDataFromJson(Map<String, dynamic> json) {
         ? null
         : ChurchAttachment.fromJson(json['logoImage'] as Map<String, dynamic>),
     createdAt: json['createdAt'] as String?,
+    deletedAt: json['deletedAt'] as String?,
     churchType: json['churchType'] as int?,
     communityCount: json['communityCount'] as int?,
     communityLimit: json['communityLimit'] as int?,
@@ -70,6 +71,7 @@ Map<String, dynamic> _$ChurchResultDataToJson(ChurchResultData instance) =>
       'landscapeImage': instance.landscapeImage,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+      'deletedAt': instance.deletedAt,
     };
 
 ChurchAttachment _$ChurchAttachmentFromJson(Map<String, dynamic> json) {
