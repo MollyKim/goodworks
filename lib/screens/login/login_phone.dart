@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/themes/extensions.dart';
 
 class LoginPhone extends StatefulWidget {
   @override
@@ -12,9 +13,17 @@ class LoginPhone extends StatefulWidget {
 }
 
 class _LoginPhoneState extends State<LoginPhone> {
+  @override
+  void dispose() {
+    timer?.cancel();
+    phoneTextEditingController.dispose();
+    super.dispose();
+  }
+
   bool signUpFlag = false;
   bool phoneFlag = false;
   bool phoneOTPFlag = false;
+  TextEditingController phoneTextEditingController = TextEditingController();
 
   int timerMaxSeconds = 180;
   int currentSeconds = 0;
@@ -23,7 +32,7 @@ class _LoginPhoneState extends State<LoginPhone> {
       '${((timerMaxSeconds - currentSeconds) ~/ 60).toString().padLeft(1, '0')}:${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
 
   final interval = const Duration(seconds: 1);
-  late Timer timer;
+  late Timer? timer;
 
   startTimeout(int milliseconds) {
     var duration = interval;
@@ -46,74 +55,50 @@ class _LoginPhoneState extends State<LoginPhone> {
           SizedBox(
             // width: 346,
             child: Text(
-              "휴대폰 번호를 인증하여 로그인합니다.",
-              style: TextStyle(
-                color: Color(0xff2d9067),
+              "휴대폰 번호로\n인증하여 로그인합니다.",
+              style: context.textStyleCustom.copyWith(
+                  fontSize: 24,
+                  color: context.forest80,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(height: 60),
+          TextFormField(
+            controller: phoneTextEditingController,
+            validator: (val) {
+              if (val!.length < 1) {
+                return '번호는 필수사항입니다.';
+              }
+              return null;
+            },
+            style: context.textStyleCustom
+                .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+            cursorColor: context.forest70,
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.done,
+            autofocus: true,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+              LengthLimitingTextInputFormatter(11),
+            ],
+            decoration: InputDecoration(
+              //클릭시 Label 올라 가는 애니메이션 제거
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              //isDense : lab!el, hint 간격 조절
+              isDense: true,
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: context.forest60!),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: context.forest90!),
+              ),
+              contentPadding:
+                  const EdgeInsets.only(left: 12, top: 11, bottom: 11),
+              hintStyle: context.textStyleCustom.copyWith(
+                color: context.forest70,
                 fontSize: 14,
               ),
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            height: 42,
-            // width: 315,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(
-                color: Color(0xff90c79c),
-                width: 0.50,
-              ),
-              color: Color(0xffcde3d6),
-            ),
-            child: TextFormField(
-              style: TextStyle(
-                color: Color(0xff1a442b),
-              ),
-              cursorColor: Color(0xff2d9067),
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.done,
-              autofocus: true,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                LengthLimitingTextInputFormatter(11),
-              ],
-              decoration: InputDecoration(
-                suffix: Padding(
-                  padding: EdgeInsets.only(right: 15),
-                  child: phoneFlag
-                      ? SvgPicture.asset(
-                          'assets/ic/ic_check.svg',
-                        )
-                      : Container(
-                          height: 1,
-                          width: 1,
-                        ),
-                ),
-                //클릭시 Label 올라 가는 애니메이션 제거
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                //isDense : label, hint 간격 조절
-                isDense: true,
-                fillColor: Colors.transparent,
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.only(top: 10, left: 12),
-                // labelText: '이름',
-                hintText: '휴대폰 번호를 입력해주세요(숫자만 입력)',
-                hintStyle: TextStyle(
-                  color: Color(0xff629677),
-                  fontSize: 14,
-                ),
-              ),
-              onChanged: (value) {
-                setState(() {
-                  if (value == '01022449379') {
-                    signUpFlag = true;
-                  } else {
-                    signUpFlag = false;
-                  }
-                });
-              },
+              hintText: '휴대폰 번호를 입력해주세요( - 없이)',
             ),
           ),
         ],
@@ -128,28 +113,21 @@ class _LoginPhoneState extends State<LoginPhone> {
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(5.0),
+              borderRadius: new BorderRadius.circular(25.0),
             ),
-            primary: Color(0xff2d9067),
+            primary: context.forest80,
           ),
           onPressed: () {
             setState(() {
-              phoneFlag = true;
+              timer?.cancel();
               startTimeout(180);
             });
             // Get.toNamed('/login_select_church');
           },
-          child: Text(
-            "인증 문자 받기",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontFamily: "AppleSDGothicNeo",
-              fontWeight: FontWeight.w500,
-              letterSpacing: 1.80,
-            ),
-          )),
+          child: Text("인증 문자 받기",
+              textAlign: TextAlign.center,
+              style: context.textStyleCustom
+                  .copyWith(fontSize: 18, color: Colors.white))),
     );
   }
 
@@ -240,7 +218,7 @@ class _LoginPhoneState extends State<LoginPhone> {
                 ),
                 onPressed: () {
                   setState(() {
-                    timer.cancel();
+                    timer?.cancel();
                     startTimeout(180);
                   });
                   // Get.toNamed('/login_select_church');
@@ -276,7 +254,7 @@ class _LoginPhoneState extends State<LoginPhone> {
                 onPressed: () {
                   setState(() {
                     phoneOTPFlag = true;
-                    timer.cancel();
+                    timer?.cancel();
                   });
                   Get.offAllNamed('/main');
                 },
