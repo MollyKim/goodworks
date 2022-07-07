@@ -41,15 +41,16 @@ class _HomeState extends State<Home>
 
   getFeed(String subject) async {
     try {
-      await feedController.getFeedListData(churchId: churchController.churchModel.resultData?.id ?? 1);
+      await feedController.getFeedListData(
+          churchId: churchController.churchModel.resultData?.id ?? 1);
     } catch (e) {
       print("error!! home get Feed: $e");
     }
 
-    if(feedController.feedList.resultData != null && feedController.feedList.resultData?.length != 0) {
+    if (feedController.feedList.resultData != null &&
+        feedController.feedList.resultData?.length != 0) {
       return true;
-    }
-    else
+    } else
       return false;
   }
 
@@ -62,7 +63,7 @@ class _HomeState extends State<Home>
       body: FutureBuilder(
           future: callApis,
           builder: (context, snapShot) {
-            if(snapShot.connectionState == ConnectionState.done) {
+            if (snapShot.connectionState == ConnectionState.done) {
               if (snapShot.data == true) {
                 return NestedScrollView(
                   controller: scrollController,
@@ -76,7 +77,7 @@ class _HomeState extends State<Home>
                         flexibleSpace: CachedNetworkImage(
                           fit: BoxFit.cover,
                           imageUrl: churchController.churchModel.resultData
-                              ?.portraitImage?.fileInfo.smallUrl ??
+                                  ?.portraitImage?.fileInfo.smallUrl ??
                               "https://cdn.vm-united.com/statics/defaultImage/church/churchLandscapeUrban.png",
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
@@ -91,20 +92,20 @@ class _HomeState extends State<Home>
                           elevation: 0.5,
                           titleSpacing: 0,
                           backgroundColor: Colors.white,
-                          title: Text(churchController.churchModel.resultData
-                              ?.title ??
-                              "교회"),
+                          title: Text(
+                              churchController.churchModel.resultData?.title ??
+                                  "교회"),
                           titleTextStyle: context.textStyleCustom.copyWith(
                             color: context.forest100,
                             fontWeight: FontWeight.bold,
                           ),
                           leading: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
                             child: CircleAvatar(
                               backgroundImage: NetworkImage(
                                 churchController.churchModel.resultData
-                                    ?.logoImage?.fileInfo.smallUrl ??
+                                        ?.logoImage?.fileInfo.smallUrl ??
                                     "https://cdn.vm-united.com/statics/defaultImage/user/userAvatar.png",
                               ),
                             ),
@@ -121,8 +122,8 @@ class _HomeState extends State<Home>
                           isScrollable: true,
                           labelPadding: EdgeInsets.only(left: 10, right: 10),
                           unselectedLabelColor: context.gray02,
-                          unselectedLabelStyle: context.textStyleCustom
-                              .copyWith(
+                          unselectedLabelStyle:
+                              context.textStyleCustom.copyWith(
                             fontSize: 16,
                           ),
                           labelColor: context.forest90,
@@ -170,11 +171,11 @@ class _HomeState extends State<Home>
                         },
                         child: ListView.separated(
                           itemCount:
-                          feedController.feedList.resultData?.length ?? 1,
+                              feedController.feedList.resultData?.length ?? 1,
                           separatorBuilder: (context, index) {
                             return Divider(
-                              thickness: 5.0,
-                              color: Colors.grey[600],
+                              thickness: 4.0,
+                              color: const Color(0xFFEEEEEE),
                             );
                           },
                           itemBuilder: (BuildContext context, int index) {
@@ -264,15 +265,14 @@ class _HomeState extends State<Home>
                     ],
                   ),
                 );
-              }
-              else  if (snapShot.data == false) {
+              } else if (snapShot.data == false) {
                 return NoData();
-              }
-              else return Center(
-                  child: CircularProgressIndicator(
-                    color: context.forest80,
-                  ));
-            }else {
+              } else
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: context.forest80,
+                ));
+            } else {
               return Center(
                   child: CircularProgressIndicator(
                 color: context.forest80,

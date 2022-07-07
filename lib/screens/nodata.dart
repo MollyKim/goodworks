@@ -13,15 +13,14 @@ class NoData extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              'assets/img/img_nodata.svg',
+            Image.asset('assets/img/img_nodata.png'),
+            Text(
+              "현재 작성된 게시물이 없습니다.",
+              style: context.textStyleCustom.copyWith(
+                  fontSize: 24,
+                  color: context.forest80,
+                  fontWeight: FontWeight.bold),
             ),
-            Text("현재 작성된 게시물이 없습니다.",
-                style: context.textStyleCustom.copyWith(
-                    fontSize: 24,
-                    color: context.forest80,
-                    fontWeight: FontWeight.bold),
-                ),
           ],
         ),
       ),

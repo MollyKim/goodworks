@@ -41,8 +41,8 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
                       aspectRatio: 0.7,
                       enlargeCenterPage: true,
                       enableInfiniteScroll: false,
-                      initialPage: 0,
-                      autoPlay: true,
+                      initialPage: 1,
+                      autoPlay: false,//true,
                     ),
                     items: imageSliders,
                   )),
@@ -57,8 +57,8 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
 
 //
 final List<String> imgList = [
-  'assets/img/img_logo_church.jpg',
   'assets/img/img_rural_church.jpg',
+  'assets/img/img_logo_church.jpg',
   'assets/img/img_urban_church.jpg',
 ];
 //

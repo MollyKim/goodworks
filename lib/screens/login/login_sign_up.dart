@@ -108,7 +108,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "이메일 아이디",
+              "아이디",
               style: context.textStyleCustom.copyWith(
                 fontSize: 14,
                 color: Colors.black,
@@ -125,7 +125,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
           validator: (val) {
             if (val!.length < 1) {
               return '필수사항입니다.';
-            } else if(val.length < 5) {
+            } else if (val.length < 5) {
               return '5자리 이상 20자리 이하로 작성해주세요';
             }
             return null;
@@ -728,17 +728,17 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ),
           onPressed: () async {
             // if(this.formKey.currentState!.validate()){
-              final UserController loginController = Get.find();
-              await loginController.registerUser(
-                  email: idTextEditingController.text,
-                  userpwd: passwordTextEditingController.text,
-                  userName: nameTextEditingController.text,
-                  phoneNumber: phoneNumberTextEditingController.text
-              );
+            final UserController loginController = Get.find();
+            await loginController.registerUser(
+                email: idTextEditingController.text,
+                userpwd: passwordTextEditingController.text,
+                userName: nameTextEditingController.text,
+                phoneNumber: phoneNumberTextEditingController.text);
 
-              if(loginController.userModel.resultCode == "200"){
-            Get.toNamed('/login_welcome');
-              } else Get.toNamed('/login_fail');
+            if (loginController.userModel.resultCode == "200") {
+              Get.offAndToNamed('/splash');
+            } else
+              Get.toNamed('/login_fail');
             // }
           },
           child: Text("가입하기",
@@ -752,7 +752,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
   Widget build(BuildContext context) {
     return DefaultLayout(
       body: SingleChildScrollView(
-        child: Container(
+        child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40),
             child: Form(
               key: this.formKey,
@@ -807,6 +807,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
                   height: 10,
                 ),
                 renderSignUpButton(),
+                SizedBox(
+                  height: 10,
+                ),
               ]),
             )),
       ),

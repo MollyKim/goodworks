@@ -87,8 +87,24 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
         onTap: () {
           Get.toNamed("/pray_community_post");
         },
-        child: SvgPicture.asset(
-          'assets/ic/ic_write.svg',
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.all(
+              Radius.circular(100),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 3,
+                blurRadius: 10,
+                offset: Offset(0.1, 0.1),
+              ),
+            ],
+          ),
+          child: SvgPicture.asset(
+            'assets/ic/ic_write.svg',
+          ),
         ),
       ),
       appBar: AppBar(

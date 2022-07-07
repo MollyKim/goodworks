@@ -14,45 +14,48 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return DefaultLayout(
         body: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            const Color(0xFF60A979),
+            const Color(0xFF2E9067),
+          ],
+        ),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            // margin: EdgeInsets.only(right: 10),
-            // padding: EdgeInsets.all(10),
-            child: SvgPicture.asset(
-              'assets/img/img_logo.svg',
-              // color: Colors.amberAccent,
-              width: 105,
-              height: 109,
-            ),
+
+
+
+          SvgPicture.asset(
+            'assets/img/img_logo.svg',
           ),
-          Container(
-            height: 16,
-          ),
+          const SizedBox(height: 90),
           Container(
             child: Text(
               "교회와 공동체\n그리고 나의 신앙을 세움",
               textAlign: TextAlign.center,
               style: context.textStyleCustom.copyWith(
-                color: context.forest80,
-                fontSize: 18,
+                color: context.forest50,
+                fontSize: 16,
               ),
             ),
           ),
-          Container(
-            height: 16,
-          ),
+
+
+
+          const SizedBox(height: 140),
           SizedBox(
             height: 50,
-            width: 180,
+            width: 298,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(40),
                   ),
-                  primary: context.forest80,
+                  primary: context.forest50,
                 ),
                 onPressed: () {
                   Get.toNamed('/login_select_church');
@@ -61,36 +64,31 @@ class _LoginState extends State<Login> {
                   "시작하기",
                   textAlign: TextAlign.center,
                   style: context.textStyleCustom.copyWith(
-                      color: Colors.white,
+                      color: context.forest80,
                       fontSize: 18,
-                      fontWeight: FontWeight.w500
-                  ),
+                      fontWeight: FontWeight.w500),
                 )),
           ),
-          SizedBox(
-            height: 129,
-          ),
+          const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 '이미 계정이 있나요?',
                 style: context.textStyleCustom.copyWith(
-                    color: context.forest90,
-                    fontSize: 16,
+                  color: context.forest60,
+                  fontSize: 16,
                 ),
               ),
-              SizedBox(
-                width: 5,
-              ),
+              const SizedBox(width: 5),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Get.toNamed('/login_phone');
                 },
                 child: Text(
                   "로그인",
                   style: context.textStyleCustom.copyWith(
-                    color: context.forest90,
+                    color: context.forest50,
                     decoration: TextDecoration.underline,
                     fontSize: 16,
                   ),

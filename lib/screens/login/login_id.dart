@@ -11,7 +11,6 @@ class LoginID extends StatefulWidget {
 }
 
 class _LoginIDState extends State<LoginID> {
-
   @override
   void dispose() {
     idTextEditingController.dispose();
@@ -44,7 +43,7 @@ class _LoginIDState extends State<LoginID> {
             validator: (val) {
               if (val!.length < 1) {
                 return '필수사항입니다.';
-              } else if(val.length < 5) {
+              } else if (val.length < 5) {
                 return '5자리 이상 20자리 이하로 작성해주세요';
               }
               return null;
@@ -71,12 +70,12 @@ class _LoginIDState extends State<LoginID> {
                 borderSide: BorderSide(color: context.forest90!),
               ),
               contentPadding:
-              const EdgeInsets.only(left: 12, top: 11, bottom: 11),
+                  const EdgeInsets.only(left: 12, top: 11, bottom: 11),
               hintStyle: context.textStyleCustom.copyWith(
                 color: context.forest70,
                 fontSize: 14,
               ),
-              hintText: '이메일 아이디를 입력해주세요.',
+              hintText: '아이디를 입력해주세요.',
             ),
           ),
           SizedBox(height: 15),
@@ -148,7 +147,7 @@ class _LoginIDState extends State<LoginID> {
             setState(() {
               IDFlag = true;
             });
-            if (controller.userSession != null) Get.offAllNamed('/main');
+            if (controller.userSession != null) Get.offAndToNamed('/splash');
           },
           child: Text(
             "로그인",
@@ -167,19 +166,21 @@ class _LoginIDState extends State<LoginID> {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
-        body: Container(
-      padding: EdgeInsets.symmetric(horizontal: 19),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 130,
-          ),
-          renderID(),
-          SizedBox(
-            height: 15,
-          ),
-          renderIDButton(),
-        ],
+        body: SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 19),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 130,
+            ),
+            renderID(),
+            SizedBox(
+              height: 15,
+            ),
+            renderIDButton(),
+          ],
+        ),
       ),
     ));
   }
