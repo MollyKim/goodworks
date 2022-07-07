@@ -266,7 +266,7 @@ class _HomeState extends State<Home>
                   ),
                 );
               } else if (snapShot.data == false) {
-                return NoData();
+                return NoData(title: "현재 작성된 게시물이 없습니다.",content: "",);
               } else
                 return Center(
                     child: CircularProgressIndicator(

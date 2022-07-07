@@ -89,16 +89,13 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.all(
-              Radius.circular(100),
-            ),
+            shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 3,
-                blurRadius: 10,
-                offset: Offset(0.1, 0.1),
+                color: Color(0x3f000000),
+                blurRadius: 6,
+                spreadRadius: 0.5,
+                offset: Offset(0, 3),
               ),
             ],
           ),
@@ -348,7 +345,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                   ),
                 );
               } else {
-                return NoData();
+                return NoData(title: "현재 작성된 기도제목이 없습니다",content: "교회 및 공동체 지체들의 기도 제목을\n함께 나누고 기도해요.",);
               }
             } else {
               return Center(

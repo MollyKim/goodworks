@@ -4,7 +4,9 @@ import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/themes/extensions.dart';
 
 class NoData extends StatelessWidget {
-  const NoData({Key? key}) : super(key: key);
+  final String title;
+  final String content;
+  const NoData({Key? key, required this.title, required this.content}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +17,18 @@ class NoData extends StatelessWidget {
           children: [
             Image.asset('assets/img/img_nodata.png'),
             Text(
-              "현재 작성된 게시물이 없습니다.",
+              title,
               style: context.textStyleCustom.copyWith(
                   fontSize: 24,
-                  color: context.forest80,
+                  color: Colors.black,//context.forest80,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 7),
+            Text(
+              content,
+              style: context.textStyleCustom.copyWith(
+                  fontSize: 16,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
           ],

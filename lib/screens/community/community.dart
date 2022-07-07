@@ -111,8 +111,21 @@ class _CommunityState extends State<Community> {
         onTap: () {
           Get.toNamed("/write_community_post");
         },
-        child: SvgPicture.asset(
-          'assets/ic/ic_write.svg',
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x3f000000),
+                blurRadius: 6,
+                spreadRadius: 0.5,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: SvgPicture.asset(
+            'assets/ic/ic_write.svg',
+          ),
         ),
       ),
     );
