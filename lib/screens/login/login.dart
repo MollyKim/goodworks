@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_onboard/flutter_onboard.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/layouts/default_layout.dart';
@@ -10,6 +11,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final PageController _pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
@@ -26,27 +29,50 @@ class _LoginState extends State<Login> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
-
-
-          SvgPicture.asset(
-            'assets/img/img_logo.svg',
-          ),
-          const SizedBox(height: 90),
-          Container(
-            child: Text(
-              "교회와 공동체\n그리고 나의 신앙을 세움",
-              textAlign: TextAlign.center,
-              style: context.textStyleCustom.copyWith(
-                color: context.forest50,
-                fontSize: 16,
+          SizedBox(
+            height: 500,
+            child: OnBoard(
+              pageIndicatorStyle: PageIndicatorStyle(
+                width: 100,
+                inactiveColor: context.forest50!.withOpacity(0.5),
+                activeColor: context.forest50,
+                inactiveSize: Size(8, 8),
+                activeSize: Size(8, 8),
               ),
+              pageController: _pageController,
+              skipButton: const SizedBox(),
+              nextButton: const SizedBox(),
+              onBoardData: [
+                const OnBoardModel(
+                  title: "",
+                  description: "",
+                  imgUrl: "assets/img/img_logo.png",
+                ),
+                const OnBoardModel(
+                  title: "",
+                  description: "",
+                  imgUrl: "assets/img/img_logo.png",
+                ),
+              ],
             ),
           ),
 
+          // SvgPicture.asset(
+          //   'assets/img/img_logo.svg',
+          // ),
+          // const SizedBox(height: 90),
+          // Container(
+          //   child: Text(
+          //     "교회와 공동체\n그리고 나의 신앙을 세움",
+          //     textAlign: TextAlign.center,
+          //     style: context.textStyleCustom.copyWith(
+          //       color: context.forest50,
+          //       fontSize: 16,
+          //     ),
+          //   ),
+          // ),
 
-
-          const SizedBox(height: 140),
+          const SizedBox(height: 100),
           SizedBox(
             height: 50,
             width: 298,
