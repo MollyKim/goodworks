@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_onboard/flutter_onboard.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/themes/extensions.dart';
@@ -46,12 +45,27 @@ class _LoginState extends State<Login> {
                 const OnBoardModel(
                   title: "",
                   description: "",
-                  imgUrl: "assets/img/img_logo.png",
+                  imgUrl: "assets/img/img_onbording1.png",
                 ),
                 const OnBoardModel(
                   title: "",
                   description: "",
-                  imgUrl: "assets/img/img_logo.png",
+                  imgUrl: "assets/img/img_onbording2.png",
+                ),
+                const OnBoardModel(
+                  title: "",
+                  description: "",
+                  imgUrl: "assets/img/img_onbording3.png",
+                ),
+                const OnBoardModel(
+                  title: "",
+                  description: "",
+                  imgUrl: "assets/img/img_onbording4.png",
+                ),
+                const OnBoardModel(
+                  title: "",
+                  description: "",
+                  imgUrl: "assets/img/img_onbording5.png",
                 ),
               ],
             ),
