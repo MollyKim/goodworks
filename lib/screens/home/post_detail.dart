@@ -117,17 +117,18 @@ class HomePostDetail extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
+            feedController.feedList.resultData?[index].attachments?[index].fileInfo.smallUrl != null
+            ? Container(
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: feedController.feedList.resultData?[index].attachments![index].fileInfo.smallUrl!
-                ?? "https://cosmosmagazine.com/wp-content/uploads/2020/02/191010_nature.jpg",
+                imageUrl: feedController.feedList.resultData?[index].attachments?[index].fileInfo.smallUrl!
+                ?? "",
                 height: 300.0,
                 placeholder: (context, url) =>
                     Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-            ),
+            ) : Container(),
             SizedBox(height: 15,),
           ],
         );

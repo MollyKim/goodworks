@@ -23,31 +23,31 @@ class Feed {
 
 @JsonSerializable()
 class FeedResultData {
-  final String id;
-  final int churchId;
-  final int churchUserId;
-  final String title;
-  final int feedType;
-  final int feedStatus;
+  final String? id;
+  final int? churchId;
+  final int? churchUserId;
+  final String? title;
+  final int? feedType;
+  final int? feedStatus;
   final String? content;
-  final int favoriteCount;
-  final int commentCount;
-  final bool pinned;
+  final int? favoriteCount;
+  final int? commentCount;
+  final bool? pinned;
   final List<FeedAttachment>? attachments;
-  final String createdAt;
-  final String updatedAt;
+  final String? createdAt;
+  final String? updatedAt;
   final String? deletedAt;
 
   FeedResultData(
-      {required this.id,
-      required this.churchId,
-      required this.churchUserId,
-      required this.title,
-      required this.feedType,
-      required this.feedStatus, this.content, this.favoriteCount : 0, this.commentCount : 0,
-      required this.pinned, this.attachments,
-      required this.createdAt,
-      required this.updatedAt, this.deletedAt});
+      { this.id,
+       this.churchId,
+       this.churchUserId,
+       this.title,
+       this.feedType,
+       this.feedStatus, this.content, this.favoriteCount : 0, this.commentCount : 0,
+       this.pinned, this.attachments,
+       this.createdAt,
+       this.updatedAt, this.deletedAt});
 
   factory FeedResultData.fromJson(Map<String, dynamic> json) =>
       _$FeedResultDataFromJson(json);
@@ -57,19 +57,19 @@ class FeedResultData {
 
 @JsonSerializable()
 class FeedAttachment {
-  final int id;
-  final String feedId;
-  final FeedFileInfo fileInfo;
-  final String attachType;
+  final int? id;
+  final String? feedId;
+  final FeedFileInfo? fileInfo;
+  final String? attachType;
 
   factory FeedAttachment.fromJson(Map<String, dynamic> json) =>
       _$FeedAttachmentFromJson(json);
 
   FeedAttachment({
-      required this.id,
-      required this.feedId,
-      required this.fileInfo,
-      required this.attachType});
+       this.id,
+       this.feedId,
+       this.fileInfo,
+       this.attachType});
 
   Map<String, dynamic> toJson() => _$FeedAttachmentToJson(this);
 }

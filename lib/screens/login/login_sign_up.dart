@@ -157,7 +157,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
               color: context.forest70,
               fontSize: 14,
             ),
-            hintText: '이메일 주소를 입력하세요.',
+            hintText: '아이디를 입력하세요.',
           ),
         ),
       ],

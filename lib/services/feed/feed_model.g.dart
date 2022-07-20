@@ -26,21 +26,21 @@ Map<String, dynamic> _$FeedToJson(Feed instance) => <String, dynamic>{
 
 FeedResultData _$FeedResultDataFromJson(Map<String, dynamic> json) {
   return FeedResultData(
-    id: json['id'] as String,
-    churchId: json['churchId'] as int,
-    churchUserId: json['churchUserId'] as int,
-    title: json['title'] as String,
-    feedType: json['feedType'] as int,
-    feedStatus: json['feedStatus'] as int,
+    id: json['id'] as String?,
+    churchId: json['churchId'] as int?,
+    churchUserId: json['churchUserId'] as int?,
+    title: json['title'] as String?,
+    feedType: json['feedType'] as int?,
+    feedStatus: json['feedStatus'] as int?,
     content: json['content'] as String?,
-    favoriteCount: json['favoriteCount'] as int,
-    commentCount: json['commentCount'] as int,
-    pinned: json['pinned'] as bool,
+    favoriteCount: json['favoriteCount'] as int?,
+    commentCount: json['commentCount'] as int?,
+    pinned: json['pinned'] as bool?,
     attachments: (json['attachments'] as List<dynamic>?)
         ?.map((e) => FeedAttachment.fromJson(e as Map<String, dynamic>))
         .toList(),
-    createdAt: json['createdAt'] as String,
-    updatedAt: json['updatedAt'] as String,
+    createdAt: json['createdAt'] as String?,
+    updatedAt: json['updatedAt'] as String?,
     deletedAt: json['deletedAt'] as String?,
   );
 }
@@ -65,10 +65,12 @@ Map<String, dynamic> _$FeedResultDataToJson(FeedResultData instance) =>
 
 FeedAttachment _$FeedAttachmentFromJson(Map<String, dynamic> json) {
   return FeedAttachment(
-    id: json['id'] as int,
-    feedId: json['feedId'] as String,
-    fileInfo: FeedFileInfo.fromJson(json['fileInfo'] as Map<String, dynamic>),
-    attachType: json['attachType'] as String,
+    id: json['id'] as int?,
+    feedId: json['feedId'] as String?,
+    fileInfo: json['fileInfo'] == null
+        ? null
+        : FeedFileInfo.fromJson(json['fileInfo'] as Map<String, dynamic>),
+    attachType: json['attachType'] as String?,
   );
 }
 

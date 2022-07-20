@@ -17,6 +17,7 @@ class HomePostList extends StatelessWidget {
 
     return GestureDetector(
       onTap: () async {
+        print("123");
         await feedController.getFeedDetail(
             churchId:
             feedController.feedList.resultData?[index].churchId ?? 1,
