@@ -31,7 +31,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
   late final Future callPrayApis;
 
   String year = '2022';
-  String month = '01';
+  String month = '07';
   late String time = year + '-' + month;
 
   @override

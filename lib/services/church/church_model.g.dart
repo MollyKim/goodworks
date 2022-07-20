@@ -41,7 +41,7 @@ ChurchResultData _$ChurchResultDataFromJson(Map<String, dynamic> json) {
     ownerId: json['ownerId'] as int,
     updatedAt: json['updatedAt'] as String?,
     introduce: json['introduce'] as String?,
-    title: json['title'] as String?,
+    name: json['name'] as String?,
     memberCount: json['memberCount'] as int?,
     landscapeImage: json['landscapeImage'] == null
         ? null
@@ -64,7 +64,7 @@ Map<String, dynamic> _$ChurchResultDataToJson(ChurchResultData instance) =>
       'communityLimit': instance.communityLimit,
       'depthLimit': instance.depthLimit,
       'churchType': instance.churchType,
-      'title': instance.title,
+      'name': instance.name,
       'introduce': instance.introduce,
       'logoImage': instance.logoImage,
       'portraitImage': instance.portraitImage,

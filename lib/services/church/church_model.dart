@@ -32,7 +32,7 @@ class ChurchResultData {
   final int? communityLimit;
   final int? depthLimit;
   final int? churchType;
-  final String? title;
+  final String? name;
   final String? introduce;
   final ChurchAttachment? logoImage;
   final ChurchAttachment? portraitImage;
@@ -54,7 +54,7 @@ class ChurchResultData {
     required this.ownerId,
     this.updatedAt,
     this.introduce,
-    this.title,
+    this.name,
     this.memberCount,
     this.landscapeImage,
     this.portraitImage,

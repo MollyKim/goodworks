@@ -17,14 +17,6 @@ class Main extends StatefulWidget {
   _MainState createState() => _MainState();
 }
 
-// Future<PostLoginInfoModel?> login() async{
-//   final LoginController loginController = Get.find();
-//   final PostLoginInfoModel? resp = await loginController.loginInfos(
-//     uid: 'phil',
-//     passwd: 'qweqwe123',);
-// return resp;
-// }
-
 class _MainState extends State<Main> {
   UserModel? result;
 
@@ -33,7 +25,7 @@ class _MainState extends State<Main> {
     return GetBuilder<BottomNaviController>(
         init: BottomNaviController(),
         builder: (controller) {
-        return DefaultLayout(
+          return DefaultLayout(
             body: IndexedStack(
               index: controller.selectedIndex,
               children: <Widget>[
@@ -44,31 +36,41 @@ class _MainState extends State<Main> {
                 Menu(),
               ],
             ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            items: <BottomNavigationBarItem>[
-              bottomStyle('assets/ic/ic_home',controller.selectedIndex,0),
-              bottomStyle('assets/ic/ic_worship',controller.selectedIndex,1),
-              bottomStyle('assets/ic/ic_pray',controller.selectedIndex,2),
-              bottomStyle('assets/ic/ic_community',controller.selectedIndex,3),
-              bottomStyle('assets/ic/ic_my',controller.selectedIndex,4),
-            ],
-            currentIndex: controller.selectedIndex,
-            onTap: controller.onItemTapped,
-            backgroundColor: Colors.white,
-          ),
-        );
-      }
-    );
+            bottomNavigationBar: BottomNavigationBar(
+              selectedFontSize: 0,
+              unselectedFontSize: 0,
+              type: BottomNavigationBarType.fixed,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              items: <BottomNavigationBarItem>[
+                bottomStyle('assets/ic/ic_home', controller.selectedIndex, 0),
+                bottomStyle(
+                    'assets/ic/ic_worship', controller.selectedIndex, 1),
+                bottomStyle('assets/ic/ic_pray', controller.selectedIndex, 2),
+                bottomStyle(
+                    'assets/ic/ic_community', controller.selectedIndex, 3),
+                bottomStyle('assets/ic/ic_my', controller.selectedIndex, 4),
+              ],
+              currentIndex: controller.selectedIndex,
+              onTap: controller.onItemTapped,
+              backgroundColor: Colors.white,
+            ),
+          );
+        });
   }
-  bottomStyle(String icon,int selectedIndex,int myIndex){
+
+  bottomStyle(String icon, int selectedIndex, int myIndex) {
     return BottomNavigationBarItem(
       icon: myIndex == selectedIndex
-          ? SvgPicture.asset(icon+"_active.svg")
-          : SvgPicture.asset(icon+".svg"),
-      label:"",
+          ? Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: SvgPicture.asset(icon + "_active.svg"),
+            )
+          : Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: SvgPicture.asset(icon + ".svg"),
+            ),
+      label: "",
     );
   }
 }

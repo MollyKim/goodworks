@@ -93,8 +93,9 @@ class _HomeState extends State<Home>
                           elevation: 0,
                           titleSpacing: 0,
                           backgroundColor: Colors.white,
+                          centerTitle: false,
                           title: Text(
-                              churchController.churchModel.resultData?.title ??
+                              churchController.churchModel.resultData?.name ??
                                   "교회"),
                           titleTextStyle: context.textStyleCustom.copyWith(
                             color: context.forest100,
