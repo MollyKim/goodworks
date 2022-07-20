@@ -22,7 +22,7 @@ class CommunityPostList extends StatelessWidget {
         Get.toNamed("/community_post_detail");
       },
       child: Padding(
-        padding: const EdgeInsets.only(top: 8.0, left: 15, right: 15),
+        padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
         child: Container(
           color: Colors.white,
           child: Column(

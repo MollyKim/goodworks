@@ -25,7 +25,7 @@ class HomePostList extends StatelessWidget {
         Get.toNamed("/home_post_detail", arguments: index);
       },
       child: Padding(
-        padding: const EdgeInsets.only(top: 8.0, left: 15, right: 15),
+        padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
         child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,13 +58,13 @@ class HomePostList extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              // Text(feedController.feedList.resultData?[index].title ?? "공지사항",
-              //   style: TextStyle(
-              //       fontFamily: "AppleSDGothicNeo",
-              //       fontSize: 18,
-              //       fontWeight: FontWeight.bold),
-              // ),
-              // SizedBox(height: 10,),
+              Text(feedController.feedList.resultData?[index].title ?? "공지사항",
+                style: TextStyle(
+                    fontFamily: "AppleSDGothicNeo",
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10,),
               Text(
                 feedController.feedList.resultData?[index].content ?? "",
                 maxLines: 5,

@@ -52,8 +52,10 @@ class _CommunityState extends State<Community> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: false,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        titleSpacing: 20,
         title: Text(
           "청년부",
           style: TextStyle(

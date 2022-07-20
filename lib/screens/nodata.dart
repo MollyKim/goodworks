@@ -18,17 +18,19 @@ class NoData extends StatelessWidget {
             Image.asset('assets/img/img_nodata.png'),
             Text(
               title,
+              textAlign: TextAlign.center,
               style: context.textStyleCustom.copyWith(
-                  fontSize: 24,
-                  color: Colors.black,//context.forest80,
+                  fontSize: 20,
+                  color: context.forest80,//context.forest80,
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 7),
             Text(
               content,
+              textAlign: TextAlign.center,
               style: context.textStyleCustom.copyWith(
                   fontSize: 16,
-                  color: Colors.black,
+                  color: context.gray04,
                   fontWeight: FontWeight.bold),
             ),
           ],

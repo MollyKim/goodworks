@@ -106,24 +106,26 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
         ),
       ),
       appBar: AppBar(
-        elevation: 2.0,
-        titleSpacing: 0,
+        elevation: 0.0,
+        titleSpacing: 20,
         backgroundColor: Colors.white,
-        leading: Center(
-            child: Text(
-          '기도',
+        centerTitle: false,
+        title: Text(
+          "기도",
           style: TextStyle(
-            color: Color(0xff2d9067),
+            fontWeight: FontWeight.bold,
             fontSize: 20,
             fontFamily: "AppleSDGothicNeo",
-            fontWeight: FontWeight.w700,
+            color: Color(0xff2d9067),
           ),
-        )),
+        ),
       ),
       body: FutureBuilder(
           future: callPrayApis,
           builder: (context, snapshot) {
             if(snapshot.connectionState == ConnectionState.done) {
+              print(snapshot.hasData);
+
               if (snapshot.hasData && snapshot.data == true) {
                 return NestedScrollView(
                   controller: scrollController,

@@ -90,7 +90,7 @@ class _HomeState extends State<Home>
                         backgroundColor: Colors.white,
                         pinned: true,
                         flexibleSpace: AppBar(
-                          elevation: 0.5,
+                          elevation: 0,
                           titleSpacing: 0,
                           backgroundColor: Colors.white,
                           title: Text(
@@ -115,7 +115,7 @@ class _HomeState extends State<Home>
                       ),
                       SliverAppBar(
                         automaticallyImplyLeading: false,
-                        elevation: 0,
+                        elevation: 0.5,
                         backgroundColor: Colors.white,
                         pinned: true,
                         flexibleSpace: TabBar(

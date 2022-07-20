@@ -39,6 +39,9 @@ extension ThemeColor on BuildContext {
   Color? get gray02 =>
       dynamicColor(light: const Color(0xFF929292), dark: const Color(0xFF6F6F6F));
 
+  Color? get gray04 =>
+      dynamicColor(light: const Color(0xFF7C7C7C), dark: const Color(0xFF7C7C7C));
+
   Color? get success =>
       dynamicColor(light: const Color(0xFF0073CB), dark: const Color(0xFF6AB6F0));
 
