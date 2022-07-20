@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/screens/pray/pray_post_list.dart';
 import 'package:practice/screens/worship/worship_post_list.dart';
+import 'package:practice/util/seperator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class Worship extends StatefulWidget {
@@ -115,10 +116,7 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
               child: ListView.separated(
                 itemCount: 5,
                 separatorBuilder: (context, index) {
-                  return Divider(
-                    thickness: 3.0,
-                    color: Colors.grey[600],
-                  );
+                  return CustomSeparator();
                 },
                 itemBuilder: (BuildContext context, int index) {
                   return WorshipPostList();
@@ -128,10 +126,7 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
             ListView.separated(
               itemCount: 5,
               separatorBuilder: (context, index) {
-                return Divider(
-                  thickness: 3.0,
-                  color: Colors.grey[600],
-                );
+                return CustomSeparator();
               },
               itemBuilder: (BuildContext context, int index) {
                 return PrayPostList();
@@ -140,10 +135,7 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
             ListView.separated(
               itemCount: 5,
               separatorBuilder: (context, index) {
-                return Divider(
-                  thickness: 3.0,
-                  color: Colors.grey[600],
-                );
+                return CustomSeparator();
               },
               itemBuilder: (BuildContext context, int index) {
                 return PrayPostList();
@@ -152,10 +144,7 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
             ListView.separated(
               itemCount: 5,
               separatorBuilder: (context, index) {
-                return Divider(
-                  thickness: 3.0,
-                  color: Colors.grey[600],
-                );
+                return CustomSeparator();
               },
               itemBuilder: (BuildContext context, int index) {
                 return PrayPostList();
@@ -164,10 +153,7 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
             ListView.separated(
               itemCount: 5,
               separatorBuilder: (context, index) {
-                return Divider(
-                  thickness: 3.0,
-                  color: Colors.grey[600],
-                );
+                return CustomSeparator();
               },
               itemBuilder: (BuildContext context, int index) {
                 return PrayPostList();
@@ -176,10 +162,7 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
             ListView.separated(
               itemCount: 5,
               separatorBuilder: (context, index) {
-                return Divider(
-                  thickness: 3.0,
-                  color: Colors.grey[600],
-                );
+                return CustomSeparator();
               },
               itemBuilder: (BuildContext context, int index) {
                 return PrayPostList();

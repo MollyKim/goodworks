@@ -20,4 +20,12 @@ abstract class CommunityService {
       @Path("churchID") String churchID,
       @Path("communityID") String communityID,
       );
+
+  @POST('/api/v1/seum/church/{churchID}/community/{communityID}/feed')
+  Future<CommunityModel> postCommunityPost(
+      @Header('Authorization') String token,
+      @Path("churchID") String churchID,
+      @Path("communityID") String communityID,
+      @Body() Map<String,dynamic> body,
+      );
 }

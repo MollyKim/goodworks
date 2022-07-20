@@ -21,4 +21,16 @@ class CommunityController extends BaseController{
     this.communityList  = await super.rootService.communityService.getCommunityDetail(token,churchId,communityId);
     update();
   }
+
+  Future<void> postCommunityPost({required String churchId, required String communityId}) async{
+    String token = "Bearer ${userController.userSession}";
+    Map<String,dynamic> body = {
+      // 'title' : title,
+      // 'type' : 1,
+      // 'content' : content,
+      // 'attachments' : attatchment[],
+      // 'attachType' :
+    };
+    await super.rootService.communityService.postCommunityPost(token,churchId,communityId,body);
+  }
 }

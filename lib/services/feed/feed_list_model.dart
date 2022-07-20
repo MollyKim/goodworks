@@ -35,7 +35,7 @@ class FeedListResultData {
   final Avatar avatar;
   final String? title;
   final String? content;
-  final int? feedType;
+  final int? feedType; // 커뮤니티, 공개, 교회소식(공지), 주보
   final int? feedStatus;
   final bool? pinned;
   final bool? myFavorite;

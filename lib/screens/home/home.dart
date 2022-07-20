@@ -7,6 +7,7 @@ import 'package:practice/controllers/feed_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/screens/nodata.dart';
 import 'package:practice/themes/extensions.dart';
+import 'package:practice/util/seperator.dart';
 import 'post_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -173,10 +174,7 @@ class _HomeState extends State<Home>
                           itemCount:
                               feedController.feedList.resultData?.length ?? 1,
                           separatorBuilder: (context, index) {
-                            return Divider(
-                              thickness: 4.0,
-                              color: const Color(0xFFEEEEEE),
-                            );
+                            return CustomSeparator();
                           },
                           itemBuilder: (BuildContext context, int index) {
                             return HomePostList(index);
@@ -213,9 +211,7 @@ class _HomeState extends State<Home>
                         child: ListView.separated(
                           itemCount: 1,
                           separatorBuilder: (context, index) {
-                            return Divider(
-                              thickness: 2.0,
-                            );
+                            return CustomSeparator();
                           },
                           itemBuilder: (BuildContext context, int index) {
                             return HomePostList(index);
@@ -252,10 +248,7 @@ class _HomeState extends State<Home>
                         child: ListView.separated(
                           itemCount: 1,
                           separatorBuilder: (context, index) {
-                            return Divider(
-                              thickness: 2.0,
-                              color: Colors.grey[800],
-                            );
+                           return CustomSeparator();
                           },
                           itemBuilder: (BuildContext context, int index) {
                             return HomePostList(index);

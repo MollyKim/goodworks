@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/screens/community/post_list.dart';
+import 'package:practice/util/seperator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class Community extends StatefulWidget {
@@ -97,9 +98,7 @@ class _CommunityState extends State<Community> {
           child: ListView.separated(
             itemCount: communityController.communityList.resultData?.length ?? 1,
             separatorBuilder: (context, index) {
-              return Divider(
-                thickness: 2.0,
-              );
+              return CustomSeparator();
             },
             itemBuilder: (BuildContext context, int index) {
               return CommunityPostList(index);

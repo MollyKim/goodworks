@@ -11,6 +11,7 @@ import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/screens/nodata.dart';
 import 'package:practice/screens/pray/pray_post_list.dart';
 import 'package:practice/themes/extensions.dart';
+import 'package:practice/util/seperator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class Pray extends StatefulWidget {
@@ -319,10 +320,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                           itemCount:
                               prayController.prayList.resultData?.length ?? 0,
                           separatorBuilder: (context, index) {
-                            return Divider(
-                              thickness: 3.0,
-                              color: Colors.grey[600],
-                            );
+                            return CustomSeparator();
                           },
                           itemBuilder: (BuildContext context, int index) {
                             return PrayPostList();
@@ -332,10 +330,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                       ListView.separated(
                         itemCount: 5,
                         separatorBuilder: (context, index) {
-                          return Divider(
-                            thickness: 3.0,
-                            color: Colors.grey[600],
-                          );
+                          return CustomSeparator();
                         },
                         itemBuilder: (BuildContext context, int index) {
                           return PrayPostList();
