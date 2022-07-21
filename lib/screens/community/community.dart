@@ -38,7 +38,11 @@ class _CommunityState extends State<Community> {
         RefreshController(initialRefresh: false);
 
     void _onRefresh() async {
-      await Future.delayed(Duration(milliseconds: 1000));
+      try{
+        communityController.getCommunityListData(churchId:  churchController.churchModel.resultData?.id ?? 1);
+      } catch(e){
+        print("error!! in community : $e");
+      }
       _refreshController.refreshCompleted();
     }
 

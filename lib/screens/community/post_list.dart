@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/screens/home/post_list.dart';
-import 'package:practice/screens/login/login_select_church.dart';
+import 'package:practice/themes/extensions.dart';
 import 'package:practice/util/getTimeAgo.dart';
 
 class CommunityPostList extends StatelessWidget {
@@ -62,7 +61,12 @@ class CommunityPostList extends StatelessWidget {
                     ),
                   ),
                   Text(getTimeAge(communityController
-                      .communityList.resultData?[index].createdAt))
+                      .communityList.resultData?[index].createdAt),
+                    style: TextStyle(
+                      color: context.gray04,
+                        fontFamily: "AppleSDGothicNeo",
+                        fontSize: 12,),
+                  )
                 ],
               ),
               SizedBox(

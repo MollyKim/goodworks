@@ -27,6 +27,7 @@ class PrayList {
 class PrayListResultData {
   final int id;
   final int communityId;
+  final String? communityName;
   final String? communityTitle;
   final int? communityType;
   final int? ownerChurchUserID;
@@ -34,7 +35,7 @@ class PrayListResultData {
   final int? churchUserType;
   final Avatar? avatar;
   final String? content;
-  final String createdAt;
+  final String? createdAt;
   final String? updatedAt;
   final String? deletedAt;
   final bool isMine;
@@ -42,16 +43,17 @@ class PrayListResultData {
   PrayListResultData({
     required this.id,
     required this.communityId,
-    required this.communityTitle,
-    required this.communityType,
-    required this.ownerChurchUserID,
-    required this.userName,
-    required this.churchUserType,
-    required this.avatar,
-    required this.content,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.deletedAt,
+    this.communityName,
+    this.communityTitle,
+    this.communityType,
+    this.ownerChurchUserID,
+    this.userName,
+    this.churchUserType,
+    this.avatar,
+    this.content,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
     required this.isMine,
   });
 

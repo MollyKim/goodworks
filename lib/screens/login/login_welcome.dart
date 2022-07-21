@@ -90,7 +90,7 @@ class LoginWelcome extends StatelessWidget {
             primary: context.forest80,
           ),
           onPressed: () {
-            Get.toNamed('/main');
+            Get.offAllNamed('/main');
           },
           child: Text(
             "입장하기",

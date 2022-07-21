@@ -71,7 +71,7 @@ class _RootState extends State<Root> {
   List<GetPage> renderPages() {
     return [
       GetPage(
-        name: '/',
+        name: '/main',
         page: () => Main(),
         transition: Transition.rightToLeft,
       ),

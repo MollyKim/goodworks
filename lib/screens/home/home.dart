@@ -59,7 +59,7 @@ class _HomeState extends State<Home>
   Widget build(BuildContext context) {
     super.build(context);
 
-    TabController tabController = TabController(length: 3, vsync: this);
+    TabController tabController = TabController(length: 1, vsync: this);
     return DefaultLayout(
       body: FutureBuilder(
           future: callApis,
@@ -114,31 +114,31 @@ class _HomeState extends State<Home>
                           ),
                         ),
                       ),
-                      SliverAppBar(
-                        automaticallyImplyLeading: false,
-                        elevation: 0.5,
-                        backgroundColor: Colors.white,
-                        pinned: true,
-                        flexibleSpace: TabBar(
-                          indicatorColor: Colors.transparent,
-                          isScrollable: true,
-                          labelPadding: EdgeInsets.only(left: 10, right: 10),
-                          unselectedLabelColor: context.gray02,
-                          unselectedLabelStyle:
-                              context.textStyleCustom.copyWith(
-                            fontSize: 16,
-                          ),
-                          labelColor: context.forest90,
-                          labelStyle: context.textStyleCustom.copyWith(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                          controller: tabController,
-                          tabs: <Widget>[
-                            Tab(text: '전체'),
-                            Tab(text: '주보'),
-                            Tab(text: '교회소식'),
-                          ],
-                        ),
-                      ),
+                      // SliverAppBar(
+                      //   automaticallyImplyLeading: false,
+                      //   elevation: 0.5,
+                      //   backgroundColor: Colors.white,
+                      //   pinned: true,
+                      //   flexibleSpace: TabBar(
+                      //     indicatorColor: Colors.transparent,
+                      //     isScrollable: true,
+                      //     labelPadding: EdgeInsets.only(left: 10, right: 10),
+                      //     unselectedLabelColor: context.gray02,
+                      //     unselectedLabelStyle:
+                      //         context.textStyleCustom.copyWith(
+                      //       fontSize: 16,
+                      //     ),
+                      //     labelColor: context.forest90,
+                      //     labelStyle: context.textStyleCustom.copyWith(
+                      //         fontSize: 16, fontWeight: FontWeight.bold),
+                      //     controller: tabController,
+                      //     tabs: <Widget>[
+                      //       Tab(text: '전체'),
+                      //       Tab(text: '주보'),
+                      //       Tab(text: '교회소식'),
+                      //     ],
+                      //   ),
+                      // ),
                     ];
                   },
                   body: TabBarView(
@@ -176,80 +176,6 @@ class _HomeState extends State<Home>
                               feedController.feedList.resultData?.length ?? 1,
                           separatorBuilder: (context, index) {
                             return CustomSeparator();
-                          },
-                          itemBuilder: (BuildContext context, int index) {
-                            return HomePostList(index);
-                          },
-                        ),
-                      ),
-                      SmartRefresher(
-                        enablePullDown: true,
-                        controller: _juboRefreshController,
-                        header: ClassicHeader(
-                          height: 100,
-                          idleIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          idleText: "",
-                          refreshingIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          releaseIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          completeIcon: null,
-                          completeText: "",
-                          completeDuration: Duration.zero,
-                          releaseText: "",
-                          refreshingText: "",
-                        ),
-                        onRefresh: () {
-                          _onRefresh("jubo");
-                        },
-                        onLoading: () {
-                          _onLoading("jubo");
-                        },
-                        child: ListView.separated(
-                          itemCount: 1,
-                          separatorBuilder: (context, index) {
-                            return CustomSeparator();
-                          },
-                          itemBuilder: (BuildContext context, int index) {
-                            return HomePostList(index);
-                          },
-                        ),
-                      ),
-                      SmartRefresher(
-                        enablePullDown: true,
-                        controller: _newsRefreshController,
-                        header: ClassicHeader(
-                          height: 100,
-                          idleIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          idleText: "",
-                          refreshingIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          releaseIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          completeIcon: null,
-                          completeText: "",
-                          completeDuration: Duration.zero,
-                          releaseText: "",
-                          refreshingText: "",
-                        ),
-                        onRefresh: () {
-                          _onRefresh("news");
-                        },
-                        onLoading: () {
-                          _onLoading("news");
-                        },
-                        child: ListView.separated(
-                          itemCount: 1,
-                          separatorBuilder: (context, index) {
-                           return CustomSeparator();
                           },
                           itemBuilder: (BuildContext context, int index) {
                             return HomePostList(index);

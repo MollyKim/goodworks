@@ -34,29 +34,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
   String month = '07';
   late String time = year + '-' + month;
 
-  @override
-  void initState() {
-    callPrayApis = getPray();
-    super.initState();
-  }
-
-  getPray() async {
-    try {
-      await prayController.getPrayListData(userController.userSession!,
-          churchId: churchController.churchModel.resultData?.id ?? 1,
-          time: time);
-    } catch (e) {
-      print("error!! in pray : $e");
-    }
-
-    if(prayController.prayList.resultCode == "0000" && prayController.prayList.resultData?.length != 0) {
-      return true;
-    } else return false;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    const PickerData2 = '''
+  final pickerData2 = '''
 [
     [
         2021,
@@ -79,11 +57,36 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
 ]
     ''';
 
+  @override
+  void initState() {
+    callPrayApis = getPray();
+    super.initState();
+  }
+
+  getPray() async {
+    try {
+      await prayController.getPrayListData(userController.userSession!,
+          churchId: churchController.churchModel.resultData?.id ?? 1,
+          time: time);
+    } catch (e) {
+      print("error!! in pray : $e");
+    }
+
+    if (prayController.prayList.resultCode == "0000" &&
+        prayController.prayList.resultData?.length != 0) {
+      return true;
+    } else
+      return false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     TabController tabController = TabController(
-      length: 2,
+      length: 1, // 2
       vsync: this,
     );
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: GestureDetector(
         onTap: () {
           Get.toNamed("/pray_community_post");
@@ -105,27 +108,10 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
           ),
         ),
       ),
-      appBar: AppBar(
-        elevation: 0.0,
-        titleSpacing: 20,
-        backgroundColor: Colors.white,
-        centerTitle: false,
-        title: Text(
-          "기도",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            fontFamily: "AppleSDGothicNeo",
-            color: Color(0xff2d9067),
-          ),
-        ),
-      ),
       body: FutureBuilder(
           future: callPrayApis,
           builder: (context, snapshot) {
-            if(snapshot.connectionState == ConnectionState.done) {
-              print(snapshot.hasData);
-
+            if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData && snapshot.data == true) {
                 return NestedScrollView(
                   controller: scrollController,
@@ -137,156 +123,17 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                         elevation: 0,
                         backgroundColor: Colors.white,
                         pinned: true,
-                        bottom: PreferredSize(
-                          // Add this code
-                          preferredSize: Size.fromHeight(40.0), // Add this code
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                right: 10, left: 10, bottom: 20),
-                            child: Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Picker(
-                                        adapter: PickerDataAdapter<String>(
-                                            pickerdata: new JsonDecoder()
-                                                .convert(PickerData2),
-                                            isArray: true),
-                                        hideHeader: true,
-                                        title: new Text("날짜 선택"),
-                                        cancelText: '취소',
-                                        confirmText: '선택',
-                                        onConfirm: (Picker picker, List value) {
-                                          print(value.toString());
-                                          setState(() {
-                                            year = picker
-                                                .getSelectedValues()
-                                                .first;
-                                            month =
-                                                picker.getSelectedValues().last;
-                                            getPray();
-                                          });
-                                          print(
-                                              picker.getSelectedValues().first);
-                                        }).showDialog(context);
-                                  },
-                                  child: Container(
-                                    width: 80,
-                                    height: 32,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Color(0xff2d9067),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          year,
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontFamily: "AppleSDGothicNeo",
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        SvgPicture.asset(
-                                          'assets/ic/ic_bottom.svg',
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Picker(
-                                        adapter: PickerDataAdapter<String>(
-                                            pickerdata: new JsonDecoder()
-                                                .convert(PickerData2),
-                                            isArray: true),
-                                        hideHeader: true,
-                                        title: new Text("날짜 선택"),
-                                        cancelText: '취소',
-                                        confirmText: '선택',
-                                        onConfirm: (Picker picker, List value) {
-                                          print(value.toString());
-                                          setState(() {
-                                            year = picker
-                                                .getSelectedValues()
-                                                .first;
-                                            month =
-                                                picker.getSelectedValues().last;
-                                            getPray();
-                                          });
-                                          print(
-                                              picker.getSelectedValues().first);
-                                        }).showDialog(context);
-                                  },
-                                  child: Container(
-                                    width: 62,
-                                    height: 32,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Color(0xff2d9067),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          month,
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontFamily: "AppleSDGothicNeo",
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        SvgPicture.asset(
-                                          'assets/ic/ic_bottom.svg',
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ), // Add this code
-                        ),
-                        flexibleSpace: TabBar(
-                          indicatorColor: Colors.transparent,
-                          isScrollable: true,
-                          labelPadding: EdgeInsets.only(left: 10, right: 10),
-                          unselectedLabelColor: Colors.grey,
-                          unselectedLabelStyle: TextStyle(
-                            fontSize: 14,
-                            fontFamily: "AppleSDGothicNeo",
-                            fontWeight: FontWeight.w700,
+                        flexibleSpace: AppBar(
+                          elevation: 0,
+                          titleSpacing: 20,
+                          backgroundColor: Colors.white,
+                          centerTitle: false,
+                          title: Text("기도"),
+                          titleTextStyle: context.textStyleCustom.copyWith(
+                            color: context.forest80,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
-                          labelColor: Color(0xff2d9067),
-                          labelStyle: TextStyle(
-                            color: Color(0xff2d9067),
-                            fontSize: 14,
-                            fontFamily: "AppleSDGothicNeo",
-                            fontWeight: FontWeight.w700,
-                          ),
-                          controller: tabController,
-                          tabs: <Widget>[
-                            Tab(text: '교회 기도'),
-                            Tab(text: '소그룹 기도'),
-                            // Tab(text: '청년부'),
-                          ],
                         ),
                       ),
                     ];
@@ -316,8 +163,12 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                           refreshingText: "",
                         ),
                         // header: WaterDropHeader(),
-                        onRefresh: _onRefresh,
-                        onLoading: _onLoading,
+                        onRefresh: () {
+                          _onRefresh();
+                        },
+                        onLoading: () {
+                          _onLoading();
+                        },
                         child: ListView.separated(
                           itemCount:
                               prayController.prayList.resultData?.length ?? 0,
@@ -325,24 +176,27 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                             return CustomSeparator();
                           },
                           itemBuilder: (BuildContext context, int index) {
-                            return PrayPostList();
+                            return PrayPostList(index: index);
                           },
                         ),
                       ),
-                      ListView.separated(
-                        itemCount: 5,
-                        separatorBuilder: (context, index) {
-                          return CustomSeparator();
-                        },
-                        itemBuilder: (BuildContext context, int index) {
-                          return PrayPostList();
-                        },
-                      ),
+                      // ListView.separated(
+                      //   itemCount: 5,
+                      //   separatorBuilder: (context, index) {
+                      //     return CustomSeparator();
+                      //   },
+                      //   itemBuilder: (BuildContext context, int index) {
+                      //     return PrayPostList();
+                      //   },
+                      // ),
                     ],
                   ),
                 );
               } else {
-                return NoData(title: "현재 작성된 기도제목이 없습니다",content: "교회 및 공동체 지체들의 기도 제목을\n함께 나누고 기도해요.",);
+                return NoData(
+                  title: "현재 작성된 기도제목이 없습니다",
+                  content: "교회 및 공동체 지체들의 기도 제목을\n함께 나누고 기도해요.",
+                );
               }
             } else {
               return Center(
@@ -354,8 +208,67 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
     );
   }
 
+  pickDate() {
+    return GestureDetector(
+      onTap: () {
+        Picker(
+            adapter: PickerDataAdapter<String>(
+                pickerdata: new JsonDecoder().convert(pickerData2),
+                isArray: true),
+            hideHeader: true,
+            title: new Text("날짜 선택"),
+            cancelText: '취소',
+            confirmText: '선택',
+            onConfirm: (Picker picker, List value) {
+              print(value.toString());
+              setState(() {
+                year = picker.getSelectedValues().first;
+                month = picker.getSelectedValues().last;
+                getPray();
+              });
+              print(picker.getSelectedValues().first);
+            }).showDialog(context);
+      },
+      child: Container(
+        width: 62,
+        height: 32,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Color(0xff2d9067),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              month,
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontFamily: "AppleSDGothicNeo",
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            SvgPicture.asset(
+              'assets/ic/ic_bottom.svg',
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   void _onRefresh() async {
-    await Future.delayed(Duration(milliseconds: 1000));
+    try {
+      await prayController.getPrayListData(userController.userSession!,
+          churchId: churchController.churchModel.resultData?.id ?? 1,
+          time: time);
+    } catch (e) {
+      print("error!! in pray : $e");
+    }
     _refreshController.refreshCompleted();
   }
 

@@ -32,7 +32,7 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController tabController = TabController(
-      length: 6,
+      length: 1,
       vsync: this,
     );
     return Scaffold(
@@ -83,11 +83,11 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
                 controller: tabController,
                 tabs: <Widget>[
                   Tab(text: '전체'),
-                  Tab(text: '주일예배'),
-                  Tab(text: '새벽예배'),
-                  Tab(text: '금요예배'),
-                  Tab(text: '수요예배'),
-                  Tab(text: '주일학교'),
+                  // Tab(text: '주일예배'),
+                  // Tab(text: '새벽예배'),
+                  // Tab(text: '금요예배'),
+                  // Tab(text: '수요예배'),
+                  // Tab(text: '주일학교'),
                   // Tab(text: '청년부'),
                 ],
               ),
@@ -114,7 +114,7 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               child: ListView.separated(
-                itemCount: 5,
+                itemCount: 1,
                 separatorBuilder: (context, index) {
                   return CustomSeparator();
                 },
@@ -122,51 +122,6 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
                   return WorshipPostList();
                 },
               ),
-            ),
-            ListView.separated(
-              itemCount: 5,
-              separatorBuilder: (context, index) {
-                return CustomSeparator();
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return PrayPostList();
-              },
-            ),
-            ListView.separated(
-              itemCount: 5,
-              separatorBuilder: (context, index) {
-                return CustomSeparator();
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return PrayPostList();
-              },
-            ),
-            ListView.separated(
-              itemCount: 5,
-              separatorBuilder: (context, index) {
-                return CustomSeparator();
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return PrayPostList();
-              },
-            ),
-            ListView.separated(
-              itemCount: 5,
-              separatorBuilder: (context, index) {
-                return CustomSeparator();
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return PrayPostList();
-              },
-            ),
-            ListView.separated(
-              itemCount: 5,
-              separatorBuilder: (context, index) {
-                return CustomSeparator();
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return PrayPostList();
-              },
             ),
             // Container(
             //     color: Colors.blue,
