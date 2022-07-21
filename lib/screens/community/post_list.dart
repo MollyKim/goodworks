@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/controllers/user_controller.dart';
-import 'package:practice/screens/home/post_list.dart';
 import 'package:practice/themes/extensions.dart';
 import 'package:practice/util/getTimeAgo.dart';
 
@@ -16,9 +15,10 @@ class CommunityPostList extends StatelessWidget {
   Widget build(BuildContext context) {
     UserController userController = Get.find();
     CommunityController communityController = Get.find();
+    int imageLength = communityController.communityList.resultData?[index].attachments?.length ?? 0;
     return GestureDetector(
       onTap: () {
-        Get.toNamed("/community_post_detail");
+        Get.toNamed("/community_post_detail",arguments: index);
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
@@ -44,18 +44,13 @@ class CommunityPostList extends StatelessWidget {
                         SizedBox(
                           width: 5,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              userController.userModel.resultData?.userName ??
-                                  "",
-                              style: TextStyle(
-                                  fontFamily: "AppleSDGothicNeo",
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                        Text(
+                          userController.userModel.resultData?.userName ??
+                              "",
+                          style: TextStyle(
+                              fontFamily: "AppleSDGothicNeo",
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
@@ -96,29 +91,30 @@ class CommunityPostList extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              GridView.builder(
+              imageLength != 0
+             ? GridView.builder(
                   primary: false,
-                  itemCount: listOfUrls.length > 3 ? 3 : listOfUrls.length,
+                  itemCount: imageLength > 3 ? 3 : imageLength,
                   padding: EdgeInsets.all(0),
                   semanticChildCount: 1,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisExtent: 150,
                       crossAxisCount:
-                          listOfUrls.length > 3 ? 3 : listOfUrls.length,
+                      imageLength > 3 ? 3 : imageLength,
                       mainAxisSpacing: 0,
                       crossAxisSpacing: 5),
                   shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
+                  itemBuilder: (BuildContext context, int imageIndex) {
                     return ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
-                      child: listOfUrls.length > 3 && index == 2
+                      child: imageLength > 3 && imageIndex == 2
                           ? Stack(
                               alignment: AlignmentDirectional.center,
                               fit: StackFit.expand,
                               children: <Widget>[
                                 CachedNetworkImage(
                                   fit: BoxFit.cover,
-                                  imageUrl: listOfUrls[index],
+                                  imageUrl: communityController.communityList.resultData![index].attachments![imageIndex].fileinfo.url!,
                                   height: 100.0,
                                   placeholder: (context, url) => Center(
                                       child: CircularProgressIndicator()),
@@ -129,7 +125,7 @@ class CommunityPostList extends StatelessWidget {
                                   color: Colors.black.withOpacity(.7),
                                   child: Center(
                                     child: Text(
-                                      "+${listOfUrls.length - index}",
+                                      "+${imageLength - imageIndex}",
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 40),
                                     ),
@@ -140,7 +136,7 @@ class CommunityPostList extends StatelessWidget {
                           : Container(
                               child: CachedNetworkImage(
                                 fit: BoxFit.cover,
-                                imageUrl: listOfUrls[index],
+                                imageUrl: communityController.communityList.resultData![index].attachments![imageIndex].fileinfo.url!,
                                 height: 100.0,
                                 placeholder: (context, url) =>
                                     Center(child: CircularProgressIndicator()),
@@ -149,7 +145,8 @@ class CommunityPostList extends StatelessWidget {
                               ),
                             ),
                     );
-                  }),
+                  })
+                  : Container()
             ],
           ),
         ),
