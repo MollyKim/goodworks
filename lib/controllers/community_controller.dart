@@ -10,6 +10,7 @@ class CommunityController extends BaseController{
   CommunityModel communityList = CommunityModel();
   UserController userController = Get.find();
 
+
   Future<void> getCommunityListData({required int churchId}) async{
     String token = "Bearer ${userController.userSession}";
     this.communityList  = await super.rootService.communityService.getCommunityList(token,churchId);
@@ -22,15 +23,9 @@ class CommunityController extends BaseController{
     update();
   }
 
-  Future<void> postCommunityPost({required String churchId, required String communityId}) async{
+  Future<void> postCommunityPost( int churchId, Map<String,dynamic> body ) async{
     String token = "Bearer ${userController.userSession}";
-    Map<String,dynamic> body = {
-      // 'title' : title,
-      // 'type' : 1,
-      // 'content' : content,
-      // 'attachments' : attatchment[],
-      // 'attachType' :
-    };
-    await super.rootService.communityService.postCommunityPost(token,churchId,communityId,body);
+
+    await super.rootService.communityService.postCommunityPost(token,churchId,body);
   }
 }

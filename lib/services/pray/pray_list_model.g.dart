@@ -30,6 +30,7 @@ PrayListResultData _$PrayListResultDataFromJson(Map<String, dynamic> json) {
   return PrayListResultData(
     id: json['id'] as int,
     communityId: json['communityId'] as int,
+    communityName: json['communityName'] as String?,
     communityTitle: json['communityTitle'] as String?,
     communityType: json['communityType'] as int?,
     ownerChurchUserID: json['ownerChurchUserID'] as int?,
@@ -39,7 +40,7 @@ PrayListResultData _$PrayListResultDataFromJson(Map<String, dynamic> json) {
         ? null
         : Avatar.fromJson(json['avatar'] as Object),
     content: json['content'] as String?,
-    createdAt: json['createdAt'] as String,
+    createdAt: json['createdAt'] as String?,
     updatedAt: json['updatedAt'] as String?,
     deletedAt: json['deletedAt'] as String?,
     isMine: json['isMine'] as bool,
@@ -50,6 +51,7 @@ Map<String, dynamic> _$PrayListResultDataToJson(PrayListResultData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'communityId': instance.communityId,
+      'communityName': instance.communityName,
       'communityTitle': instance.communityTitle,
       'communityType': instance.communityType,
       'ownerChurchUserID': instance.ownerChurchUserID,
