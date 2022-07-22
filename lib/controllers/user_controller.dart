@@ -16,6 +16,11 @@ class UserController extends BaseController {
     userSession = _sharedPreferences?.getString('session');
   }
 
+  logout() async {
+    await _sharedPreferences?.remove("session");
+    update();
+  }
+
   registerUser(
       {required String email,
       required String userpwd,

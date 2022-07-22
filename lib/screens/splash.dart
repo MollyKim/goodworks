@@ -61,13 +61,15 @@ class _SplashState extends State<Splash> {
 
         await churchController.getChurchData(token,
             churchId: churchController.churchModel.resultData?.id ?? 1);
+        if (userController.userModel.resultCode == "0000")
+          return true;
+        else
+          return false;
       }
+      else return false;
     } catch (e) {
       print("error!! in splash : $e");
     }
-    if (userController.userModel.resultCode == "0000")
-      return true;
-    else
-      return false;
+
   }
 }
