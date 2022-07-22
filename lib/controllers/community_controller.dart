@@ -23,7 +23,7 @@ class CommunityController extends BaseController{
     update();
   }
 
-  Future<void> postCommunityPost( int churchId, Map<String,dynamic> body ) async{
+  Future<void> postCommunityPost( int churchId, body ) async{
     String token = "Bearer ${userController.userSession}";
 
     await super.rootService.communityService.postCommunityPost(token,churchId,body);

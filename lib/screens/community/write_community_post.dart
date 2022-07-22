@@ -1,8 +1,8 @@
 import 'dart:io';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide FormData, MultipartFile;
 import 'package:practice/components/baseToast.dart';
 import 'package:practice/controllers/church_controller.dart';
 import 'package:practice/controllers/community_controller.dart';
@@ -53,11 +53,7 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
               actions: [
                 GestureDetector(
                   onTap: () async{
-                    // FormData formData = FormData.fromMap({
-                    //   "image_file":
-                    //   await MultipartFile.fromFile(file.path, filename: fileName),
-                    // });
-                    Map<String,dynamic> body = {
+                    FormData formData = FormData.fromMap({
                       'title' : wrightCommunityController.titleTextEditingController.text,
                       'type' : 1,
                       'content' : wrightCommunityController.contentTextEditingController.text,
@@ -65,10 +61,11 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
                       // 'attachType' : "image",
                       // 'attachments' : wrightCommunityController.images![1].path,
                       // 'attachType' : "image",
-                    };
+                    });
+
                    await communityController.postCommunityPost(
                          churchController.churchModel.resultData?.id ?? 1,
-                      body,
+                     formData,
                     );
                   },
                   child: Padding(

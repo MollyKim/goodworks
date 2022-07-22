@@ -25,6 +25,6 @@ abstract class CommunityService {
   Future<CommunityModel> postCommunityPost(
       @Header('Authorization') String token,
       @Path("churchID") int churchID,
-      @Body() Map<String,dynamic> body,
+      @Body() FormData body,
       );
 }
