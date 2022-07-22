@@ -28,6 +28,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
   bool necessaryFlagOne = false;
   bool necessaryFlagTwo = false;
 
+  bool buttonFlag = true; // 인증 요청 또는 재전송 보이게 하는 플래그
   bool phoneFlag = false;
   bool phoneOTPFlag = false;
   bool signUpFlag = false;
@@ -151,8 +152,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: context.forest90!),
             ),
-            contentPadding:
-                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
             hintStyle: context.textStyleCustom.copyWith(
               color: context.forest70,
               fontSize: 14,
@@ -217,8 +216,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: context.forest90!),
             ),
-            contentPadding:
-                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
             hintStyle: context.textStyleCustom.copyWith(
               color: context.forest70,
               fontSize: 14,
@@ -278,8 +275,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: context.forest90!),
             ),
-            contentPadding:
-                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
             hintStyle: context.textStyleCustom.copyWith(
               color: context.forest70,
               fontSize: 14,
@@ -339,8 +334,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: context.forest90!),
             ),
-            contentPadding:
-                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
             hintStyle: context.textStyleCustom.copyWith(
               color: context.forest70,
               fontSize: 14,
@@ -401,8 +394,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: context.forest90!),
             ),
-            contentPadding:
-                const EdgeInsets.only(left: 12, top: 11, bottom: 11),
             hintStyle: context.textStyleCustom.copyWith(
               color: context.forest70,
               fontSize: 14,
@@ -473,7 +464,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
     );
   }
 
-  renderPhoneButton() {
+  renderPhoneButton(UserController userController) {
     return SizedBox(
       height: 24,
       child: ElevatedButton(
@@ -483,18 +474,49 @@ class _LoginSignUpState extends State<LoginSignUp> {
             ),
             primary: context.forest80,
           ),
-          onPressed: () {
-            startTimeout(180);
-            setState(() {
-              phoneFlag = true;
-            });
+          onPressed: () async{
+            // if(buttonFlag) {
+              startTimeout(180);
+              await userController.sendOTP(idTextEditingController.text, phoneNumberTextEditingController.text);
+              setState(() {
+                phoneFlag = true;
+                buttonFlag = false;
+              });
+            // } else {
+            //
+            // }
+
             // Get.toNamed('/login_select_church');
           },
           child: Text(
-            "인증요청",
+            buttonFlag ? "인증요청" : "재전송",
             textAlign: TextAlign.center,
             style: context.textStyleCustom
                 .copyWith(fontSize: 12, color: Colors.white),
+          )),
+    );
+  }
+
+  renderPhoneValidateButton(UserController userController) {
+    return SizedBox(
+      height: 50,
+      width: double.infinity,
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(25.0),
+            ),
+            primary: context.forest80,
+          ),
+          onPressed: () async{
+            await userController.validateOTP(idTextEditingController.text, phoneNumberTextEditingController.text, otpTextEditingController.text);
+
+          },
+          child: Text(
+            "인증하기",
+            textAlign: TextAlign.center,
+            style: context.textStyleCustom
+                .copyWith(fontSize: 18, color: Colors.white),
           )),
     );
   }
@@ -715,7 +737,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
     );
   }
 
-  renderSignUpButton() {
+  renderSignUpButton(UserController userController) {
     return SizedBox(
       height: 50,
       width: 315,
@@ -728,14 +750,13 @@ class _LoginSignUpState extends State<LoginSignUp> {
           ),
           onPressed: () async {
             // if(this.formKey.currentState!.validate()){
-            final UserController loginController = Get.find();
-            await loginController.registerUser(
+            await userController.registerUser(
                 email: idTextEditingController.text,
                 userpwd: passwordTextEditingController.text,
                 userName: nameTextEditingController.text,
                 phoneNumber: phoneNumberTextEditingController.text);
 
-            if (loginController.userModel.resultCode == "200") {
+            if (userController.userModel.resultCode == "200") {
               Get.offAndToNamed('/splash');
             } else
               Get.toNamed('/login_fail');
@@ -750,6 +771,8 @@ class _LoginSignUpState extends State<LoginSignUp> {
 
   @override
   Widget build(BuildContext context) {
+    UserController userController = Get.find();
+
     return DefaultLayout(
       body: SingleChildScrollView(
         child: Padding(
@@ -780,7 +803,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
                   children: [
                     renderPhone(),
                     Positioned(
-                        right: 13, bottom: 10, child: renderPhoneButton())
+                        right: 13, bottom: 10, child: renderPhoneButton(userController))
                   ],
                 ),
                 SizedBox(
@@ -791,6 +814,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
                     : phoneFlag
                         ? renderPhoneOTP()
                         : Container(),
+                SizedBox(
+                  height: 20,
+                ),
+                renderPhoneValidateButton(userController),
                 SizedBox(
                   height: 40,
                 ),
@@ -806,7 +833,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 SizedBox(
                   height: 10,
                 ),
-                renderSignUpButton(),
+                renderSignUpButton(userController),
                 SizedBox(
                   height: 10,
                 ),

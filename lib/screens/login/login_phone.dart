@@ -13,12 +13,6 @@ class LoginPhone extends StatefulWidget {
 }
 
 class _LoginPhoneState extends State<LoginPhone> {
-  @override
-  void dispose() {
-    timer?.cancel();
-    phoneTextEditingController.dispose();
-    super.dispose();
-  }
 
   bool signUpFlag = false;
   bool phoneFlag = false;
@@ -32,7 +26,15 @@ class _LoginPhoneState extends State<LoginPhone> {
       '${((timerMaxSeconds - currentSeconds) ~/ 60).toString().padLeft(1, '0')}:${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
 
   final interval = const Duration(seconds: 1);
-  late Timer? timer;
+  Timer? timer;
+
+  @override
+  void dispose() {
+    if(timer != null)
+      timer?.cancel();
+    phoneTextEditingController.dispose();
+    super.dispose();
+  }
 
   startTimeout(int milliseconds) {
     var duration = interval;

@@ -24,6 +24,16 @@ abstract class LoginService {
       @Body() Map<String,dynamic> body,
       );
 
+  @POST('/api/v1/seum/user/register/otp')
+  Future<UserModel> sendOTP(
+      @Body() Map<String,dynamic> body,
+      );
+
+  @POST('/api/v1/seum/user/phone/validate')
+  Future<UserModel> validateOTP(
+      @Body() Map<String,dynamic> body,
+      );
+
   @POST('/api/v1/seum/user/login')
   @Headers(<String,dynamic>{"Appname" : "class/student"})
   Future<UserModel> loginUser(

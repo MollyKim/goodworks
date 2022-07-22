@@ -21,6 +21,24 @@ class UserController extends BaseController {
     update();
   }
 
+  sendOTP(String id, String phoneNumber) async{
+    final Map<String, dynamic> data = {
+      "seumId": id,
+      "phoneNumber": phoneNumber
+    };
+    await super.rootService.loginService.sendOTP(data);
+  }
+
+  validateOTP(String id, String phoneNumber, String otp) async{
+    final Map<String, dynamic> data = {
+      "seumId": id,
+      "phoneNumber": phoneNumber,
+      "otp" : int.parse(otp),
+    };
+    await super.rootService.loginService.validateOTP(data);
+  }
+
+
   registerUser(
       {required String email,
       required String userpwd,
