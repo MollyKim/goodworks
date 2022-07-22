@@ -100,3 +100,18 @@ class CommunityFileInfo {
 
   Map<String, dynamic> toJson() => _$CommunityFileInfoToJson(this);
 }
+
+@JsonSerializable()
+class PostCommunityResponse {
+  String? trId;
+  String? resultCode;
+  String? resultMsg;
+
+  PostCommunityResponse(
+      {this.trId, this.resultCode, this.resultMsg,});
+
+  factory PostCommunityResponse.fromJson(Object? json) =>
+      _$PostCommunityResponseFromJson(json as Map<String, dynamic>);
+
+  Map<String, dynamic> toJson() => _$PostCommunityResponseToJson(this);
+}

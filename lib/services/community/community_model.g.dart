@@ -121,3 +121,20 @@ Map<String, dynamic> _$CommunityFileInfoToJson(CommunityFileInfo instance) =>
       'smallUrl': instance.smallUrl,
       'size': instance.size,
     };
+
+PostCommunityResponse _$PostCommunityResponseFromJson(
+    Map<String, dynamic> json) {
+  return PostCommunityResponse(
+    trId: json['trId'] as String?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+  );
+}
+
+Map<String, dynamic> _$PostCommunityResponseToJson(
+        PostCommunityResponse instance) =>
+    <String, dynamic>{
+      'trId': instance.trId,
+      'resultCode': instance.resultCode,
+      'resultMsg': instance.resultMsg,
+    };

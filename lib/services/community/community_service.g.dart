@@ -53,20 +53,20 @@ class _CommunityService implements CommunityService {
   }
 
   @override
-  Future<CommunityModel> postCommunityPost(token, churchID, body) async {
+  Future<PostCommunityResponse> postCommunityPost(token, churchID, body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = body;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<CommunityModel>(Options(
+        _setStreamType<PostCommunityResponse>(Options(
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(
-                _dio.options, '/api/v1/seum/church/$churchID/community/1/feed',
+                _dio.options, '/api/v1/seum/church/$churchID/community/5/feed',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CommunityModel.fromJson(_result.data!);
+    final value = PostCommunityResponse.fromJson(_result.data!);
     return value;
   }
 

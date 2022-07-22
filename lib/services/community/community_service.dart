@@ -21,8 +21,8 @@ abstract class CommunityService {
       @Path("communityID") String communityID,
       );
 
-  @POST('/api/v1/seum/church/{churchID}/community/1/feed')
-  Future<CommunityModel> postCommunityPost(
+  @POST('/api/v1/seum/church/{churchID}/community/5/feed')
+  Future<PostCommunityResponse> postCommunityPost(
       @Header('Authorization') String token,
       @Path("churchID") int churchID,
       @Body() FormData body,
