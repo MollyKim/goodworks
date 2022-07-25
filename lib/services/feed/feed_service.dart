@@ -10,7 +10,7 @@ part 'feed_service.g.dart';
 abstract class FeedService {
   factory FeedService(Dio dio, {String baseUrl}) = _FeedService;
 
-  @GET('/api/v1/seum/church/{churchID}/feed?limit=5')
+  @GET('/api/v1/seum/church/{churchID}/feed')
   Future<FeedList> getFeedList(
       @Header('Authorization') String token,
       @Path() int churchID,

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/feed_controller.dart';
+import 'package:practice/util/feedType.dart';
 import 'package:practice/util/getTimeAgo.dart';
 
 class HomePostList extends StatelessWidget {
@@ -13,15 +14,15 @@ class HomePostList extends StatelessWidget {
   Widget build(BuildContext context) {
     FeedController feedController = Get.find();
     int itemCount =
-        feedController.feedList.resultData?[index].attachments?.length ?? 1;
+        feedController.feedList.resultData?[index].attachments?.length ?? 0;
 
     return GestureDetector(
       onTap: () async {
-        await feedController.getFeedDetail(
-            churchId:
-            feedController.feedList.resultData?[index].churchId ?? 1,
-            communityID: feedController.feedList.resultData?[index].communityId ?? 1,
-            feedID: feedController.feedList.resultData?[index].attachments?[0].feedId ?? "1000001817fb1bf46ecbba4ebaea4eb8b88ed8bb020ed94bceb939c014");
+        // await feedController.getFeedDetail(
+        //     churchId:
+        //     feedController.feedList.resultData?[index].churchId ?? 1,
+        //     communityID: feedController.feedList.resultData?[index].communityId ?? 1,
+        //     feedID: feedController.feedList.resultData?[index].attachments?[0].feedId ?? "1000001817fb1bf46ecbba4ebaea4eb8b88ed8bb020ed94bceb939c014");
         Get.toNamed("/home_post_detail", arguments: index);
       },
       child: Padding(
@@ -44,9 +45,7 @@ class HomePostList extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: Text(
-                        feedController.feedList.resultData?[index].feedType
-                                ?.toString() ??
-                            "교회소식",
+                          getFeedType(feedController.feedList.resultData?[index].feedType),
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -77,7 +76,7 @@ class HomePostList extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              GridView.builder(
+              itemCount != 0 ? GridView.builder(
                   primary: false,
                   itemCount: itemCount > 3 ? 3 : itemCount,
                   padding: EdgeInsets.all(0),
@@ -102,8 +101,7 @@ class HomePostList extends StatelessWidget {
                                           .feedList
                                           .resultData?[index]
                                           .attachments?[index]
-                                          .fileInfo
-                                          .smallUrl! ??
+                                          .fileInfo.url ??
                                       "",
                                   height: 100.0,
                                   placeholder: (context, url) => Center(
@@ -130,9 +128,9 @@ class HomePostList extends StatelessWidget {
                                         .feedList
                                         .resultData?[index]
                                         .attachments?[index]
-                                        .fileInfo
-                                        .smallUrl! ??
-                                    "https://cdn.vm-united.com/dev/user_profile/origin/3/2021-11-21/small.rXixqiVPspWs_test.png",
+                                        .fileInfo.url
+                                         ??
+                                    "",
                                 height: 100.0,
                                 placeholder: (context, url) =>
                                     Center(child: CircularProgressIndicator()),
@@ -141,7 +139,7 @@ class HomePostList extends StatelessWidget {
                               ),
                             ),
                     );
-                  }),
+                  }) : Container(),
               SizedBox(
                 height: 10,
               ),

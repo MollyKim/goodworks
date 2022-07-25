@@ -25,7 +25,7 @@ class _FeedService implements FeedService {
                 method: 'GET',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, '/api/v1/seum/church/$churchID/feed?limit=5',
+            .compose(_dio.options, '/api/v1/seum/church/$churchID/feed',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = FeedList.fromJson(_result.data!);

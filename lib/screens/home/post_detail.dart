@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/components/base_bottomSheet.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/util/feedType.dart';
 import 'package:practice/util/getTimeAgo.dart';
-import 'package:share/share.dart';
 import 'package:practice/controllers/feed_controller.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class HomePostDetail extends StatelessWidget {
   final FeedController feedController = Get.find();
@@ -15,6 +14,7 @@ class HomePostDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var index = Get.arguments;
 
     return DefaultLayout(
       appBar: AppBar(
@@ -50,12 +50,14 @@ class HomePostDetail extends StatelessWidget {
                           height: 30,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: Text(feedType(feedController.feed.resultData?.feedType ?? 1),
+                            //feedController.feedList.resultData?[index].createdAt
+                            child: Text(getFeedType(feedController.feedList.resultData?[index].feedType),
                               style: TextStyle(color: Colors.white,fontFamily: "AppleSDGothicNeo",
                                 fontSize: 18,),),
                           ),
                         ),
-                        Text(getTimeAge(feedController.feed.resultData?.createdAt))
+                        Text(getTimeAge(feedController.feedList.resultData?[index].createdAt))
+                        // Text(getTimeAge(feedController.feed.resultData?.createdAt))
                       ],
                     ),
                   ),
@@ -65,7 +67,7 @@ class HomePostDetail extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top:8.0,left: 20),
-                        child: Text(feedController.feed.resultData?.title ?? "제목",
+                        child: Text(feedController.feedList.resultData?[index].title ?? "제목",
                           style: TextStyle(
                               fontFamily: "AppleSDGothicNeo",
                               fontSize: 18,
@@ -91,7 +93,7 @@ class HomePostDetail extends StatelessWidget {
                   SizedBox(height: 15,),
                   Padding(
                     padding: const EdgeInsets.only(top:8.0,left: 20,right: 20),
-                    child: Text(feedController.feed.resultData?.content ?? "내용\n\n\n\n내용",
+                    child: Text(feedController.feedList.resultData?[index].content ?? "내용\n\n\n\n내용",
                       style: TextStyle(
                         fontFamily: "AppleSDGothicNeo",
                         fontSize: 14,
@@ -101,16 +103,16 @@ class HomePostDetail extends StatelessWidget {
                   SizedBox(height: 10,),
                 ],
               ),
-              renderPostDetailPicture(),
+              renderPostDetailPicture(index),
             ],
           ),
         ),
     );
   }
-  renderPostDetailPicture(){
+  renderPostDetailPicture(int index){
     return ListView.builder(
       scrollDirection: Axis.vertical,
-      itemCount: feedController.feed.resultData?.attachments?.length ?? 2,
+      itemCount: feedController.feedList.resultData?[index].attachments?.length ?? 0,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
@@ -135,13 +137,4 @@ class HomePostDetail extends StatelessWidget {
       },
     );
   }
-
-  String feedType(int typeNum) {
-    switch(typeNum) {
-      case 1:
-        return "교회 소식";
-      default: return "소식";
-    }
-  }
-
 }
