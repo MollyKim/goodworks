@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/worship_controller.dart';
 import 'package:practice/screens/pray/pray_post_list.dart';
 import 'package:practice/screens/worship/worship_post_list.dart';
 import 'package:practice/util/seperator.dart';
@@ -21,12 +22,22 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
+  WorshipController worshipController = Get.find();
+
   String year = '2022';
   String month = '1';
+  late final Future callWorshipApis;
 
   @override
   void initState() {
+    callWorshipApis = getWorship();
     super.initState();
+  }
+
+  getWorship() async {
+    try {} catch (e) {
+      print("error!! in worship : $e");
+    }
   }
 
   @override
@@ -100,17 +111,25 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
             SmartRefresher(
               enablePullDown: true,
               controller: _refreshController,
-              header:	ClassicHeader(
+              header: ClassicHeader(
                 height: 100,
-                idleIcon: CupertinoActivityIndicator(radius: 13.0,),
+                idleIcon: CupertinoActivityIndicator(
+                  radius: 13.0,
+                ),
                 idleText: "",
-                refreshingIcon: CupertinoActivityIndicator(radius: 13.0,),
-                releaseIcon: CupertinoActivityIndicator(radius: 13.0,),
+                refreshingIcon: CupertinoActivityIndicator(
+                  radius: 13.0,
+                ),
+                releaseIcon: CupertinoActivityIndicator(
+                  radius: 13.0,
+                ),
                 completeIcon: null,
                 completeText: "",
                 completeDuration: Duration.zero,
                 releaseText: "",
-                refreshingText: "",),              // header: WaterDropHeader(),
+                refreshingText: "",
+              ),
+              // header: WaterDropHeader(),
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               child: ListView.separated(
