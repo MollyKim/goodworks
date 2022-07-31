@@ -13,7 +13,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipTypeList> getWorshipTypeList(
-    @Path("churchID") int churchID,
+    @Path("churchID") String churchId,
   );
 
   @POST('/church/{churchID}/worship-type')
@@ -21,7 +21,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipTypeCreate> postWorshipTypeCreate(
-    @Path("churchID") int churchID,
+    @Path("churchID") String churchId,
     @Body() Map<String, dynamic> body,
   );
 
@@ -30,7 +30,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipTypeUpdate> putWorshipTypeUpdate(
-    @Path("churchID") int churchID,
+    @Path("churchID") String churchId,
     @Body() Map<String, dynamic> body,
   );
 
@@ -39,7 +39,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipTypePriorityUpdate> putWorshipTypePriorityUpdate(
-    @Path("churchID") int churchID,
+    @Path("churchID") String churchId,
     @Body() Map<String, dynamic> body,
   );
 
@@ -47,8 +47,8 @@ abstract class WorshipService {
   @Headers(<String, dynamic>{
     "Country": "KR",
   })
-  Future<WorshipTypeListData> deleteWorshipType(
-    @Path("churchID") int churchID,
+  Future<WorshipTypeDelete> deleteWorshipTypeDelete(
+    @Path("churchID") String churchId,
     @Body() Map<String, dynamic> body,
   );
 
@@ -57,24 +57,24 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipList> getWorshipList(
-    @Path("churchID") int churchID,
+    @Path("churchID") String churchId,
   );
 
   @GET('/church/{churchID}/worship/:{worshipID}')
   @Headers(<String, dynamic>{
     "Country": "KR",
   })
-  Future<WorshipDelete> getWorshipDetail(
-    @Path("churchID") int churchID,
-    @Path("worshipID") int worshipID,
+  Future<WorshipDetail> getWorshipDetail(
+    @Path("churchID") String churchId,
+    @Path("worshipID") String worshipId,
   );
 
   @POST('/church/{churchID}/worship')
   @Headers(<String, dynamic>{
     "Country": "KR",
   })
-  Future<CreateWorship> postWorshipCreate(
-    @Path("churchID") int churchID,
+  Future<WorshipCreate> postWorshipCreate(
+    @Path("churchID") String churchId,
     @Body() Map<String, dynamic> body,
   );
 
@@ -82,9 +82,9 @@ abstract class WorshipService {
   @Headers(<String, dynamic>{
     "Country": "KR",
   })
-  Future<UpdateWorship> putWorshipUpdate(
-    @Path("churchID") int churchID,
-    @Path("worshipID") int worshipID,
+  Future<WorshipUpdate> putWorshipUpdate(
+    @Path("churchID") String churchId,
+    @Path("worshipID") String worshipId,
     @Body() Map<String, dynamic> body,
   );
 
@@ -92,9 +92,9 @@ abstract class WorshipService {
   @Headers(<String, dynamic>{
     "Country": "KR",
   })
-  Future<DeleteWorship> deleteWorship(
-    @Path("churchID") int churchID,
-    @Path("worshipID") int worshipID,
+  Future<WorshipDelete> deleteWorshipDelete(
+    @Path("churchID") String churchId,
+    @Path("worshipID") String worshipId,
   );
 
   ///https://www.vm-united.com/seum/api/v1/seum/church/1/prayer

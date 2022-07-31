@@ -150,15 +150,15 @@ Map<String, dynamic> _$WorshipTypePriorityUpdateResultDataToJson(
       'title': instance.title,
     };
 
-WorshipDelete _$WorshipDeleteFromJson(Map<String, dynamic> json) {
-  return WorshipDelete(
+WorshipTypeDelete _$WorshipTypeDeleteFromJson(Map<String, dynamic> json) {
+  return WorshipTypeDelete(
     trID: json['trID'] as String?,
     resultCode: json['resultCode'] as String?,
     resultMsg: json['resultMsg'] as String?,
   );
 }
 
-Map<String, dynamic> _$WorshipDeleteToJson(WorshipDelete instance) =>
+Map<String, dynamic> _$WorshipTypeDeleteToJson(WorshipTypeDelete instance) =>
     <String, dynamic>{
       'trID': instance.trID,
       'resultCode': instance.resultCode,
@@ -248,7 +248,7 @@ WorshipDetailResultData _$WorshipDetailResultDataFromJson(
     json['worshipTypeId'] as String?,
     json['playInfo'] == null
         ? null
-        : DetailPlayInfo.fromJson(json['playInfo'] as Map<String, dynamic>),
+        : PlayInfoDetail.fromJson(json['playInfo'] as Map<String, dynamic>),
     json['preacher'] as String?,
     json['title'] as String?,
     json['content'] as String?,
@@ -276,8 +276,8 @@ Map<String, dynamic> _$WorshipDetailResultDataToJson(
       'updatedAt': instance.updatedAt,
     };
 
-DetailPlayInfo _$DetailPlayInfoFromJson(Map<String, dynamic> json) {
-  return DetailPlayInfo(
+PlayInfoDetail _$PlayInfoDetailFromJson(Map<String, dynamic> json) {
+  return PlayInfoDetail(
     json['id'] as int?,
     json['videoId'] as String?,
     json['createdAt'] as String?,
@@ -285,7 +285,7 @@ DetailPlayInfo _$DetailPlayInfoFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$DetailPlayInfoToJson(DetailPlayInfo instance) =>
+Map<String, dynamic> _$PlayInfoDetailToJson(PlayInfoDetail instance) =>
     <String, dynamic>{
       'id': instance.id,
       'videoId': instance.videoId,
@@ -293,17 +293,19 @@ Map<String, dynamic> _$DetailPlayInfoToJson(DetailPlayInfo instance) =>
       'updatedAt': instance.updatedAt,
     };
 
-CreateWorship _$CreateWorshipFromJson(Map<String, dynamic> json) {
-  return CreateWorship(
-    json['trID'] as String?,
-    json['resultCode'] as String?,
-    json['resultMsg'] as String?,
-    CreateWorshipResultData.fromJson(
-        json['resultData'] as Map<String, dynamic>),
+WorshipCreate _$WorshipCreateFromJson(Map<String, dynamic> json) {
+  return WorshipCreate(
+    trID: json['trID'] as String?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+    resultData: json['resultData'] == null
+        ? null
+        : WorshipCreateResultData.fromJson(
+            json['resultData'] as Map<String, dynamic>),
   );
 }
 
-Map<String, dynamic> _$CreateWorshipToJson(CreateWorship instance) =>
+Map<String, dynamic> _$WorshipCreateToJson(WorshipCreate instance) =>
     <String, dynamic>{
       'trID': instance.trID,
       'resultCode': instance.resultCode,
@@ -311,16 +313,16 @@ Map<String, dynamic> _$CreateWorshipToJson(CreateWorship instance) =>
       'resultData': instance.resultData,
     };
 
-CreateWorshipResultData _$CreateWorshipResultDataFromJson(
+WorshipCreateResultData _$WorshipCreateResultDataFromJson(
     Map<String, dynamic> json) {
-  return CreateWorshipResultData(
+  return WorshipCreateResultData(
     json['id'] as int?,
     json['churchId'] as int?,
     json['uploaderId'] as int?,
     json['worshipTypeId'] as String?,
     json['playInfo'] == null
         ? null
-        : CreatePlayInfo.fromJson(json['playInfo'] as Map<String, dynamic>),
+        : PlayInfoCreate.fromJson(json['playInfo'] as Map<String, dynamic>),
     json['preacher'] as String?,
     json['title'] as String?,
     json['isVisible'] as bool?,
@@ -330,8 +332,8 @@ CreateWorshipResultData _$CreateWorshipResultDataFromJson(
   );
 }
 
-Map<String, dynamic> _$CreateWorshipResultDataToJson(
-        CreateWorshipResultData instance) =>
+Map<String, dynamic> _$WorshipCreateResultDataToJson(
+        WorshipCreateResultData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'churchId': instance.churchId,
@@ -346,8 +348,8 @@ Map<String, dynamic> _$CreateWorshipResultDataToJson(
       'updatedAt': instance.updatedAt,
     };
 
-CreatePlayInfo _$CreatePlayInfoFromJson(Map<String, dynamic> json) {
-  return CreatePlayInfo(
+PlayInfoCreate _$PlayInfoCreateFromJson(Map<String, dynamic> json) {
+  return PlayInfoCreate(
     json['id'] as int?,
     json['videoId'] as String?,
     json['playingCount'] as int?,
@@ -357,7 +359,7 @@ CreatePlayInfo _$CreatePlayInfoFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$CreatePlayInfoToJson(CreatePlayInfo instance) =>
+Map<String, dynamic> _$PlayInfoCreateToJson(PlayInfoCreate instance) =>
     <String, dynamic>{
       'id': instance.id,
       'videoId': instance.videoId,
@@ -367,19 +369,19 @@ Map<String, dynamic> _$CreatePlayInfoToJson(CreatePlayInfo instance) =>
       'updatedAt': instance.updatedAt,
     };
 
-UpdateWorship _$UpdateWorshipFromJson(Map<String, dynamic> json) {
-  return UpdateWorship(
-    json['trID'] as String?,
-    json['resultCode'] as String?,
-    json['resultMsg'] as String?,
-    json['resultData'] == null
+WorshipUpdate _$WorshipUpdateFromJson(Map<String, dynamic> json) {
+  return WorshipUpdate(
+    trID: json['trID'] as String?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+    resultData: json['resultData'] == null
         ? null
-        : UpdateWorshipResultData.fromJson(
+        : WorshipUpdateResultData.fromJson(
             json['resultData'] as Map<String, dynamic>),
   );
 }
 
-Map<String, dynamic> _$UpdateWorshipToJson(UpdateWorship instance) =>
+Map<String, dynamic> _$WorshipUpdateToJson(WorshipUpdate instance) =>
     <String, dynamic>{
       'trID': instance.trID,
       'resultCode': instance.resultCode,
@@ -387,14 +389,14 @@ Map<String, dynamic> _$UpdateWorshipToJson(UpdateWorship instance) =>
       'resultData': instance.resultData,
     };
 
-UpdateWorshipResultData _$UpdateWorshipResultDataFromJson(
+WorshipUpdateResultData _$WorshipUpdateResultDataFromJson(
     Map<String, dynamic> json) {
-  return UpdateWorshipResultData(
+  return WorshipUpdateResultData(
     json['id'] as int?,
     json['churchId'] as int?,
     json['uploaderId'] as int?,
     json['worshipTypeId'] as String?,
-    UpdateWorshipPlayInfo.fromJson(json['playInfo'] as Map<String, dynamic>),
+    WorshipUpdatePlayInfo.fromJson(json['playInfo'] as Map<String, dynamic>),
     json['preacher'] as String?,
     json['title'] as String?,
     json['content'] as String?,
@@ -405,8 +407,8 @@ UpdateWorshipResultData _$UpdateWorshipResultDataFromJson(
   );
 }
 
-Map<String, dynamic> _$UpdateWorshipResultDataToJson(
-        UpdateWorshipResultData instance) =>
+Map<String, dynamic> _$WorshipUpdateResultDataToJson(
+        WorshipUpdateResultData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'churchId': instance.churchId,
@@ -422,9 +424,9 @@ Map<String, dynamic> _$UpdateWorshipResultDataToJson(
       'updatedAt': instance.updatedAt,
     };
 
-UpdateWorshipPlayInfo _$UpdateWorshipPlayInfoFromJson(
+WorshipUpdatePlayInfo _$WorshipUpdatePlayInfoFromJson(
     Map<String, dynamic> json) {
-  return UpdateWorshipPlayInfo(
+  return WorshipUpdatePlayInfo(
     json['id'] as int?,
     json['videoId'] as String?,
     json['playingCount'] as int?,
@@ -434,8 +436,8 @@ UpdateWorshipPlayInfo _$UpdateWorshipPlayInfoFromJson(
   );
 }
 
-Map<String, dynamic> _$UpdateWorshipPlayInfoToJson(
-        UpdateWorshipPlayInfo instance) =>
+Map<String, dynamic> _$WorshipUpdatePlayInfoToJson(
+        WorshipUpdatePlayInfo instance) =>
     <String, dynamic>{
       'id': instance.id,
       'videoId': instance.videoId,
@@ -445,15 +447,15 @@ Map<String, dynamic> _$UpdateWorshipPlayInfoToJson(
       'updatedAt': instance.updatedAt,
     };
 
-DeleteWorship _$DeleteWorshipFromJson(Map<String, dynamic> json) {
-  return DeleteWorship(
-    json['trID'] as String?,
-    json['resultCode'] as String?,
-    json['resultMsg'] as String?,
+WorshipDelete _$WorshipDeleteFromJson(Map<String, dynamic> json) {
+  return WorshipDelete(
+    trID: json['trID'] as String?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
   );
 }
 
-Map<String, dynamic> _$DeleteWorshipToJson(DeleteWorship instance) =>
+Map<String, dynamic> _$WorshipDeleteToJson(WorshipDelete instance) =>
     <String, dynamic>{
       'trID': instance.trID,
       'resultCode': instance.resultCode,
