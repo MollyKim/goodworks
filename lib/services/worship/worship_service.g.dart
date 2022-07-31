@@ -16,17 +16,14 @@ class _WorshipService implements WorshipService {
   String? baseUrl;
 
   @override
-  Future<WorshipTypeList> getWorshipTypeList(token, churchID) async {
+  Future<WorshipTypeList> getWorshipTypeList(churchID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipTypeList>(Options(
                 method: 'GET',
-                headers: <String, dynamic>{
-                  r'Country': 'KR',
-                  r'Authorization': token
-                },
+                headers: <String, dynamic>{r'Country': 'KR'},
                 extra: _extra)
             .compose(_dio.options, '/church/$churchID/worship-type',
                 queryParameters: queryParameters, data: _data)

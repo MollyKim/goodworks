@@ -7,13 +7,11 @@ class WorshipController extends BaseController {
 
   WorshipTypeList worshipTypeList = WorshipTypeList();
 
-  Future<void> getWorshipTypeData(String token, {required int churchId}) async {
-    String headerToken = "Bearer $token";
-    //, int? type, String? cursor} ) async {
+  Future<void> getWorshipTypeData({required int churchId}) async {
     final WorshipTypeList resp = await super
         .rootService
         .worshipService
-        .getWorshipTypeList(headerToken, churchId); //,type,cursor);
+        .getWorshipTypeList(churchId); //,type,cursor);
     this.worshipTypeList = resp;
     update();
   }
