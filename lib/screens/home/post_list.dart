@@ -150,7 +150,7 @@ class HomePostList extends StatelessWidget {
     );
   }
 }
-
+ //삭제
 List<String> listOfUrls = [
   "https://cosmosmagazine.com/wp-content/uploads/2020/02/191010_nature.jpg",
   "https://scx2.b-cdn.net/gfx/news/hires/2019/2-nature.jpg",
