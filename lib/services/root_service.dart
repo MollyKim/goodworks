@@ -6,6 +6,7 @@ import 'package:practice/services/church/church_service.dart';
 import 'package:practice/services/feed/feed_service.dart';
 import 'package:practice/services/pray/pray_service.dart';
 import 'package:practice/services/user/user_service.dart';
+import 'package:practice/services/worship/worship_service.dart';
 import 'package:practice/util/logger.dart';
 
 import 'community/community_service.dart';
@@ -25,13 +26,15 @@ class RootService {
   FeedService feedService;
   CommunityService communityService;
   PrayService pryService;
+  WorshipService worshipService;
 
   RootService()
       : this.loginService = LoginService(_dio),
         this.churchService = ChurchService(_dio),
         this.feedService = FeedService(_dio),
         this.communityService = CommunityService(_dio),
-        this.pryService = PrayService(_dio);
+        this.pryService = PrayService(_dio),
+        this.worshipService = WorshipService(_dio);
 
   static parseBody(dynamic data) {
     try {
