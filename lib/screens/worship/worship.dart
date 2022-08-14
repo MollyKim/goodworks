@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/church_controller.dart';
+import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/controllers/worship_controller.dart';
 import 'package:practice/screens/pray/pray_post_list.dart';
 import 'package:practice/screens/worship/worship_post_list.dart';
@@ -23,6 +25,8 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
       RefreshController(initialRefresh: false);
 
   WorshipController worshipController = Get.find();
+  ChurchController churchController = Get.find();
+  UserController userController = Get.find();
 
   String year = '2022';
   String month = '1';
@@ -35,9 +39,21 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
   }
 
   getWorship() async {
-    try {} catch (e) {
+    try {
+      await worshipController.getWorshipTypeData(userController.userSession!,
+          churchId:
+              churchController.churchModel.resultData?.id.toString() ?? '1');
+      await worshipController.getWorshipData(userController.userSession!,
+          churchId:
+              churchController.churchModel.resultData?.id.toString() ?? '1');
+    } catch (e) {
       print("error!! in worship : $e");
     }
+    print('phil10');
+    print('worshipController');
+    print(worshipController.worshipTypeList);
+    print(worshipController.worshipTypeList.trID);
+    print(worshipController.worshipTypeList.resultData);
   }
 
   @override
@@ -94,7 +110,7 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
                 controller: tabController,
                 tabs: <Widget>[
                   Tab(text: '전체'),
-                  // Tab(text: '주일예배'),
+                  // Tab(text: worshipController.worshipTypeList.resultData!.worshipTypeList![0].title),
                   // Tab(text: '새벽예배'),
                   // Tab(text: '금요예배'),
                   // Tab(text: '수요예배'),
@@ -133,12 +149,12 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               child: ListView.separated(
-                itemCount: 1,
+                itemCount: worshipController.worshipList.resultData!.length,
                 separatorBuilder: (context, index) {
                   return CustomSeparator();
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return WorshipPostList();
+                  return WorshipPostList(index: index);
                 },
               ),
             ),

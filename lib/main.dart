@@ -6,6 +6,7 @@ import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/controllers/feed_controller.dart';
 import 'package:practice/controllers/pray_controller.dart';
 import 'package:practice/controllers/user_controller.dart';
+import 'package:practice/controllers/worship_controller.dart';
 import 'package:practice/screens/community/community_post_detail.dart';
 import 'package:practice/screens/community/write_community_post.dart';
 import 'package:practice/screens/home/home.dart';
@@ -61,6 +62,7 @@ class _RootState extends State<Root> {
     Get.put(CommunityController(service));
     Get.put(FeedController(service));
     Get.put(PrayController(service));
+    Get.put(WorshipController(service));
   }
 
   initService() {

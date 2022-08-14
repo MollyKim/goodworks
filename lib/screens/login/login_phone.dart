@@ -124,7 +124,7 @@ class _LoginPhoneState extends State<LoginPhone> {
               timer?.cancel();
               startTimeout(180);
             });
-            // Get.toNamed('/login_select_church');
+            Get.toNamed('/login_select_church');
           },
           child: Text("인증 문자 받기",
               textAlign: TextAlign.center,

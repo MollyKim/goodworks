@@ -11,11 +11,10 @@ WorshipTypeList _$WorshipTypeListFromJson(Map<String, dynamic> json) {
     trID: json['trID'] as String?,
     resultCode: json['resultCode'] as String?,
     resultMsg: json['resultMsg'] as String?,
-    resultData: (json['resultData'] as List<dynamic>?)
-        ?.map((e) =>
-            WorshipTypeListResultData.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    cursor: json['cursor'] as String?,
+    resultData: json['resultData'] == null
+        ? null
+        : WorshipTypeListResultData.fromJson(
+            json['resultData'] as Map<String, dynamic>),
   );
 }
 
@@ -25,19 +24,39 @@ Map<String, dynamic> _$WorshipTypeListToJson(WorshipTypeList instance) =>
       'resultCode': instance.resultCode,
       'resultMsg': instance.resultMsg,
       'resultData': instance.resultData,
-      'cursor': instance.cursor,
     };
 
 WorshipTypeListResultData _$WorshipTypeListResultDataFromJson(
     Map<String, dynamic> json) {
   return WorshipTypeListResultData(
-    id: json['id'] as String,
-    title: json['title'] as String,
+    churchId: json['churchId'] as int?,
+    worshipTypeList: (json['worshipTypeList'] as List<dynamic>?)
+        ?.map((e) => WorshipTypeListInData.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    createdAt: json['createdAt'] as String?,
+    updatedAt: json['updatedAt'] as String?,
   );
 }
 
 Map<String, dynamic> _$WorshipTypeListResultDataToJson(
         WorshipTypeListResultData instance) =>
+    <String, dynamic>{
+      'churchId': instance.churchId,
+      'worshipTypeList': instance.worshipTypeList,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
+    };
+
+WorshipTypeListInData _$WorshipTypeListInDataFromJson(
+    Map<String, dynamic> json) {
+  return WorshipTypeListInData(
+    id: json['id'] as String?,
+    title: json['title'] as String?,
+  );
+}
+
+Map<String, dynamic> _$WorshipTypeListInDataToJson(
+        WorshipTypeListInData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
@@ -71,7 +90,7 @@ WorshipTypeCreateResultData _$WorshipTypeCreateResultDataFromJson(
         .map((e) => WorshipTypeListData.fromJson(e as Map<String, dynamic>))
         .toList(),
     createdAt: json['createdAt'] as String?,
-    updatedAt: json['updatedAt'] as int?,
+    updatedAt: json['updatedAt'] as String?,
   );
 }
 
@@ -194,7 +213,10 @@ WorshipListResultData _$WorshipListResultDataFromJson(
         ? null
         : PlayInfo.fromJson(json['playInfo'] as Map<String, dynamic>),
     title: json['title'] as String?,
+    preacher: json['preacher'] as String?,
     worshipDate: json['worshipDate'] as String?,
+    content: json['content'] as String?,
+    isVisible: json['isVisible'] as bool?,
   );
 }
 
@@ -206,7 +228,10 @@ Map<String, dynamic> _$WorshipListResultDataToJson(
       'uploaderId': instance.uploaderId,
       'playInfo': instance.playInfo,
       'title': instance.title,
+      'preacher': instance.preacher,
       'worshipDate': instance.worshipDate,
+      'content': instance.content,
+      'isVisible': instance.isVisible,
     };
 
 PlayInfo _$PlayInfoFromJson(Map<String, dynamic> json) {

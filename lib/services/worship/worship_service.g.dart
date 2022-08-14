@@ -16,14 +16,17 @@ class _WorshipService implements WorshipService {
   String? baseUrl;
 
   @override
-  Future<WorshipTypeList> getWorshipTypeList(churchId) async {
+  Future<WorshipTypeList> getWorshipTypeList(token, churchId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipTypeList>(Options(
                 method: 'GET',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchId/worship-type',
                 queryParameters: queryParameters, data: _data)
@@ -33,7 +36,7 @@ class _WorshipService implements WorshipService {
   }
 
   @override
-  Future<WorshipTypeCreate> postWorshipTypeCreate(churchId, body) async {
+  Future<WorshipTypeCreate> postWorshipTypeCreate(token, churchId, body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -41,7 +44,10 @@ class _WorshipService implements WorshipService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipTypeCreate>(Options(
                 method: 'POST',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchId/worship-type',
                 queryParameters: queryParameters, data: _data)
@@ -51,7 +57,7 @@ class _WorshipService implements WorshipService {
   }
 
   @override
-  Future<WorshipTypeUpdate> putWorshipTypeUpdate(churchId, body) async {
+  Future<WorshipTypeUpdate> putWorshipTypeUpdate(token, churchId, body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -59,7 +65,10 @@ class _WorshipService implements WorshipService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipTypeUpdate>(Options(
                 method: 'PUT',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchId/worship-type',
                 queryParameters: queryParameters, data: _data)
@@ -70,7 +79,7 @@ class _WorshipService implements WorshipService {
 
   @override
   Future<WorshipTypePriorityUpdate> putWorshipTypePriorityUpdate(
-      churchId, body) async {
+      token, churchId, body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -78,7 +87,10 @@ class _WorshipService implements WorshipService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipTypePriorityUpdate>(Options(
                 method: 'PUT',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchId/worship-type/priority',
                 queryParameters: queryParameters, data: _data)
@@ -88,7 +100,8 @@ class _WorshipService implements WorshipService {
   }
 
   @override
-  Future<WorshipTypeDelete> deleteWorshipTypeDelete(churchId, body) async {
+  Future<WorshipTypeDelete> deleteWorshipTypeDelete(
+      token, churchId, body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -96,7 +109,10 @@ class _WorshipService implements WorshipService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipTypeDelete>(Options(
                 method: 'DELETE',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchId/worship-type',
                 queryParameters: queryParameters, data: _data)
@@ -106,14 +122,17 @@ class _WorshipService implements WorshipService {
   }
 
   @override
-  Future<WorshipList> getWorshipList(churchId) async {
+  Future<WorshipList> getWorshipList(token, churchId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipList>(Options(
                 method: 'GET',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchId/worship',
                 queryParameters: queryParameters, data: _data)
@@ -123,14 +142,17 @@ class _WorshipService implements WorshipService {
   }
 
   @override
-  Future<WorshipDetail> getWorshipDetail(churchId, worshipId) async {
+  Future<WorshipDetail> getWorshipDetail(token, churchId, worshipId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipDetail>(Options(
                 method: 'GET',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchId/worship/:$worshipId',
                 queryParameters: queryParameters, data: _data)
@@ -140,7 +162,7 @@ class _WorshipService implements WorshipService {
   }
 
   @override
-  Future<WorshipCreate> postWorshipCreate(churchId, body) async {
+  Future<WorshipCreate> postWorshipCreate(token, churchId, body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -148,7 +170,10 @@ class _WorshipService implements WorshipService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipCreate>(Options(
                 method: 'POST',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchId/worship',
                 queryParameters: queryParameters, data: _data)
@@ -158,7 +183,8 @@ class _WorshipService implements WorshipService {
   }
 
   @override
-  Future<WorshipUpdate> putWorshipUpdate(churchId, worshipId, body) async {
+  Future<WorshipUpdate> putWorshipUpdate(
+      token, churchId, worshipId, body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -166,7 +192,10 @@ class _WorshipService implements WorshipService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipUpdate>(Options(
                 method: 'PUT',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchId/worship/:$worshipId',
                 queryParameters: queryParameters, data: _data)
@@ -176,14 +205,17 @@ class _WorshipService implements WorshipService {
   }
 
   @override
-  Future<WorshipDelete> deleteWorshipDelete(churchId, worshipId) async {
+  Future<WorshipDelete> deleteWorshipDelete(token, churchId, worshipId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WorshipDelete>(Options(
                 method: 'DELETE',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchId/worship/:$worshipId',
                 queryParameters: queryParameters, data: _data)

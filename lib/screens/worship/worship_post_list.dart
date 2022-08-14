@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/worship_controller.dart';
+import 'package:practice/services/worship/worship_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class WorshipPostList extends StatefulWidget {
-  const WorshipPostList({Key? key}) : super(key: key);
+  final int? index;
+
+  const WorshipPostList({Key? key, this.index}) : super(key: key);
 
   @override
   _WorshipPostListState createState() => _WorshipPostListState();
 }
 
 class _WorshipPostListState extends State<WorshipPostList> {
+  WorshipController worshipController = Get.find();
   late YoutubePlayerController _controller;
 
   @override
   void initState() {
     super.initState();
 
+    print('phil111');
+    print(widget.index);
     _controller = YoutubePlayerController(
       initialVideoId: 'YmrMtEj5T-I',
       flags: const YoutubePlayerFlags(
@@ -32,7 +39,6 @@ class _WorshipPostListState extends State<WorshipPostList> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +73,7 @@ class _WorshipPostListState extends State<WorshipPostList> {
                 height: 13,
                 child: Text(
                   ///시간
-                  "21.11.22",
+                  "${worshipController.worshipList.resultData![widget.index!.toInt()].worshipDate}",
                   textAlign: TextAlign.right,
                   style: TextStyle(
                     color: Colors.black,
@@ -82,10 +88,11 @@ class _WorshipPostListState extends State<WorshipPostList> {
           ),
           SizedBox(
             width: 350,
-            height: 19,
+            // height: 19,
             child: Text(
+              "${worshipController.worshipList.resultData![widget.index!.toInt()].title}",
+              maxLines:3,
               ///본문
-              "2021_1123(화)내수동교회 새벽예배",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 18,
@@ -101,7 +108,10 @@ class _WorshipPostListState extends State<WorshipPostList> {
 
           GestureDetector(
             onTap: () {
-              Get.toNamed('/player', arguments: 'YmrMtEj5T-I');
+              Get.toNamed('/player',
+                  arguments: [worshipController.worshipList
+                      .resultData![widget.index!.toInt()].playInfo!.videoId
+                      .toString(), widget.index]);
             },
             child: Stack(
               children: [
@@ -117,7 +127,7 @@ class _WorshipPostListState extends State<WorshipPostList> {
                   ),
                 ),
                 Positioned(
-                  bottom:0,
+                  bottom: 0,
                   right: 0,
                   child: Container(
                     margin: EdgeInsets.only(bottom: 10, right: 10),

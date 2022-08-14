@@ -7,15 +7,10 @@ class WorshipTypeList {
   final String? trID;
   final String? resultCode;
   final String? resultMsg;
-  final List<WorshipTypeListResultData>? resultData;
-  final String? cursor;
+  final WorshipTypeListResultData? resultData;
 
   WorshipTypeList(
-      {this.trID,
-      this.resultCode,
-      this.resultMsg,
-      this.resultData,
-      this.cursor});
+      {this.trID, this.resultCode, this.resultMsg, this.resultData});
 
   factory WorshipTypeList.fromJson(Map<String, dynamic> json) =>
       _$WorshipTypeListFromJson(json);
@@ -25,18 +20,38 @@ class WorshipTypeList {
 
 @JsonSerializable()
 class WorshipTypeListResultData {
-  final String id;
-  final String title;
+  final int? churchId;
+  final List<WorshipTypeListInData>? worshipTypeList;
+  final String? createdAt;
+  final String? updatedAt;
 
   WorshipTypeListResultData({
-    required this.id,
-    required this.title,
+    this.churchId,
+    this.worshipTypeList,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory WorshipTypeListResultData.fromJson(Map<String, dynamic> json) =>
       _$WorshipTypeListResultDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipTypeListResultDataToJson(this);
+}
+
+@JsonSerializable()
+class WorshipTypeListInData {
+  final String? id;
+  final String? title;
+
+  WorshipTypeListInData({
+    this.id,
+    this.title,
+  });
+
+  factory WorshipTypeListInData.fromJson(Map<String, dynamic> json) =>
+      _$WorshipTypeListInDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WorshipTypeListInDataToJson(this);
 }
 
 @JsonSerializable()
@@ -60,7 +75,7 @@ class WorshipTypeCreateResultData {
   final int? churchId;
   final List<WorshipTypeListData> resultData;
   final String? createdAt;
-  final int? updatedAt;
+  final String? updatedAt;
 
   WorshipTypeCreateResultData({
     required this.churchId,
@@ -184,7 +199,10 @@ class WorshipListResultData {
   int? uploaderId;
   PlayInfo? playInfo;
   String? title;
+  String? preacher;
   String? worshipDate;
+  String? content;
+  bool? isVisible;
 
   WorshipListResultData({
     this.id,
@@ -192,7 +210,10 @@ class WorshipListResultData {
     this.uploaderId,
     this.playInfo,
     this.title,
+    this.preacher,
     this.worshipDate,
+    this.content,
+    this.isVisible,
   });
 
   factory WorshipListResultData.fromJson(Map<String, dynamic> json) =>

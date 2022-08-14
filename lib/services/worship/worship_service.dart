@@ -13,6 +13,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipTypeList> getWorshipTypeList(
+    @Header('Authorization') String token,
     @Path("churchID") String churchId,
   );
 
@@ -21,6 +22,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipTypeCreate> postWorshipTypeCreate(
+    @Header('Authorization') String token,
     @Path("churchID") String churchId,
     @Body() Map<String, dynamic> body,
   );
@@ -30,6 +32,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipTypeUpdate> putWorshipTypeUpdate(
+    @Header('Authorization') String token,
     @Path("churchID") String churchId,
     @Body() Map<String, dynamic> body,
   );
@@ -39,6 +42,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipTypePriorityUpdate> putWorshipTypePriorityUpdate(
+    @Header('Authorization') String token,
     @Path("churchID") String churchId,
     @Body() Map<String, dynamic> body,
   );
@@ -48,6 +52,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipTypeDelete> deleteWorshipTypeDelete(
+    @Header('Authorization') String token,
     @Path("churchID") String churchId,
     @Body() Map<String, dynamic> body,
   );
@@ -57,6 +62,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipList> getWorshipList(
+    @Header('Authorization') String token,
     @Path("churchID") String churchId,
   );
 
@@ -65,6 +71,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipDetail> getWorshipDetail(
+    @Header('Authorization') String token,
     @Path("churchID") String churchId,
     @Path("worshipID") String worshipId,
   );
@@ -74,6 +81,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipCreate> postWorshipCreate(
+    @Header('Authorization') String token,
     @Path("churchID") String churchId,
     @Body() Map<String, dynamic> body,
   );
@@ -83,6 +91,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipUpdate> putWorshipUpdate(
+    @Header('Authorization') String token,
     @Path("churchID") String churchId,
     @Path("worshipID") String worshipId,
     @Body() Map<String, dynamic> body,
@@ -93,6 +102,7 @@ abstract class WorshipService {
     "Country": "KR",
   })
   Future<WorshipDelete> deleteWorshipDelete(
+    @Header('Authorization') String token,
     @Path("churchID") String churchId,
     @Path("worshipID") String worshipId,
   );

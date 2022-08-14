@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/worship_controller.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Player extends StatefulWidget {
@@ -10,12 +11,13 @@ class Player extends StatefulWidget {
 
 class PlayerState extends State<Player> {
   late YoutubePlayerController _controller;
+  WorshipController worshipController = Get.find();
 
   @override
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: Get.arguments,
+      initialVideoId: Get.arguments[0],
       flags: const YoutubePlayerFlags(
         mute: false,
         autoPlay: true,
@@ -181,7 +183,7 @@ class PlayerState extends State<Player> {
                           // width: 57,
                           height: 13,
                           child: Text(
-                            "21.11.22",
+                            "${worshipController.worshipList.resultData![Get.arguments[1]].worshipDate}",
                             textAlign: TextAlign.right,
                             style: TextStyle(
                               color: Colors.black,
@@ -221,7 +223,7 @@ class PlayerState extends State<Player> {
                     child: SizedBox(
                       // width: 350,
                       child: Text(
-                        "설교 본문 노출\n관리자페이지에서 입력한 설교 본문이 노출됩니다.\n노출됩니다.\n노출하세요. (4줄에서 다섯줄 입력 후) \n설교본문이 노출중\ndasgasd\nsadgadsg\nadsgds\ngdasg\nsaa\nsgas\ngs\ngadsgsg\nabjoasdhgoiwejafjoi",
+                        "${worshipController.worshipList.resultData![Get.arguments[1]].content}",
                         style: TextStyle(
                           fontSize: 14,
                         ),

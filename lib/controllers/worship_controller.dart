@@ -9,7 +9,7 @@ class WorshipController extends BaseController {
   WorshipTypeList worshipTypeList = WorshipTypeList();
   WorshipTypeUpdate worshipTypeUpdate = WorshipTypeUpdate();
   WorshipTypePriorityUpdate worshipTypePriorityUpdate =
-  WorshipTypePriorityUpdate();
+      WorshipTypePriorityUpdate();
   WorshipTypeDelete worshipTypeDelete = WorshipTypeDelete();
   WorshipList worshipList = WorshipList();
   WorshipDetail worshipDetail = WorshipDetail();
@@ -17,29 +17,37 @@ class WorshipController extends BaseController {
   WorshipUpdate worshipUpdate = WorshipUpdate();
   WorshipDelete worshipDelete = WorshipDelete();
 
-  Future<void> getWorshipTypeData({required String churchId}) async {
+  Future<void> getWorshipTypeData(String token,
+      {required String churchId}) async {
+    String headerToken = "Bearer $token";
+
     final WorshipTypeList resp = await super
         .rootService
         .worshipService
-        .getWorshipTypeList(churchId); //,type,cursor);
+        .getWorshipTypeList(headerToken, churchId); //,type,cursor);
     this.worshipTypeList = resp;
+
     update();
   }
 
-  Future<void> postWorshipTypeCreate(
+  Future<void> postWorshipTypeCreate(String token,
       {required String churchId, required String title}) async {
+    String headerToken = "Bearer $token";
+
     final Map<String, dynamic> data = {"title": title};
 
     final WorshipTypeCreate resp = await super
         .rootService
         .worshipService
-        .postWorshipTypeCreate(churchId, data); //,type,cursor);
+        .postWorshipTypeCreate(headerToken, churchId, data); //,type,cursor);
     this.worshipTypeCreate = resp;
     update();
   }
 
-  Future<void> putWorshipTypeUpdate(
+  Future<void> putWorshipTypeUpdate(String token,
       {required String churchId, worshipTypeId, title}) async {
+    String headerToken = "Bearer $token";
+
     final Map<String, dynamic> data = {
       "worshipTypeId": worshipTypeId,
       "title": title
@@ -48,14 +56,16 @@ class WorshipController extends BaseController {
     final WorshipTypeUpdate resp = await super
         .rootService
         .worshipService
-        .putWorshipTypeUpdate(churchId, data); //,type,cursor);
+        .putWorshipTypeUpdate(headerToken, churchId, data); //,type,cursor);
     this.worshipTypeUpdate = resp;
     update();
   }
 
   ///체크 List
-  Future<void> putWorshipTypePriorityUpdate(
+  Future<void> putWorshipTypePriorityUpdate(String token,
       {required String churchId, worshipTypeIds}) async {
+    String headerToken = "Bearer $token";
+
     final Map<String, dynamic> data = {
       "worshipTypeIds": worshipTypeIds,
     };
@@ -63,13 +73,16 @@ class WorshipController extends BaseController {
     final WorshipTypePriorityUpdate resp = await super
         .rootService
         .worshipService
-        .putWorshipTypePriorityUpdate(churchId, data); //,type,cursor);
+        .putWorshipTypePriorityUpdate(
+            headerToken, churchId, data); //,type,cursor);
     this.worshipTypePriorityUpdate = resp;
     update();
   }
 
-  Future<void> deleteWorshipTypeDelete(
+  Future<void> deleteWorshipTypeDelete(String token,
       {required String churchId, worshipTypeId}) async {
+    String headerToken = "Bearer $token";
+
     final Map<String, dynamic> data = {
       "worshipTypeId": worshipTypeId,
     };
@@ -77,34 +90,45 @@ class WorshipController extends BaseController {
     final WorshipTypeDelete resp = await super
         .rootService
         .worshipService
-        .deleteWorshipTypeDelete(churchId, data); //,type,cursor);
+        .deleteWorshipTypeDelete(headerToken, churchId, data); //,type,cursor);
     this.worshipTypeDelete = resp;
     update();
   }
 
-  Future<void> getWorshipData({required String churchId}) async {
+  Future<void> getWorshipData(String token, {required String churchId}) async {
+    String headerToken = "Bearer $token";
+
     final WorshipList resp = await super
         .rootService
         .worshipService
-        .getWorshipList(churchId); //,type,cursor);
+        .getWorshipList(headerToken, churchId); //,type,cursor);
     this.worshipList = resp;
     update();
   }
 
-  Future<void> getWorshipDetailData({required String churchId,
-    required String worshipId}) async {
+  Future<void> getWorshipDetailData(String token,
+      {required String churchId, required String worshipId}) async {
+    String headerToken = "Bearer $token";
     final WorshipDetail resp = await super
         .rootService
         .worshipService
-        .getWorshipDetail(churchId, worshipId); //,type,cursor);
+        .getWorshipDetail(headerToken, churchId, worshipId); //,type,cursor);
     this.worshipDetail = resp;
     update();
   }
 
-  Future<void> postWorshipCreate(
-      {required String churchId, required String title, preacher,
-        required String worshipTypeId, required String videoId, content, required String worshipDate}) async {
-    final Map<String, dynamic> data = {"title": title,
+  Future<void> postWorshipCreate(String token,
+      {required String churchId,
+      required String title,
+      preacher,
+      required String worshipTypeId,
+      required String videoId,
+      content,
+      required String worshipDate}) async {
+    String headerToken = "Bearer $token";
+
+    final Map<String, dynamic> data = {
+      "title": title,
       "preacher": preacher,
       "worshipTypeId": worshipTypeId,
       "videoId": videoId,
@@ -115,15 +139,22 @@ class WorshipController extends BaseController {
     final WorshipCreate resp = await super
         .rootService
         .worshipService
-        .postWorshipCreate(churchId, data); //,type,cursor);
+        .postWorshipCreate(headerToken, churchId, data); //,type,cursor);
     this.worshipCreate = resp;
     update();
   }
 
-  Future<void> putWorshipUpdate(
-      {required String churchId, required String worshipId, title,
-        preacher, worshipTypeId, videoId, content, worshipDate
-      }) async {
+  Future<void> putWorshipUpdate(String token,
+      {required String churchId,
+      required String worshipId,
+      title,
+      preacher,
+      worshipTypeId,
+      videoId,
+      content,
+      worshipDate}) async {
+    String headerToken = "Bearer $token";
+
     final Map<String, dynamic> data = {
       "title": title,
       "preacher": preacher,
@@ -136,19 +167,21 @@ class WorshipController extends BaseController {
     final WorshipUpdate resp = await super
         .rootService
         .worshipService
-        .putWorshipUpdate(churchId, worshipId, data); //,type,cursor);
+        .putWorshipUpdate(
+            headerToken, churchId, worshipId, data); //,type,cursor);
     this.worshipUpdate = resp;
     update();
   }
 
-  Future<void> deleteWorshipDelete(
+  Future<void> deleteWorshipDelete(String token,
       {required String churchId, required String worshipId}) async {
+    String headerToken = "Bearer $token";
+
     final WorshipDelete resp = await super
         .rootService
         .worshipService
-        .deleteWorshipDelete(churchId, worshipId); //,type,cursor);
+        .deleteWorshipDelete(headerToken, churchId, worshipId); //,type,cursor);
     this.worshipDelete = resp;
     update();
   }
 }
-

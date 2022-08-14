@@ -22,7 +22,7 @@ class DefaultLayout extends StatelessWidget {
       bottomNavigationBar: bottomNavigationBar,
       resizeToAvoidBottomInset : true,
       body: SafeArea(
-        top: true,
+        top: false,
         bottom: false,
         child: body,
       ),
