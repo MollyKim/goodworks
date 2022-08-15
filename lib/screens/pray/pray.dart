@@ -6,8 +6,10 @@ import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/church_controller.dart';
+import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/controllers/pray_controller.dart';
 import 'package:practice/controllers/user_controller.dart';
+import 'package:practice/screens/community/post_list.dart';
 import 'package:practice/screens/nodata.dart';
 import 'package:practice/screens/pray/pray_post_list.dart';
 import 'package:practice/themes/extensions.dart';
@@ -23,39 +25,11 @@ class Pray extends StatefulWidget {
 
 class _PrayState extends State<Pray> with TickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
-  RefreshController _refreshController2 = RefreshController(initialRefresh: false);
+
   PrayController prayController = Get.find();
   ChurchController churchController = Get.find();
   UserController userController = Get.find();
   late final Future callPrayApis;
-
-  String year = '2022';
-  String month = '07';
-  late String time = year + '-' + month;
-
-  final pickerData2 = '''
-[
-    [
-        2021,
-        2022
-    ],
-    [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12
-    ]
-]
-    ''';
 
   @override
   void initState() {
@@ -75,37 +49,90 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
     } catch (e) {
       print("error!! in pray : $e");
     }
-
-    if (prayController.prayList.resultCode == "0000" && prayController.prayList.resultData?.length != 0) {
-      return true;
-    } else
-      return false;
   }
 
   @override
   Widget build(BuildContext context) {
-    TabController tabController = TabController(
-      length: 2, // 2
-      vsync: this,
-    );
+    final RefreshController _refreshController = RefreshController(initialRefresh: false);
+
+    void _onRefresh() async {
+      try {
+        prayController.getPrayListData(userController.userSession!,
+            churchId: churchController.churchModel.resultData?.id.toString() ?? "1");
+      } catch (e) {
+        print("error!! in community : $e");
+      }
+      await Future.delayed(Duration(milliseconds: 1000));
+      _refreshController.refreshCompleted();
+    }
+
+    void _onLoading() async {
+      await Future.delayed(Duration(milliseconds: 1000));
+      // if(mounted)
+      //   setState(() {});
+      _refreshController.loadComplete();
+    }
+
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 2.0,
-        titleSpacing: 0,
+        centerTitle: false,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        backwardsCompatibility: false,
-        // leadingWidth: 75,
-        //TODO Adjust leading container width
-        leading: Center(
-            child: Text(
-          '예배',
+        titleSpacing: 20,
+        title: Text(
+          "기도",
           style: TextStyle(
-            color: Color(0xff2d9067),
+            fontWeight: FontWeight.bold,
             fontSize: 20,
             fontFamily: "AppleSDGothicNeo",
-            fontWeight: FontWeight.w700,
+            color: Color(0xff2d9067),
           ),
-        )),
+        ),
+        elevation: 0.0,
+      ),
+      body: SafeArea(
+        top: true,
+        bottom: true,
+        child: SmartRefresher(
+          enablePullDown: true,
+          controller: _refreshController,
+          header: ClassicHeader(
+            height: 100,
+            idleIcon: CupertinoActivityIndicator(
+              radius: 13.0,
+            ),
+            idleText: "",
+            refreshingIcon: CupertinoActivityIndicator(
+              radius: 13.0,
+            ),
+            releaseIcon: CupertinoActivityIndicator(
+              radius: 13.0,
+            ),
+            completeIcon: null,
+            completeText: "",
+            completeDuration: Duration.zero,
+            releaseText: "",
+            refreshingText: "",
+          ),
+          onRefresh: () {
+            _onRefresh();
+          },
+          onLoading: () {
+            _onLoading();
+          },
+          child: ListView.separated(
+            itemCount: prayController.prayList.resultData?.length ?? 1,
+            separatorBuilder: (context, index) {
+              return CustomSeparator();
+            },
+            itemBuilder: (BuildContext context, int index) {
+              return PrayPostList(
+                index: index,
+              );
+            },
+          ),
+        ),
       ),
       floatingActionButton: GestureDetector(
         onTap: () {
@@ -128,247 +155,6 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
           ),
         ),
       ),
-      body: FutureBuilder(
-          future: callPrayApis,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasData && snapshot.data == true) {
-                return NestedScrollView(
-                  controller: scrollController,
-                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-                    return <Widget>[
-                      SliverAppBar(
-                        toolbarHeight: 30,
-                        automaticallyImplyLeading: false,
-                        elevation: 0,
-                        backgroundColor: Colors.white,
-                        pinned: true,
-                        flexibleSpace: TabBar(
-                          indicatorColor: Colors.transparent,
-                          isScrollable: true,
-                          labelPadding: EdgeInsets.only(left: 10, right: 10),
-                          unselectedLabelColor: Colors.grey,
-                          unselectedLabelStyle: TextStyle(
-                            fontSize: 14,
-                            fontFamily: "AppleSDGothicNeo",
-                            fontWeight: FontWeight.w700,
-                          ),
-                          labelColor: Color(0xff2d9067),
-                          labelStyle: TextStyle(
-                            color: Color(0xff2d9067),
-                            fontSize: 14,
-                            fontFamily: "AppleSDGothicNeo",
-                            fontWeight: FontWeight.w700,
-                          ),
-                          controller: tabController,
-                          tabs: <Widget>[
-                            Tab(text: '교회 기도'),
-                            Tab(text: '소그룹 기도'),
-                            // Tab(text: worshipController.worshipTypeList.resultData!.worshipTypeList![0].title),
-                            // Tab(text: '새벽예배'),
-                            // Tab(text: '금요예배'),
-                            // Tab(text: '수요예배'),
-                            // Tab(text: '주일학교'),
-                            // Tab(text: '청년부'),
-                          ],
-                        ),
-                      ),
-                      // SliverAppBar(
-                      //     toolbarHeight: tabController.index == 1 ? 44 : 0,
-                      //     automaticallyImplyLeading: false,
-                      //     elevation: 0,
-                      //     backgroundColor: Colors.white,
-                      //     pinned: true,
-                      //     title: Container(
-                      //       child: Text(
-                      //         '전체 소그룹',
-                      //         style: TextStyle(color: Colors.black),
-                      //       ),
-                      //     )),
-                    ];
-                  },
-                  body: TabBarView(
-                    controller: tabController,
-                    children: <Widget>[
-                      SmartRefresher(
-                        enablePullDown: true,
-                        controller: _refreshController,
-                        header: ClassicHeader(
-                          height: 100,
-                          idleIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          idleText: "",
-                          refreshingIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          releaseIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          completeIcon: null,
-                          completeText: "",
-                          completeDuration: Duration.zero,
-                          releaseText: "",
-                          refreshingText: "",
-                        ),
-                        // header: WaterDropHeader(),
-                        onRefresh: () {
-                          _onRefresh();
-                        },
-                        onLoading: () {
-                          _onLoading();
-                        },
-                        child: ListView.separated(
-                          itemCount: prayController.prayList.resultData?.length ?? 0,
-                          separatorBuilder: (context, index) {
-                            return CustomSeparator();
-                          },
-                          itemBuilder: (BuildContext context, int index) {
-                            return PrayPostList(index: index);
-                          },
-                        ),
-                      ),
-
-                      SmartRefresher(
-                        enablePullDown: true,
-                        controller: _refreshController2,
-                        header: ClassicHeader(
-                          height: 100,
-                          idleIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          idleText: "",
-                          refreshingIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          releaseIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          completeIcon: null,
-                          completeText: "",
-                          completeDuration: Duration.zero,
-                          releaseText: "",
-                          refreshingText: "",
-                        ),
-                        // header: WaterDropHeader(),
-                        onRefresh: () {
-                          _onRefresh2();
-                        },
-                        onLoading: () {
-                          _onLoading();
-                        },
-                        child: ListView.separated(
-                          itemCount: prayController.prayList.resultData?.length ?? 0,
-                          separatorBuilder: (context, index) {
-                            return CustomSeparator();
-                          },
-                          itemBuilder: (BuildContext context, int index) {
-                            return PrayPostList(index: index);
-                          },
-                        ),
-                      ),
-                      // ListView.separated(
-                      //   itemCount: 5,
-                      //   separatorBuilder: (context, index) {
-                      //     return CustomSeparator();
-                      //   },
-                      //   itemBuilder: (BuildContext context, int index) {
-                      //     return PrayPostList();
-                      //   },
-                      // ),
-                    ],
-                  ),
-                );
-              } else {
-                return NoData(
-                  title: "현재 작성된 기도제목이 없습니다",
-                  content: "교회 및 공동체 지체들의 기도 제목을\n함께 나누고 기도해요.",
-                );
-              }
-            } else {
-              return Center(
-                  child: CircularProgressIndicator(
-                color: context.forest80,
-              ));
-            }
-          }),
     );
-  }
-
-  pickDate() {
-    return GestureDetector(
-      onTap: () {
-        Picker(
-            adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(pickerData2), isArray: true),
-            hideHeader: true,
-            title: new Text("날짜 선택"),
-            cancelText: '취소',
-            confirmText: '선택',
-            onConfirm: (Picker picker, List value) {
-              print(value.toString());
-              setState(() {
-                year = picker.getSelectedValues().first;
-                month = picker.getSelectedValues().last;
-                getPray();
-              });
-              print(picker.getSelectedValues().first);
-            }).showDialog(context);
-      },
-      child: Container(
-        width: 62,
-        height: 32,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Color(0xff2d9067),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              month,
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            SvgPicture.asset(
-              'assets/ic/ic_bottom.svg',
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _onRefresh() async {
-    try {
-      await prayController.getPrayListData(userController.userSession!,
-          churchId: churchController.churchModel.resultData?.id.toString() ?? "1");
-    } catch (e) {
-      print("error!! in pray : $e");
-    }
-    _refreshController.refreshCompleted();
-  }
-
-  void _onRefresh2() async {
-    try {
-      await prayController.getPrayListData(userController.userSession!,
-          churchId: churchController.churchModel.resultData?.id.toString() ?? "1");
-    } catch (e) {
-      print("error!! in pray : $e");
-    }
-    _refreshController2.refreshCompleted();
-  }
-
-  void _onLoading() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    if (mounted) setState(() {});
-    _refreshController.loadComplete();
   }
 }

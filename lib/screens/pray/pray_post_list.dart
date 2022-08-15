@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/pray_controller.dart';
 import 'package:practice/themes/extensions.dart';
@@ -61,20 +60,6 @@ class PrayPostList extends StatelessWidget {
                     fontSize: 12,
                   ),
                 )
-
-                // GestureDetector(
-                //   onTap: () {
-                //     showModalBottomSheet(
-                //         backgroundColor: Colors.transparent,
-                //         context: context,
-                //         builder: buildBottomSheet);
-                //   },
-                //   child: SvgPicture.asset(
-                //     'assets/ic/ic_more_horiz.svg',
-                //     width: 30,
-                //     height: 30,
-                //   ),
-                // ),
               ],
             ),
             SizedBox(
