@@ -23,7 +23,8 @@ class Pray extends StatefulWidget {
 
 class _PrayState extends State<Pray> with TickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
-  RefreshController _refreshController = RefreshController(initialRefresh: true);
+  RefreshController _refreshController = RefreshController(initialRefresh: false);
+  RefreshController _refreshController2 = RefreshController(initialRefresh: false);
   PrayController prayController = Get.find();
   ChurchController churchController = Get.find();
   UserController userController = Get.find();
@@ -172,18 +173,18 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                           ],
                         ),
                       ),
-                      SliverAppBar(
-                          toolbarHeight: tabController.index == 1 ? 44 : 0,
-                          automaticallyImplyLeading: false,
-                          elevation: 0,
-                          backgroundColor: Colors.white,
-                          pinned: true,
-                          title: Container(
-                            child: Text(
-                              '전체 소그룹',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          )),
+                      // SliverAppBar(
+                      //     toolbarHeight: tabController.index == 1 ? 44 : 0,
+                      //     automaticallyImplyLeading: false,
+                      //     elevation: 0,
+                      //     backgroundColor: Colors.white,
+                      //     pinned: true,
+                      //     title: Container(
+                      //       child: Text(
+                      //         '전체 소그룹',
+                      //         style: TextStyle(color: Colors.black),
+                      //       ),
+                      //     )),
                     ];
                   },
                   body: TabBarView(
@@ -215,7 +216,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                           _onRefresh();
                         },
                         onLoading: () {
-                          // _onLoading();
+                          _onLoading();
                         },
                         child: ListView.separated(
                           itemCount: prayController.prayList.resultData?.length ?? 0,
@@ -230,7 +231,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
 
                       SmartRefresher(
                         enablePullDown: true,
-                        controller: _refreshController,
+                        controller: _refreshController2,
                         header: ClassicHeader(
                           height: 100,
                           idleIcon: CupertinoActivityIndicator(
@@ -251,10 +252,10 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                         ),
                         // header: WaterDropHeader(),
                         onRefresh: () {
-                          // _onRefresh();
+                          _onRefresh2();
                         },
                         onLoading: () {
-                          // _onLoading();
+                          _onLoading();
                         },
                         child: ListView.separated(
                           itemCount: prayController.prayList.resultData?.length ?? 0,
@@ -347,12 +348,22 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
 
   void _onRefresh() async {
     try {
-      // await prayController.getPrayListData(userController.userSession!,
-      //     churchId: churchController.churchModel.resultData?.id.toString() ?? "1");
+      await prayController.getPrayListData(userController.userSession!,
+          churchId: churchController.churchModel.resultData?.id.toString() ?? "1");
     } catch (e) {
       print("error!! in pray : $e");
     }
     _refreshController.refreshCompleted();
+  }
+
+  void _onRefresh2() async {
+    try {
+      await prayController.getPrayListData(userController.userSession!,
+          churchId: churchController.churchModel.resultData?.id.toString() ?? "1");
+    } catch (e) {
+      print("error!! in pray : $e");
+    }
+    _refreshController2.refreshCompleted();
   }
 
   void _onLoading() async {

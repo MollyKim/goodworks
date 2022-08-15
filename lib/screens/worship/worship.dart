@@ -21,15 +21,12 @@ class Worship extends StatefulWidget {
 
 class _WorshipState extends State<Worship> with TickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   WorshipController worshipController = Get.find();
   ChurchController churchController = Get.find();
   UserController userController = Get.find();
 
-  String year = '2022';
-  String month = '1';
   late final Future callWorshipApis;
 
   @override
@@ -41,11 +38,9 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
   getWorship() async {
     try {
       await worshipController.getWorshipTypeData(userController.userSession!,
-          churchId:
-              churchController.churchModel.resultData?.id.toString() ?? '1');
+          churchId: churchController.churchModel.resultData?.id.toString() ?? '1');
       await worshipController.getWorshipData(userController.userSession!,
-          churchId:
-              churchController.churchModel.resultData?.id.toString() ?? '1');
+          churchId: churchController.churchModel.resultData?.id.toString() ?? '1');
     } catch (e) {
       print("error!! in worship : $e");
     }
@@ -67,8 +62,6 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
         elevation: 2.0,
         titleSpacing: 0,
         backgroundColor: Colors.white,
-        backwardsCompatibility: false,
-        // leadingWidth: 75,
         //TODO Adjust leading container width
         leading: Center(
             child: Text(
@@ -84,42 +77,7 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
       body: NestedScrollView(
         controller: scrollController,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              elevation: 0,
-              backgroundColor: Colors.white,
-              pinned: true,
-              flexibleSpace: TabBar(
-                indicatorColor: Colors.transparent,
-                isScrollable: true,
-                labelPadding: EdgeInsets.only(left: 10, right: 10),
-                unselectedLabelColor: Colors.grey,
-                unselectedLabelStyle: TextStyle(
-                  fontSize: 14,
-                  fontFamily: "AppleSDGothicNeo",
-                  fontWeight: FontWeight.w700,
-                ),
-                labelColor: Color(0xff2d9067),
-                labelStyle: TextStyle(
-                  color: Color(0xff2d9067),
-                  fontSize: 14,
-                  fontFamily: "AppleSDGothicNeo",
-                  fontWeight: FontWeight.w700,
-                ),
-                controller: tabController,
-                tabs: <Widget>[
-                  Tab(text: '전체'),
-                  // Tab(text: worshipController.worshipTypeList.resultData!.worshipTypeList![0].title),
-                  // Tab(text: '새벽예배'),
-                  // Tab(text: '금요예배'),
-                  // Tab(text: '수요예배'),
-                  // Tab(text: '주일학교'),
-                  // Tab(text: '청년부'),
-                ],
-              ),
-            ),
-          ];
+          return <Widget>[];
         },
         body: TabBarView(
           controller: tabController,
@@ -145,11 +103,10 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
                 releaseText: "",
                 refreshingText: "",
               ),
-              // header: WaterDropHeader(),
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               child: ListView.separated(
-                itemCount: worshipController.worshipList.resultData!.length,
+                itemCount: worshipController.worshipList.resultData?.length ?? 1,
                 separatorBuilder: (context, index) {
                   return CustomSeparator();
                 },
@@ -158,21 +115,6 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
                 },
               ),
             ),
-            // Container(
-            //     color: Colors.blue,
-            //     child: ElevatedButton(
-            //       onPressed: () {
-            //         Fluttertoast.showToast(
-            //             msg: "This is Center Short Toast",
-            //             toastLength: Toast.LENGTH_SHORT,
-            //             gravity: ToastGravity.CENTER,
-            //             timeInSecForIosWeb: 1,
-            //             backgroundColor: Colors.red,
-            //             textColor: Colors.white,
-            //             fontSize: 16.0);
-            //       },
-            //       child: Text("button"),
-            //     )),
           ],
         ),
       ),
@@ -190,68 +132,3 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
     _refreshController.loadComplete();
   }
 }
-//   late YoutubePlayerController _controller;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//
-//     _controller = YoutubePlayerController(
-//       initialVideoId: 'dyRsYk0LyA8',
-//       flags: const YoutubePlayerFlags(
-//         mute: false,
-//         autoPlay: false,
-//         disableDragSeek: false,
-//         loop: false,
-//         isLive: false,
-//         forceHD: false,
-//         enableCaption: true,
-//       ),
-//     );
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         automaticallyImplyLeading: false,
-//         foregroundColor: Colors.black,
-//         backgroundColor: Colors.white,
-//         title: Text(
-//           '기도',
-//           style: TextStyle(fontSize: 20.0),
-//         ),
-//       ),
-//       body: Container(
-//         padding: EdgeInsets.all(20),
-//         child: Column(
-//           children: [
-//             ElevatedButton(
-//                 onPressed: () {
-//
-//                   // Get.toNamed('/player', arguments: 'lQ-bjS-S4wQ');
-//                   Get.toNamed('/full_screen', arguments: 'dyRsYk0LyA8');
-//                   // Player('dyRsYk0LyA8', 'Video Title');
-//                 },
-//                 child: Text('Full Screen')),
-//             YoutubePlayer(
-//               thumbnail:Container(child: Text('ThumbNail'),),
-//               key: ObjectKey(_controller),
-//               controller: _controller,
-//               actionsPadding: const EdgeInsets.only(left: 16.0),
-//               bottomActions: [
-//
-//                 CurrentPosition(),
-//                 const SizedBox(width: 10.0),
-//                 ProgressBar(isExpanded: true),
-//                 const SizedBox(width: 10.0),
-//                 RemainingDuration(),
-//                 FullScreenButton(),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
