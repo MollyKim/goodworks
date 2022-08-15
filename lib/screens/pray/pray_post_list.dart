@@ -78,17 +78,17 @@ class PrayPostList extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Text(
-              prayController.prayList.resultData?[index].createdAt.toString().substring(0,10).replaceAll('-','.') ?? '',
+              "2022.06.05",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 14,
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Text(
               prayController.prayList.resultData?[index].content.toString() ?? "목장",
