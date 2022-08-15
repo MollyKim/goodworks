@@ -7,6 +7,7 @@ import 'package:practice/services/root_service.dart';
 class CommunityController extends BaseController{
   CommunityController(RootService rootService) : super(rootService);
 
+  CommunityUserModel communityUserList = CommunityUserModel();
   CommunityModel communityList = CommunityModel();
   UserController userController = Get.find();
 
@@ -20,6 +21,12 @@ class CommunityController extends BaseController{
   Future<void> getCommunityDetail({required String churchId, required String communityId}) async{
     String token = "Bearer ${userController.userSession}";
     this.communityList  = await super.rootService.communityService.getCommunityDetail(token,churchId,communityId);
+    update();
+  }
+
+  Future<void> getCommunityUserList({required String churchId, required String communityId}) async{
+    String token = "Bearer ${userController.userSession}";
+    this.communityUserList  = await super.rootService.communityService.getCommunityUserList(token,churchId,communityId);
     update();
   }
 

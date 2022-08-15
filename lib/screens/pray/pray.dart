@@ -25,7 +25,7 @@ class Pray extends StatefulWidget {
 
 class _PrayState extends State<Pray> with TickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
-
+  CommunityController communityController = Get.find();
   PrayController prayController = Get.find();
   ChurchController churchController = Get.find();
   UserController userController = Get.find();
@@ -45,7 +45,8 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
       print('phil getPray 001');
       await prayController.getPrayDetailData(userController.userSession!,
           churchId: churchController.churchModel.resultData?.id.toString() ?? "1", prayerID: "1");
-      print('phil getPray 002');
+      await communityController.getCommunityUserList(
+          churchId: churchController.churchModel.resultData?.id.toString() ?? "1", communityId: communityController.communityList.resultData![0].id.toString());
     } catch (e) {
       print("error!! in pray : $e");
     }
@@ -91,48 +92,52 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
         ),
         elevation: 0.0,
       ),
-      body: SafeArea(
-        top: true,
-        bottom: true,
-        child: SmartRefresher(
-          enablePullDown: true,
-          controller: _refreshController,
-          header: ClassicHeader(
-            height: 100,
-            idleIcon: CupertinoActivityIndicator(
-              radius: 13.0,
+      body: GetBuilder<PrayController>(
+        builder: (context) {
+          return SafeArea(
+            top: true,
+            bottom: true,
+            child: SmartRefresher(
+              enablePullDown: true,
+              controller: _refreshController,
+              header: ClassicHeader(
+                height: 100,
+                idleIcon: CupertinoActivityIndicator(
+                  radius: 13.0,
+                ),
+                idleText: "",
+                refreshingIcon: CupertinoActivityIndicator(
+                  radius: 13.0,
+                ),
+                releaseIcon: CupertinoActivityIndicator(
+                  radius: 13.0,
+                ),
+                completeIcon: null,
+                completeText: "",
+                completeDuration: Duration.zero,
+                releaseText: "",
+                refreshingText: "",
+              ),
+              onRefresh: () {
+                _onRefresh();
+              },
+              onLoading: () {
+                _onLoading();
+              },
+              child: ListView.separated(
+                itemCount: prayController.prayList.resultData?.length ?? 1,
+                separatorBuilder: (context, index) {
+                  return CustomSeparator();
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return PrayPostList(
+                    index: index,
+                  );
+                },
+              ),
             ),
-            idleText: "",
-            refreshingIcon: CupertinoActivityIndicator(
-              radius: 13.0,
-            ),
-            releaseIcon: CupertinoActivityIndicator(
-              radius: 13.0,
-            ),
-            completeIcon: null,
-            completeText: "",
-            completeDuration: Duration.zero,
-            releaseText: "",
-            refreshingText: "",
-          ),
-          onRefresh: () {
-            _onRefresh();
-          },
-          onLoading: () {
-            _onLoading();
-          },
-          child: ListView.separated(
-            itemCount: prayController.prayList.resultData?.length ?? 1,
-            separatorBuilder: (context, index) {
-              return CustomSeparator();
-            },
-            itemBuilder: (BuildContext context, int index) {
-              return PrayPostList(
-                index: index,
-              );
-            },
-          ),
-        ),
+          );
+        }
       ),
       floatingActionButton: GestureDetector(
         onTap: () {

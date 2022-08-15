@@ -10,21 +10,28 @@ abstract class CommunityService {
 
   @GET('/api/v1/seum/church/{churchID}/community/my/sharinggroup')
   Future<CommunityModel> getCommunityList(
-      @Header('Authorization') String token,
-      @Path() String churchID,
-      );
+    @Header('Authorization') String token,
+    @Path() String churchID,
+  );
 
   @GET('/api/v1/seum/church/{churchID}/community/{communityID}')
   Future<CommunityModel> getCommunityDetail(
-      @Header('Authorization') String token,
-      @Path("churchID") String churchID,
-      @Path("communityID") String communityID,
-      );
+    @Header('Authorization') String token,
+    @Path("churchID") String churchID,
+    @Path("communityID") String communityID,
+  );
+
+  @GET('/api/v1/seum/church/{churchID}/community/{communityID}/user')
+  Future<CommunityUserModel> getCommunityUserList(
+    @Header('Authorization') String token,
+    @Path("churchID") String churchID,
+    @Path("communityID") String communityID,
+  );
 
   @POST('/api/v1/seum/church/{churchID}/community/5/feed')
   Future<PostCommunityResponse> postCommunityPost(
-      @Header('Authorization') String token,
-      @Path("churchID") int churchID,
-      @Body() FormData body,
-      );
+    @Header('Authorization') String token,
+    @Path("churchID") int churchID,
+    @Body() FormData body,
+  );
 }

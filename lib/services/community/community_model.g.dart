@@ -43,6 +43,7 @@ CommunityResultData _$CommunityResultDataFromJson(Map<String, dynamic> json) {
     attachments: (json['attachments'] as List<dynamic>?)
         ?.map((e) => CommunityAttachment.fromJson(e as Map<String, dynamic>))
         .toList(),
+    name: json['name'] as String?,
     createdAt: json['createdAt'] as String?,
     updatedAt: json['updatedAt'] as String?,
     deletedAt: json['deletedAt'] as String?,
@@ -63,6 +64,7 @@ Map<String, dynamic> _$CommunityResultDataToJson(
       'introduce': instance.introduce,
       'coverImage': instance.coverImage,
       'attachments': instance.attachments,
+      'name': instance.name,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'deletedAt': instance.deletedAt,
@@ -137,4 +139,60 @@ Map<String, dynamic> _$PostCommunityResponseToJson(
       'trId': instance.trId,
       'resultCode': instance.resultCode,
       'resultMsg': instance.resultMsg,
+    };
+
+CommunityUserModel _$CommunityUserModelFromJson(Map<String, dynamic> json) {
+  return CommunityUserModel(
+    trId: json['trId'] as String?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+    resultData: (json['resultData'] as List<dynamic>?)
+        ?.map((e) => CommunityUserResultData.fromJson(e as Object))
+        .toList(),
+  );
+}
+
+Map<String, dynamic> _$CommunityUserModelToJson(CommunityUserModel instance) =>
+    <String, dynamic>{
+      'trId': instance.trId,
+      'resultCode': instance.resultCode,
+      'resultMsg': instance.resultMsg,
+      'resultData': instance.resultData,
+    };
+
+CommunityUserResultData _$CommunityUserResultDataFromJson(
+    Map<String, dynamic> json) {
+  return CommunityUserResultData(
+    json['churchUserId'] as int?,
+    json['userId'] as int?,
+    json['userStatus'] as int?,
+    json['userName'] as String?,
+    json['avatar'] == null ? null : Avatar.fromJson(json['avatar'] as Object),
+  );
+}
+
+Map<String, dynamic> _$CommunityUserResultDataToJson(
+        CommunityUserResultData instance) =>
+    <String, dynamic>{
+      'churchUserId': instance.churchUserId,
+      'userId': instance.userId,
+      'userStatus': instance.userStatus,
+      'userName': instance.userName,
+      'avatar': instance.avatar,
+    };
+
+Avatar _$AvatarFromJson(Map<String, dynamic> json) {
+  return Avatar(
+    json['filename'] as String?,
+    json['url'] as String?,
+    json['smallUrl'] as String?,
+    json['size'] as int?,
+  );
+}
+
+Map<String, dynamic> _$AvatarToJson(Avatar instance) => <String, dynamic>{
+      'filename': instance.filename,
+      'url': instance.url,
+      'smallUrl': instance.smallUrl,
+      'size': instance.size,
     };

@@ -1,9 +1,13 @@
 import 'dart:convert';
 
+import 'package:dropdown_button2/custom_dropdown_button2.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/community_controller.dart';
+import 'package:practice/controllers/pray_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 
 class PrayCommunityPost extends StatefulWidget {
@@ -14,26 +18,60 @@ class PrayCommunityPost extends StatefulWidget {
 }
 
 class _PrayCommunityPostState extends State<PrayCommunityPost> {
-  String name = '윤하정';
-  bool flag = true;
-  bool flag2 = false;
-  bool flag3 = false;
-  bool flag4 = false;
+  var memberNum = 0;
+  CommunityController communityController = Get.find();
+  PrayController prayController = Get.find();
+
+  String? selectedValue;
+  List<String> items = [
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+  ];
+
+  List<DropdownMenuItem<String>> _addDividersAfterItems(List<String?> items) {
+    List<DropdownMenuItem<String>> _menuItems = [];
+    for (var item in items) {
+      _menuItems.addAll(
+        [
+          DropdownMenuItem<String>(
+            value: item,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                item!,
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+          //If it's last item, we will not add Divider after it.
+          if (item != items.last)
+            const DropdownMenuItem<String>(
+              enabled: false,
+              child: Divider(),
+            ),
+        ],
+      );
+    }
+    return _menuItems;
+  }
+
+  List<int> _getDividersIndexes() {
+    List<int> _dividersIndexes = [];
+    for (var i = 0; i < (items.length * 2) - 1; i++) {
+      //Dividers indexes will be the odd indexes
+      if (i.isOdd) {
+        _dividersIndexes.add(i);
+      }
+    }
+    return _dividersIndexes;
+  }
 
   @override
   Widget build(BuildContext context) {
-    const PickerData2 = '''
-[
-    [
-          "임지혜",      
-          "임지혜",
-          "임지혜",
-          "임지혜",
-          "임지혜",
-          "임지혜"    
-    ]
-]
-    ''';
     return DefaultLayout(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -81,172 +119,59 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
             SizedBox(
               height: 10,
             ),
-            GestureDetector(
-              onTap: () {
-                Picker(
-                    adapter: PickerDataAdapter<String>(
-                        pickerdata: new JsonDecoder().convert(PickerData2),
-                        isArray: true),
-                    hideHeader: true,
-                    title: new Text("목장 선택"),
-                    cancelText: '취소',
-                    confirmText: '선택',
-                    onConfirm: (Picker picker, List value) {
-                      print(value.toString());
-                      setState(() {
-                        name = picker.getSelectedValues().first;
-                      });
-                      print(picker.getSelectedValues().first);
-                    }).showDialog(context);
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "$name 목장",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontFamily: "AppleSDGothicNeo",
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    SvgPicture.asset(
-                      'assets/ic/ic_bottom_black.svg',
-                      width: 15,
-                      height: 8.50,
-                    ),
-                  ],
+            Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton2(
+                  isExpanded: true,
+                  hint: Text(
+                    "${communityController.communityList.resultData![0].name}",
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                  items:
+                      _addDividersAfterItems(communityController.communityList.resultData!.map((e) => e.name).toList()),
+                  customItemsIndexes: _getDividersIndexes(),
+                  customItemsHeight: 4,
+                  value: selectedValue,
+                  onChanged: (value) {
+                    setState(() {
+                      print('phil memberNum ');
+                      memberNum = communityController.communityList.resultData!
+                          .map((e) => e.name)
+                          .toList()
+                          .indexOf(value.toString());
+                      print(memberNum);
+
+                      communityController.getCommunityUserList(
+                          churchId: "1",
+                          communityId: communityController.communityList.resultData![memberNum].id.toString());
+                      selectedValue = value as String;
+
+                    });
+                  },
+                  buttonHeight: 40,
+                  buttonWidth: 170,
+                  itemHeight: 40,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                 ),
               ),
             ),
             SizedBox(
               height: 32,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        flag = true;
-                        flag2 = false;
-                        flag3 = false;
-                        flag4 = false;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        flag
-                            ? SvgPicture.asset(
-                                'assets/ic/ic_photo.svg',
-                                width: 60,
-                                height: 60,
-                              )
-                            : SvgPicture.asset(
-                                'assets/ic/ic_photo_off.svg',
-                                width: 60,
-                                height: 60,
-                              ),
-                        Text(
-                          "임지혜",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontFamily: "AppleSDGothicNeo",
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        flag = false;
-                        flag2 = true;
-                        flag3 = false;
-                        flag4 = false;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        flag2
-                            ? SvgPicture.asset(
-                                'assets/ic/ic_photo.svg',
-                                width: 60,
-                                height: 60,
-                              )
-                            : SvgPicture.asset(
-                                'assets/ic/ic_photo_off.svg',
-                                width: 60,
-                                height: 60,
-                              ),
-                        Text(
-                          "임지혜",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontFamily: "AppleSDGothicNeo",
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        flag = false;
-                        flag2 = false;
-                        flag3 = true;
-                        flag4 = false;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        flag3
-                            ? SvgPicture.asset(
-                                'assets/ic/ic_photo.svg',
-                                width: 60,
-                                height: 60,
-                              )
-                            : SvgPicture.asset(
-                                'assets/ic/ic_photo_off.svg',
-                                width: 60,
-                                height: 60,
-                              ),
-                        Text(
-                          "임지혜",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontFamily: "AppleSDGothicNeo",
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+            Container(
+              height: 100,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: communityController.communityList.resultData![memberNum].memberCount,
+                itemBuilder: (BuildContext context, int index) {
+                  print('phil test');
+                  print(memberNum);
+
+                  // Why network for web?
+                  // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
+                  return member(index);
+                },
               ),
             ),
             SizedBox(
@@ -268,5 +193,53 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
             ),
           ],
         ));
+  }
+
+  Widget member(index) {
+    bool flag = false;
+    print('phil flag');
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                flag = !flag;
+                print(flag);
+
+              });
+            },
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                flag
+                    ? SvgPicture.asset(
+                        'assets/ic/ic_photo.svg',
+                        width: 60,
+                        height: 60,
+                      )
+                    : SvgPicture.asset(
+                        'assets/ic/ic_photo_off.svg',
+                        width: 60,
+                        height: 60,
+                      ),
+                Text(
+                  communityController.communityUserList.resultData?[index].userName.toString() ?? "",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontFamily: "AppleSDGothicNeo",
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+        ],
+      ),
+    );
   }
 }

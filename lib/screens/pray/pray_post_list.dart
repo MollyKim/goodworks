@@ -36,6 +36,11 @@ class PrayPostList extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        prayController.prayList.resultData?[index].communityId == 2 ?
+                        Text(
+                          "청년부",
+                          style: TextStyle(fontFamily: "AppleSDGothicNeo", fontSize: 14, fontWeight: FontWeight.bold),
+                        ):
                         Text(
                           prayController.prayList.resultData?[index].userName.toString() ?? "",
                           style: TextStyle(fontFamily: "AppleSDGothicNeo", fontSize: 14, fontWeight: FontWeight.bold),
