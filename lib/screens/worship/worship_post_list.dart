@@ -73,7 +73,7 @@ class _WorshipPostListState extends State<WorshipPostList> {
                 height: 13,
                 child: Text(
                   ///시간
-                  "${worshipController.worshipList.resultData?[widget.index!.toInt()].worshipDate}",
+                  "${worshipController.worshipList.resultData![widget.index!.toInt()].worshipDate}",
                   textAlign: TextAlign.right,
                   style: TextStyle(
                     color: Colors.black,
@@ -90,7 +90,7 @@ class _WorshipPostListState extends State<WorshipPostList> {
             width: 350,
             // height: 19,
             child: Text(
-              "${worshipController.worshipList.resultData?[widget.index!.toInt()].title}",
+              "${worshipController.worshipList.resultData![widget.index!.toInt()].title}",
               maxLines:3,
               ///본문
               style: TextStyle(

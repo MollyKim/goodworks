@@ -127,7 +127,7 @@ class HomePostList extends StatelessWidget {
                                 imageUrl: feedController
                                         .feedList
                                         .resultData?[index]
-                                        .attachments?[0]
+                                        .attachments?[index]
                                         .fileInfo.url
                                          ??
                                     "",
