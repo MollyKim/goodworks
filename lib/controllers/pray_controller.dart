@@ -11,23 +11,35 @@ class PrayController extends BaseController {
   PrayUpdate prayUpdate = PrayUpdate();
   PrayDelete prayDelete = PrayDelete();
 
-  Future<void> getPrayListData(String token,{required int churchId, time}) async {
+  Future<void> getPrayListData(String token, {required String churchId}) async {
     String headerToken = "Bearer $token";
-    //, int? type, String? cursor} ) async {
     final PrayList resp = await super
         .rootService
         .pryService
-        .getPrayList(headerToken,churchId, time); //,type,cursor);
+        .getPrayList(headerToken, churchId); //,type,cursor);
     this.prayList = resp;
     update();
   }
 
-  Future<void> getPrayDetailData({required String churchId, prayerID}) async {
-    //, int? type, String? cursor} ) async {
+  // Future<void> getPrayListData(String token,{required String churchId, time}) async {
+  //   String headerToken = "Bearer $token";
+  //   //, int? type, String? cursor} ) async {
+  //   final PrayList resp = await super
+  //       .rootService
+  //       .pryService
+  //       .getPrayList(headerToken, churchId, time); //,type,cursor);
+  //   this.prayList = resp;
+  //   update();
+  // }
+
+  Future<void> getPrayDetailData(String token,
+      {required String churchId, prayerID}) async {
+    String headerToken = "Bearer $token";
+
     final PrayDetail resp = await super
         .rootService
         .pryService
-        .getPrayDetail(churchId, prayerID); //,type,cursor);
+        .getPrayDetail(headerToken, churchId, prayerID); //,type,cursor);
     this.prayDetail = resp;
     update();
   }

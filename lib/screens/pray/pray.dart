@@ -23,8 +23,7 @@ class Pray extends StatefulWidget {
 
 class _PrayState extends State<Pray> with TickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController _refreshController = RefreshController(initialRefresh: true);
   PrayController prayController = Get.find();
   ChurchController churchController = Get.find();
   UserController userController = Get.find();
@@ -65,15 +64,18 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
 
   getPray() async {
     try {
+      print('phil getPray 000');
       await prayController.getPrayListData(userController.userSession!,
-          churchId: churchController.churchModel.resultData?.id ?? 1,
-          time: time);
+          churchId: churchController.churchModel.resultData?.id.toString() ?? "1");
+      print('phil getPray 001');
+      await prayController.getPrayDetailData(userController.userSession!,
+          churchId: churchController.churchModel.resultData?.id.toString() ?? "1", prayerID: "1");
+      print('phil getPray 002');
     } catch (e) {
       print("error!! in pray : $e");
     }
 
-    if (prayController.prayList.resultCode == "0000" &&
-        prayController.prayList.resultData?.length != 0) {
+    if (prayController.prayList.resultCode == "0000" && prayController.prayList.resultData?.length != 0) {
       return true;
     } else
       return false;
@@ -82,11 +84,28 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController tabController = TabController(
-      length: 1, // 2
+      length: 2, // 2
       vsync: this,
     );
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 2.0,
+        titleSpacing: 0,
+        backgroundColor: Colors.white,
+        backwardsCompatibility: false,
+        // leadingWidth: 75,
+        //TODO Adjust leading container width
+        leading: Center(
+            child: Text(
+          '예배',
+          style: TextStyle(
+            color: Color(0xff2d9067),
+            fontSize: 20,
+            fontFamily: "AppleSDGothicNeo",
+            fontWeight: FontWeight.w700,
+          ),
+        )),
+      ),
       floatingActionButton: GestureDetector(
         onTap: () {
           Get.toNamed("/pray_community_post");
@@ -115,27 +134,56 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
               if (snapshot.hasData && snapshot.data == true) {
                 return NestedScrollView(
                   controller: scrollController,
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
+                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverAppBar(
+                        toolbarHeight: 30,
                         automaticallyImplyLeading: false,
                         elevation: 0,
                         backgroundColor: Colors.white,
                         pinned: true,
-                        flexibleSpace: AppBar(
-                          elevation: 0,
-                          titleSpacing: 20,
-                          backgroundColor: Colors.white,
-                          centerTitle: false,
-                          title: Text("기도"),
-                          titleTextStyle: context.textStyleCustom.copyWith(
-                            color: context.forest80,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                        flexibleSpace: TabBar(
+                          indicatorColor: Colors.transparent,
+                          isScrollable: true,
+                          labelPadding: EdgeInsets.only(left: 10, right: 10),
+                          unselectedLabelColor: Colors.grey,
+                          unselectedLabelStyle: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "AppleSDGothicNeo",
+                            fontWeight: FontWeight.w700,
                           ),
+                          labelColor: Color(0xff2d9067),
+                          labelStyle: TextStyle(
+                            color: Color(0xff2d9067),
+                            fontSize: 14,
+                            fontFamily: "AppleSDGothicNeo",
+                            fontWeight: FontWeight.w700,
+                          ),
+                          controller: tabController,
+                          tabs: <Widget>[
+                            Tab(text: '교회 기도'),
+                            Tab(text: '소그룹 기도'),
+                            // Tab(text: worshipController.worshipTypeList.resultData!.worshipTypeList![0].title),
+                            // Tab(text: '새벽예배'),
+                            // Tab(text: '금요예배'),
+                            // Tab(text: '수요예배'),
+                            // Tab(text: '주일학교'),
+                            // Tab(text: '청년부'),
+                          ],
                         ),
                       ),
+                      SliverAppBar(
+                          toolbarHeight: tabController.index == 1 ? 44 : 0,
+                          automaticallyImplyLeading: false,
+                          elevation: 0,
+                          backgroundColor: Colors.white,
+                          pinned: true,
+                          title: Container(
+                            child: Text(
+                              '전체 소그룹',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          )),
                     ];
                   },
                   body: TabBarView(
@@ -167,11 +215,49 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
                           _onRefresh();
                         },
                         onLoading: () {
-                          _onLoading();
+                          // _onLoading();
                         },
                         child: ListView.separated(
-                          itemCount:
-                              prayController.prayList.resultData?.length ?? 0,
+                          itemCount: prayController.prayList.resultData?.length ?? 0,
+                          separatorBuilder: (context, index) {
+                            return CustomSeparator();
+                          },
+                          itemBuilder: (BuildContext context, int index) {
+                            return PrayPostList(index: index);
+                          },
+                        ),
+                      ),
+
+                      SmartRefresher(
+                        enablePullDown: true,
+                        controller: _refreshController,
+                        header: ClassicHeader(
+                          height: 100,
+                          idleIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          idleText: "",
+                          refreshingIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          releaseIcon: CupertinoActivityIndicator(
+                            radius: 13.0,
+                          ),
+                          completeIcon: null,
+                          completeText: "",
+                          completeDuration: Duration.zero,
+                          releaseText: "",
+                          refreshingText: "",
+                        ),
+                        // header: WaterDropHeader(),
+                        onRefresh: () {
+                          // _onRefresh();
+                        },
+                        onLoading: () {
+                          // _onLoading();
+                        },
+                        child: ListView.separated(
+                          itemCount: prayController.prayList.resultData?.length ?? 0,
                           separatorBuilder: (context, index) {
                             return CustomSeparator();
                           },
@@ -212,9 +298,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
     return GestureDetector(
       onTap: () {
         Picker(
-            adapter: PickerDataAdapter<String>(
-                pickerdata: new JsonDecoder().convert(pickerData2),
-                isArray: true),
+            adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(pickerData2), isArray: true),
             hideHeader: true,
             title: new Text("날짜 선택"),
             cancelText: '취소',
@@ -263,9 +347,8 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
 
   void _onRefresh() async {
     try {
-      await prayController.getPrayListData(userController.userSession!,
-          churchId: churchController.churchModel.resultData?.id ?? 1,
-          time: time);
+      // await prayController.getPrayListData(userController.userSession!,
+      //     churchId: churchController.churchModel.resultData?.id.toString() ?? "1");
     } catch (e) {
       print("error!! in pray : $e");
     }

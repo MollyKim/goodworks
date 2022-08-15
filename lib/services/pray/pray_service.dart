@@ -8,24 +8,24 @@ part 'pray_service.g.dart';
 abstract class PrayService {
   factory PrayService(Dio dio, {String baseUrl}) = _PrayService;
 
-  @GET('/church/{churchID}/prayer?limit=5&timeFilter={time}')
+  @GET('/church/{churchID}/prayer')
   @Headers(<String, dynamic>{
     "Country": "KR",
   })
   Future<PrayList> getPrayList(
-
-      ///2022-06
-      @Header('Authorization') String token,
-      @Path("churchID") int churchID,
-      @Path("time") time);
+    @Header('Authorization') String token,
+    @Path("churchID") String churchID,
+  );
 
   @GET('/church/{churchID}/prayer/{prayerID}')
   @Headers(<String, dynamic>{
     "Country": "KR",
   })
-  Future<PrayDetail> getPrayDetail(@Path() String churchID, prayerID
-      //, int type, String cursor
-      );
+  Future<PrayDetail> getPrayDetail(
+    @Header('Authorization') String token,
+    @Path("churchID") String churchID,
+    @Path("prayerID") String prayerID,
+  );
 
   ///create
   @POST('/church/{churchID}/prayer')

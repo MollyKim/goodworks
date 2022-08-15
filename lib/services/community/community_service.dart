@@ -11,7 +11,7 @@ abstract class CommunityService {
   @GET('/api/v1/seum/church/{churchID}/community/my/sharinggroup')
   Future<CommunityModel> getCommunityList(
       @Header('Authorization') String token,
-      @Path() int churchID,
+      @Path() String churchID,
       );
 
   @GET('/api/v1/seum/church/{churchID}/community/{communityID}')

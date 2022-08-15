@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class PrayPostList extends StatelessWidget {
     PrayController prayController = Get.find();
 
     return GestureDetector(
-      onTap: (){},
+      onTap: () {},
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
         child: Column(
@@ -25,11 +26,11 @@ class PrayPostList extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      'assets/ic/ic_photo.svg',
-                      width: 30,
-                      height: 30,
-                    ),
+                    CachedNetworkImage(
+                        // 'assets/ic/ic_photo.svg',
+                        width: 30,
+                        height: 30,
+                        imageUrl: prayController.prayList.resultData![index].avatar!.smallUrl.toString()),
                     SizedBox(
                       width: 10,
                     ),
@@ -38,27 +39,27 @@ class PrayPostList extends StatelessWidget {
                       children: [
                         Text(
                           prayController.prayList.resultData?[index].userName.toString() ?? "",
-                          style: TextStyle(
-                              fontFamily: "AppleSDGothicNeo",
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(fontFamily: "AppleSDGothicNeo", fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           prayController.prayList.resultData?[index].communityName.toString() ?? "목장",
                           style: TextStyle(
                             color: context.gray04,
                             fontFamily: "AppleSDGothicNeo",
-                            fontSize: 12,),
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                Text(getTimeAge(prayController.prayList.resultData?[index].createdAt ?? ""),
+                Text(
+                  getTimeAge(prayController.prayList.resultData?[index].createdAt ?? ""),
                   style: TextStyle(
                     color: context.gray04,
                     fontFamily: "AppleSDGothicNeo",
-                    fontSize: 12,),
+                    fontSize: 12,
+                  ),
                 )
 
                 // GestureDetector(
@@ -77,7 +78,17 @@ class PrayPostList extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 20,
+              height: 10,
+            ),
+            Text(
+              prayController.prayList.resultData?[index].createdAt.toString().substring(0,10).replaceAll('-','.') ?? '',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+              ),
+            ),
+            SizedBox(
+              height: 10,
             ),
             Text(
               prayController.prayList.resultData?[index].content.toString() ?? "목장",
@@ -95,7 +106,7 @@ class PrayPostList extends StatelessWidget {
   Widget buildBottomSheet(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: [
       GestureDetector(
-        onTap: (){
+        onTap: () {
           Get.offNamed("/pray_post_correction");
         },
         child: Container(
@@ -151,5 +162,4 @@ class PrayPostList extends StatelessWidget {
       ),
     ]);
   }
-
 }

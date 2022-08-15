@@ -42,8 +42,7 @@ PrayListResultData _$PrayListResultDataFromJson(Map<String, dynamic> json) {
     content: json['content'] as String?,
     createdAt: json['createdAt'] as String?,
     updatedAt: json['updatedAt'] as String?,
-    deletedAt: json['deletedAt'] as String?,
-    isMine: json['isMine'] as bool,
+    isMine: json['isMine'] as bool?,
   );
 }
 
@@ -61,7 +60,6 @@ Map<String, dynamic> _$PrayListResultDataToJson(PrayListResultData instance) =>
       'content': instance.content,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
-      'deletedAt': instance.deletedAt,
       'isMine': instance.isMine,
     };
 

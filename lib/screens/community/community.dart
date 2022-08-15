@@ -23,14 +23,17 @@ class _CommunityState extends State<Community> {
     super.initState();
   }
 
-  getCommunity() async{
-    try{
-      communityController.getCommunityListData(churchId:  churchController.churchModel.resultData?.id ?? 1);
-    } catch(e){
+  getCommunity() async {
+    try {
+      print("getCommunity 000");
+      communityController.getCommunityListData(
+          churchId:
+              churchController.churchModel.resultData?.id.toString() ?? "1");
+      print("getCommunity 001");
+    } catch (e) {
       print("error!! in community : $e");
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +41,13 @@ class _CommunityState extends State<Community> {
         RefreshController(initialRefresh: false);
 
     void _onRefresh() async {
-      try{
-        communityController.getCommunityListData(churchId:  churchController.churchModel.resultData?.id ?? 1);
-      } catch(e){
+      try {
+        communityController.getCommunityListData(
+            churchId:
+                churchController.churchModel.resultData?.id.toString() ?? "1");
+        // communityController.getCommunityDetail(churchId:  churchController.churchModel.resultData?.id.toString() ?? "1" , communityId : "1");
+
+      } catch (e) {
         print("error!! in community : $e");
       }
       _refreshController.refreshCompleted();
@@ -102,7 +109,8 @@ class _CommunityState extends State<Community> {
             _onLoading();
           },
           child: ListView.separated(
-            itemCount: communityController.communityList.resultData?.length ?? 1,
+            itemCount:
+                communityController.communityList.resultData?.length ?? 1,
             separatorBuilder: (context, index) {
               return CustomSeparator();
             },

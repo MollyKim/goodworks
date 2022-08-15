@@ -80,8 +80,8 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
                         try {
                           communityController.getCommunityListData(
                               churchId:
-                                  churchController.churchModel.resultData?.id ??
-                                      1);
+                                  churchController.churchModel.resultData?.id.toString() ??
+                                      "1");
                         } catch (e) {
                           print("error!! in rebuild community : $e");
                         }

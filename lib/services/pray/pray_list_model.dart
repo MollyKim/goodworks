@@ -37,8 +37,7 @@ class PrayListResultData {
   final String? content;
   final String? createdAt;
   final String? updatedAt;
-  final String? deletedAt;
-  final bool isMine;
+  final bool? isMine;
 
   PrayListResultData({
     required this.id,
@@ -53,8 +52,7 @@ class PrayListResultData {
     this.content,
     this.createdAt,
     this.updatedAt,
-    this.deletedAt,
-    required this.isMine,
+    this.isMine,
   });
 
   factory PrayListResultData.fromJson(Map<String, dynamic> json) =>
