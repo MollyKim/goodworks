@@ -21,6 +21,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final ScrollController scrollController = ScrollController();
+  final ScrollController scrollController2 = ScrollController();
   final RefreshController _totalRefreshController =
       RefreshController(initialRefresh: false);
   final RefreshController _juboRefreshController =
@@ -30,12 +31,19 @@ class _HomeState extends State<Home>
   final FeedController feedController = Get.find();
   final ChurchController churchController = Get.find();
   late final Future callApis;
+  bool flag = true;
 
   @override
   bool get wantKeepAlive => true;
 
   @override
   void initState() {
+    scrollController2.addListener(() async{
+      if (scrollController2.position.pixels == scrollController2.position.maxScrollExtent && flag){
+        flag = false;
+       await _onLoading("total");
+      }
+    });
     callApis = getFeed("total");
     super.initState();
   }
@@ -44,13 +52,13 @@ class _HomeState extends State<Home>
     try {
       await feedController.getFeedListData(
           churchId: churchController.churchModel.resultData?.id ?? 1);
-      feedController.update();
     } catch (e) {
       print("error!! home get Feed: $e");
     }
 
-    if (feedController.feedList.resultData != null &&
-        feedController.feedList.resultData?.length != 0) {
+    if (feedController.feeds != null &&
+        feedController.feeds?.length != 0) {
+
       return true;
     } else
       return false;
@@ -58,6 +66,8 @@ class _HomeState extends State<Home>
 
   @override
   Widget build(BuildContext context) {
+    print(feedController.feeds?.length);
+    print("-------");
     super.build(context);
 
     TabController tabController = TabController(length: 1, vsync: this);
@@ -142,48 +152,55 @@ class _HomeState extends State<Home>
                       // ),
                     ];
                   },
-                  body: TabBarView(
-                    controller: tabController,
-                    children: <Widget>[
-                      SmartRefresher(
-                        enablePullDown: true,
-                        controller: _totalRefreshController,
-                        header: ClassicHeader(
-                          height: 100,
-                          idleIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
+                  body: GetBuilder<FeedController>(
+                    builder: (controller) {
+                      return TabBarView(
+                        controller: tabController,
+                        children: <Widget>[
+                          SmartRefresher(
+                            enablePullDown: true,
+                            controller: _totalRefreshController,
+                            header: ClassicHeader(
+                              height: 100,
+                              idleIcon: CupertinoActivityIndicator(
+                                radius: 13.0,
+                              ),
+                              idleText: "",
+                              refreshingIcon: CupertinoActivityIndicator(
+                                radius: 13.0,
+                              ),
+                              releaseIcon: CupertinoActivityIndicator(
+                                radius: 13.0,
+                              ),
+                              completeIcon: null,
+                              completeText: "",
+                              completeDuration: Duration.zero,
+                              releaseText: "",
+                              refreshingText: "",
+                            ),
+                            onRefresh: () {
+                              _onRefresh("total");
+                            },
+                            // onLoading: () {
+                            //   _onLoading("total");
+                            // },
+                            child: ListView.separated(
+                              controller: scrollController2,
+                              shrinkWrap: true,
+                              physics: BouncingScrollPhysics(),
+                              itemCount:
+                                  feedController.feeds?.length ?? 1,
+                              separatorBuilder: (context, index) {
+                                return CustomSeparator();
+                              },
+                              itemBuilder: (BuildContext context, int index) {
+                                return HomePostList(index);
+                              },
+                            ),
                           ),
-                          idleText: "",
-                          refreshingIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          releaseIcon: CupertinoActivityIndicator(
-                            radius: 13.0,
-                          ),
-                          completeIcon: null,
-                          completeText: "",
-                          completeDuration: Duration.zero,
-                          releaseText: "",
-                          refreshingText: "",
-                        ),
-                        onRefresh: () {
-                          _onRefresh("total");
-                        },
-                        onLoading: () {
-                          _onLoading("total");
-                        },
-                        child: ListView.separated(
-                          itemCount:
-                              feedController.feedList.resultData?.length ?? 1,
-                          separatorBuilder: (context, index) {
-                            return CustomSeparator();
-                          },
-                          itemBuilder: (BuildContext context, int index) {
-                            return HomePostList(index);
-                          },
-                        ),
-                      ),
-                    ],
+                        ],
+                      );
+                    }
                   ),
                 );
               } else if (snapShot.data == false) {
@@ -234,13 +251,13 @@ class _HomeState extends State<Home>
     }
   }
 
-  void _onLoading(String subject) async {
+  Future<void> _onLoading(String subject) async {
     switch (subject) {
       case "total":
         {
-          await Future.delayed(Duration(milliseconds: 1000));
-          getFeed(subject);
+         await getFeed(subject);
           _totalRefreshController.loadComplete();
+          flag = true;
           break;
         }
       case "jubo":

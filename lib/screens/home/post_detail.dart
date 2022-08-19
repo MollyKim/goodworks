@@ -50,13 +50,13 @@ class HomePostDetail extends StatelessWidget {
                           height: 30,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                            //feedController.feedList.resultData?[index].createdAt
-                            child: Text(getFeedType(feedController.feedList.resultData?[index].feedType),
+                            //feedController.feeds?[index].createdAt
+                            child: Text(getFeedType(feedController.feeds?[index].feedType),
                               style: TextStyle(color: Colors.white,fontFamily: "AppleSDGothicNeo",
                                 fontSize: 18,),),
                           ),
                         ),
-                        Text(getTimeAge(feedController.feedList.resultData?[index].createdAt))
+                        Text(getTimeAge(feedController.feeds?[index].createdAt))
                         // Text(getTimeAge(feedController.feed.resultData?.createdAt))
                       ],
                     ),
@@ -68,7 +68,7 @@ class HomePostDetail extends StatelessWidget {
                       Flexible(
                         child: Padding(
                           padding: const EdgeInsets.only(top:8.0,left: 20),
-                          child: Text(feedController.feedList.resultData?[index].title ?? "제목",
+                          child: Text(feedController.feeds?[index].title ?? "제목",
                             style: TextStyle(
                                 fontFamily: "AppleSDGothicNeo",
                                 fontSize: 18,
@@ -95,7 +95,7 @@ class HomePostDetail extends StatelessWidget {
                   SizedBox(height: 15,),
                   Padding(
                     padding: const EdgeInsets.only(top:8.0,left: 20,right: 20),
-                    child: Text(feedController.feedList.resultData?[index].content ?? "내용\n\n\n\n내용",
+                    child: Text(feedController.feeds?[index].content ?? "내용\n\n\n\n내용",
                       style: TextStyle(
                         fontFamily: "AppleSDGothicNeo",
                         fontSize: 14,
@@ -114,18 +114,18 @@ class HomePostDetail extends StatelessWidget {
   renderPostDetailPicture(int index){
     return ListView.builder(
       scrollDirection: Axis.vertical,
-      itemCount: feedController.feedList.resultData?[index].attachments?.length ?? 0,
+      itemCount: feedController.feeds?[index].attachments?.length ?? 0,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int picIndex) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            feedController.feedList.resultData?[index].attachments?[picIndex].fileInfo.smallUrl != null
+            feedController.feeds?[index].attachments?[picIndex].fileInfo.smallUrl != null
             ? Container(
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: feedController.feedList.resultData?[index].attachments?[picIndex].fileInfo.smallUrl!
+                imageUrl: feedController.feeds?[index].attachments?[picIndex].fileInfo.smallUrl!
                 ?? "",
                 height: 300.0,
                 placeholder: (context, url) =>

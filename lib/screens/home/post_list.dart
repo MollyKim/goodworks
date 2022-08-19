@@ -14,16 +14,16 @@ class HomePostList extends StatelessWidget {
   Widget build(BuildContext context) {
     FeedController feedController = Get.find();
     int itemCount =
-        feedController.feedList.resultData?[index].attachments?.length ?? 0;
+        feedController.feeds?[index].attachments?.length ?? 0;
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () async {
         // await feedController.getFeedDetail(
         //     churchId:
-        //     feedController.feedList.resultData?[index].churchId ?? 1,
-        //     communityID: feedController.feedList.resultData?[index].communityId ?? 1,
-        //     feedID: feedController.feedList.resultData?[index].attachments?[0].feedId ?? "1000001817fb1bf46ecbba4ebaea4eb8b88ed8bb020ed94bceb939c014");
+        //     feedController.feeds?[index].churchId ?? 1,
+        //     communityID: feedController.feeds?[index].communityId ?? 1,
+        //     feedID: feedController.feeds?[index].attachments?[0].feedId ?? "1000001817fb1bf46ecbba4ebaea4eb8b88ed8bb020ed94bceb939c014");
         Get.toNamed("/home_post_detail", arguments: index);
       },
       child: Padding(
@@ -46,19 +46,19 @@ class HomePostList extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: Text(
-                          getFeedType(feedController.feedList.resultData?[index].feedType),
+                          getFeedType(feedController.feeds?[index].feedType),
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
                   Text(getTimeAge(
-                      feedController.feedList.resultData?[index].createdAt))
+                      feedController.feeds?[index].createdAt))
                 ],
               ),
               SizedBox(
                 height: 10,
               ),
-              Text(feedController.feedList.resultData?[index].title ?? "공지사항",
+              Text(feedController.feeds?[index].title ?? "공지사항",
                 style: TextStyle(
                     fontFamily: "AppleSDGothicNeo",
                     fontSize: 18,
@@ -66,7 +66,7 @@ class HomePostList extends StatelessWidget {
               ),
               SizedBox(height: 10,),
               Text(
-                feedController.feedList.resultData?[index].content ?? "",
+                feedController.feeds?[index].content ?? "",
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

@@ -9,6 +9,7 @@ class FeedController extends BaseController{
   FeedController(RootService rootService) : super(rootService);
 
   FeedList feedList = FeedList();
+  List<FeedListResultData>? feeds = [];
   Feed feed = Feed();
   UserController userController = Get.find();
 
@@ -16,6 +17,7 @@ class FeedController extends BaseController{
     String token = "Bearer ${userController.userSession}";
     final FeedList resp = await super.rootService.feedService.getFeedList(token,churchId);
     this.feedList = resp;
+    feeds?.addAll(feedList.resultData!);
     update();
   }
 
