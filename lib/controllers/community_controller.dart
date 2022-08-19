@@ -4,36 +4,38 @@ import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/services/community/community_model.dart';
 import 'package:practice/services/root_service.dart';
 
-class CommunityController extends BaseController{
+class CommunityController extends BaseController {
   CommunityController(RootService rootService) : super(rootService);
 
   CommunityUserModel communityUserList = CommunityUserModel();
   CommunityModel communityList = CommunityModel();
   UserController userController = Get.find();
 
+  RxList? communityUserNameList;
 
-  Future<void> getCommunityListData({required String churchId}) async{
+  Future<void> getCommunityListData({required String churchId}) async {
     String token = "Bearer ${userController.userSession}";
-    this.communityList  = await super.rootService.communityService.getCommunityList(token,churchId);
+    this.communityList = await super.rootService.communityService.getCommunityList(token, churchId);
     update();
   }
 
-  Future<void> getCommunityDetail({required String churchId, required String communityId}) async{
+  Future<void> getCommunityDetail({required String churchId, required String communityId}) async {
     String token = "Bearer ${userController.userSession}";
-    this.communityList  = await super.rootService.communityService.getCommunityDetail(token,churchId,communityId);
+    this.communityList = await super.rootService.communityService.getCommunityDetail(token, churchId, communityId);
     update();
   }
 
-  Future<void> getCommunityUserList({required String churchId, required String communityId}) async{
+  Future<void> getCommunityUserList({required String churchId, required String communityId}) async {
     String token = "Bearer ${userController.userSession}";
-    this.communityUserList  = await super.rootService.communityService.getCommunityUserList(token,churchId,communityId);
+    this.communityUserList =
+        await super.rootService.communityService.getCommunityUserList(token, churchId, communityId);
     update();
   }
 
-  Future<String?> postCommunityPost( int churchId, body ) async{
+  Future<String?> postCommunityPost(int churchId, body) async {
     String token = "Bearer ${userController.userSession}";
 
-    var resp = await super.rootService.communityService.postCommunityPost(token,churchId,body);
+    var resp = await super.rootService.communityService.postCommunityPost(token, churchId, body);
     return resp.resultCode;
   }
 }

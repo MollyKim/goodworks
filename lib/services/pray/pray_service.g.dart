@@ -56,7 +56,7 @@ class _PrayService implements PrayService {
   }
 
   @override
-  Future<PrayCreate> postPrayCreate(churchID, body) async {
+  Future<PrayCreate> postPrayCreate(token, churchID, body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -64,7 +64,10 @@ class _PrayService implements PrayService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PrayCreate>(Options(
                 method: 'POST',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
             .compose(_dio.options, '/church/$churchID/prayer',
                 queryParameters: queryParameters, data: _data)
