@@ -171,7 +171,7 @@ class PlayerState extends State<Player> {
                             vertical: 3,
                           ),
                           child: Text(
-                            "실시간 예배",
+                            "예배",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
@@ -201,7 +201,7 @@ class PlayerState extends State<Player> {
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: SizedBox(
                       child: Text(
-                        "코로나시대 영성(59)_’휘파람’ 그리고 ‘구속' 스가랴 10:6-10",
+                        "${worshipController.worshipList.resultData?[Get.arguments[1]].title}",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 18,
