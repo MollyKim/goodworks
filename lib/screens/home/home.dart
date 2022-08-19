@@ -235,11 +235,9 @@ class _HomeState extends State<Home>
   }
 
   void _onLoading(String subject) async {
-    // 커서 호출
     switch (subject) {
       case "total":
         {
-          print("123");
           await Future.delayed(Duration(milliseconds: 1000));
           getFeed(subject);
           _totalRefreshController.loadComplete();
