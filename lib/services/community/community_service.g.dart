@@ -82,7 +82,7 @@ class _CommunityService implements CommunityService {
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(
-                _dio.options, '/api/v1/seum/church/$churchID/community/5/feed',
+                _dio.options, '/api/v1/seum/church/$churchID/community/2/feed',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PostCommunityResponse.fromJson(_result.data!);

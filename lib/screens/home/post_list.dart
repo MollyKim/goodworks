@@ -17,6 +17,7 @@ class HomePostList extends StatelessWidget {
         feedController.feedList.resultData?[index].attachments?.length ?? 0;
 
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () async {
         // await feedController.getFeedDetail(
         //     churchId:
@@ -87,7 +88,7 @@ class HomePostList extends StatelessWidget {
                       mainAxisSpacing: 0,
                       crossAxisSpacing: 5),
                   shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
+                  itemBuilder: (BuildContext context, int picIndex) {
                     return ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       child: itemCount > 3 && index == 2
@@ -100,7 +101,7 @@ class HomePostList extends StatelessWidget {
                                   imageUrl: feedController
                                           .feedList
                                           .resultData?[index]
-                                          .attachments?[index]
+                                          .attachments?[picIndex]
                                           .fileInfo.url ??
                                       "",
                                   height: 100.0,
@@ -113,7 +114,7 @@ class HomePostList extends StatelessWidget {
                                   color: Colors.black.withOpacity(.7),
                                   child: Center(
                                     child: Text(
-                                      "+${itemCount - index}",
+                                      "+${itemCount - picIndex}",
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 40),
                                     ),

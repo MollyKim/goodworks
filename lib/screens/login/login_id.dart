@@ -140,7 +140,10 @@ class _LoginIDState extends State<LoginID> {
           ),
           onPressed: () async {
             UserController controller = Get.find();
-            await controller.loginUser("joyLim", "joyjoyjoy123");
+            if(idTextEditingController.text == "" )
+              await controller.loginUser("joyLim", "asdf1234");
+            else
+              await controller.loginUser(idTextEditingController.text, passwordTextEditingController.text);
 
             // await controller.loginUser(idTextEditingController.text,
             //     passwordTextEditingController.text);

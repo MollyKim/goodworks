@@ -44,6 +44,7 @@ class _HomeState extends State<Home>
     try {
       await feedController.getFeedListData(
           churchId: churchController.churchModel.resultData?.id ?? 1);
+      feedController.update();
     } catch (e) {
       print("error!! home get Feed: $e");
     }

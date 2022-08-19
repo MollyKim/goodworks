@@ -65,13 +65,15 @@ class HomePostDetail extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top:8.0,left: 20),
-                        child: Text(feedController.feedList.resultData?[index].title ?? "제목",
-                          style: TextStyle(
-                              fontFamily: "AppleSDGothicNeo",
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top:8.0,left: 20),
+                          child: Text(feedController.feedList.resultData?[index].title ?? "제목",
+                            style: TextStyle(
+                                fontFamily: "AppleSDGothicNeo",
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                       GestureDetector(
@@ -115,15 +117,15 @@ class HomePostDetail extends StatelessWidget {
       itemCount: feedController.feedList.resultData?[index].attachments?.length ?? 0,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (BuildContext context, int picIndex) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            feedController.feedList.resultData?[index].attachments?[index].fileInfo.smallUrl != null
+            feedController.feedList.resultData?[index].attachments?[picIndex].fileInfo.smallUrl != null
             ? Container(
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: feedController.feedList.resultData?[index].attachments?[index].fileInfo.smallUrl!
+                imageUrl: feedController.feedList.resultData?[index].attachments?[picIndex].fileInfo.smallUrl!
                 ?? "",
                 height: 300.0,
                 placeholder: (context, url) =>

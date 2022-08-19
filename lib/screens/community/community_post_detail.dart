@@ -127,39 +127,39 @@ class CommunityPostDetail extends StatelessWidget {
             ),
             communityController.communityList.resultData?[index].attachments != null
             ? renderPostDetailPicture(communityController, index) : Container(),
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 8.0, left: 20, right: 20, bottom: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SvgPicture.asset("assets/ic/ic_comment.svg"),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text("2")
-                ],
-              ),
-            ),
-            Divider(
-              thickness: 0.5,
-            ),
-            renderComments(),
-            Divider(
-              thickness: 0.5,
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //       top: 8.0, left: 20, right: 20, bottom: 8),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     children: [
+            //       SvgPicture.asset("assets/ic/ic_comment.svg"),
+            //       SizedBox(
+            //         width: 5,
+            //       ),
+            //       Text("2")
+            //     ],
+            //   ),
+            // ),
+            // Divider(
+            //   thickness: 0.5,
+            // ),
+            // renderComments(),
+            // Divider(
+            //   thickness: 0.5,
+            // ),
           ],
         ),
       ),
-      bottomNavigationBar: GestureDetector(
-        child: Container(
-          padding:
-              const EdgeInsets.only(top: 20.0, left: 20, right: 20, bottom: 20),
-          child: TextField(
-            decoration: new InputDecoration.collapsed(hintText: "댓글을 작성해주세요."),
-          ),
-        ),
-      ),
+      // bottomNavigationBar: GestureDetector(
+      //   child: Container(
+      //     padding:
+      //         const EdgeInsets.only(top: 20.0, left: 20, right: 20, bottom: 20),
+      //     child: TextField(
+      //       decoration: new InputDecoration.collapsed(hintText: "댓글을 작성해주세요."),
+      //     ),
+      //   ),
+      // ),
     );
   }
 

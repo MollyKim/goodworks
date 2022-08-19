@@ -59,11 +59,7 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
                         'type': 1,
                         'content': wrightCommunityController
                             .contentTextEditingController.text,
-                        'attachments':
-                            wrightCommunityController.images![0].path,
-                        'attachType': "image",
-                        'attachments':
-                            wrightCommunityController.images![1].path,
+                        'attachments': wrightCommunityController.images?.map((e) => e.path),
                         'attachType': "image",
                       });
                       String? respCode;
