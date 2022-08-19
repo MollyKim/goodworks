@@ -60,7 +60,7 @@ class _WorshipPostListState extends State<WorshipPostList> {
                   vertical: 3,
                 ),
                 child: Text(
-                  "실시간 예배",
+                  "예배",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
@@ -126,22 +126,22 @@ class _WorshipPostListState extends State<WorshipPostList> {
                     ),
                   ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 10, right: 10),
-                    width: 60,
-                    height: 20,
-                    color: Colors.black,
-                    child: Center(
-                      child: Text(
-                        '3:35:27',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                )
+                // Positioned(
+                //   bottom: 0,
+                //   right: 0,
+                //   child: Container(
+                //     margin: EdgeInsets.only(bottom: 10, right: 10),
+                //     width: 60,
+                //     height: 20,
+                //     color: Colors.black,
+                //     child: Center(
+                //       child: Text(
+                //         '3:35:27',
+                //         style: TextStyle(color: Colors.white),
+                //       ),
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),

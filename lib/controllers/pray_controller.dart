@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:practice/controllers/root_contoller.dart';
+import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/services/pray/pray_list_model.dart';
 import 'package:practice/services/root_service.dart';
 
@@ -10,13 +12,11 @@ class PrayController extends BaseController {
   PrayCreate prayCreate = PrayCreate();
   PrayUpdate prayUpdate = PrayUpdate();
   PrayDelete prayDelete = PrayDelete();
+  UserController userController = Get.find();
 
   Future<void> getPrayListData(String token, {required String churchId}) async {
     String headerToken = "Bearer $token";
-    final PrayList resp = await super
-        .rootService
-        .pryService
-        .getPrayList(headerToken, churchId); //,type,cursor);
+    final PrayList resp = await super.rootService.pryService.getPrayList(headerToken, churchId); //,type,cursor);
     this.prayList = resp;
     update();
   }
@@ -32,14 +32,11 @@ class PrayController extends BaseController {
   //   update();
   // }
 
-  Future<void> getPrayDetailData(String token,
-      {required String churchId, prayerID}) async {
+  Future<void> getPrayDetailData(String token, {required String churchId, prayerID}) async {
     String headerToken = "Bearer $token";
 
-    final PrayDetail resp = await super
-        .rootService
-        .pryService
-        .getPrayDetail(headerToken, churchId, prayerID); //,type,cursor);
+    final PrayDetail resp =
+        await super.rootService.pryService.getPrayDetail(headerToken, churchId, prayerID); //,type,cursor);
     this.prayDetail = resp;
     update();
   }
@@ -50,33 +47,26 @@ class PrayController extends BaseController {
       prayerType,
       ownerChurchUserId,
       required String content}) async {
-    //, int? type, String? cursor} ) async {
+    String token = "Bearer ${userController.userSession}";
 
     final Map<String, dynamic> data = {
       "communityId": communityId,
-      "prayerType": prayerType,
+      "prayerType": 2,
       "ownerChurchUserId": ownerChurchUserId,
       "content": content
     };
 
-    final PrayCreate resp = await super
-        .rootService
-        .pryService
-        .postPrayCreate(churchId, data); //,type,cursor);
+    final PrayCreate resp = await super.rootService.pryService.postPrayCreate(token, churchId, data); //,type,cursor);
     this.prayCreate = resp;
     update();
   }
 
-  Future<void> putPrayUpdate(
-      {required String churchId, prayerId, content}) async {
+  Future<void> putPrayUpdate({required String churchId, prayerId, content}) async {
     //, int? type, String? cursor} ) async {
 
     final Map<String, dynamic> data = {"content": content};
 
-    final PrayUpdate resp = await super
-        .rootService
-        .pryService
-        .putPrayUpdate(churchId, prayerId, data); //,type,cursor);
+    final PrayUpdate resp = await super.rootService.pryService.putPrayUpdate(churchId, prayerId, data); //,type,cursor);
     this.prayUpdate = resp;
     update();
   }
@@ -84,10 +74,7 @@ class PrayController extends BaseController {
   Future<void> deletePray({required String churchId, prayerId}) async {
     //, int? type, String? cursor} ) async {
 
-    final PrayDelete resp = await super
-        .rootService
-        .pryService
-        .deletePray(churchId, prayerId); //,type,cursor);
+    final PrayDelete resp = await super.rootService.pryService.deletePray(churchId, prayerId); //,type,cursor);
     this.prayDelete = resp;
     update();
   }

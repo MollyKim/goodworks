@@ -160,10 +160,10 @@ class PrayCreate {
 class PrayCreateResultData {
   final int id;
   final int churchId;
-  final String? communityId;
+  final int? communityId;
   final int? prayerType;
   final int? ownerChurchUserID;
-  final String? userName;
+  // final String? userName;
   final String? content;
   final String createdAt;
   final String? updatedAt;
@@ -175,7 +175,7 @@ class PrayCreateResultData {
     required this.communityId,
     required this.prayerType,
     required this.ownerChurchUserID,
-    required this.userName,
+    // required this.userName,
     required this.content,
     required this.createdAt,
     required this.updatedAt,

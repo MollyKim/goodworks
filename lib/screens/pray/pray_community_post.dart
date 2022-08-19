@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +7,9 @@ import 'package:get/get.dart';
 import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/controllers/pray_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/screens/home/home.dart';
+import 'package:practice/screens/main.dart';
+import 'package:practice/screens/pray/pray.dart';
 
 class PrayCommunityPost extends StatefulWidget {
   const PrayCommunityPost({Key? key}) : super(key: key);
@@ -19,6 +20,9 @@ class PrayCommunityPost extends StatefulWidget {
 
 class _PrayCommunityPostState extends State<PrayCommunityPost> {
   var memberNum = 0;
+  List<bool> flagList = [true, false, false, false, false, false, false, false, false, false];
+  String contextText = '';
+  int contextIndex = 0;
   CommunityController communityController = Get.find();
   PrayController prayController = Get.find();
 
@@ -88,7 +92,7 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
           elevation: 2.0,
           leading: GestureDetector(
               onTap: () {
-                Get.back();
+                Get.offAll(() => Main());
               },
               child: Icon(
                 Icons.close_rounded,
@@ -100,6 +104,20 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
               padding: const EdgeInsets.only(right: 5.0),
               child: Center(
                   child: GestureDetector(
+                onTap: () {
+                  prayController.postPrayCreate(
+                    churchId: "1",
+                    communityId: communityController.communityList.resultData![memberNum].id,
+                    ownerChurchUserId: communityController.communityUserList.resultData?[contextIndex].churchUserId,
+                    content: contextText,
+                  );
+
+                  Get.offAll(() => Main());
+
+                  ///communityId : communityController.communityList.resultData![memberNum].id.toString()
+                  ///onwerChurchUserID : communityController.communityUserList.resultData?[index].churchUserId.toString()
+                  ///contextText : contextText
+                },
                 child: Text(
                   "완료",
                   style: TextStyle(
@@ -134,19 +152,23 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
                   customItemsHeight: 4,
                   value: selectedValue,
                   onChanged: (value) {
-                    setState(() {
-                      print('phil memberNum ');
-                      memberNum = communityController.communityList.resultData!
-                          .map((e) => e.name)
-                          .toList()
-                          .indexOf(value.toString());
-                      print(memberNum);
-
-                      communityController.getCommunityUserList(
-                          churchId: "1",
-                          communityId: communityController.communityList.resultData![memberNum].id.toString());
-                      selectedValue = value as String;
-
+                    setState(() async {
+                      try {
+                        memberNum = communityController.communityList.resultData!
+                            .map((e) => e.name)
+                            .toList()
+                            .indexOf(value.toString());
+                        await communityController.getCommunityUserList(
+                            churchId: "1",
+                            communityId: communityController.communityList.resultData![memberNum].id.toString());
+                      } catch (e) {
+                        print(e);
+                      } finally {
+                        print('phil test : ' + communityController.communityList.resultData![memberNum].id.toString());
+                        selectedValue = value as String;
+                        setState(() {});
+                        communityController.update();
+                      }
                     });
                   },
                   buttonHeight: 40,
@@ -165,9 +187,6 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
                 scrollDirection: Axis.horizontal,
                 itemCount: communityController.communityList.resultData![memberNum].memberCount,
                 itemBuilder: (BuildContext context, int index) {
-                  print('phil test');
-                  print(memberNum);
-
                   // Why network for web?
                   // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
                   return member(index);
@@ -183,6 +202,10 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
             Expanded(
               child: TextField(
                 keyboardType: TextInputType.multiline,
+                onChanged: (text) {
+                  contextText = text;
+                  print(contextText);
+                },
                 decoration: InputDecoration(
                     hintText: "기도 내용을 작성해주세요.",
                     border: InputBorder.none,
@@ -196,24 +219,165 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
   }
 
   Widget member(index) {
-    bool flag = false;
-    print('phil flag');
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
           GestureDetector(
             onTap: () {
               setState(() {
-                flag = !flag;
-                print(flag);
+                print('phil List test');
 
+                switch (index) {
+                  case 0:
+                    flagList[index] = !flagList[index];
+                    contextIndex = index;
+                    flagList[1] = false;
+                    flagList[2] = false;
+                    flagList[3] = false;
+                    flagList[4] = false;
+                    flagList[5] = false;
+                    flagList[6] = false;
+                    flagList[7] = false;
+                    flagList[8] = false;
+                    flagList[9] = false;
+                    break;
+                  case 1:
+                    flagList[index] = !flagList[index];
+                    contextIndex = index;
+
+                    flagList[0] = false;
+                    flagList[2] = false;
+                    flagList[3] = false;
+                    flagList[4] = false;
+                    flagList[5] = false;
+                    flagList[6] = false;
+                    flagList[7] = false;
+                    flagList[8] = false;
+                    flagList[9] = false;
+                    break;
+                  case 2:
+                    flagList[index] = !flagList[index];
+                    contextIndex = index;
+
+                    flagList[0] = false;
+                    flagList[1] = false;
+                    flagList[3] = false;
+                    flagList[4] = false;
+                    flagList[5] = false;
+                    flagList[6] = false;
+                    flagList[7] = false;
+                    flagList[8] = false;
+                    flagList[9] = false;
+                    break;
+                  case 3:
+                    flagList[index] = !flagList[index];
+                    contextIndex = index;
+
+                    flagList[0] = false;
+                    flagList[1] = false;
+                    flagList[2] = false;
+                    flagList[4] = false;
+                    flagList[5] = false;
+                    flagList[6] = false;
+                    flagList[7] = false;
+                    flagList[8] = false;
+                    flagList[9] = false;
+                    break;
+                  case 4:
+                    flagList[index] = !flagList[index];
+                    contextIndex = index;
+
+                    flagList[0] = false;
+                    flagList[1] = false;
+                    flagList[2] = false;
+                    flagList[3] = false;
+                    flagList[5] = false;
+                    flagList[6] = false;
+                    flagList[7] = false;
+                    flagList[8] = false;
+                    flagList[9] = false;
+                    break;
+                  case 5:
+                    flagList[index] = !flagList[index];
+                    contextIndex = index;
+
+                    flagList[0] = false;
+                    flagList[1] = false;
+                    flagList[2] = false;
+                    flagList[3] = false;
+                    flagList[4] = false;
+                    flagList[6] = false;
+                    flagList[7] = false;
+                    flagList[8] = false;
+                    flagList[9] = false;
+                    break;
+                  case 6:
+                    flagList[index] = !flagList[index];
+                    contextIndex = index;
+
+                    flagList[0] = false;
+                    flagList[1] = false;
+                    flagList[2] = false;
+                    flagList[3] = false;
+                    flagList[4] = false;
+                    flagList[5] = false;
+                    flagList[7] = false;
+                    flagList[8] = false;
+                    flagList[9] = false;
+                    break;
+                  case 7:
+                    flagList[index] = !flagList[index];
+                    contextIndex = index;
+
+                    flagList[0] = false;
+                    flagList[1] = false;
+                    flagList[2] = false;
+                    flagList[3] = false;
+                    flagList[4] = false;
+                    flagList[5] = false;
+                    flagList[6] = false;
+                    flagList[8] = false;
+                    flagList[9] = false;
+                    break;
+                  case 8:
+                    flagList[index] = !flagList[index];
+                    contextIndex = index;
+
+                    flagList[0] = false;
+                    flagList[1] = false;
+                    flagList[2] = false;
+                    flagList[3] = false;
+                    flagList[4] = false;
+                    flagList[5] = false;
+                    flagList[6] = false;
+                    flagList[7] = false;
+                    flagList[9] = false;
+                    break;
+                  case 9:
+                    flagList[index] = !flagList[index];
+                    contextIndex = index;
+
+                    flagList[0] = false;
+                    flagList[1] = false;
+                    flagList[2] = false;
+                    flagList[3] = false;
+                    flagList[4] = false;
+                    flagList[5] = false;
+                    flagList[6] = false;
+                    flagList[7] = false;
+                    flagList[8] = false;
+                    break;
+                }
+                setState(() {
+                  flagList.toList().map((e) => e = false);
+                });
               });
             },
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                flag
+                flagList[index]
                     ? SvgPicture.asset(
                         'assets/ic/ic_photo.svg',
                         width: 60,
@@ -237,7 +401,6 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
               ],
             ),
           ),
-
         ],
       ),
     );

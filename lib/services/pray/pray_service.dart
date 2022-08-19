@@ -33,6 +33,7 @@ abstract class PrayService {
     "Country": "KR",
   })
   Future<PrayCreate> postPrayCreate(
+    @Header('Authorization') String token,
     @Path() String churchID,
     @Body() Map<String, dynamic> body,
   );
