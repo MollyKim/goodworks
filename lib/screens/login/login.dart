@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 80),
+          const Spacer(),
           CarouselSlider(
             carouselController: _controller,
             options: CarouselOptions(
@@ -69,7 +69,6 @@ class _LoginState extends State<Login> {
               );
             }).toList(),
           ),
-          const Spacer(),
           SizedBox(
             height: 50,
             width: 298,
@@ -92,6 +91,7 @@ class _LoginState extends State<Login> {
                       fontWeight: FontWeight.w500),
                 )),
           ),
+          const Spacer(),
           const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

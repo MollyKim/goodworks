@@ -53,14 +53,25 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
                 actions: [
                   GestureDetector(
                     onTap: () async {
+
+                      List<String> path = [];
+                      wrightCommunityController.images?.forEach((element) {path.add(element.path);});
+                      path.length;
+
                       FormData formData = FormData.fromMap({
                         'title': wrightCommunityController
                             .titleTextEditingController.text,
                         'type': 1,
                         'content': wrightCommunityController
                             .contentTextEditingController.text,
-                        'attachments': wrightCommunityController.images?.map((e) => e.path),
-                        'attachType': "image",
+                        'attachments': path[0],
+                        'attachTypes': "image",
+
+                        'attachments': path[1],
+                        'attachTypes': "image",
+
+                        // 'attachments': wrightCommunityController.images?.map((e) => e.path),
+                        // 'attachTypes': "image",
                       });
                       String? respCode;
                       try {

@@ -225,7 +225,12 @@ class _HomeState extends State<Home>
     switch (subject) {
       case "total":
         {
-          await getFeed(subject);
+          try {
+            await feedController.getFeedListRefresh(
+                churchId: churchController.churchModel.resultData?.id ?? 1);
+          } catch (e) {
+            print("error!! home get Feed: $e");
+          }
           _totalRefreshController.refreshCompleted();
           break;
         }

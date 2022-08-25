@@ -99,8 +99,7 @@ class HomePostList extends StatelessWidget {
                                 CachedNetworkImage(
                                   fit: BoxFit.cover,
                                   imageUrl: feedController
-                                          .feedList
-                                          .resultData?[index]
+                                          .feeds?[index]
                                           .attachments?[picIndex]
                                           .fileInfo.url ??
                                       "",
@@ -126,8 +125,7 @@ class HomePostList extends StatelessWidget {
                               child: CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: feedController
-                                        .feedList
-                                        .resultData?[index]
+                                        .feeds?[index]
                                         .attachments?[0]
                                         .fileInfo.url
                                          ??
