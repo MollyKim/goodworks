@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:practice/components/baseToast.dart';
 import 'package:share/share.dart';
 
@@ -47,6 +48,7 @@ Widget BaseBottomSheet(BuildContext context) {
       GestureDetector(
         onTap: (){
           BaseToast(text: '신고되었습니다.').showToast(context);
+          Get.back();
         },
         child: Container(
           decoration: BoxDecoration(

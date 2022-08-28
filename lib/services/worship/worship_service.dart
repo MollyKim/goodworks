@@ -66,7 +66,7 @@ abstract class WorshipService {
     @Path("churchID") String churchId,
   );
 
-  @GET('/church/{churchID}/worship/:{worshipID}')
+  @GET('/church/{churchID}/worship/{worshipID}')
   @Headers(<String, dynamic>{
     "Country": "KR",
   })

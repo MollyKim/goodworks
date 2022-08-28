@@ -213,7 +213,7 @@ class PrayUpdate {
 class PrayUpdateResultData {
   final int id;
   final int churchId;
-  final String? communityId;
+  final int? communityId;
   final int? prayerType;
   final int? ownerChurchUserID;
   final String? content;

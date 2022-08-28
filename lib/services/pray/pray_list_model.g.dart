@@ -215,7 +215,7 @@ PrayUpdateResultData _$PrayUpdateResultDataFromJson(Map<String, dynamic> json) {
   return PrayUpdateResultData(
     id: json['id'] as int,
     churchId: json['churchId'] as int,
-    communityId: json['communityId'] as String?,
+    communityId: json['communityId'] as int?,
     prayerType: json['prayerType'] as int?,
     ownerChurchUserID: json['ownerChurchUserID'] as int?,
     content: json['content'] as String?,

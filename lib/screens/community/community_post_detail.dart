@@ -222,7 +222,7 @@ class CommunityPostDetail extends StatelessWidget {
     return Column(mainAxisSize: MainAxisSize.min, children: [
       GestureDetector(
         onTap: (){
-          Get.offNamed("/pray_post_correction");
+          // Get.offNamed("/pray_post_correction");
         },
         child: Container(
           decoration: BoxDecoration(
@@ -267,7 +267,7 @@ class CommunityPostDetail extends StatelessWidget {
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
-            fontFamily: "Apple SD Gothic Neo",
+            fontFamily: "AppleSDGothicNeo",
             fontWeight: FontWeight.w700,
           ),
         ),

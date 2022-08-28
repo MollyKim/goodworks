@@ -61,20 +61,24 @@ class PrayController extends BaseController {
     update();
   }
 
-  Future<void> putPrayUpdate({required String churchId, prayerId, content}) async {
+  Future<void> putPrayUpdate({required String churchId, required String prayerId, required String content}) async {
+    String token = "Bearer ${userController.userSession}";
+
     //, int? type, String? cursor} ) async {
 
     final Map<String, dynamic> data = {"content": content};
 
-    final PrayUpdate resp = await super.rootService.pryService.putPrayUpdate(churchId, prayerId, data); //,type,cursor);
+    final PrayUpdate resp = await super.rootService.pryService.putPrayUpdate(token, churchId, prayerId, data); //,type,cursor);
     this.prayUpdate = resp;
     update();
   }
 
-  Future<void> deletePray({required String churchId, prayerId}) async {
+  Future<void> deletePray({required String churchId, required String prayerId}) async {
+    String token = "Bearer ${userController.userSession}";
+
     //, int? type, String? cursor} ) async {
 
-    final PrayDelete resp = await super.rootService.pryService.deletePray(churchId, prayerId); //,type,cursor);
+    final PrayDelete resp = await super.rootService.pryService.deletePray(token, churchId, prayerId); //,type,cursor);
     this.prayDelete = resp;
     update();
   }

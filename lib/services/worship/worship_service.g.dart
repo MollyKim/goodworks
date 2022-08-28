@@ -154,7 +154,7 @@ class _WorshipService implements WorshipService {
                   r'Authorization': token
                 },
                 extra: _extra)
-            .compose(_dio.options, '/church/$churchId/worship/:$worshipId',
+            .compose(_dio.options, '/church/$churchId/worship/$worshipId',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = WorshipDetail.fromJson(_result.data!);

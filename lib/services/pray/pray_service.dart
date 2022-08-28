@@ -44,8 +44,9 @@ abstract class PrayService {
     "Country": "KR",
   })
   Future<PrayUpdate> putPrayUpdate(
+    @Header('Authorization') String token,
     @Path() String churchID,
-    prayerID,
+    @Path() String prayerID,
     @Body() Map<String, dynamic> body,
   );
 
@@ -54,8 +55,9 @@ abstract class PrayService {
     "Country": "KR",
   })
   Future<PrayDelete> deletePray(
+    @Header('Authorization') String token,
     @Path() String churchID,
-    prayerID,
+    @Path() String prayerID,
   );
 
   ///https://www.vm-united.com/seum/api/v1/seum/church/1/prayer

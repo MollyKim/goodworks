@@ -77,7 +77,7 @@ class _PrayService implements PrayService {
   }
 
   @override
-  Future<PrayUpdate> putPrayUpdate(churchID, prayerID, body) async {
+  Future<PrayUpdate> putPrayUpdate(token, churchID, prayerID, body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -85,9 +85,12 @@ class _PrayService implements PrayService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PrayUpdate>(Options(
                 method: 'PUT',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
-            .compose(_dio.options, '/church/$churchID/prayer/{prayerID}',
+            .compose(_dio.options, '/church/$churchID/prayer/$prayerID',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PrayUpdate.fromJson(_result.data!);
@@ -95,16 +98,19 @@ class _PrayService implements PrayService {
   }
 
   @override
-  Future<PrayDelete> deletePray(churchID, prayerID) async {
+  Future<PrayDelete> deletePray(token, churchID, prayerID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PrayDelete>(Options(
                 method: 'DELETE',
-                headers: <String, dynamic>{r'Country': 'KR'},
+                headers: <String, dynamic>{
+                  r'Country': 'KR',
+                  r'Authorization': token
+                },
                 extra: _extra)
-            .compose(_dio.options, '/church/$churchID/prayer/{prayerID}',
+            .compose(_dio.options, '/church/$churchID/prayer/$prayerID',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PrayDelete.fromJson(_result.data!);

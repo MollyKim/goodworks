@@ -41,6 +41,12 @@ class _WorshipState extends State<Worship> with TickerProviderStateMixin {
           churchId: churchController.churchModel.resultData?.id.toString() ?? '1');
       await worshipController.getWorshipData(userController.userSession!,
           churchId: churchController.churchModel.resultData?.id.toString() ?? '1');
+      // await worshipController.getWorshipDetailData(userController.userSession!,
+      //     churchId: churchController.churchModel.resultData?.id.toString() ?? '1',
+      // worshipId: '1');
+
+
+
     } catch (e) {
       print("error!! in worship : $e");
     }
