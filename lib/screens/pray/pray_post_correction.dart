@@ -104,41 +104,23 @@ class _PrayPostCorrectionState extends State<PrayPostCorrection> {
             SizedBox(
               height: 10,
             ),
-            GestureDetector(
-              onTap: () {
-                Picker(
-                    adapter:
-                        PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
-                    hideHeader: true,
-                    title: new Text("목장 선택"),
-                    cancelText: '취소',
-                    confirmText: '선택',
-                    onConfirm: (Picker picker, List value) {
-                      print(value.toString());
-                      setState(() {
-                        name = picker.getSelectedValues().first;
-                      });
-                      print(picker.getSelectedValues().first);
-                    }).showDialog(context);
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "$name 목장",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontFamily: "AppleSDGothicNeo",
-                        fontWeight: FontWeight.w700,
-                      ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    prayController.prayList.resultData?[Get.arguments].communityName ?? "",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontFamily: "AppleSDGothicNeo",
+                      fontWeight: FontWeight.w700,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             SizedBox(
@@ -157,7 +139,7 @@ class _PrayPostCorrectionState extends State<PrayPostCorrection> {
                         height: 60,
                       ),
                       Text(
-                        "임지혜",
+                        prayController.prayList.resultData?[Get.arguments].userName.toString() ?? "",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,

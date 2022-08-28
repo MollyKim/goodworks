@@ -152,6 +152,24 @@ class _SettingState extends State<Setting> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 28,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showOutDialog(userController);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          child: Text(
+                            "회원탈퇴",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
                     ]),
               ),
             ],
@@ -245,6 +263,116 @@ class _SettingState extends State<Setting> {
                           child: Center(
                               child: Text(
                                 '로그아웃',
+                                style: TextStyle(
+                                  color: Color(0xff2d9067),
+                                  fontSize: 18,
+                                  fontFamily: "Apple SD Gothic Neo",
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              )),
+                        ),
+                      ),
+                    ),
+                  ]),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+      animationType: DialogTransitionType.none,
+      curve: Curves.fastOutSlowIn,
+      duration: Duration(milliseconds: 200),
+    );
+  }
+
+  showOutDialog(UserController userController) {
+    showAnimatedDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Material(
+          color: Colors.transparent,
+          child: Center(
+            child: Container(
+              width: 287,
+              height: 192,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0x3f000000),
+                    blurRadius: 4,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+                color: Colors.white,
+              ),
+              child: Column(
+                // mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 146,
+                    width: 287,
+                    child: Center(
+                      child: Text(
+                        "회원탈퇴 하시겠습니까?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xff2d9067),
+                          fontSize: 14,
+                          fontFamily: "AppleSDGothicNeo",
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Row(children: [
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          height: 46,
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  top: BorderSide(
+                                      color: Color(0xff2d9067), width: 0.5))),
+                          child: Center(
+                              child: Text(
+                                '취소',
+                                style: TextStyle(
+                                  color: Color(0xff2d9067),
+                                  fontSize: 18,
+                                  fontFamily: "AppleSDGothicNeo",
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              )),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () async{
+                          await userController.outUser(userController.userModel.resultData?.seumId.toString() ?? "");
+                          Get.offAllNamed('/splash');
+                        },
+                        child: Container(
+                          height: 46,
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  top: BorderSide(
+                                      color: Color(0xff2d9067), width: 0.5),
+                                  left: BorderSide(
+                                      color: Color(0xff2d9067), width: 0.5))),
+                          child: Center(
+                              child: Text(
+                                '회원탈퇴',
                                 style: TextStyle(
                                   color: Color(0xff2d9067),
                                   fontSize: 18,

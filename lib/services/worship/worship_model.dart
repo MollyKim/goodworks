@@ -9,11 +9,9 @@ class WorshipTypeList {
   final String? resultMsg;
   final WorshipTypeListResultData? resultData;
 
-  WorshipTypeList(
-      {this.trID, this.resultCode, this.resultMsg, this.resultData});
+  WorshipTypeList({this.trID, this.resultCode, this.resultMsg, this.resultData});
 
-  factory WorshipTypeList.fromJson(Map<String, dynamic> json) =>
-      _$WorshipTypeListFromJson(json);
+  factory WorshipTypeList.fromJson(Map<String, dynamic> json) => _$WorshipTypeListFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipTypeListToJson(this);
 }
@@ -32,8 +30,7 @@ class WorshipTypeListResultData {
     this.updatedAt,
   });
 
-  factory WorshipTypeListResultData.fromJson(Map<String, dynamic> json) =>
-      _$WorshipTypeListResultDataFromJson(json);
+  factory WorshipTypeListResultData.fromJson(Map<String, dynamic> json) => _$WorshipTypeListResultDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipTypeListResultDataToJson(this);
 }
@@ -48,8 +45,7 @@ class WorshipTypeListInData {
     this.title,
   });
 
-  factory WorshipTypeListInData.fromJson(Map<String, dynamic> json) =>
-      _$WorshipTypeListInDataFromJson(json);
+  factory WorshipTypeListInData.fromJson(Map<String, dynamic> json) => _$WorshipTypeListInDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipTypeListInDataToJson(this);
 }
@@ -61,11 +57,9 @@ class WorshipTypeCreate {
   final String? resultMsg;
   final WorshipTypeCreateResultData? resultData;
 
-  WorshipTypeCreate(
-      {this.trID, this.resultCode, this.resultMsg, this.resultData});
+  WorshipTypeCreate({this.trID, this.resultCode, this.resultMsg, this.resultData});
 
-  factory WorshipTypeCreate.fromJson(Map<String, dynamic> json) =>
-      _$WorshipTypeCreateFromJson(json);
+  factory WorshipTypeCreate.fromJson(Map<String, dynamic> json) => _$WorshipTypeCreateFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipTypeCreateToJson(this);
 }
@@ -100,8 +94,7 @@ class WorshipTypeListData {
     required this.title,
   });
 
-  factory WorshipTypeListData.fromJson(Map<String, dynamic> json) =>
-      _$WorshipTypeListDataFromJson(json);
+  factory WorshipTypeListData.fromJson(Map<String, dynamic> json) => _$WorshipTypeListDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipTypeListDataToJson(this);
 }
@@ -120,8 +113,7 @@ class WorshipTypeUpdate {
     this.resultMsg,
   });
 
-  factory WorshipTypeUpdate.fromJson(Map<String, dynamic> json) =>
-      _$WorshipTypeUpdateFromJson(json);
+  factory WorshipTypeUpdate.fromJson(Map<String, dynamic> json) => _$WorshipTypeUpdateFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipTypeUpdateToJson(this);
 }
@@ -136,8 +128,7 @@ class WorshipTypePriorityUpdate {
   final String? resultMsg;
   final List<WorshipTypePriorityUpdateResultData>? resultData;
 
-  WorshipTypePriorityUpdate(
-      {this.trID, this.resultCode, this.resultMsg, this.resultData});
+  WorshipTypePriorityUpdate({this.trID, this.resultCode, this.resultMsg, this.resultData});
 
   factory WorshipTypePriorityUpdate.fromJson(Object? json) =>
       _$WorshipTypePriorityUpdateFromJson(json as Map<String, dynamic>);
@@ -155,12 +146,10 @@ class WorshipTypePriorityUpdateResultData {
     required this.title,
   });
 
-  factory WorshipTypePriorityUpdateResultData.fromJson(
-          Map<String, dynamic> json) =>
+  factory WorshipTypePriorityUpdateResultData.fromJson(Map<String, dynamic> json) =>
       _$WorshipTypePriorityUpdateResultDataFromJson(json);
 
-  Map<String, dynamic> toJson() =>
-      _$WorshipTypePriorityUpdateResultDataToJson(this);
+  Map<String, dynamic> toJson() => _$WorshipTypePriorityUpdateResultDataToJson(this);
 }
 
 @JsonSerializable()
@@ -171,8 +160,7 @@ class WorshipTypeDelete {
 
   WorshipTypeDelete({this.trID, this.resultCode, this.resultMsg});
 
-  factory WorshipTypeDelete.fromJson(Map<String, dynamic> json) =>
-      _$WorshipTypeDeleteFromJson(json);
+  factory WorshipTypeDelete.fromJson(Map<String, dynamic> json) => _$WorshipTypeDeleteFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipTypeDeleteToJson(this);
 }
@@ -186,8 +174,7 @@ class WorshipList {
 
   WorshipList({this.trID, this.resultCode, this.resultMsg, this.resultData});
 
-  factory WorshipList.fromJson(Map<String, dynamic> json) =>
-      _$WorshipListFromJson(json);
+  factory WorshipList.fromJson(Map<String, dynamic> json) => _$WorshipListFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipListToJson(this);
 }
@@ -216,8 +203,7 @@ class WorshipListResultData {
     this.isVisible,
   });
 
-  factory WorshipListResultData.fromJson(Map<String, dynamic> json) =>
-      _$WorshipListResultDataFromJson(json);
+  factory WorshipListResultData.fromJson(Map<String, dynamic> json) => _$WorshipListResultDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipListResultDataToJson(this);
 }
@@ -230,8 +216,7 @@ class PlayInfo {
     this.videoId,
   });
 
-  factory PlayInfo.fromJson(Map<String, dynamic> json) =>
-      _$PlayInfoFromJson(json);
+  factory PlayInfo.fromJson(Map<String, dynamic> json) => _$PlayInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$PlayInfoToJson(this);
 }
@@ -241,12 +226,11 @@ class WorshipDetail {
   String? trID;
   String? resultCode;
   String? resultMsg;
-  List<WorshipDetailResultData>? resultData;
+  WorshipDetailResultData? resultData;
 
   WorshipDetail({this.trID, this.resultCode, this.resultMsg, this.resultData});
 
-  factory WorshipDetail.fromJson(Map<String, dynamic> json) =>
-      _$WorshipDetailFromJson(json);
+  factory WorshipDetail.fromJson(Map<String, dynamic> json) => _$WorshipDetailFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipDetailToJson(this);
 }
@@ -265,23 +249,25 @@ class WorshipDetailResultData {
   String? worshipDate;
   String? createdAt;
   String? updatedAt;
+  ContentDetail? contentDetail;
 
   WorshipDetailResultData(
-      this.id,
-      this.churchId,
-      this.uploaderId,
-      this.worshipTypeId,
-      this.playInfo,
-      this.preacher,
-      this.title,
-      this.content,
-      this.isVisible,
-      this.worshipDate,
-      this.createdAt,
-      this.updatedAt);
+    this.id,
+    this.churchId,
+    this.uploaderId,
+    this.worshipTypeId,
+    this.playInfo,
+    this.preacher,
+    this.title,
+    this.content,
+    this.isVisible,
+    this.worshipDate,
+    this.createdAt,
+    this.updatedAt,
+    this.contentDetail,
+  );
 
-  factory WorshipDetailResultData.fromJson(Map<String, dynamic> json) =>
-      _$WorshipDetailResultDataFromJson(json);
+  factory WorshipDetailResultData.fromJson(Map<String, dynamic> json) => _$WorshipDetailResultDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipDetailResultDataToJson(this);
 }
@@ -295,10 +281,34 @@ class PlayInfoDetail {
 
   PlayInfoDetail(this.id, this.videoId, this.createdAt, this.updatedAt);
 
-  factory PlayInfoDetail.fromJson(Map<String, dynamic> json) =>
-      _$PlayInfoDetailFromJson(json);
+  factory PlayInfoDetail.fromJson(Map<String, dynamic> json) => _$PlayInfoDetailFromJson(json);
 
   Map<String, dynamic> toJson() => _$PlayInfoDetailToJson(this);
+}
+
+@JsonSerializable()
+class ContentDetail {
+  String? duration;
+  Thumbnail? thumbnail;
+
+  ContentDetail(this.duration, this.thumbnail);
+
+  factory ContentDetail.fromJson(Map<String, dynamic> json) => _$ContentDetailFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ContentDetailToJson(this);
+}
+
+@JsonSerializable()
+class Thumbnail {
+  String? url;
+  int? width;
+  int? height;
+
+  Thumbnail(this.url, this.width, this.height);
+
+  factory Thumbnail.fromJson(Map<String, dynamic> json) => _$ThumbnailFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ThumbnailToJson(this);
 }
 
 @JsonSerializable()
@@ -310,8 +320,7 @@ class WorshipCreate {
 
   WorshipCreate({this.trID, this.resultCode, this.resultMsg, this.resultData});
 
-  factory WorshipCreate.fromJson(Map<String, dynamic> json) =>
-      _$WorshipCreateFromJson(json);
+  factory WorshipCreate.fromJson(Map<String, dynamic> json) => _$WorshipCreateFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipCreateToJson(this);
 }
@@ -330,21 +339,10 @@ class WorshipCreateResultData {
   String? createdAt;
   String? updatedAt;
 
-  WorshipCreateResultData(
-      this.id,
-      this.churchId,
-      this.uploaderId,
-      this.worshipTypeId,
-      this.playInfo,
-      this.preacher,
-      this.title,
-      this.isVisible,
-      this.worshipDate,
-      this.createdAt,
-      this.updatedAt);
+  WorshipCreateResultData(this.id, this.churchId, this.uploaderId, this.worshipTypeId, this.playInfo, this.preacher,
+      this.title, this.isVisible, this.worshipDate, this.createdAt, this.updatedAt);
 
-  factory WorshipCreateResultData.fromJson(Map<String, dynamic> json) =>
-      _$WorshipCreateResultDataFromJson(json);
+  factory WorshipCreateResultData.fromJson(Map<String, dynamic> json) => _$WorshipCreateResultDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipCreateResultDataToJson(this);
 }
@@ -358,11 +356,9 @@ class PlayInfoCreate {
   String? createdAt;
   String? updatedAt;
 
-  PlayInfoCreate(this.id, this.videoId, this.playingCount, this.size,
-      this.createdAt, this.updatedAt);
+  PlayInfoCreate(this.id, this.videoId, this.playingCount, this.size, this.createdAt, this.updatedAt);
 
-  factory PlayInfoCreate.fromJson(Map<String, dynamic> json) =>
-      _$PlayInfoCreateFromJson(json);
+  factory PlayInfoCreate.fromJson(Map<String, dynamic> json) => _$PlayInfoCreateFromJson(json);
 
   Map<String, dynamic> toJson() => _$PlayInfoCreateToJson(this);
 }
@@ -376,8 +372,7 @@ class WorshipUpdate {
 
   WorshipUpdate({this.trID, this.resultCode, this.resultMsg, this.resultData});
 
-  factory WorshipUpdate.fromJson(Map<String, dynamic> json) =>
-      _$WorshipUpdateFromJson(json);
+  factory WorshipUpdate.fromJson(Map<String, dynamic> json) => _$WorshipUpdateFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipUpdateToJson(this);
 }
@@ -397,22 +392,10 @@ class WorshipUpdateResultData {
   String? createdAt;
   String? updatedAt;
 
-  WorshipUpdateResultData(
-      this.id,
-      this.churchId,
-      this.uploaderId,
-      this.worshipTypeId,
-      this.playInfo,
-      this.preacher,
-      this.title,
-      this.content,
-      this.isVisible,
-      this.worshipDate,
-      this.createdAt,
-      this.updatedAt);
+  WorshipUpdateResultData(this.id, this.churchId, this.uploaderId, this.worshipTypeId, this.playInfo, this.preacher,
+      this.title, this.content, this.isVisible, this.worshipDate, this.createdAt, this.updatedAt);
 
-  factory WorshipUpdateResultData.fromJson(Map<String, dynamic> json) =>
-      _$WorshipUpdateResultDataFromJson(json);
+  factory WorshipUpdateResultData.fromJson(Map<String, dynamic> json) => _$WorshipUpdateResultDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipUpdateResultDataToJson(this);
 }
@@ -426,11 +409,9 @@ class WorshipUpdatePlayInfo {
   String? createdAt;
   String? updatedAt;
 
-  WorshipUpdatePlayInfo(this.id, this.videoId, this.playingCount, this.size,
-      this.createdAt, this.updatedAt);
+  WorshipUpdatePlayInfo(this.id, this.videoId, this.playingCount, this.size, this.createdAt, this.updatedAt);
 
-  factory WorshipUpdatePlayInfo.fromJson(Map<String, dynamic> json) =>
-      _$WorshipUpdatePlayInfoFromJson(json);
+  factory WorshipUpdatePlayInfo.fromJson(Map<String, dynamic> json) => _$WorshipUpdatePlayInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipUpdatePlayInfoToJson(this);
 }
@@ -443,8 +424,7 @@ class WorshipDelete {
 
   WorshipDelete({this.trID, this.resultCode, this.resultMsg});
 
-  factory WorshipDelete.fromJson(Map<String, dynamic> json) =>
-      _$WorshipDeleteFromJson(json);
+  factory WorshipDelete.fromJson(Map<String, dynamic> json) => _$WorshipDeleteFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorshipDeleteToJson(this);
 }

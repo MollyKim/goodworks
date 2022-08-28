@@ -7,6 +7,7 @@ class UserController extends BaseController {
   UserController(RootService rootService) : super(rootService);
 
   UserModel userModel = UserModel();
+  UserOutModel userOutModel = UserOutModel();
   String? userSession;
 
   SharedPreferences? _sharedPreferences;
@@ -21,29 +22,22 @@ class UserController extends BaseController {
     update();
   }
 
-  sendOTP(String id, String phoneNumber) async{
-    final Map<String, dynamic> data = {
-      "seumId": id,
-      "phoneNumber": phoneNumber
-    };
+  sendOTP(String id, String phoneNumber) async {
+    final Map<String, dynamic> data = {"seumId": id, "phoneNumber": phoneNumber};
     await super.rootService.loginService.sendOTP(data);
   }
 
-  validateOTP(String id, String phoneNumber, String otp) async{
+  validateOTP(String id, String phoneNumber, String otp) async {
     final Map<String, dynamic> data = {
       "seumId": id,
       "phoneNumber": phoneNumber,
-      "otp" : int.parse(otp),
+      "otp": int.parse(otp),
     };
     await super.rootService.loginService.validateOTP(data);
   }
 
-
   registerUser(
-      {required String email,
-      required String userpwd,
-      required String userName,
-      required String phoneNumber}) async {
+      {required String email, required String userpwd, required String userName, required String phoneNumber}) async {
     final Map<String, dynamic> data = {
       "seumId": email,
       "password": userpwd,
@@ -69,6 +63,12 @@ class UserController extends BaseController {
     if (userSession != null) {
       _sharedPreferences?.setString('session', userSession!);
     }
+    update();
+  }
+
+  outUser(String userId) async {
+    userOutModel = await super.rootService.loginService.outUser(userId);
+
     update();
   }
 }

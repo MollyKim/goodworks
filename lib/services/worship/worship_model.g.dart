@@ -249,10 +249,10 @@ WorshipDetail _$WorshipDetailFromJson(Map<String, dynamic> json) {
     trID: json['trID'] as String?,
     resultCode: json['resultCode'] as String?,
     resultMsg: json['resultMsg'] as String?,
-    resultData: (json['resultData'] as List<dynamic>?)
-        ?.map(
-            (e) => WorshipDetailResultData.fromJson(e as Map<String, dynamic>))
-        .toList(),
+    resultData: json['resultData'] == null
+        ? null
+        : WorshipDetailResultData.fromJson(
+            json['resultData'] as Map<String, dynamic>),
   );
 }
 
@@ -281,6 +281,9 @@ WorshipDetailResultData _$WorshipDetailResultDataFromJson(
     json['worshipDate'] as String?,
     json['createdAt'] as String?,
     json['updatedAt'] as String?,
+    json['contentDetail'] == null
+        ? null
+        : ContentDetail.fromJson(json['contentDetail'] as Map<String, dynamic>),
   );
 }
 
@@ -299,6 +302,7 @@ Map<String, dynamic> _$WorshipDetailResultDataToJson(
       'worshipDate': instance.worshipDate,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+      'contentDetail': instance.contentDetail,
     };
 
 PlayInfoDetail _$PlayInfoDetailFromJson(Map<String, dynamic> json) {
@@ -316,6 +320,35 @@ Map<String, dynamic> _$PlayInfoDetailToJson(PlayInfoDetail instance) =>
       'videoId': instance.videoId,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+    };
+
+ContentDetail _$ContentDetailFromJson(Map<String, dynamic> json) {
+  return ContentDetail(
+    json['duration'] as String?,
+    json['thumbnail'] == null
+        ? null
+        : Thumbnail.fromJson(json['thumbnail'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$ContentDetailToJson(ContentDetail instance) =>
+    <String, dynamic>{
+      'duration': instance.duration,
+      'thumbnail': instance.thumbnail,
+    };
+
+Thumbnail _$ThumbnailFromJson(Map<String, dynamic> json) {
+  return Thumbnail(
+    json['url'] as String?,
+    json['width'] as int?,
+    json['height'] as int?,
+  );
+}
+
+Map<String, dynamic> _$ThumbnailToJson(Thumbnail instance) => <String, dynamic>{
+      'url': instance.url,
+      'width': instance.width,
+      'height': instance.height,
     };
 
 WorshipCreate _$WorshipCreateFromJson(Map<String, dynamic> json) {

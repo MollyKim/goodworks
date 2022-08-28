@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/components/baseToast.dart';
 import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
@@ -29,6 +30,9 @@ class CommunityPostDetail extends StatelessWidget {
               size: 20,
               color: context.forest80,
             )),
+        centerTitle: true,
+        title: Text("모임",
+        style: TextStyle(color: Colors.black),),
         actions: [
           GestureDetector(
             onTap: () {
@@ -222,7 +226,8 @@ class CommunityPostDetail extends StatelessWidget {
     return Column(mainAxisSize: MainAxisSize.min, children: [
       GestureDetector(
         onTap: (){
-          // Get.offNamed("/pray_post_correction");
+          BaseToast(text: '기능 준비중입니다.').showToast(context);
+          Get.back();
         },
         child: Container(
           decoration: BoxDecoration(
@@ -252,23 +257,28 @@ class CommunityPostDetail extends StatelessWidget {
       SizedBox(
         height: 11,
       ),
-      Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Color(0xff2d9067),
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 159,
-          vertical: 24,
-        ),
-        child: Text(
-          "삭제",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontFamily: "AppleSDGothicNeo",
-            fontWeight: FontWeight.w700,
+      GestureDetector(
+        onTap: () {
+
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color(0xff2d9067),
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 159,
+            vertical: 24,
+          ),
+          child: Text(
+            "삭제",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontFamily: "AppleSDGothicNeo",
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
       ),

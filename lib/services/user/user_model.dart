@@ -77,3 +77,19 @@ class UserAvatar {
 
   Map<String, dynamic> toJson() => _$UserAvatarToJson(this);
 }
+
+@JsonSerializable()
+class UserOutModel {
+  int? trId;
+  String? resultCode;
+  String? resultMsg;
+  // UserResultData? resultData;
+
+  UserOutModel(
+      {this.trId, this.resultCode, this.resultMsg, });
+
+  factory UserOutModel.fromJson(Object? json) =>
+      _$UserOutModelFromJson(json as Map<String, dynamic>);
+
+  Map<String, dynamic> toJson() => _$UserOutModelToJson(this);
+}

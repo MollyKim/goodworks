@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'dart:io';
 
@@ -13,6 +14,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  UserController userController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     XFile? image;
@@ -82,7 +85,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   Text(
-                    "홍길동",
+                      userController.userModel.resultData?.userName.toString() ?? "",
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color: Colors.black,
@@ -174,7 +177,7 @@ class _ProfileState extends State<Profile> {
                     height: 15,
                   ),
                   Text(
-                    "abc1234",
+                    userController.userModel.resultData?.seumId.toString() ?? "",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
@@ -213,7 +216,7 @@ class _ProfileState extends State<Profile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "01022449379",
+                        userController.userModel.resultData?.phoneNumber.toString() ?? "",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -221,16 +224,16 @@ class _ProfileState extends State<Profile> {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      Text(
-                        "변경",
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: Color(0xff2d9067),
-                          fontSize: 14,
-                          fontFamily: "Apple SD Gothic Neo",
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
+                      // Text(
+                      //   "변경",
+                      //   textAlign: TextAlign.right,
+                      //   style: TextStyle(
+                      //     color: Color(0xff2d9067),
+                      //     fontSize: 14,
+                      //     fontFamily: "Apple SD Gothic Neo",
+                      //     fontWeight: FontWeight.w700,
+                      //   ),
+                      // )
                     ],
                   ),
                 ],
@@ -257,8 +260,10 @@ class _ProfileState extends State<Profile> {
                     Text(
                       "비밀번호 변경",
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
+                        color: Color(0xff2d9067),
+                        fontSize: 16,
+                        fontFamily: "Apple SD Gothic Neo",
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],

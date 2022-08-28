@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,12 +16,14 @@ class WorshipPostList extends StatefulWidget {
 }
 
 class _WorshipPostListState extends State<WorshipPostList> {
-  WorshipController worshipController = Get.find();
+  late WorshipController worshipController = Get.find();
   late YoutubePlayerController _controller;
 
   @override
   void initState() {
-    super.initState();
+
+    // worshipController.getWorshipDetailData(
+    //     churchId: "1", worshipId: worshipController.worshipList.resultData?[widget.index!.toInt()].id.toString() ?? "");
 
     print('phil111');
     print(widget.index);
@@ -91,7 +94,8 @@ class _WorshipPostListState extends State<WorshipPostList> {
             // height: 19,
             child: Text(
               "${worshipController.worshipList.resultData?[widget.index!.toInt()].title}",
-              maxLines:3,
+              maxLines: 3,
+
               ///본문
               style: TextStyle(
                 color: Colors.black,
@@ -108,10 +112,10 @@ class _WorshipPostListState extends State<WorshipPostList> {
 
           GestureDetector(
             onTap: () {
-              Get.toNamed('/player',
-                  arguments: [worshipController.worshipList
-                      .resultData![widget.index!.toInt()].playInfo!.videoId
-                      .toString(), widget.index]);
+              Get.toNamed('/player', arguments: [
+                worshipController.worshipList.resultData![widget.index!.toInt()].playInfo!.videoId.toString(),
+                widget.index
+              ]);
             },
             child: Stack(
               children: [
@@ -126,6 +130,11 @@ class _WorshipPostListState extends State<WorshipPostList> {
                     ),
                   ),
                 ),
+                // CachedNetworkImage(
+                //     // 'assets/ic/ic_photo.svg',
+                //     width: 200,
+                //     height: 200,
+                //     imageUrl: worshipController.worshipDetail.resultData!.contentDetail!.thumbnail!.url ?? ""),
                 // Positioned(
                 //   bottom: 0,
                 //   right: 0,

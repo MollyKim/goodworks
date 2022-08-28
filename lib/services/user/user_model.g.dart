@@ -101,3 +101,18 @@ Map<String, dynamic> _$UserAvatarToJson(UserAvatar instance) =>
       'smallUrl': instance.smallUrl,
       'size': instance.size,
     };
+
+UserOutModel _$UserOutModelFromJson(Map<String, dynamic> json) {
+  return UserOutModel(
+    trId: json['trId'] as int?,
+    resultCode: json['resultCode'] as String?,
+    resultMsg: json['resultMsg'] as String?,
+  );
+}
+
+Map<String, dynamic> _$UserOutModelToJson(UserOutModel instance) =>
+    <String, dynamic>{
+      'trId': instance.trId,
+      'resultCode': instance.resultCode,
+      'resultMsg': instance.resultMsg,
+    };
