@@ -14,6 +14,7 @@ abstract class FeedService {
   Future<FeedList> getFeedList(
       @Header('Authorization') String token,
       @Path() int churchID,
+      @Query('cursor') String cursor,
       // @Path() String communityID//, int type, String cursor
       );
 

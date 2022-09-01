@@ -16,9 +16,9 @@ class _FeedService implements FeedService {
   String? baseUrl;
 
   @override
-  Future<FeedList> getFeedList(token, churchID) async {
+  Future<FeedList> getFeedList(token, churchID, cursor) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'cursor': cursor};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<FeedList>(Options(

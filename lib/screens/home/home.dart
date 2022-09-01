@@ -49,19 +49,20 @@ class _HomeState extends State<Home>
   }
 
   getFeed(String subject) async {
-    try {
-      await feedController.getFeedListData(
-          churchId: churchController.churchModel.resultData?.id ?? 1);
-    } catch (e) {
-      print("error!! home get Feed: $e");
+    if(!feedController.isLast) {
+      try {
+        await feedController.getFeedListData(
+            churchId: churchController.churchModel.resultData?.id ?? 1);
+      } catch (e) {
+        print("error!! home get Feed: $e");
+      }
+
+      if (feedController.feeds != null &&
+          feedController.feeds?.length != 0) {
+        return true;
+      } else
+        return false;
     }
-
-    if (feedController.feeds != null &&
-        feedController.feeds?.length != 0) {
-
-      return true;
-    } else
-      return false;
   }
 
   @override
