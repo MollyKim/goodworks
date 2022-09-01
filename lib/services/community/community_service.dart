@@ -29,6 +29,7 @@ abstract class CommunityService {
   );
 
   @POST('/api/v1/seum/church/{churchID}/community/2/feed')
+  @FormUrlEncoded()
   Future<PostCommunityResponse> postCommunityPost(
     @Header('Authorization') String token,
     @Path("churchID") int churchID,

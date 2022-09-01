@@ -80,7 +80,8 @@ class _CommunityService implements CommunityService {
         _setStreamType<PostCommunityResponse>(Options(
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
-                extra: _extra)
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
             .compose(
                 _dio.options, '/api/v1/seum/church/$churchID/community/2/feed',
                 queryParameters: queryParameters, data: _data)
