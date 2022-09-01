@@ -12,6 +12,19 @@ class FeedController extends BaseController{
   List<FeedListResultData>? feeds = [];
   Feed feed = Feed();
   UserController userController = Get.find();
+  List<String> images = [];
+
+  getImagesOnly() {
+    if(feeds != null && feeds!.length != 0)
+    feeds!.forEach((element) {
+      element.attachments?.forEach((element) {
+        if(element.attachType == "image" && element.fileInfo.url != null) {
+          images.add(element.fileInfo.url!);
+        }
+      });
+    });
+  }
+
 
   Future<void> getFeedListData({required int churchId}) async{
     String token = "Bearer ${userController.userSession}";
@@ -37,6 +50,7 @@ class FeedController extends BaseController{
 
     Feed resp = await super.rootService.feedService.getFeedDetailData(token,churchId,communityID,feedID);
     this.feed = resp;
+
     update();
   }
 

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/feed_controller.dart';
+import 'package:practice/services/feed/feed_list_model.dart';
 import 'package:practice/util/feedType.dart';
 import 'package:practice/util/getTimeAgo.dart';
 
@@ -13,8 +14,8 @@ class HomePostList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FeedController feedController = Get.find();
-    int itemCount =
-        feedController.feeds?[index].attachments?.length ?? 0;
+    List<FeedListAttachment> images = feedController.feeds?[index].attachments ?? [];
+    int itemCount = isImage(images).length;
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -98,11 +99,7 @@ class HomePostList extends StatelessWidget {
                               children: <Widget>[
                                 CachedNetworkImage(
                                   fit: BoxFit.cover,
-                                  imageUrl: feedController
-                                          .feeds?[index]
-                                          .attachments?[picIndex]
-                                          .fileInfo.url ??
-                                      "",
+                                  imageUrl:isImage(images)[picIndex],
                                   height: 100.0,
                                   placeholder: (context, url) => Center(
                                       child: CircularProgressIndicator()),
@@ -147,6 +144,16 @@ class HomePostList extends StatelessWidget {
         ),
       ),
     );
+  }
+  List<String> isImage(List<FeedListAttachment>? attachments) {
+    List<String> images = [];
+
+    attachments?.forEach((e) {
+      if (e.attachType == "image") {
+        images.add(e.fileInfo.url!);
+      }});
+
+    return images;
   }
 }
 
