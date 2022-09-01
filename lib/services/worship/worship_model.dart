@@ -189,6 +189,7 @@ class WorshipListResultData {
   String? preacher;
   String? worshipDate;
   String? content;
+  ContentDetailList? contentDetail;
   bool? isVisible;
 
   WorshipListResultData({
@@ -200,6 +201,7 @@ class WorshipListResultData {
     this.preacher,
     this.worshipDate,
     this.content,
+    this.contentDetail,
     this.isVisible,
   });
 
@@ -219,6 +221,31 @@ class PlayInfo {
   factory PlayInfo.fromJson(Map<String, dynamic> json) => _$PlayInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$PlayInfoToJson(this);
+}
+
+@JsonSerializable()
+class ContentDetailList {
+  String? duration;
+  ThumbnailList? thumbnail;
+
+  ContentDetailList({this.duration, this.thumbnail});
+
+  factory ContentDetailList.fromJson(Map<String, dynamic> json) => _$ContentDetailListFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ContentDetailListToJson(this);
+}
+
+@JsonSerializable()
+class ThumbnailList {
+  String? url;
+  int? width;
+  int? heigth;
+
+  ThumbnailList({this.url, this.width, this.heigth});
+
+  factory ThumbnailList.fromJson(Map<String, dynamic> json) => _$ThumbnailListFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ThumbnailListToJson(this);
 }
 
 @JsonSerializable()
