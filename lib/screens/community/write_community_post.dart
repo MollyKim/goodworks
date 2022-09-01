@@ -56,7 +56,6 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
 
                       List<String> path = [];
                       wrightCommunityController.images?.forEach((element) {path.add(element.path);});
-                      path.length;
 
                       FormData formData = FormData.fromMap({
                         'title': wrightCommunityController
@@ -64,14 +63,10 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
                         'type': 1,
                         'content': wrightCommunityController
                             .contentTextEditingController.text,
-                        'attachments': path[0],
                         'attachTypes': "image",
-
-                        'attachments': path[1],
+                        'attachments': await MultipartFile.fromFile(path[0]),
                         'attachTypes': "image",
-
-                        // 'attachments': wrightCommunityController.images?.map((e) => e.path),
-                        // 'attachTypes': "image",
+                        'attachments': await MultipartFile.fromFile(path[1]),
                       });
                       String? respCode;
                       try {
