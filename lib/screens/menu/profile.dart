@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:practice/components/baseToast.dart';
 import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'dart:io';
@@ -249,9 +250,13 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                Get.toNamed('/password_reset');
+              onTap: (){
+                BaseToast(text: '기능 준비중입니다.').showToast(context);
+                // Get.back();
               },
+              // onTap: () {
+              //   Get.toNamed('/password_reset');
+              // },
               child: Container(
                 padding: EdgeInsets.all(20),
                 child: Column(

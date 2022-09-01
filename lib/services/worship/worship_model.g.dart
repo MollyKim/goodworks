@@ -216,6 +216,10 @@ WorshipListResultData _$WorshipListResultDataFromJson(
     preacher: json['preacher'] as String?,
     worshipDate: json['worshipDate'] as String?,
     content: json['content'] as String?,
+    contentDetail: json['contentDetail'] == null
+        ? null
+        : ContentDetailList.fromJson(
+            json['contentDetail'] as Map<String, dynamic>),
     isVisible: json['isVisible'] as bool?,
   );
 }
@@ -231,6 +235,7 @@ Map<String, dynamic> _$WorshipListResultDataToJson(
       'preacher': instance.preacher,
       'worshipDate': instance.worshipDate,
       'content': instance.content,
+      'contentDetail': instance.contentDetail,
       'isVisible': instance.isVisible,
     };
 
@@ -242,6 +247,36 @@ PlayInfo _$PlayInfoFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PlayInfoToJson(PlayInfo instance) => <String, dynamic>{
       'videoId': instance.videoId,
+    };
+
+ContentDetailList _$ContentDetailListFromJson(Map<String, dynamic> json) {
+  return ContentDetailList(
+    duration: json['duration'] as String?,
+    thumbnail: json['thumbnail'] == null
+        ? null
+        : ThumbnailList.fromJson(json['thumbnail'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$ContentDetailListToJson(ContentDetailList instance) =>
+    <String, dynamic>{
+      'duration': instance.duration,
+      'thumbnail': instance.thumbnail,
+    };
+
+ThumbnailList _$ThumbnailListFromJson(Map<String, dynamic> json) {
+  return ThumbnailList(
+    url: json['url'] as String?,
+    width: json['width'] as int?,
+    heigth: json['heigth'] as int?,
+  );
+}
+
+Map<String, dynamic> _$ThumbnailListToJson(ThumbnailList instance) =>
+    <String, dynamic>{
+      'url': instance.url,
+      'width': instance.width,
+      'heigth': instance.heigth,
     };
 
 WorshipDetail _$WorshipDetailFromJson(Map<String, dynamic> json) {

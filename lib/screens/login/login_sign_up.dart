@@ -776,7 +776,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
     return DefaultLayout(
       body: SingleChildScrollView(
         child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40),
+            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
             child: Form(
               key: this.formKey,
               child: Column(children: [

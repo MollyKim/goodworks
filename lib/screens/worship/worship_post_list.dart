@@ -21,7 +21,6 @@ class _WorshipPostListState extends State<WorshipPostList> {
 
   @override
   void initState() {
-
     // worshipController.getWorshipDetailData(
     //     churchId: "1", worshipId: worshipController.worshipList.resultData?[widget.index!.toInt()].id.toString() ?? "");
 
@@ -112,6 +111,7 @@ class _WorshipPostListState extends State<WorshipPostList> {
 
           GestureDetector(
             onTap: () {
+              print('phill');
               Get.toNamed('/player', arguments: [
                 worshipController.worshipList.resultData![widget.index!.toInt()].playInfo!.videoId.toString(),
                 widget.index
@@ -119,38 +119,41 @@ class _WorshipPostListState extends State<WorshipPostList> {
             },
             child: Stack(
               children: [
-                Container(
-                  color: Colors.yellow,
-                  width: double.infinity,
-                  height: 200,
-                  child: Center(
-                    child: Text(
-                      '썸네일 사진',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    ),
-                  ),
-                ),
-                // CachedNetworkImage(
-                //     // 'assets/ic/ic_photo.svg',
-                //     width: 200,
-                //     height: 200,
-                //     imageUrl: worshipController.worshipDetail.resultData!.contentDetail!.thumbnail!.url ?? ""),
-                // Positioned(
-                //   bottom: 0,
-                //   right: 0,
-                //   child: Container(
-                //     margin: EdgeInsets.only(bottom: 10, right: 10),
-                //     width: 60,
-                //     height: 20,
-                //     color: Colors.black,
-                //     child: Center(
-                //       child: Text(
-                //         '3:35:27',
-                //         style: TextStyle(color: Colors.white),
-                //       ),
+                // Container(
+                //   color: Colors.yellow,
+                //   width: double.infinity,
+                //   height: 200,
+                //   child: Center(
+                //     child: Text(
+                //       '썸네일 사진',
+                //       style: TextStyle(fontSize: 20, color: Colors.black),
                 //     ),
                 //   ),
-                // )
+                // ),
+                CachedNetworkImage(
+                    // 'assets/ic/ic_photo.svg',
+                    // width: 460,
+                    // height: 260,
+                    imageUrl: worshipController
+                        .worshipList.resultData![widget.index!.toInt()].contentDetail!.thumbnail!.url
+                        .toString()),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 10, right: 10),
+                    width: 60,
+                    height: 20,
+                    color: Colors.black,
+                    child: Center(
+                      child: Text(
+                        worshipController.worshipList.resultData![widget.index!.toInt()].contentDetail!.duration
+                            .toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),

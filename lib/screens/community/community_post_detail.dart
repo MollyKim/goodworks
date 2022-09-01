@@ -224,39 +224,39 @@ class CommunityPostDetail extends StatelessWidget {
 
   Widget buildBottomSheet(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: [
-      GestureDetector(
-        onTap: (){
-          BaseToast(text: '기능 준비중입니다.').showToast(context);
-          Get.back();
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: Colors.black,
-              width: 1,
-            ),
-            color: Colors.white,
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 159,
-            vertical: 24,
-          ),
-          child: Text(
-            "수정",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color(0xff2d9067),
-              fontSize: 18,
-              fontFamily: "Apple SD Gothic Neo",
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-      ),
-      SizedBox(
-        height: 11,
-      ),
+      // GestureDetector(
+      //   onTap: (){
+      //     BaseToast(text: '기능 준비중입니다.').showToast(context);
+      //     Get.back();
+      //   },
+      //   child: Container(
+      //     decoration: BoxDecoration(
+      //       borderRadius: BorderRadius.circular(10),
+      //       border: Border.all(
+      //         color: Colors.black,
+      //         width: 1,
+      //       ),
+      //       color: Colors.white,
+      //     ),
+      //     padding: const EdgeInsets.symmetric(
+      //       horizontal: 159,
+      //       vertical: 24,
+      //     ),
+      //     child: Text(
+      //       "수정",
+      //       textAlign: TextAlign.center,
+      //       style: TextStyle(
+      //         color: Color(0xff2d9067),
+      //         fontSize: 18,
+      //         fontFamily: "Apple SD Gothic Neo",
+      //         fontWeight: FontWeight.w700,
+      //       ),
+      //     ),
+      //   ),
+      // ),
+      // SizedBox(
+      //   height: 11,
+      // ),
       GestureDetector(
         onTap: () {
 
@@ -281,6 +281,9 @@ class CommunityPostDetail extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      SizedBox(
+        height: 21,
       ),
       SizedBox(
         height: 19,

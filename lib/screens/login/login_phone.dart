@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 import 'package:practice/themes/extensions.dart';
 
@@ -18,7 +19,7 @@ class _LoginPhoneState extends State<LoginPhone> {
   bool phoneFlag = false;
   bool phoneOTPFlag = false;
   TextEditingController phoneTextEditingController = TextEditingController();
-
+  UserController userController = Get.find();
   int timerMaxSeconds = 180;
   int currentSeconds = 0;
 
@@ -119,11 +120,12 @@ class _LoginPhoneState extends State<LoginPhone> {
             ),
             primary: context.forest80,
           ),
-          onPressed: () {
+          onPressed: () async {
             setState(() {
               timer?.cancel();
               startTimeout(180);
             });
+            // await userController.sendOTP(phoneTextEditingController.text);
             Get.toNamed('/login_select_church');
           },
           child: Text("인증 문자 받기",
