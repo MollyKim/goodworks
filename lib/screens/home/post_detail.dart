@@ -23,9 +23,8 @@ class _HomePostDetailState extends State<HomePostDetail> {
 
   @override
   void initState() {
-    print(feedController.feeds![Get.arguments].attachments!);
-    print("teata");
-    image.addAll(isImage(feedController.feeds![Get.arguments].attachments!));
+    if(feedController.feeds![Get.arguments].attachments != null)
+      image.addAll(isImage(feedController.feeds![Get.arguments].attachments!));
 
     super.initState();
   }
