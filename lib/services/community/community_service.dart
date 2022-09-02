@@ -11,6 +11,8 @@ abstract class CommunityService {
   @GET('/api/v1/seum/church/{churchID}/feed/')
   Future<CommunityModel> getCommunityList(
     @Header('Authorization') String token,
+    @Query('communityID') int communityId,
+    @Query('feedType') int feedType,
     @Path() String churchID,
   );
 

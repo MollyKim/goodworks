@@ -68,10 +68,7 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
                         'content': wrightCommunityController
                             .contentTextEditingController.text,
                         'attachTypes': "image",
-                        'attachments': await MultipartFile.fromFile(path[0]),
-                        'attachTypes': "image",
-                        'attachments': await MultipartFile.fromFile(path[1]),
-                      });
+                        });
 
                       imageMap.forEach((element) {formData.fields.add(MapEntry('attachTypes', element.toString()));});
 

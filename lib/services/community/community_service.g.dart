@@ -16,17 +16,20 @@ class _CommunityService implements CommunityService {
   String? baseUrl;
 
   @override
-  Future<CommunityModel> getCommunityList(token, churchID) async {
+  Future<CommunityModel> getCommunityList(
+      token, communityId, feedType, churchID) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'communityID': communityId,
+      r'feedType': feedType
+    };
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CommunityModel>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options,
-                '/api/v1/seum/church/{churchID}/feed/',
+            .compose(_dio.options, '/api/v1/seum/church/$churchID/feed/',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CommunityModel.fromJson(_result.data!);
