@@ -167,6 +167,7 @@ CommunityUserResultData _$CommunityUserResultDataFromJson(
     json['userId'] as int?,
     json['userStatus'] as int?,
     json['userName'] as String?,
+    json['communityUserType'] as int?,
     json['avatar'] == null ? null : Avatar.fromJson(json['avatar'] as Object),
   );
 }
@@ -178,6 +179,7 @@ Map<String, dynamic> _$CommunityUserResultDataToJson(
       'userId': instance.userId,
       'userStatus': instance.userStatus,
       'userName': instance.userName,
+      'communityUserType': instance.communityUserType,
       'avatar': instance.avatar,
     };
 

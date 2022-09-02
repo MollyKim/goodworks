@@ -32,6 +32,13 @@ class CommunityController extends BaseController {
     update();
   }
 
+  Future<void> getCommunityUserListTwo({required String churchId, required String communityId}) async {
+    String token = "Bearer ${userController.userSession}";
+    this.communityUserList =
+        await super.rootService.communityService.getCommunityUserListTwo(token, churchId, communityId);
+    update();
+  }
+
   Future<String?> postCommunityPost(int churchId, body) async {
     String token = "Bearer ${userController.userSession}";
 

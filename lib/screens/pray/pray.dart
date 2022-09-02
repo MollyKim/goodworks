@@ -45,7 +45,7 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
       print('phil getPray 001');
       await prayController.getPrayDetailData(userController.userSession!,
           churchId: churchController.churchModel.resultData?.id.toString() ?? "1", prayerID: "1");
-      await communityController.getCommunityUserList(
+      await communityController.getCommunityUserListTwo(
           churchId: churchController.churchModel.resultData?.id.toString() ?? "1", communityId: communityController.communityList.resultData![0].id.toString());
     } catch (e) {
       print("error!! in pray : $e");

@@ -76,6 +76,8 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
 
   @override
   Widget build(BuildContext context) {
+    print('phil test');
+    print(communityController.communityList.resultData![memberNum].memberCount);
     return DefaultLayout(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -158,7 +160,7 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
                             .map((e) => e.name)
                             .toList()
                             .indexOf(value.toString());
-                        await communityController.getCommunityUserList(
+                        await communityController.getCommunityUserListTwo(
                             churchId: "1",
                             communityId: communityController.communityList.resultData![memberNum].id.toString());
                       } catch (e) {
@@ -168,6 +170,7 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
                         selectedValue = value as String;
                         setState(() {});
                         communityController.update();
+                        setState(() {});
                       }
                     });
                   },
@@ -181,18 +184,35 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
             SizedBox(
               height: 32,
             ),
-            Container(
-              height: 100,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: communityController.communityList.resultData![memberNum].memberCount,
-                itemBuilder: (BuildContext context, int index) {
-                  // Why network for web?
-                  // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
-                  return member(index);
-                },
-              ),
-            ),
+            communityController.communityUserList.resultData![0].communityUserType == 1
+                ? Container(
+                    height: 100,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      // itemCount:
+                      ///TODO 123
+                      itemCount: 1,
+                      itemBuilder: (BuildContext context, int index) {
+                        // Why network for web?
+                        // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
+                        return member(index);
+                      },
+                    ),
+                  )
+                : Container(
+                    height: 100,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      // itemCount: communityController.communityUserList.resultData![memberNum].communityUserType == 1
+                      ///TODO 123
+                      itemCount: communityController.communityList.resultData![memberNum].memberCount,
+                      itemBuilder: (BuildContext context, int index) {
+                        // Why network for web?
+                        // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
+                        return member(index);
+                      },
+                    ),
+                  ),
             SizedBox(
               height: 18,
             ),
@@ -227,6 +247,7 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
             onTap: () {
               setState(() {
                 print('phil List test');
+                print(index);
 
                 switch (index) {
                   case 0:
@@ -389,6 +410,7 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
                         height: 60,
                       ),
                 Text(
+                  //GetPrayer
                   communityController.communityUserList.resultData?[index].userName.toString() ?? "",
                   textAlign: TextAlign.center,
                   style: TextStyle(

@@ -136,9 +136,10 @@ class CommunityUserResultData {
   int? userId;
   int? userStatus;
   String? userName;
+  int? communityUserType;
   Avatar? avatar;
 
-  CommunityUserResultData(this.churchUserId, this.userId, this.userStatus, this.userName, this.avatar);
+  CommunityUserResultData(this.churchUserId, this.userId, this.userStatus, this.userName, this.communityUserType, this.avatar);
 
   factory CommunityUserResultData.fromJson(Object? json) =>
       _$CommunityUserResultDataFromJson(json as Map<String, dynamic>);
