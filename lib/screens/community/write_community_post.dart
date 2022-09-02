@@ -57,6 +57,10 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
                       List<String> path = [];
                       wrightCommunityController.images?.forEach((element) {path.add(element.path);});
 
+                      List<MultipartFile> imageMap = [];
+
+                      path.forEach((e) async => imageMap.add(await MultipartFile.fromFile(e)));
+
                       FormData formData = FormData.fromMap({
                         'title': wrightCommunityController
                             .titleTextEditingController.text,
@@ -68,6 +72,9 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
                         'attachTypes': "image",
                         'attachments': await MultipartFile.fromFile(path[1]),
                       });
+
+                      imageMap.forEach((element) {formData.fields.add(MapEntry('attachTypes', element.toString()));});
+
                       String? respCode;
                       try {
                         respCode = await communityController.postCommunityPost(
