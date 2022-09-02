@@ -181,7 +181,7 @@ class _WriteCommunityPostState extends State<WriteCommunityPost> {
                                           onTap: () {
                                             wrightCommunityController.images!
                                                 .removeAt(imageIndex);
-                                            communityController.update();
+                                            setState(() {});
                                           },
                                           child: Image.asset(
                                             'assets/ic/ic_delete.png',
