@@ -28,6 +28,13 @@ abstract class CommunityService {
     @Path("communityID") String communityID,
   );
 
+  @GET('/api/v1/seum/church/{churchID}/community/{communityID}/prayer/users-to-manage')
+  Future<CommunityUserModel> getCommunityUserListTwo(
+    @Header('Authorization') String token,
+    @Path("churchID") String churchID,
+    @Path("communityID") String communityID,
+  );
+
   @POST('/api/v1/seum/church/{churchID}/community/2/feed')
   @FormUrlEncoded()
   Future<PostCommunityResponse> postCommunityPost(
