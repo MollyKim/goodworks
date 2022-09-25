@@ -33,7 +33,7 @@ class PrayPostList extends StatelessWidget {
                         // 'assets/ic/ic_photo.svg',
                         width: 30,
                         height: 30,
-                        imageUrl: prayController.prayList.resultData![index].avatar!.smallUrl.toString()),
+                        imageUrl: prayController.prayList.resultData?[index].avatar!.smallUrl.toString() ?? ""),
                     SizedBox(
                       width: 10,
                     ),

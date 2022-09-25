@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/worship_controller.dart';
 import 'package:practice/services/worship/worship_model.dart';
+import 'package:practice/util/getTimeAgo.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class WorshipPostList extends StatefulWidget {
@@ -16,13 +17,13 @@ class WorshipPostList extends StatefulWidget {
 }
 
 class _WorshipPostListState extends State<WorshipPostList> {
-  late WorshipController worshipController = Get.find();
+  WorshipController worshipController = Get.find();
   late YoutubePlayerController _controller;
 
   @override
   void initState() {
-    // worshipController.getWorshipDetailData(
-    //     churchId: "1", worshipId: worshipController.worshipList.resultData?[widget.index!.toInt()].id.toString() ?? "");
+    worshipController.getWorshipDetailData(
+        churchId: "1", worshipId: worshipController.worshipList.resultData?[widget.index!.toInt()].id.toString() ?? "");
 
     print('phil111');
     print(widget.index);
@@ -72,10 +73,10 @@ class _WorshipPostListState extends State<WorshipPostList> {
               ),
               SizedBox(
                 // width: 57,
-                height: 13,
+                // height: 13,
                 child: Text(
                   ///시간
-                  "${worshipController.worshipList.resultData?[widget.index!.toInt()].worshipDate}",
+                  "${getTimeAge(worshipController.worshipList.resultData?[widget.index!.toInt()].worshipDate)}",
                   textAlign: TextAlign.right,
                   style: TextStyle(
                     color: Colors.black,
@@ -135,8 +136,9 @@ class _WorshipPostListState extends State<WorshipPostList> {
                     // width: 460,
                     // height: 260,
                     imageUrl: worshipController
-                        .worshipList.resultData![widget.index!.toInt()].contentDetail!.thumbnail!.url
-                        .toString()),
+                            .worshipList.resultData?[widget.index?.toInt() ?? 0].contentDetail?.thumbnail?.url
+                            .toString() ??
+                        ""),
                 Positioned(
                   bottom: 0,
                   right: 0,
@@ -147,8 +149,9 @@ class _WorshipPostListState extends State<WorshipPostList> {
                     color: Colors.black,
                     child: Center(
                       child: Text(
-                        worshipController.worshipList.resultData![widget.index!.toInt()].contentDetail!.duration
-                            .toString(),
+                        worshipController.worshipList.resultData?[widget.index?.toInt() ?? 0].contentDetail?.duration
+                                .toString() ??
+                            "",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
