@@ -57,9 +57,9 @@ class _LoginSelectChurchState extends State<LoginSelectChurch> {
 
 //
 final List<String> imgList = [
-  'assets/img/img_rural_church.jpg',
+  // 'assets/img/img_rural_church.jpg',
   'assets/img/img_logo_church.jpg',
-  'assets/img/img_urban_church.jpg',
+  // 'assets/img/img_urban_church.jpg',
 ];
 //
 final List<Widget> imageSliders = imgList
