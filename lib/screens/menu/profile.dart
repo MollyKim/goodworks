@@ -51,10 +51,12 @@ class _ProfileState extends State<Profile> {
                 height: 134,
                 child: Center(
                   child: image == null
-                      ? SvgPicture.asset(
-                          'assets/ic/ic_photo.svg',
-                          width: 81,
-                          height: 81,
+                      ? CircleAvatar(
+                          radius: 40,
+                          backgroundImage: NetworkImage(
+                            userController.userModel.resultData?.userProfile?.avatar?.smallUrl ??
+                                "https://cdn.vm-united.com/statics/defaultImage/user/userAvatar.png",
+                          ),
                         )
                       : Image.file(
                           File(image!.path),
@@ -86,7 +88,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   Text(
-                      userController.userModel.resultData?.userName.toString() ?? "",
+                    userController.userModel.resultData?.userName.toString() ?? "",
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color: Colors.black,
@@ -250,7 +252,7 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 BaseToast(text: '기능 준비중입니다.').showToast(context);
                 // Get.back();
               },

@@ -29,11 +29,20 @@ class PrayPostList extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    CachedNetworkImage(
-                        // 'assets/ic/ic_photo.svg',
-                        width: 30,
-                        height: 30,
-                        imageUrl: prayController.prayList.resultData?[index].avatar!.smallUrl.toString() ?? ""),
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundImage: NetworkImage(
+                        prayController.prayList.resultData?[index].avatar!.smallUrl.toString() ?? "",
+                      ),
+                    ),
+                    // CircleAvatar(
+                    //   child: CachedNetworkImage(
+                    //     // 'assets/ic/ic_photo.svg',
+                    //     width: 40,
+                    //     height: 40,
+                    //     imageUrl: "",
+                    //     fit: BoxFit.cover,),
+                    // ),
                     SizedBox(
                       width: 10,
                     ),
@@ -50,7 +59,7 @@ class PrayPostList extends StatelessWidget {
                             child: Text(
                               prayController.prayList.resultData?[index].userName.toString() ?? "",
                               style:
-                                  TextStyle(fontFamily: "AppleSDGothicNeo", fontSize: 14, fontWeight: FontWeight.bold),
+                              TextStyle(fontFamily: "AppleSDGothicNeo", fontSize: 14, fontWeight: FontWeight.bold),
                             ),
                           ),
                         Text(
@@ -68,10 +77,11 @@ class PrayPostList extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     (prayController.prayList.resultData?[index].communityId.toString() != '2' &&
-                    (userController.userModel.resultData?.userName == prayController.prayList.resultData?[index].userName.toString())) ?
-                    showModalBottomSheet(
-                        backgroundColor: Colors.transparent, context: context, builder: buildBottomSheet) :
-                    showModalBottomSheet(
+                        (userController.userModel.resultData?.userName ==
+                            prayController.prayList.resultData?[index].userName.toString()))
+                        ? showModalBottomSheet(
+                        backgroundColor: Colors.transparent, context: context, builder: buildBottomSheet)
+                        : showModalBottomSheet(
                         backgroundColor: Colors.transparent, context: context, builder: BaseBottomSheet);
                   },
                   child: SvgPicture.asset(
@@ -122,7 +132,7 @@ class PrayPostList extends StatelessWidget {
     return Column(mainAxisSize: MainAxisSize.min, children: [
       GestureDetector(
         onTap: () {
-          Get.offNamed("/pray_post_correction", arguments: this.index);
+          Get.toNamed("/pray_post_correction", arguments: this.index);
         },
         child: Container(
           decoration: BoxDecoration(

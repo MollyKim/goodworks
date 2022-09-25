@@ -77,7 +77,9 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
   @override
   Widget build(BuildContext context) {
     print('phil test');
-    print(communityController.communityList.resultData![memberNum].memberCount);
+    print(communityController.communityList.resultData?[memberNum].memberCount);
+    print('phil test2');
+
     return DefaultLayout(
         appBar: AppBar(
           automaticallyImplyLeading: false,
