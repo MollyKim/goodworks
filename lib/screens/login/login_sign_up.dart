@@ -757,7 +757,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 phoneNumber: phoneNumberTextEditingController.text);
 
             if (userController.userModel.resultCode == "200") {
-              Get.offAndToNamed('/splash');
+              Get.offAllNamed('/splash');
             } else
               Get.toNamed('/login_fail');
             // }

@@ -150,7 +150,7 @@ class _LoginIDState extends State<LoginID> {
             setState(() {
               IDFlag = true;
             });
-            if (controller.userSession != null) Get.offAndToNamed('/splash');
+            if (controller.userSession != null) Get.offAllNamed('/splash');
           },
           child: Text(
             "로그인",
