@@ -117,7 +117,7 @@ class CommunityPostList extends StatelessWidget {
                               children: <Widget>[
                                 CachedNetworkImage(
                                   fit: BoxFit.cover,
-                                  imageUrl: communityController.communityList.resultData![index].attachments![imageIndex].fileinfo.url!,
+                                  imageUrl: communityController.communityList.resultData![index].attachments![imageIndex].fileInfo?.url ?? '',
                                   height: 100.0,
                                   placeholder: (context, url) => Center(
                                       child: CircularProgressIndicator()),
@@ -139,7 +139,7 @@ class CommunityPostList extends StatelessWidget {
                           : Container(
                               child: CachedNetworkImage(
                                 fit: BoxFit.cover,
-                                imageUrl: communityController.communityList.resultData![index].attachments![imageIndex].fileinfo.url!,
+                                imageUrl: communityController.communityList.resultData![index].attachments![imageIndex].fileInfo?.url ?? '',
                                 height: 100.0,
                                 placeholder: (context, url) =>
                                     Center(child: CircularProgressIndicator()),

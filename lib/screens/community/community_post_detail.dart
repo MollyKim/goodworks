@@ -116,7 +116,7 @@ class CommunityPostDetail extends StatelessWidget {
                     height: 10
                   ),
                   Text(
-                    communityModel.introduce ??
+                    communityModel.content ??
                         "게시글 본문 표시되는 곳 \n최대 다섯줄 까지 적용",
                     style: TextStyle(
                       fontFamily: "AppleSDGothicNeo",
@@ -210,7 +210,7 @@ class CommunityPostDetail extends StatelessWidget {
         return  Container(
           child: CachedNetworkImage(
             fit: BoxFit.cover,
-            imageUrl: communityModel.attachments![imageIndex].fileinfo.url!,
+            imageUrl: communityModel.attachments![imageIndex].fileInfo?.url ??  "",
             height: 100.0,
             placeholder: (context, url) =>
                 Center(child: CircularProgressIndicator()),

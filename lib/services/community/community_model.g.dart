@@ -29,7 +29,6 @@ CommunityResultData _$CommunityResultDataFromJson(Map<String, dynamic> json) {
   return CommunityResultData(
     id: json['id'] as String,
     churchId: json['churchId'] as int?,
-    upperCommunityId: json['upperCommunityId'] as int?,
     depth: json['depth'] as int?,
     title: json['title'] as String?,
     memberLimit: json['memberLimit'] as int?,
@@ -40,15 +39,22 @@ CommunityResultData _$CommunityResultDataFromJson(Map<String, dynamic> json) {
         ? null
         : CommunityCoverImage.fromJson(
             json['coverImage'] as Map<String, dynamic>),
-    attachments: (json['attachments'] as List<dynamic>?)
-        ?.map((e) => CommunityAttachment.fromJson(e as Map<String, dynamic>))
-        .toList(),
     name: json['name'] as String?,
     createdAt: json['createdAt'] as String?,
     updatedAt: json['updatedAt'] as String?,
     userName: json['userName'] as String,
     content: json['content'] as String,
     deletedAt: json['deletedAt'] as String?,
+    avatar: json['avatar'] == null
+        ? null
+        : AvatarImage.fromJson(json['avatar'] as Map<String, dynamic>),
+    churchUserId: json['churchUserId'] as int?,
+    churchUserType: json['churchUserType'] as int?,
+    communityId: json['communityId'] as int?,
+    communityUserType: json['communityUserType'] as int?,
+    attachments: (json['attachments'] as List<dynamic>?)
+        ?.map((e) => CommunityAttachment.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -57,7 +63,10 @@ Map<String, dynamic> _$CommunityResultDataToJson(
     <String, dynamic>{
       'id': instance.id,
       'churchId': instance.churchId,
-      'upperCommunityId': instance.upperCommunityId,
+      'communityId': instance.communityId,
+      'churchUserId': instance.churchUserId,
+      'churchUserType': instance.churchUserType,
+      'communityUserType': instance.communityUserType,
       'depth': instance.depth,
       'title': instance.title,
       'memberLimit': instance.memberLimit,
@@ -65,6 +74,7 @@ Map<String, dynamic> _$CommunityResultDataToJson(
       'communityType': instance.communityType,
       'introduce': instance.introduce,
       'coverImage': instance.coverImage,
+      'avatar': instance.avatar,
       'attachments': instance.attachments,
       'name': instance.name,
       'createdAt': instance.createdAt,
@@ -92,12 +102,26 @@ Map<String, dynamic> _$CommunityCoverImageToJson(
       'size': instance.size,
     };
 
+AvatarImage _$AvatarImageFromJson(Map<String, dynamic> json) {
+  return AvatarImage(
+    json['smallUrl'] as String?,
+    json['url'] as String?,
+  );
+}
+
+Map<String, dynamic> _$AvatarImageToJson(AvatarImage instance) =>
+    <String, dynamic>{
+      'url': instance.url,
+      'smallUrl': instance.smallUrl,
+    };
+
 CommunityAttachment _$CommunityAttachmentFromJson(Map<String, dynamic> json) {
   return CommunityAttachment(
     id: json['id'] as int,
-    communityId: json['communityId'] as int?,
-    fileinfo:
-        CommunityFileInfo.fromJson(json['fileinfo'] as Map<String, dynamic>),
+    feedId: json['feedId'] as String?,
+    fileInfo: json['fileInfo'] == null
+        ? null
+        : CommunityFileInfo.fromJson(json['fileInfo'] as Map<String, dynamic>),
     attachType: json['attachType'] as String,
   );
 }
@@ -106,8 +130,8 @@ Map<String, dynamic> _$CommunityAttachmentToJson(
         CommunityAttachment instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'communityId': instance.communityId,
-      'fileinfo': instance.fileinfo,
+      'feedId': instance.feedId,
+      'fileInfo': instance.fileInfo,
       'attachType': instance.attachType,
     };
 

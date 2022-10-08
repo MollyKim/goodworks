@@ -21,7 +21,10 @@ class CommunityModel {
 class CommunityResultData {
   final String id;
   final int? churchId;
-  final int? upperCommunityId;
+  final int? communityId;
+  final int? churchUserId;
+  final int? churchUserType;
+  final int? communityUserType;
   final int? depth;
   final String? title;
   final int? memberLimit;
@@ -29,6 +32,7 @@ class CommunityResultData {
   final int? communityType;
   final String? introduce;
   final CommunityCoverImage? coverImage;
+  final AvatarImage? avatar;
   final List<CommunityAttachment>? attachments;
   final String? name;
   final String? createdAt;
@@ -42,7 +46,6 @@ class CommunityResultData {
   CommunityResultData(
       {required this.id,
       this.churchId,
-      this.upperCommunityId,
       this.depth,
       this.title,
       this.memberLimit,
@@ -50,13 +53,19 @@ class CommunityResultData {
       this.communityType,
       this.introduce,
       this.coverImage,
-      this.attachments,
       this.name,
       this.createdAt,
       this.updatedAt,
         this.userName = '',
         this.content = '',
-      this.deletedAt});
+      this.deletedAt,
+      this.avatar,
+        this.churchUserId,
+        this.churchUserType,
+        this.communityId,
+        this.communityUserType,
+        this.attachments,
+      });
 
   Map<String, dynamic> toJson() => _$CommunityResultDataToJson(this);
 }
@@ -75,16 +84,30 @@ class CommunityCoverImage {
   Map<String, dynamic> toJson() => _$CommunityCoverImageToJson(this);
 }
 
+
+@JsonSerializable()
+class AvatarImage {
+  final String? url;
+  final String? smallUrl;
+
+  factory AvatarImage.fromJson(Map<String, dynamic> json) => _$AvatarImageFromJson(json);
+
+  AvatarImage(this.smallUrl, this.url);
+
+  Map<String, dynamic> toJson() => _$AvatarImageToJson(this);
+}
+
+
 @JsonSerializable()
 class CommunityAttachment {
   final int id;
-  final int? communityId;
-  final CommunityFileInfo fileinfo;
+  final String? feedId;
+  final CommunityFileInfo? fileInfo;
   final String attachType;
 
   factory CommunityAttachment.fromJson(Map<String, dynamic> json) => _$CommunityAttachmentFromJson(json);
 
-  CommunityAttachment({required this.id, required this.communityId, required this.fileinfo, required this.attachType});
+  CommunityAttachment({required this.id, required this.feedId, required this.fileInfo, required this.attachType});
 
   Map<String, dynamic> toJson() => _$CommunityAttachmentToJson(this);
 }
