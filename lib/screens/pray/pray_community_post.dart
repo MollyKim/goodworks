@@ -34,6 +34,13 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
     'Item4',
   ];
 
+  @override
+  void initState() {
+
+    super.initState();
+  }
+
+
   List<DropdownMenuItem<String>> _addDividersAfterItems(List<String?> items) {
     List<DropdownMenuItem<String>> _menuItems = [];
     for (var item in items) {
@@ -77,7 +84,7 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
   @override
   Widget build(BuildContext context) {
     print('phil test');
-    print(communityController.communityList.resultData?[memberNum].memberCount);
+    // print(communityController.communityList.resultData?[memberNum].memberCount);
     print('phil test2');
 
     return DefaultLayout(
@@ -147,7 +154,7 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
                 child: DropdownButton2(
                   isExpanded: true,
                   hint: Text(
-                    "${communityController.communityList.resultData![0].name}",
+                    "${communityController.communityList.resultData?[0].name ?? ""} ",
                     style: TextStyle(fontSize: 16, color: Colors.black),
                   ),
                   items:

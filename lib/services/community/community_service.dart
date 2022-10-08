@@ -8,11 +8,9 @@ part 'community_service.g.dart';
 abstract class CommunityService {
   factory CommunityService(Dio dio, {String baseUrl}) = _CommunityService;
 
-  @GET('/api/v1/seum/church/{churchID}/feed/')
+  @GET('/api/v1/seum/church/{churchID}/community/my/sharinggroup')
   Future<CommunityModel> getCommunityList(
     @Header('Authorization') String token,
-    @Query('communityID') int communityId,
-    @Query('feedType') int feedType,
     @Path() String churchID,
   );
 

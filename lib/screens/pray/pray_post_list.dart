@@ -35,14 +35,6 @@ class PrayPostList extends StatelessWidget {
                         prayController.prayList.resultData?[index].avatar!.smallUrl.toString() ?? "",
                       ),
                     ),
-                    // CircleAvatar(
-                    //   child: CachedNetworkImage(
-                    //     // 'assets/ic/ic_photo.svg',
-                    //     width: 40,
-                    //     height: 40,
-                    //     imageUrl: "",
-                    //     fit: BoxFit.cover,),
-                    // ),
                     SizedBox(
                       width: 10,
                     ),
@@ -59,7 +51,7 @@ class PrayPostList extends StatelessWidget {
                             child: Text(
                               prayController.prayList.resultData?[index].userName.toString() ?? "",
                               style:
-                              TextStyle(fontFamily: "AppleSDGothicNeo", fontSize: 14, fontWeight: FontWeight.bold),
+                                  TextStyle(fontFamily: "AppleSDGothicNeo", fontSize: 14, fontWeight: FontWeight.bold),
                             ),
                           ),
                         Text(
@@ -77,12 +69,12 @@ class PrayPostList extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     (prayController.prayList.resultData?[index].communityId.toString() != '2' &&
-                        (userController.userModel.resultData?.userName ==
-                            prayController.prayList.resultData?[index].userName.toString()))
+                            (userController.userModel.resultData?.userName ==
+                                prayController.prayList.resultData?[index].userName.toString()))
                         ? showModalBottomSheet(
-                        backgroundColor: Colors.transparent, context: context, builder: buildBottomSheet)
+                            backgroundColor: Colors.transparent, context: context, builder: buildBottomSheet)
                         : showModalBottomSheet(
-                        backgroundColor: Colors.transparent, context: context, builder: BaseBottomSheet);
+                            backgroundColor: Colors.transparent, context: context, builder: BaseBottomSheet);
                   },
                   child: SvgPicture.asset(
                     'assets/ic/ic_more_horiz.svg',

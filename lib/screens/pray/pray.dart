@@ -42,11 +42,18 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
       print('phil getPray 000');
       await prayController.getPrayListData(userController.userSession!,
           churchId: churchController.churchModel.resultData?.id.toString() ?? "1");
-      print('phil getPray 001');
+      print(" prayController.getPrayListData ");
       await prayController.getPrayDetailData(userController.userSession!,
           churchId: churchController.churchModel.resultData?.id.toString() ?? "1", prayerID: "1");
+      print(" prayController.getPrayDetailData ");
+      print(churchController.churchModel.resultData?.id.toString());
+      // await communityController.getCommunityListData(churchId: churchController.churchModel.resultData?.id.toString() ?? "1");
+      // print(communityController.communityList.resultData?[0].id.toString());
+      // print(" prayController.getPrayDetailData ");
       await communityController.getCommunityUserListTwo(
-          churchId: churchController.churchModel.resultData?.id.toString() ?? "1", communityId: communityController.communityList.resultData![0].id.toString());
+          churchId: churchController.churchModel.resultData?.id.toString() ?? "1",
+          communityId: communityController.communityList.resultData![0].id.toString());
+      print(" communityController.getCommunityUserListTwo ");
     } catch (e) {
       print("error!! in pray : $e");
     }
@@ -92,53 +99,51 @@ class _PrayState extends State<Pray> with TickerProviderStateMixin {
         ),
         elevation: 0.0,
       ),
-      body: GetBuilder<PrayController>(
-        builder: (context) {
-          return SafeArea(
-            top: true,
-            bottom: true,
-            child: SmartRefresher(
-              enablePullDown: true,
-              controller: _refreshController,
-              header: ClassicHeader(
-                height: 100,
-                idleIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                idleText: "",
-                refreshingIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                releaseIcon: CupertinoActivityIndicator(
-                  radius: 13.0,
-                ),
-                completeIcon: null,
-                completeText: "",
-                completeDuration: Duration.zero,
-                releaseText: "",
-                refreshingText: "",
+      body: GetBuilder<PrayController>(builder: (context) {
+        return SafeArea(
+          top: true,
+          bottom: true,
+          child: SmartRefresher(
+            enablePullDown: true,
+            controller: _refreshController,
+            header: ClassicHeader(
+              height: 100,
+              idleIcon: CupertinoActivityIndicator(
+                radius: 13.0,
               ),
-              onRefresh: () {
-                _onRefresh();
-              },
-              onLoading: () {
-                _onLoading();
-              },
-              child: ListView.separated(
-                itemCount: prayController.prayList.resultData?.length ?? 1,
-                separatorBuilder: (context, index) {
-                  return CustomSeparator();
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return PrayPostList(
-                    index: index,
-                  );
-                },
+              idleText: "",
+              refreshingIcon: CupertinoActivityIndicator(
+                radius: 13.0,
               ),
+              releaseIcon: CupertinoActivityIndicator(
+                radius: 13.0,
+              ),
+              completeIcon: null,
+              completeText: "",
+              completeDuration: Duration.zero,
+              releaseText: "",
+              refreshingText: "",
             ),
-          );
-        }
-      ),
+            onRefresh: () {
+              _onRefresh();
+            },
+            onLoading: () {
+              _onLoading();
+            },
+            child: ListView.separated(
+              itemCount: prayController.prayList.resultData?.length ?? 1,
+              separatorBuilder: (context, index) {
+                return CustomSeparator();
+              },
+              itemBuilder: (BuildContext context, int index) {
+                return PrayPostList(
+                  index: index,
+                );
+              },
+            ),
+          ),
+        );
+      }),
       floatingActionButton: GestureDetector(
         onTap: () {
           Get.toNamed("/pray_community_post");
