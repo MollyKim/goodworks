@@ -28,8 +28,9 @@ class _CommunityState extends State<Community> {
       print("getCommunity 000");
       communityController.getCommunityListData(
           churchId:
-              churchController.churchModel.resultData?.id.toString() ?? "1");
-      print("getCommunity 001");
+              churchController.churchModel.resultData?.id.toString() ?? "1",
+      communityId: '1');
+
     } catch (e) {
       print("error!! in community : $e");
     }
@@ -44,7 +45,7 @@ class _CommunityState extends State<Community> {
       try {
         communityController.getCommunityListData(
             churchId:
-                churchController.churchModel.resultData?.id.toString() ?? "1");
+                churchController.churchModel.resultData?.id.toString() ?? "1",communityId: '1');
         // communityController.getCommunityDetail(churchId:  churchController.churchModel.resultData?.id.toString() ?? "1" , communityId : "1");
 
       } catch (e) {

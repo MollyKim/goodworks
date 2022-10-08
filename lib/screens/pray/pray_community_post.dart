@@ -118,7 +118,7 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
                 onTap: () {
                   prayController.postPrayCreate(
                     churchId: "1",
-                    communityId: communityController.communityList.resultData![memberNum].id,
+                    communityId: int.parse(communityController.communityList.resultData![memberNum].id),
                     ownerChurchUserId: communityController.communityUserList.resultData?[contextIndex].churchUserId,
                     content: contextText,
                   );
@@ -159,8 +159,8 @@ class _PrayCommunityPostState extends State<PrayCommunityPost> {
                   ),
                   items:
                       _addDividersAfterItems(communityController.communityList.resultData!.map((e) => e.name).toList()),
-                  customItemsIndexes: _getDividersIndexes(),
-                  customItemsHeight: 4,
+                  // customItemsIndexes: _getDividersIndexes(),
+                  // customItemsHeight: 4,
                   value: selectedValue,
                   onChanged: (value) {
                     setState(() async {

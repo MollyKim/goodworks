@@ -7,7 +7,10 @@ part of 'church_service.dart';
 // **************************************************************************
 
 class _ChurchService implements ChurchService {
-  _ChurchService(this._dio, {this.baseUrl}) {
+  _ChurchService(
+    this._dio, {
+    this.baseUrl,
+  }) {
     baseUrl ??= 'http://qa-amos.vm-united.com';
   }
 
@@ -16,17 +19,25 @@ class _ChurchService implements ChurchService {
   String? baseUrl;
 
   @override
-  Future<ChurchModel> getChurchData(token, churchID) async {
+  Future<ChurchModel> getChurchData(
+    token,
+    churchID,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ChurchModel>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{r'Authorization': token},
-                extra: _extra)
-            .compose(_dio.options, '/api/v1/seum/church/$churchID',
-                queryParameters: queryParameters, data: _data)
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ChurchModel>(Options(
+      method: 'GET',
+      headers: <String, dynamic>{r'Authorization': token},
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/seum/church/$churchID',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ChurchModel.fromJson(_result.data!);
     return value;

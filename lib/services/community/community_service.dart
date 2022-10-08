@@ -8,11 +8,18 @@ part 'community_service.g.dart';
 abstract class CommunityService {
   factory CommunityService(Dio dio, {String baseUrl}) = _CommunityService;
 
-  @GET('/api/v1/seum/church/{churchID}/community/my/sharinggroup')
+  // @GET('/api/v1/seum/church/{churchID}/community/my/sharinggroup')
+  // Future<CommunityModel> getCommunityList(
+  //   @Header('Authorization') String token,
+  //   @Path() String churchID,
+  // );
+
+  @GET('/api/v1/seum/church/{churchID}/feed/')
   Future<CommunityModel> getCommunityList(
-    @Header('Authorization') String token,
-    @Path() String churchID,
-  );
+      @Header('Authorization') String token,
+      @Path() String churchID,
+      @Query('communityID') String communityId,
+      );
 
   @GET('/api/v1/seum/church/{churchID}/community/{communityID}')
   Future<CommunityModel> getCommunityDetail(

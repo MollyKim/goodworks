@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/controllers/user_controller.dart';
+import 'package:practice/services/community/community_model.dart';
 import 'package:practice/themes/extensions.dart';
 import 'package:practice/util/getTimeAgo.dart';
 
@@ -16,9 +17,12 @@ class CommunityPostList extends StatelessWidget {
     UserController userController = Get.find();
     CommunityController communityController = Get.find();
     int imageLength = communityController.communityList.resultData?[index].attachments?.length ?? 0;
+
+    final CommunityResultData communityModel = communityController.communityList.resultData?[index] ?? CommunityResultData(id: '1');
+
     return GestureDetector(
       onTap: () {
-        Get.toNamed("/community_post_detail",arguments: index);
+        Get.toNamed("/community_post_detail",arguments: communityController.communityList.resultData?[index]);
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
@@ -36,8 +40,7 @@ class CommunityPostList extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           backgroundImage: NetworkImage(
-                            userController.userModel.resultData?.userProfile
-                                    ?.avatar?.smallUrl ??
+                            communityModel.coverImage?.smallUrl ??
                                 "https://cdn.vm-united.com/statics/defaultImage/user/userAvatar.png",
                           ),
                         ),
@@ -45,7 +48,7 @@ class CommunityPostList extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          userController.userModel.resultData?.userName ??
+                         communityModel.userName ??
                               "",
                           style: TextStyle(
                               fontFamily: "AppleSDGothicNeo",
@@ -68,7 +71,7 @@ class CommunityPostList extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                communityController.communityList.resultData?[index].title ??
+                communityModel.title ??
                     "제목 없음",
                 style: TextStyle(
                     fontFamily: "AppleSDGothicNeo",
@@ -79,7 +82,7 @@ class CommunityPostList extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                communityController.communityList.resultData?[index].introduce ??
+                communityModel.content ??
                     "게시글 본문 표시되는 곳 \n최대 다섯줄 까지 적용",
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,

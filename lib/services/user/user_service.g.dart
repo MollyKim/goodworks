@@ -7,7 +7,10 @@ part of 'user_service.dart';
 // **************************************************************************
 
 class _LoginService implements LoginService {
-  _LoginService(this._dio, {this.baseUrl}) {
+  _LoginService(
+    this._dio, {
+    this.baseUrl,
+  }) {
     baseUrl ??= 'http://qa-amos.vm-united.com';
   }
 
@@ -21,12 +24,19 @@ class _LoginService implements LoginService {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserModel>(
-            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/login',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserModel>(Options(
+      method: 'POST',
+      headers: <String, dynamic>{},
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/login',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserModel.fromJson(_result.data!);
     return value;
   }
@@ -37,17 +47,22 @@ class _LoginService implements LoginService {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserModel>(Options(
-                method: 'POST',
-                headers: <String, dynamic>{
-                  r'Content-Type': 'application/json',
-                  r'Country': 'KR'
-                },
-                extra: _extra,
-                contentType: 'application/json')
-            .compose(_dio.options, '/api/v1/seum/user/register',
-                queryParameters: queryParameters, data: _data)
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserModel>(Options(
+      method: 'POST',
+      headers: <String, dynamic>{
+        r'Content-Type': 'application/json',
+        r'Country': 'KR',
+      },
+      extra: _extra,
+      contentType: 'application/json',
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/seum/user/register',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserModel.fromJson(_result.data!);
     return value;
@@ -59,12 +74,19 @@ class _LoginService implements LoginService {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserModel>(
-            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/api/v1/seum/user/register/otp',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserModel>(Options(
+      method: 'POST',
+      headers: <String, dynamic>{},
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/seum/user/register/otp',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserModel.fromJson(_result.data!);
     return value;
   }
@@ -75,12 +97,19 @@ class _LoginService implements LoginService {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserModel>(
-            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/api/v1/seum/user/phone/validate',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserModel>(Options(
+      method: 'POST',
+      headers: <String, dynamic>{},
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/seum/user/phone/validate',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserModel.fromJson(_result.data!);
     return value;
   }
@@ -91,13 +120,18 @@ class _LoginService implements LoginService {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserModel>(Options(
-                method: 'POST',
-                headers: <String, dynamic>{r'Appname': 'class/student'},
-                extra: _extra)
-            .compose(_dio.options, '/api/v1/seum/user/login',
-                queryParameters: queryParameters, data: _data)
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserModel>(Options(
+      method: 'POST',
+      headers: <String, dynamic>{r'Appname': 'class/student'},
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/seum/user/login',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserModel.fromJson(_result.data!);
     return value;
@@ -108,30 +142,44 @@ class _LoginService implements LoginService {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserOutModel>(Options(
-                method: 'POST',
-                headers: <String, dynamic>{r'Appname': 'class/student'},
-                extra: _extra)
-            .compose(_dio.options, '/api/v1/seum/user/$userId',
-                queryParameters: queryParameters, data: _data)
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserOutModel>(Options(
+      method: 'POST',
+      headers: <String, dynamic>{r'Appname': 'class/student'},
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/seum/user/$userId',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserOutModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<dynamic> putUserPassword(token, userId, body) async {
+  Future<dynamic> putUserPassword(
+    token,
+    userId,
+    body,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-            method: 'PUT',
-            headers: <String, dynamic>{r'Authorization': token},
-            extra: _extra)
-        .compose(_dio.options, '/api/v1/seum/user/$userId/password',
-            queryParameters: queryParameters, data: _data)
+      method: 'PUT',
+      headers: <String, dynamic>{r'Authorization': token},
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/v1/seum/user/$userId/password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;
     return value;

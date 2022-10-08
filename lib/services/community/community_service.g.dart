@@ -7,7 +7,10 @@ part of 'community_service.dart';
 // **************************************************************************
 
 class _CommunityService implements CommunityService {
-  _CommunityService(this._dio, {this.baseUrl}) {
+  _CommunityService(
+    this._dio, {
+    this.baseUrl,
+  }) {
     baseUrl ??= 'http://qa-amos.vm-united.com';
   }
 
@@ -16,18 +19,26 @@ class _CommunityService implements CommunityService {
   String? baseUrl;
 
   @override
-  Future<CommunityModel> getCommunityList(token, churchID) async {
+  Future<CommunityModel> getCommunityList(
+    token,
+    churchID,
+    communityId,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'communityID': communityId};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<CommunityModel>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{r'Authorization': token},
-                extra: _extra)
-            .compose(_dio.options,
-                '/api/v1/seum/church/$churchID/community/my/sharinggroup',
-                queryParameters: queryParameters, data: _data)
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommunityModel>(Options(
+      method: 'GET',
+      headers: <String, dynamic>{r'Authorization': token},
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/seum/church/$churchID/feed/',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CommunityModel.fromJson(_result.data!);
     return value;
@@ -35,18 +46,25 @@ class _CommunityService implements CommunityService {
 
   @override
   Future<CommunityModel> getCommunityDetail(
-      token, churchID, communityID) async {
+    token,
+    churchID,
+    communityID,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<CommunityModel>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{r'Authorization': token},
-                extra: _extra)
-            .compose(_dio.options,
-                '/api/v1/seum/church/$churchID/community/$communityID',
-                queryParameters: queryParameters, data: _data)
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommunityModel>(Options(
+      method: 'GET',
+      headers: <String, dynamic>{r'Authorization': token},
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/seum/church/$churchID/community/$communityID',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CommunityModel.fromJson(_result.data!);
     return value;
@@ -54,18 +72,25 @@ class _CommunityService implements CommunityService {
 
   @override
   Future<CommunityUserModel> getCommunityUserList(
-      token, churchID, communityID) async {
+    token,
+    churchID,
+    communityID,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<CommunityUserModel>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{r'Authorization': token},
-                extra: _extra)
-            .compose(_dio.options,
-                '/api/v1/seum/church/$churchID/community/$communityID/user',
-                queryParameters: queryParameters, data: _data)
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommunityUserModel>(Options(
+      method: 'GET',
+      headers: <String, dynamic>{r'Authorization': token},
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/seum/church/$churchID/community/$communityID/user',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CommunityUserModel.fromJson(_result.data!);
     return value;
@@ -73,37 +98,52 @@ class _CommunityService implements CommunityService {
 
   @override
   Future<CommunityUserModel> getCommunityUserListTwo(
-      token, churchID, communityID) async {
+    token,
+    churchID,
+    communityID,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        CommunityUserModel>(Options(
-            method: 'GET',
-            headers: <String, dynamic>{r'Authorization': token},
-            extra: _extra)
-        .compose(_dio.options,
-            '/api/v1/seum/church/$churchID/community/$communityID/prayer/users-to-manage',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommunityUserModel>(Options(
+      method: 'GET',
+      headers: <String, dynamic>{r'Authorization': token},
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/seum/church/$churchID/community/$communityID/prayer/users-to-manage',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CommunityUserModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<PostCommunityResponse> postCommunityPost(token, churchID, body) async {
+  Future<PostCommunityResponse> postCommunityPost(
+    token,
+    churchID,
+    body,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = body;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PostCommunityResponse>(Options(
-                method: 'POST',
-                headers: <String, dynamic>{r'Authorization': token},
-                extra: _extra,
-                contentType: 'application/x-www-form-urlencoded')
+      method: 'POST',
+      headers: <String, dynamic>{r'Authorization': token},
+      extra: _extra,
+      contentType: 'application/x-www-form-urlencoded',
+    )
             .compose(
-                _dio.options, '/api/v1/seum/church/$churchID/community/2/feed',
-                queryParameters: queryParameters, data: _data)
+              _dio.options,
+              '/api/v1/seum/church/$churchID/community/2/feed',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PostCommunityResponse.fromJson(_result.data!);
     return value;

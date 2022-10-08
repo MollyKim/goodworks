@@ -27,7 +27,7 @@ Map<String, dynamic> _$CommunityModelToJson(CommunityModel instance) =>
 
 CommunityResultData _$CommunityResultDataFromJson(Map<String, dynamic> json) {
   return CommunityResultData(
-    id: json['id'] as int,
+    id: json['id'] as String,
     churchId: json['churchId'] as int?,
     upperCommunityId: json['upperCommunityId'] as int?,
     depth: json['depth'] as int?,
@@ -46,6 +46,8 @@ CommunityResultData _$CommunityResultDataFromJson(Map<String, dynamic> json) {
     name: json['name'] as String?,
     createdAt: json['createdAt'] as String?,
     updatedAt: json['updatedAt'] as String?,
+    userName: json['userName'] as String,
+    content: json['content'] as String,
     deletedAt: json['deletedAt'] as String?,
   );
 }
@@ -68,6 +70,8 @@ Map<String, dynamic> _$CommunityResultDataToJson(
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'deletedAt': instance.deletedAt,
+      'userName': instance.userName,
+      'content': instance.content,
     };
 
 CommunityCoverImage _$CommunityCoverImageFromJson(Map<String, dynamic> json) {
@@ -91,7 +95,7 @@ Map<String, dynamic> _$CommunityCoverImageToJson(
 CommunityAttachment _$CommunityAttachmentFromJson(Map<String, dynamic> json) {
   return CommunityAttachment(
     id: json['id'] as int,
-    communityId: json['communityId'] as String,
+    communityId: json['communityId'] as int?,
     fileinfo:
         CommunityFileInfo.fromJson(json['fileinfo'] as Map<String, dynamic>),
     attachType: json['attachType'] as String,

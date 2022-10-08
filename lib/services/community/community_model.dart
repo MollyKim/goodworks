@@ -19,7 +19,7 @@ class CommunityModel {
 
 @JsonSerializable()
 class CommunityResultData {
-  final int id;
+  final String id;
   final int? churchId;
   final int? upperCommunityId;
   final int? depth;
@@ -34,6 +34,8 @@ class CommunityResultData {
   final String? createdAt;
   final String? updatedAt;
   final String? deletedAt;
+  final String userName;
+  final String content;
 
   factory CommunityResultData.fromJson(Map<String, dynamic> json) => _$CommunityResultDataFromJson(json);
 
@@ -52,6 +54,8 @@ class CommunityResultData {
       this.name,
       this.createdAt,
       this.updatedAt,
+        this.userName = '',
+        this.content = '',
       this.deletedAt});
 
   Map<String, dynamic> toJson() => _$CommunityResultDataToJson(this);
@@ -74,7 +78,7 @@ class CommunityCoverImage {
 @JsonSerializable()
 class CommunityAttachment {
   final int id;
-  final String communityId;
+  final int? communityId;
   final CommunityFileInfo fileinfo;
   final String attachType;
 

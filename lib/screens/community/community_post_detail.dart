@@ -6,6 +6,7 @@ import 'package:practice/components/baseToast.dart';
 import 'package:practice/controllers/community_controller.dart';
 import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
+import 'package:practice/services/community/community_model.dart';
 import 'package:practice/themes/extensions.dart';
 import 'package:practice/util/getTimeAgo.dart';
 import 'package:share/share.dart';
@@ -15,7 +16,7 @@ class CommunityPostDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     CommunityController communityController = Get.find();
     UserController userController = Get.find();
-    var index = Get.arguments;
+    final CommunityResultData communityModel = Get.arguments;
 
     return DefaultLayout(
       appBar: AppBar(
@@ -92,8 +93,7 @@ class CommunityPostDetail extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       const Spacer(),
-                      Text(getTimeAge(communityController
-                          .communityList.resultData?[index].createdAt),
+                      Text(getTimeAge(communityModel.createdAt),
                         style: TextStyle(
                           color: context.gray04,
                           fontFamily: "AppleSDGothicNeo",
@@ -105,7 +105,7 @@ class CommunityPostDetail extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    communityController.communityList.resultData?[index].title ??
+                    communityModel.title ??
                         "제목 없음",
                     style: TextStyle(
                         fontFamily: "AppleSDGothicNeo",
@@ -116,7 +116,7 @@ class CommunityPostDetail extends StatelessWidget {
                     height: 10
                   ),
                   Text(
-                    communityController.communityList.resultData?[index].introduce ??
+                    communityModel.introduce ??
                         "게시글 본문 표시되는 곳 \n최대 다섯줄 까지 적용",
                     style: TextStyle(
                       fontFamily: "AppleSDGothicNeo",
@@ -129,8 +129,8 @@ class CommunityPostDetail extends StatelessWidget {
                 ],
               ),
             ),
-            communityController.communityList.resultData?[index].attachments != null
-            ? renderPostDetailPicture(communityController, index) : Container(),
+            communityModel.attachments != null
+            ? renderPostDetailPicture(communityController, communityModel) : Container(),
             // Padding(
             //   padding: const EdgeInsets.only(
             //       top: 8.0, left: 20, right: 20, bottom: 8),
@@ -199,18 +199,18 @@ class CommunityPostDetail extends StatelessWidget {
     );
   }
 
-  renderPostDetailPicture( CommunityController communityController, int index) {
+  renderPostDetailPicture( CommunityController communityController, CommunityResultData communityModel) {
 
     return ListView.builder(
       scrollDirection: Axis.vertical,
-      itemCount: communityController.communityList.resultData![index].attachments!.length,
+      itemCount: communityModel.attachments!.length,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int imageIndex) {
         return  Container(
           child: CachedNetworkImage(
             fit: BoxFit.cover,
-            imageUrl: communityController.communityList.resultData![index].attachments![imageIndex].fileinfo.url!,
+            imageUrl: communityModel.attachments![imageIndex].fileinfo.url!,
             height: 100.0,
             placeholder: (context, url) =>
                 Center(child: CircularProgressIndicator()),
