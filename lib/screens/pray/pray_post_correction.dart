@@ -164,7 +164,7 @@ class _PrayPostCorrectionState extends State<PrayPostCorrection> {
             Expanded(
               child: TextField(
                 onChanged: (val) {
-                  contentTextEditingController.text = val;
+                  // contentTextEditingController.text = val;
                 },
                 maxLines: 30,
                 controller: contentTextEditingController,

@@ -115,7 +115,7 @@ class PrayPostList extends StatelessWidget {
     return Column(mainAxisSize: MainAxisSize.min, children: [
       GestureDetector(
         onTap: () {
-          Get.toNamed("/pray_post_correction", arguments: this.index);
+          Get.offNamed("/pray_post_correction", arguments: this.index);
         },
         child: Container(
           decoration: BoxDecoration(
