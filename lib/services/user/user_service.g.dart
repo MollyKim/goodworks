@@ -120,6 +120,23 @@ class _LoginService implements LoginService {
     return value;
   }
 
+  @override
+  Future<dynamic> putUserPassword(token, userId, body) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+            method: 'PUT',
+            headers: <String, dynamic>{r'Authorization': token},
+            extra: _extra)
+        .compose(_dio.options, '/api/v1/seum/user/$userId/password',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

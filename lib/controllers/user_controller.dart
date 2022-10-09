@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:practice/services/user/user_model.dart';
 import 'package:practice/controllers/root_contoller.dart';
 import 'package:practice/services/root_service.dart';
@@ -68,6 +69,18 @@ class UserController extends BaseController {
 
   outUser(String userId) async {
     userOutModel = await super.rootService.loginService.outUser(userId);
+
+    update();
+  }
+
+  putUserPassword({required String userId, required String session, required String oldPassword, newPassword}) async {
+    String token = "Bearer $session";
+
+    final Map<String, dynamic> data = {
+      "oldPassword": oldPassword,
+      "newPassword": newPassword,
+    };
+    userOutModel = await super.rootService.loginService.putUserPassword(token,userId, data);
 
     update();
   }

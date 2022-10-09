@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:practice/controllers/user_controller.dart';
 import 'package:practice/layouts/default_layout.dart';
 
 class PasswordReset extends StatefulWidget {
@@ -11,6 +12,8 @@ class PasswordReset extends StatefulWidget {
 }
 
 class _PasswordResetState extends State<PasswordReset> {
+  UserController userController = Get.find();
+
   renderPassword() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,6 +224,8 @@ class _PasswordResetState extends State<PasswordReset> {
             primary: Color(0xff2d9067),
           ),
           onPressed: () {
+            userController.putUserPassword(
+                userId: Get.arguments[0], session: Get.arguments[1], oldPassword: "asdf1234", newPassword: "asdf1235");
             Get.toNamed('/login_welcome');
           },
           child: Text(
@@ -278,8 +283,7 @@ class _PasswordResetState extends State<PasswordReset> {
               child: newPassword(),
             ),
             Container(
-              padding:
-                  EdgeInsets.only(right: 20, left: 20, top: 10, bottom: 20),
+              padding: EdgeInsets.only(right: 20, left: 20, top: 10, bottom: 20),
               child: newPasswordTwo(),
             ),
             Container(

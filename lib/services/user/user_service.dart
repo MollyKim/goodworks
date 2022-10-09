@@ -41,7 +41,13 @@ abstract class LoginService {
   @POST('/api/v1/seum/user/{userId}')
   @Headers(<String, dynamic>{"Appname": "class/student"})
   Future<UserOutModel> outUser(
-      @Path() String userId,
+    @Path() String userId,
+  );
 
+  @PUT('/api/v1/seum/user/{userId}/password')
+  Future<dynamic> putUserPassword(
+    @Header('Authorization') String token,
+    @Path() String userId,
+    @Body() Map<String, dynamic> body,
   );
 }
