@@ -83,15 +83,6 @@ class PrayPostList extends StatelessWidget {
                     height: 30,
                   ),
                 )
-
-                // Text(
-                //   getTimeAge(prayController.prayList.resultData?[index].createdAt ?? ""),
-                //   style: TextStyle(
-                //     color: context.gray04,
-                //     fontFamily: "AppleSDGothicNeo",
-                //     fontSize: 12,
-                //   ),
-                // )
               ],
             ),
             SizedBox(
