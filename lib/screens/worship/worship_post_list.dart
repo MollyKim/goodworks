@@ -47,78 +47,77 @@ class _WorshipPostListState extends State<WorshipPostList> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  color: Color(0xff2d9067),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 7,
-                  vertical: 3,
-                ),
-                child: Text(
-                  "예배",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
+      child: GestureDetector(
+        onTap: () {
+          Get.toNamed('/player', arguments: [
+            worshipController.worshipList.resultData![widget.index!.toInt()].playInfo!.videoId.toString(),
+            widget.index
+          ]);
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    color: Color(0xff2d9067),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 3,
+                  ),
+                  child: Text(
+                    "예배",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                // width: 57,
-                // height: 13,
-                child: Text(
-                  ///시간
-                  "${getTimeAge(worshipController.worshipList.resultData?[widget.index!.toInt()].worshipDate)}",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
+                SizedBox(
+                  // width: 57,
+                  // height: 13,
+                  child: Text(
+                    ///시간
+                    "${getTimeAge(worshipController.worshipList.resultData?[widget.index!.toInt()].worshipDate)}",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          SizedBox(
-            width: 350,
-            // height: 19,
-            child: Text(
-              "${worshipController.worshipList.resultData?[widget.index!.toInt()].title}",
-              maxLines: 3,
+                )
+              ],
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            SizedBox(
+              width: 350,
+              // height: 19,
+              child: Text(
+                "${worshipController.worshipList.resultData?[widget.index!.toInt()].title}",
+                maxLines: 3,
 
-              ///본문
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontFamily: "AppleSDGothicNeo",
-                fontWeight: FontWeight.w700,
+                ///본문
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontFamily: "AppleSDGothicNeo",
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          //Player
+            SizedBox(
+              height: 12,
+            ),
+            //Player
 
-          GestureDetector(
-            onTap: () {
-              print('phill');
-              Get.toNamed('/player', arguments: [
-                worshipController.worshipList.resultData![widget.index!.toInt()].playInfo!.videoId.toString(),
-                widget.index
-              ]);
-            },
-            child: Stack(
+            Stack(
               children: [
                 // Container(
                 //   color: Colors.yellow,
@@ -159,8 +158,8 @@ class _WorshipPostListState extends State<WorshipPostList> {
                 )
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
