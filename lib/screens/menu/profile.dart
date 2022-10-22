@@ -254,7 +254,7 @@ class _ProfileState extends State<Profile> {
             GestureDetector(
               onTap: () {
                 Get.toNamed('/password_reset', arguments: [
-                  userController.userModel.resultData?.seumId.toString(),
+                  userController.userModel.resultData?.id.toString(),
                   userController.userSession.toString(),
                 ]);
                 // BaseToast(text: '기능 준비중입니다.').showToast(context);

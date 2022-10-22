@@ -32,15 +32,14 @@ class CommunityPostDetail extends StatelessWidget {
               color: context.forest80,
             )),
         centerTitle: true,
-        title: Text("모임",
-        style: TextStyle(color: Colors.black),),
+        title: Text(
+          "모임",
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
           GestureDetector(
             onTap: () {
-              showModalBottomSheet(
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: buildBottomSheet);
+              showModalBottomSheet(backgroundColor: Colors.transparent, context: context, builder: buildBottomSheet);
             },
             child: SvgPicture.asset(
               'assets/ic/ic_more_horiz.svg',
@@ -77,8 +76,7 @@ class CommunityPostDetail extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         backgroundImage: NetworkImage(
-                          userController.userModel.resultData?.userProfile
-                                  ?.avatar?.smallUrl ??
+                          communityModel.coverImage?.smallUrl ??
                               "https://cdn.vm-united.com/statics/defaultImage/user/userAvatar.png",
                         ),
                       ),
@@ -86,18 +84,17 @@ class CommunityPostDetail extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        userController.userModel.resultData?.userName ?? "",
-                        style: TextStyle(
-                            fontFamily: "AppleSDGothicNeo",
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
+                          communityModel.userName,
+                        style: TextStyle(fontFamily: "AppleSDGothicNeo", fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       const Spacer(),
-                      Text(getTimeAge(communityModel.createdAt),
+                      Text(
+                        getTimeAge(communityModel.createdAt),
                         style: TextStyle(
                           color: context.gray04,
                           fontFamily: "AppleSDGothicNeo",
-                          fontSize: 12,),
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -105,19 +102,12 @@ class CommunityPostDetail extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    communityModel.title ??
-                        "제목 없음",
-                    style: TextStyle(
-                        fontFamily: "AppleSDGothicNeo",
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
+                    communityModel.title ?? "제목 없음",
+                    style: TextStyle(fontFamily: "AppleSDGothicNeo", fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    height: 10
-                  ),
+                  SizedBox(height: 10),
                   Text(
-                    communityModel.content ??
-                        "게시글 본문 표시되는 곳 \n최대 다섯줄 까지 적용",
+                    communityModel.content,
                     style: TextStyle(
                       fontFamily: "AppleSDGothicNeo",
                       fontSize: 14,
@@ -130,7 +120,8 @@ class CommunityPostDetail extends StatelessWidget {
               ),
             ),
             communityModel.attachments != null
-            ? renderPostDetailPicture(communityController, communityModel) : Container(),
+                ? renderPostDetailPicture(communityController, communityModel)
+                : Container(),
             // Padding(
             //   padding: const EdgeInsets.only(
             //       top: 8.0, left: 20, right: 20, bottom: 8),
@@ -173,17 +164,12 @@ class CommunityPostDetail extends StatelessWidget {
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
-          padding:
-              const EdgeInsets.only(top: 8.0, left: 20, right: 20, bottom: 8),
+          padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20, bottom: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                children: [
-                  Icon(Icons.favorite_border),
-                  SizedBox(width: 5),
-                  Text("홍길동")
-                ],
+                children: [Icon(Icons.favorite_border), SizedBox(width: 5), Text("홍길동")],
               ),
               Text("ㅅㄷㄴㅅ ㅅㄷ먼ㅇ라ㅓㅣ낭ㄹㅁㄴㄹ아ㅓ\ndslkjflskdjflsjdlf")
             ],
@@ -199,23 +185,20 @@ class CommunityPostDetail extends StatelessWidget {
     );
   }
 
-  renderPostDetailPicture( CommunityController communityController, CommunityResultData communityModel) {
-
+  renderPostDetailPicture(CommunityController communityController, CommunityResultData communityModel) {
     return ListView.builder(
       scrollDirection: Axis.vertical,
       itemCount: communityModel.attachments!.length,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int imageIndex) {
-        return  Container(
+        return Container(
           child: CachedNetworkImage(
             fit: BoxFit.cover,
-            imageUrl: communityModel.attachments![imageIndex].fileInfo?.url ??  "",
+            imageUrl: communityModel.attachments![imageIndex].fileInfo?.url ?? "",
             height: 100.0,
-            placeholder: (context, url) =>
-                Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) =>
-                Icon(Icons.error),
+            placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) => Icon(Icons.error),
           ),
         );
       },
@@ -258,9 +241,7 @@ class CommunityPostDetail extends StatelessWidget {
       //   height: 11,
       // ),
       GestureDetector(
-        onTap: () {
-
-        },
+        onTap: () {},
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -290,5 +271,4 @@ class CommunityPostDetail extends StatelessWidget {
       ),
     ]);
   }
-
 }

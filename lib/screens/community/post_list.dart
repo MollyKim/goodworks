@@ -48,8 +48,7 @@ class CommunityPostList extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                         communityModel.userName ??
-                              "",
+                         communityModel.userName,
                           style: TextStyle(
                               fontFamily: "AppleSDGothicNeo",
                               fontSize: 14,
@@ -82,8 +81,7 @@ class CommunityPostList extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                communityModel.content ??
-                    "게시글 본문 표시되는 곳 \n최대 다섯줄 까지 적용",
+                communityModel.content,
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
